@@ -33,39 +33,32 @@ public class TDGenerator {
 
         //Generating mirogate TD requires checking out to wot-td-java feature/coap-client
 
+        /*
         MiroGate miroGate = new MiroGate("coap://10.2.1.227:5683", "urn:mirogate",
                 "mirogate");
+        */
 
+        FertilizerBot uhura = new FertilizerBot("http://10.10.10.106/", "urn:tractorbot_uhura", "Smart tractor");
 
+        SoilSensorBot spock = new SoilSensorBot("http://10.10.10.103/", "urn:tractorbot_spock", "Smart tractor");
 
-        FertilizerBot uhura = new FertilizerBot("http://10.10.10.106/", "urn:tractorbot_uhura",
-                "Smart tractor");
-
-        SoilSensorBot spock = new SoilSensorBot("http://10.10.10.103/", "urn:tractorbot_spock",
-                "Smart tractor");
-
-        Hoverbot hoverBot = new Hoverbot("http://10.10.10.105/", "urn:hoverbot_garuda",
-                "hoverbot");
+        Hoverbot hoverBot = new Hoverbot("http://10.10.10.105/", "urn:hoverbot_garuda", "hoverbot");
 
         PhantomXReactor leubot1 = new PhantomXReactor("https://api.interactions.ics.unisg.ch/leubot1/v1.2/",
-                "http://yggdrasil.interactions.ics.unisg.ch/environments/61/workspaces/102/artifacts/leubot1",
-                "leubot1");
+                "http://yggdrasil.interactions.ics.unisg.ch/environments/61/workspaces/102/artifacts/leubot1", "leubot1");
 
         PhantomXReactor leubot2 = new PhantomXReactor("https://api.interactions.ics.unisg.ch/leubot2/v1.2/",
-                "http://yggdrasil.interactions.ics.unisg.ch/environments/61/workspaces/102/artifacts/leubot2",
-                "leubot2");
+                "http://yggdrasil.interactions.ics.unisg.ch/environments/61/workspaces/102/artifacts/leubot2", "leubot2");
 
-        XArm cherryBot = new XArm("https://api.interactions.ics.unisg.ch/cherrybot/",
-                "urn:cherrybot", "cherryBot");
+        XArm cherryBot = new XArm("https://api.interactions.ics.unisg.ch/cherrybot/", "urn:cherrybot", "cherryBot");
 
-        XArm pretendaBot = new XArm("https://api.interactions.ics.unisg.ch/pretendabot/",
-                "urn:pretendabot", "pretendBot");
+        XArm pretendaBot = new XArm("https://api.interactions.ics.unisg.ch/pretendabot/", "urn:pretendabot", "pretendBot");
 
         writeToFile(cupProvider.serializeTD(), "cup-provider");
         writeToFile(spock.serializeTD(), "spock-tractorbot");
         writeToFile(uhura.serializeTD(), "uhura-tractorbot");
         writeToFile(hoverBot.serializeTD(), "hoverbot");
-        writeToFile(miroGate.serializeTD(), "mirogate");
+       // writeToFile(miroGate.serializeTD(), "mirogate");
         writeToFile(leubot1.serializeTD(), "leubot1");
         writeToFile(leubot2.serializeTD(), "leubot2");
         writeToFile(cherryBot.serializeTD(), "cherrybot");
