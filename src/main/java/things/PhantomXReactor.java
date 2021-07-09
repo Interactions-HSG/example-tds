@@ -12,7 +12,7 @@ import ch.unisg.ics.interactions.wot.td.vocabularies.HTV;
 import ch.unisg.ics.interactions.wot.td.vocabularies.TD;
 import vocabularies.MINES;
 
-public class PhantomXReactor extends Thing{
+public class PhantomXReactor extends Thing {
 
     public PhantomXReactor(String baseURI, String relativeURI, String title) {
         super(baseURI, relativeURI, title);

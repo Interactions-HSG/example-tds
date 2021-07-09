@@ -25,7 +25,7 @@ public class CupProvider extends Thing {
         actions.add(orderAction);
     }
 
-    public ThingDescription exposeTD(){
+    public ThingDescription exposeTD() {
         return new ThingDescription.Builder(title)
                 .addThingURI(relativeURI)
                 .addBaseURI(baseURI)

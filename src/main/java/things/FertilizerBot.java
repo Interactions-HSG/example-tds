@@ -6,7 +6,7 @@ import ch.unisg.ics.interactions.wot.td.schemas.NumberSchema;
 
 import java.util.Arrays;
 
-public class FertilizerBot extends Tractorbot  {
+public class FertilizerBot extends Tractorbot {
 
     public FertilizerBot(String baseURI, String relativeURI, String title) {
         super(baseURI, relativeURI, title);

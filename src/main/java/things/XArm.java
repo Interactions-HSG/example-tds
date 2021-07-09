@@ -72,7 +72,7 @@ public class XArm extends Thing {
                         .addMinimum((double) -178.3)
                         .addMaximum((double) 1010)
                         .build())
-                .addRequiredProperties("x","y","z")
+                .addRequiredProperties("x", "y", "z")
                 .build();
 
         ObjectSchema rotationSchema = new ObjectSchema.Builder()
@@ -89,7 +89,7 @@ public class XArm extends Thing {
                         .addMinimum((double) -180)
                         .addMaximum((double) 180)
                         .build())
-                .addRequiredProperties("roll","pitch","yaw")
+                .addRequiredProperties("roll", "pitch", "yaw")
                 .build();
 
         ObjectSchema targetSchema = new ObjectSchema.Builder()

@@ -15,7 +15,6 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -33,11 +32,11 @@ public class TDGenerator {
                 "cupProvider");
 
         //Generating mirogate TD requires checking out to wot-td-java feature/coap-client
-        /*
-        MiroGate miroGate = MiroGate.instantiate("coap://10.2.1.227:5683", "urn:mirogate",
+
+        MiroGate miroGate = new MiroGate("coap://10.2.1.227:5683", "urn:mirogate",
                 "mirogate");
 
-         */
+
 
         FertilizerBot uhura = new FertilizerBot("http://10.10.10.106/", "urn:tractorbot_uhura",
                 "Smart tractor");
@@ -66,7 +65,7 @@ public class TDGenerator {
         writeToFile(spock.serializeTD(), "spock-tractorbot");
         writeToFile(uhura.serializeTD(), "uhura-tractorbot");
         writeToFile(hoverBot.serializeTD(), "hoverbot");
-        // writeToFile(miroGate.serializeTD(), "miroGate");
+        writeToFile(miroGate.serializeTD(), "mirogate");
         writeToFile(leubot1.serializeTD(), "leubot1");
         writeToFile(leubot2.serializeTD(), "leubot2");
         writeToFile(cherryBot.serializeTD(), "cherrybot");
@@ -92,12 +91,12 @@ public class TDGenerator {
     private static void readOperator(ThingDescription pretendabotTD) throws IOException {
         //Get property affordance http://www.example.org/cherrybot#GetOperator
         Optional<PropertyAffordance> p = pretendabotTD.getFirstPropertyBySemanticType(CHERRY.getOperator);
-        if (p.isPresent()){
+        if (p.isPresent()) {
             PropertyAffordance getOperator = p.get();
 
             //Get form for operation type https://www.w3.org/2019/wot/td#readProperty
             Optional<Form> f = getOperator.getFirstFormForOperationType(TD.readProperty);
-            if (f.isPresent()){
+            if (f.isPresent()) {
                 Form postOperatorForm = f.get();
 
                 //Execute HTTP request
@@ -124,19 +123,19 @@ public class TDGenerator {
     private static void invokePostOperator(ThingDescription pretendabotTD) throws IOException {
         //Get property affordance http://www.example.org/cherrybot#PostOperator
         Optional<ActionAffordance> a = pretendabotTD.getFirstActionBySemanticType(CHERRY.postOperator);
-        if (a.isPresent()){
+        if (a.isPresent()) {
             ActionAffordance postOperator = a.get();
 
             //Get form for operation type https://www.w3.org/2019/wot/td#invokeAction
             Optional<Form> f = postOperator.getFirstFormForOperationType(TD.invokeAction);
-            if (f.isPresent()){
+            if (f.isPresent()) {
                 Form postOperatorForm = f.get();
 
                 //Create request payload for schema http://www.example.org/cherrybot#Operator
                 Optional<DataSchema> s = postOperator.getInputSchema();
                 if (s.isPresent() && s.get().getSemanticTypes().contains(CHERRY.operator)) {
                     ObjectSchema inputSchema = (ObjectSchema) s.get();
-                    Map<String,Object> payload = new HashMap<>();
+                    Map<String, Object> payload = new HashMap<>();
                     payload.put("name", "Danai V");
                     payload.put("email", "danai.vachtsevanou@unish.ch");
 

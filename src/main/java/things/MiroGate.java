@@ -1,6 +1,13 @@
 package things;
 
 import ch.unisg.ics.interactions.wot.td.ThingDescription;
+import ch.unisg.ics.interactions.wot.td.affordances.Form;
+import ch.unisg.ics.interactions.wot.td.affordances.PropertyAffordance;
+import ch.unisg.ics.interactions.wot.td.schemas.IntegerSchema;
+import ch.unisg.ics.interactions.wot.td.schemas.NumberSchema;
+import ch.unisg.ics.interactions.wot.td.schemas.ObjectSchema;
+import ch.unisg.ics.interactions.wot.td.vocabularies.COV;
+import ch.unisg.ics.interactions.wot.td.vocabularies.TD;
 import org.eclipse.rdf4j.model.vocabulary.DCTERMS;
 
 import static org.eclipse.rdf4j.model.util.Values.iri;
@@ -10,12 +17,12 @@ import static org.eclipse.rdf4j.model.util.Values.literal;
 
 public class MiroGate extends Thing {
 
-    MiroGate(String baseURI, String relativeURI, String title) {
+    public MiroGate(String baseURI, String relativeURI, String title) {
         super(baseURI, relativeURI, title);
-        //this.namespaces.put("cov", COV.PREFIX);
-        //this.namespaces.put("miro", "http://example.org/mirogate#");
+        this.namespaces.put("cov", COV.PREFIX);
+        this.namespaces.put("miro", "http://example.org/mirogate#");
 
-        /*
+
         Form poseForm = new Form.Builder(baseURI + "/pose")
                 .setMethodName("GET")
                 .addOperationType(TD.observeProperty)
@@ -71,8 +78,6 @@ public class MiroGate extends Thing {
         properties.add(poseEvent);
         properties.add(humEvent);
         properties.add(tempEvent);
-
-         */
     }
 
     @Override
@@ -80,7 +85,7 @@ public class MiroGate extends Thing {
         return new ThingDescription.Builder(title)
                 .addThingURI(relativeURI)
                 .addBaseURI(baseURI)
-                .addTriple(iri(baseURI + "/" + relativeURI), DCTERMS.DESCRIPTION,
+                .addTriple(iri(relativeURI), DCTERMS.DESCRIPTION,
                         literal("A Thing that provides affordances to consumers by using MiroCards."))
                 .addProperties(properties)
                 .build();

@@ -17,6 +17,7 @@
   td:hasBase <https://api.interactions.ics.unisg.ch/leubot2/v1.2/>;
   td:hasPropertyAffordance [ a td:PropertyAffordance, onto:Base, js:ObjectSchema;
       td:hasForm [
+          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/base>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
@@ -29,6 +30,7 @@
         ]
     ], [ a td:PropertyAffordance, onto:Shoulder, js:ObjectSchema;
       td:hasForm [
+          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/shoulder>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
@@ -41,6 +43,7 @@
         ]
     ], [ a td:PropertyAffordance, onto:Elbow, js:ObjectSchema;
       td:hasForm [
+          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/elbow>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
@@ -53,6 +56,7 @@
         ]
     ], [ a td:PropertyAffordance, onto:WristAngle, js:ObjectSchema;
       td:hasForm [
+          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/wrist/angle>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
@@ -65,6 +69,7 @@
         ]
     ], [ a td:PropertyAffordance, onto:WristRotation, js:ObjectSchema;
       td:hasForm [
+          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/wrist/rotation>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
@@ -89,6 +94,7 @@
         ]
     ], [ a td:PropertyAffordance, onto:Posture, js:ObjectSchema;
       td:hasForm [
+          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/posture>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
