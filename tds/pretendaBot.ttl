@@ -17,7 +17,6 @@
   td:hasPropertyAffordance [ a td:PropertyAffordance, cherrybot:GetOperator, js:ObjectSchema,
         cherrybot:Operator_with_Token;
       td:hasForm [
-          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/pretendabot/operator>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
@@ -33,7 +32,6 @@
       js:required "name", "email", "token"
     ], [ a td:PropertyAffordance, cherrybot:getTCP, js:ObjectSchema, cherrybot:Target;
       td:hasForm [
-          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/pretendabot/tcp>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
@@ -75,7 +73,6 @@
       js:required "coordinate", "rotation"
     ], [ a td:PropertyAffordance, cherrybot:GetTarget, js:ObjectSchema, cherrybot:Target;
       td:hasForm [
-          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/pretendabot/tcp/target>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
@@ -117,7 +114,6 @@
       js:required "coordinate", "rotation"
     ], [ a td:PropertyAffordance, cherrybot:getGripper, js:IntegerSchema;
       td:hasForm [
-          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/pretendabot/gripper>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
