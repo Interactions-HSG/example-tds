@@ -31,7 +31,7 @@ public class TDGenerator {
         CupProvider cupProvider = new CupProvider("http://localhost:1080/", "urn:cup_provider",
                 "cupProvider");
 
-        //Generating mirogate TD requires checking out to wot-td-java feature/coap-client
+        //Create MiroGate instance requires checking out wot-td-java to feature/coap-client 
 
         /*
         MiroGate miroGate = new MiroGate("coap://10.2.1.227:5683", "urn:mirogate",
