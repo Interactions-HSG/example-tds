@@ -1,0 +1,24 @@
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
+@prefix ex: <http://example.org#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix wotsec: <https://www.w3.org/2019/wot/security#> .
+@prefix js: <https://www.w3.org/2019/wot/json-schema#> .
+@prefix htv: <http://www.w3.org/2011/http#> .
+
+<urn:cup_provider> a td:Thing;
+  dct:title "cupProvider";
+  td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
+    ];
+  td:hasBase <http://localhost:1080/>;
+  td:hasActionAffordance [ a td:ActionAffordance, ex:Order;
+      dct:title "order";
+      td:hasForm [
+          htv:methodName "POST";
+          hctl:hasTarget <http://localhost:1080/order>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:IntegerSchema
+        ]
+    ] .

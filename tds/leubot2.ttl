@@ -1,0 +1,221 @@
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix wotsec: <https://www.w3.org/2019/wot/security#> .
+@prefix js: <https://www.w3.org/2019/wot/json-schema#> .
+@prefix htv: <http://www.w3.org/2011/http#> .
+@prefix onto: <https://ci.mines-stetienne.fr/kg/ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://yggdrasil.interactions.ics.unisg.ch/environments/61/workspaces/102/artifacts/leubot2>
+  a td:Thing, <http://w3id.org/eve#Artifact>, onto:PhantomX;
+  dct:title "leubot2";
+  td:hasSecurityConfiguration [ a wotsec:APIKeySecurityScheme;
+      wotsec:in "HEADER";
+      wotsec:name "X-API-Key"
+    ];
+  td:hasBase <https://api.interactions.ics.unisg.ch/leubot2/v1.2/>;
+  td:hasPropertyAffordance [ a td:PropertyAffordance, onto:Base, js:ObjectSchema;
+      td:hasForm [
+          htv:methodName "GET";
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/base>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty
+        ];
+      td:isObservable false;
+      js:properties [ a js:StringSchema, onto:JointName;
+          js:propertyName "name"
+        ], [ a js:IntegerSchema, onto:JointValue;
+          js:propertyName "value"
+        ]
+    ], [ a td:PropertyAffordance, onto:Shoulder, js:ObjectSchema;
+      td:hasForm [
+          htv:methodName "GET";
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/shoulder>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty
+        ];
+      td:isObservable false;
+      js:properties [ a js:StringSchema, onto:JointName;
+          js:propertyName "name"
+        ], [ a js:IntegerSchema, onto:JointValue;
+          js:propertyName "value"
+        ]
+    ], [ a td:PropertyAffordance, onto:Elbow, js:ObjectSchema;
+      td:hasForm [
+          htv:methodName "GET";
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/elbow>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty
+        ];
+      td:isObservable false;
+      js:properties [ a js:StringSchema, onto:JointName;
+          js:propertyName "name"
+        ], [ a js:IntegerSchema, onto:JointValue;
+          js:propertyName "value"
+        ]
+    ], [ a td:PropertyAffordance, onto:WristAngle, js:ObjectSchema;
+      td:hasForm [
+          htv:methodName "GET";
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/wrist/angle>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty
+        ];
+      td:isObservable false;
+      js:properties [ a js:StringSchema, onto:JointName;
+          js:propertyName "name"
+        ], [ a js:IntegerSchema, onto:JointValue;
+          js:propertyName "value"
+        ]
+    ], [ a td:PropertyAffordance, onto:WristRotation, js:ObjectSchema;
+      td:hasForm [
+          htv:methodName "GET";
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/wrist/rotation>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty
+        ];
+      td:isObservable false;
+      js:properties [ a js:StringSchema, onto:JointName;
+          js:propertyName "name"
+        ], [ a js:IntegerSchema, onto:JointValue;
+          js:propertyName "value"
+        ]
+    ], [ a td:PropertyAffordance, onto:Gripper, js:ObjectSchema;
+      td:hasForm [
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/gripper>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty, td:writeProperty
+        ];
+      td:isObservable false;
+      js:properties [ a js:StringSchema, onto:JointName;
+          js:propertyName "name"
+        ], [ a js:IntegerSchema, onto:JointValue;
+          js:propertyName "value"
+        ]
+    ], [ a td:PropertyAffordance, onto:Posture, js:ObjectSchema;
+      td:hasForm [
+          htv:methodName "GET";
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/posture>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty
+        ];
+      td:isObservable false;
+      js:properties [ a js:IntegerSchema, onto:ElbowJointValue;
+          js:propertyName "elbow"
+        ], [ a js:IntegerSchema, onto:WristRotationJointValue;
+          js:propertyName "wristRotation"
+        ], [ a js:IntegerSchema, onto:WristAngleJointValue;
+          js:propertyName "wristAngle"
+        ], [ a js:IntegerSchema, onto:ShoulderJointValue;
+          js:propertyName "shoulder"
+        ], [ a js:IntegerSchema, onto:GripperJointValue;
+          js:propertyName "gripper"
+        ], [ a js:StringSchema, onto:BaseJointValue;
+          js:propertyName "base"
+        ]
+    ];
+  td:hasActionAffordance [ a td:ActionAffordance, onto:Reset;
+      dct:title "Reset";
+      td:hasForm [
+          htv:methodName "PUT";
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/reset>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ]
+    ], [ a td:ActionAffordance, onto:SetBase;
+      dct:title "Set Base";
+      td:hasForm [
+          htv:methodName "PUT";
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/base>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema, onto:BaseJoint;
+          js:properties [ a js:IntegerSchema;
+              js:propertyName "value";
+              js:minimum "512"^^xsd:int;
+              js:maximum "1023"^^xsd:int
+            ];
+          js:required "value"
+        ]
+    ], [ a td:ActionAffordance, onto:SetShoulder;
+      dct:title "Set Shoulder";
+      td:hasForm [
+          htv:methodName "PUT";
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/shoulder>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema, onto:ShoulderJoint;
+          js:properties [ a js:IntegerSchema;
+              js:propertyName "value";
+              js:minimum "205"^^xsd:int;
+              js:maximum "810"^^xsd:int
+            ];
+          js:required "value"
+        ]
+    ], [ a td:ActionAffordance, onto:SetElbow;
+      dct:title "Set Elbow";
+      td:hasForm [
+          htv:methodName "PUT";
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/elbow>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema, onto:ElbowJoint;
+          js:properties [ a js:IntegerSchema;
+              js:propertyName "value";
+              js:minimum "210"^^xsd:int;
+              js:maximum "900"^^xsd:int
+            ];
+          js:required "value"
+        ]
+    ], [ a td:ActionAffordance, onto:SetWristAngle;
+      dct:title "Set Wrist Angle";
+      td:hasForm [
+          htv:methodName "PUT";
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/wrist/angle>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema, onto:WristAngleJoint;
+          js:properties [ a js:IntegerSchema;
+              js:propertyName "value";
+              js:minimum "200"^^xsd:int;
+              js:maximum "830"^^xsd:int
+            ];
+          js:required "value"
+        ]
+    ], [ a td:ActionAffordance, onto:SetWristAngle;
+      dct:title "Set Wrist Rotation";
+      td:hasForm [
+          htv:methodName "PUT";
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/wrist/rotation>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema, onto:WristRotateJoint;
+          js:properties [ a js:IntegerSchema;
+              js:propertyName "value";
+              js:minimum "0"^^xsd:int;
+              js:maximum "1023"^^xsd:int
+            ];
+          js:required "value"
+        ]
+    ], [ a td:ActionAffordance, onto:SetGripper;
+      dct:title "Set Gripper";
+      td:hasForm [
+          htv:methodName "PUT";
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/gripper>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema, onto:GripperJoint;
+          js:properties [ a js:IntegerSchema;
+              js:propertyName "value";
+              js:minimum "0"^^xsd:int;
+              js:maximum "512"^^xsd:int
+            ];
+          js:required "value"
+        ]
+    ] .

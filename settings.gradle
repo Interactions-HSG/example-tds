@@ -1,0 +1,4 @@
+rootProject.name = 'example-tds'
+
+include 'wot-td-java'
+
