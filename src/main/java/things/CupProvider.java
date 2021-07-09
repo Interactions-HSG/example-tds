@@ -7,13 +7,10 @@ import ch.unisg.ics.interactions.wot.td.schemas.IntegerSchema;
 
 public class CupProvider extends Thing {
 
-    CupProvider(ThingDescription td) {
-        super(td);
+    public CupProvider(String baseURI, String relativeURI, String title) {
+        super(baseURI, relativeURI, title);
         this.namespaces.put("htv", "http://www.w3.org/2011/http#");
         this.namespaces.put("ex", "http://example.org#");
-    }
-
-    public static CupProvider instantiate(String baseURI, String relativeURI, String title) {
 
         Form orderForm = new Form.Builder(baseURI + "order")
                 .build();
@@ -25,17 +22,15 @@ public class CupProvider extends Thing {
                         .build())
                 .build();
 
-        ThingDescription td = (new ThingDescription.Builder(title))
-                .addThingURI(relativeURI)
-                .addBaseURI(baseURI)
-                .addAction(orderAction)
-                .build();
-
-        return new CupProvider(td);
+        actions.add(orderAction);
     }
 
-    public ThingDescription getTD() {
-        return td;
+    public ThingDescription exposeTD(){
+        return new ThingDescription.Builder(title)
+                .addThingURI(relativeURI)
+                .addBaseURI(baseURI)
+                .addActions(actions)
+                .build();
     }
 
 }

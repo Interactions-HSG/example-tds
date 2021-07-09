@@ -1,30 +1,21 @@
 package things;
 
 import ch.unisg.ics.interactions.wot.td.ThingDescription;
-import ch.unisg.ics.interactions.wot.td.affordances.Form;
-import ch.unisg.ics.interactions.wot.td.affordances.PropertyAffordance;
-import ch.unisg.ics.interactions.wot.td.io.TDGraphWriter;
-import ch.unisg.ics.interactions.wot.td.schemas.IntegerSchema;
-import ch.unisg.ics.interactions.wot.td.schemas.NumberSchema;
-import ch.unisg.ics.interactions.wot.td.schemas.ObjectSchema;
-// import ch.unisg.ics.interactions.wot.td.vocabularies.COV;
-import ch.unisg.ics.interactions.wot.td.vocabularies.TD;
 import org.eclipse.rdf4j.model.vocabulary.DCTERMS;
 
 import static org.eclipse.rdf4j.model.util.Values.iri;
 import static org.eclipse.rdf4j.model.util.Values.literal;
 
-public class MiroGate extends Thing{
+// import ch.unisg.ics.interactions.wot.td.vocabularies.COV;
 
-    MiroGate(ThingDescription td) {
-        super(td);
+public class MiroGate extends Thing {
+
+    MiroGate(String baseURI, String relativeURI, String title) {
+        super(baseURI, relativeURI, title);
         //this.namespaces.put("cov", COV.PREFIX);
         //this.namespaces.put("miro", "http://example.org/mirogate#");
-    }
 
-    /*
-    public static MiroGate instantiate(String baseURI, String relativeURI, String title) {
-
+        /*
         Form poseForm = new Form.Builder(baseURI + "/pose")
                 .setMethodName("GET")
                 .addOperationType(TD.observeProperty)
@@ -77,19 +68,22 @@ public class MiroGate extends Thing{
                 .addObserve()
                 .build();
 
-        ThingDescription td = (new ThingDescription.Builder(title))
+        properties.add(poseEvent);
+        properties.add(humEvent);
+        properties.add(tempEvent);
+
+         */
+    }
+
+    @Override
+    public ThingDescription exposeTD() {
+        return new ThingDescription.Builder(title)
                 .addThingURI(relativeURI)
                 .addBaseURI(baseURI)
                 .addTriple(iri(baseURI + "/" + relativeURI), DCTERMS.DESCRIPTION,
                         literal("A Thing that provides affordances to consumers by using MiroCards."))
-                .addProperty(poseEvent)
-                .addProperty(humEvent)
-                .addProperty(tempEvent)
+                .addProperties(properties)
                 .build();
-
-        return new MiroGate(td);
-
     }
 
-     */
 }

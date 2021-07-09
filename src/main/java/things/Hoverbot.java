@@ -7,16 +7,15 @@ import ch.unisg.ics.interactions.wot.td.affordances.PropertyAffordance;
 import ch.unisg.ics.interactions.wot.td.schemas.StringSchema;
 import ch.unisg.ics.interactions.wot.td.vocabularies.TD;
 
-public class Hoverbot extends Thing{
+public class Hoverbot extends Thing {
 
-    Hoverbot(ThingDescription td) {
-        super(td);
+    public Hoverbot(String baseURI, String relativeURI, String title) {
+        super(baseURI, relativeURI, title);
         this.namespaces.put("htv", "http://www.w3.org/2011/http#");
         this.namespaces.put("hsg", "http://semantics.interactions.ics.unisg.ch/hackathon21#");
     }
 
-    public static Hoverbot instantiate(String baseURI, String relativeURI, String title) {
-
+    public void initialize() {
         Form streamForm = new Form.Builder(baseURI + "stream")
                 .addOperationType(TD.readProperty)
                 .setMethodName("GET")
@@ -28,24 +27,25 @@ public class Hoverbot extends Thing{
                 .setContentType("video/mpeg")
                 .build();
 
-        PropertyAffordance stream = new PropertyAffordance.Builder(new StringSchema.Builder().build(), streamForm)
+        properties.add(new PropertyAffordance.Builder(new StringSchema.Builder().build(), streamForm)
                 .addName("stream")
                 .addSemanticType("http://semantics.interactions.ics.unisg.ch/hackathon21#MpegVideoStream")
-                .build();
+                .build());
 
-        ActionAffordance takeSnapshot = new ActionAffordance.Builder(takeSnapshotForm)
+        actions.add(new ActionAffordance.Builder(takeSnapshotForm)
                 .addName("takeSnapshot")
                 .addSemanticType("http://semantics.interactions.ics.unisg.ch/hackathon21#Image")
-                .build();
+                .build());
+    }
 
-        ThingDescription td = (new ThingDescription.Builder(title))
+    @Override
+    public ThingDescription exposeTD() {
+        return new ThingDescription.Builder(title)
                 .addThingURI(relativeURI)
                 .addBaseURI(baseURI)
                 .addSemanticType("http://semantics.interactions.ics.unisg.ch/hackathon21#Camera")
-                .addProperty(stream)
-                .addAction(takeSnapshot)
+                .addProperties(properties)
+                .addActions(actions)
                 .build();
-
-        return new Hoverbot(td);
     }
 }

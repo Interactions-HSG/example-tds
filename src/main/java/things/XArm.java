@@ -9,26 +9,16 @@ import ch.unisg.ics.interactions.wot.td.schemas.NumberSchema;
 import ch.unisg.ics.interactions.wot.td.schemas.ObjectSchema;
 import ch.unisg.ics.interactions.wot.td.schemas.StringSchema;
 import ch.unisg.ics.interactions.wot.td.security.APIKeySecurityScheme;
-import ch.unisg.ics.interactions.wot.td.security.SecurityScheme;
 import ch.unisg.ics.interactions.wot.td.vocabularies.HTV;
 import ch.unisg.ics.interactions.wot.td.vocabularies.TD;
 import vocabularies.CHERRY;
-import vocabularies.MINES;
 
-import java.util.ArrayList;
-import java.util.List;
+public class XArm extends Thing {
 
-public class XArm extends Thing{
-    XArm(ThingDescription td) {
-        super(td);
+    public XArm(String baseURI, String relativeURI, String title) {
+        super(baseURI, relativeURI, title);
         this.namespaces.put("htv", HTV.PREFIX);
         this.namespaces.put("cherrybot", CHERRY.PREFIX);
-    }
-
-    public static XArm instantiate(String baseURI, String relativeURI, String title) {
-
-        List<ActionAffordance> actions = new ArrayList<>();
-        List<PropertyAffordance> properties = new ArrayList<>();
 
         //Action forms
         Form postOperatorForm = new Form.Builder(baseURI + "operator")
@@ -173,8 +163,11 @@ public class XArm extends Thing{
                 .addSemanticType(CHERRY.putGripper)
                 .addInputSchema(gripperSchema)
                 .build());
+    }
 
-        ThingDescription td = (new ThingDescription.Builder(title))
+    @Override
+    public ThingDescription exposeTD() {
+        return new ThingDescription.Builder(title)
                 .addThingURI(relativeURI)
                 .addBaseURI(baseURI)
                 .addSemanticType("http://w3id.org/eve#Artifact")
@@ -182,7 +175,5 @@ public class XArm extends Thing{
                 .addActions(actions)
                 .addSecurityScheme(new APIKeySecurityScheme(APIKeySecurityScheme.TokenLocation.HEADER, "Authentication"))
                 .build();
-
-        return new XArm(td);
     }
 }

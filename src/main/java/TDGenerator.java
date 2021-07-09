@@ -29,7 +29,7 @@ public class TDGenerator {
     public static void main(String[] args) {
         System.out.println("Hello World");
 
-        CupProvider cupProvider = CupProvider.instantiate("http://localhost:1080/", "urn:cup_provider",
+        CupProvider cupProvider = new CupProvider("http://localhost:1080/", "urn:cup_provider",
                 "cupProvider");
 
         //Generating mirogate TD requires checking out to wot-td-java feature/coap-client
@@ -39,34 +39,38 @@ public class TDGenerator {
 
          */
 
-        Tractorbot tractorBot = Tractorbot.instantiate("http://192.168.1.3/", "urn:tractorbot",
+        FertilizerBot uhura = new FertilizerBot("http://10.10.10.106/", "urn:tractorbot_uhura",
                 "Smart tractor");
 
-        Hoverbot hoverBot = Hoverbot.instantiate("http://192.168.1.6/", "urn:hoverbot_garuda",
+        SoilSensorBot spock = new SoilSensorBot("http://10.10.10.103/", "urn:tractorbot_spock",
+                "Smart tractor");
+
+        Hoverbot hoverBot = new Hoverbot("http://10.10.10.105/", "urn:hoverbot_garuda",
                 "hoverbot");
 
-        PhantomXReactor leubot1 = PhantomXReactor.instantiate("https://api.interactions.ics.unisg.ch/leubot1/v1.2/",
+        PhantomXReactor leubot1 = new PhantomXReactor("https://api.interactions.ics.unisg.ch/leubot1/v1.2/",
                 "http://yggdrasil.interactions.ics.unisg.ch/environments/61/workspaces/102/artifacts/leubot1",
                 "leubot1");
 
-        PhantomXReactor leubot2 = PhantomXReactor.instantiate("https://api.interactions.ics.unisg.ch/leubot2/v1.2/",
+        PhantomXReactor leubot2 = new PhantomXReactor("https://api.interactions.ics.unisg.ch/leubot2/v1.2/",
                 "http://yggdrasil.interactions.ics.unisg.ch/environments/61/workspaces/102/artifacts/leubot2",
                 "leubot2");
 
-        XArm cherryBot = XArm.instantiate("https://api.interactions.ics.unisg.ch/cherrybot/",
+        XArm cherryBot = new XArm("https://api.interactions.ics.unisg.ch/cherrybot/",
                 "urn:cherrybot", "cherryBot");
 
-        XArm pretendaBot = XArm.instantiate("https://api.interactions.ics.unisg.ch/pretendabot/",
+        XArm pretendaBot = new XArm("https://api.interactions.ics.unisg.ch/pretendabot/",
                 "urn:pretendabot", "pretendBot");
 
-        writeToFile(cupProvider.serialize(), "cupProvider");
-        // writeToFile(miroGate.serialize(), "miroGate");
-        writeToFile(tractorBot.serialize(), "tractorBot");
-        writeToFile(hoverBot.serialize(), "hoverBot");
-        writeToFile(leubot1.serialize(), "leubot1");
-        writeToFile(leubot2.serialize(), "leubot2");
-        writeToFile(cherryBot.serialize(), "cherryBot");
-        writeToFile(pretendaBot.serialize(), "pretendaBot");
+        writeToFile(cupProvider.serializeTD(), "cup-provider");
+        writeToFile(spock.serializeTD(), "spock-tractorbot");
+        writeToFile(uhura.serializeTD(), "uhura-tractorbot");
+        writeToFile(hoverBot.serializeTD(), "hoverbot");
+        // writeToFile(miroGate.serializeTD(), "miroGate");
+        writeToFile(leubot1.serializeTD(), "leubot1");
+        writeToFile(leubot2.serializeTD(), "leubot2");
+        writeToFile(cherryBot.serializeTD(), "cherrybot");
+        writeToFile(pretendaBot.serializeTD(), "pretendabot");
 
         try {
             //Read TD from file

@@ -1,0 +1,93 @@
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix wotsec: <https://www.w3.org/2019/wot/security#> .
+@prefix js: <https://www.w3.org/2019/wot/json-schema#> .
+@prefix htv: <http://www.w3.org/2011/http#> .
+@prefix hsg: <http://semantics.interactions.ics.unisg.ch/hackathon21#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:tractorbot_uhura> a td:Thing, hsg:Robot;
+  dct:title "Smart tractor";
+  td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
+    ];
+  td:hasBase <http://10.10.10.106/>;
+  td:hasPropertyAffordance [ a td:PropertyAffordance, hsg:BatteryVoltage, js:ArraySchema;
+      td:name "batteryLevel";
+      td:hasForm [
+          hctl:hasTarget <http://10.10.10.106/things/tractorbot/properties/batteryvoltage>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty
+        ];
+      td:isObservable false
+    ], [ a td:PropertyAffordance, hsg:RadarData, js:ArraySchema;
+      td:name "lidar";
+      td:hasForm [
+          hctl:hasTarget <http://10.10.10.106/things/tractorbot/properties/lidar>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty
+        ];
+      td:isObservable false
+    ], [ a td:PropertyAffordance, hsg:HighTemperatureEvent, js:NumberSchema;
+      td:name "highTemperature";
+      td:hasForm [
+          hctl:hasTarget <http://10.10.10.106/things/tractorbot/events/highTemperature>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty, td:writeProperty
+        ];
+      td:isObservable true
+    ], [ a td:PropertyAffordance, hsg:LowBattteryEvent, js:NumberSchema;
+      td:name "lowBattery";
+      td:hasForm [
+          hctl:hasTarget <http://10.10.10.106/things/tractorbot/events/lowBattery>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty, td:writeProperty
+        ];
+      td:isObservable true
+    ];
+  td:hasActionAffordance [ a td:ActionAffordance, hsg:MecannumWheelAction;
+      td:name "wheelControl";
+      td:hasForm [
+          htv:methodName "POST";
+          hctl:hasTarget <http://10.10.10.106/things/tractorbot/actions/wheelControl>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema;
+          js:properties [ a js:IntegerSchema;
+              js:propertyName "duration";
+              js:minimum "0"^^xsd:int;
+              js:maximum "20000"^^xsd:int
+            ], [ a js:IntegerSchema;
+              js:propertyName "axis";
+              js:minimum "0"^^xsd:int;
+              js:maximum "2"^^xsd:int
+            ], [ a js:IntegerSchema;
+              js:propertyName "speed";
+              js:minimum "-7"^^xsd:int;
+              js:maximum "7"^^xsd:int
+            ]
+        ]
+    ], [ a td:ActionAffordance, hsg:FertilizeAction;
+      td:name "fertilize";
+      dct:title "Fertilization";
+      td:hasForm [
+          htv:methodName "POST";
+          hctl:hasTarget <http://10.10.10.106/things/tractorbot/actions/fertilize>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:NumberSchema
+        ]
+    ], [ a td:ActionAffordance, hsg:IrrigationAction;
+      td:name "irrigate";
+      dct:title "Irrigation";
+      td:hasForm [
+          htv:methodName "POST";
+          hctl:hasTarget <http://10.10.10.106/things/tractorbot/actions/irrigate>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:NumberSchema
+        ]
+    ] .

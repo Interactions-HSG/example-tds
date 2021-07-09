@@ -4,9 +4,7 @@ import ch.unisg.ics.interactions.wot.td.ThingDescription;
 import ch.unisg.ics.interactions.wot.td.affordances.ActionAffordance;
 import ch.unisg.ics.interactions.wot.td.affordances.Form;
 import ch.unisg.ics.interactions.wot.td.affordances.PropertyAffordance;
-import ch.unisg.ics.interactions.wot.td.io.TDGraphWriter;
 import ch.unisg.ics.interactions.wot.td.schemas.IntegerSchema;
-import ch.unisg.ics.interactions.wot.td.schemas.NullSchema;
 import ch.unisg.ics.interactions.wot.td.schemas.ObjectSchema;
 import ch.unisg.ics.interactions.wot.td.schemas.StringSchema;
 import ch.unisg.ics.interactions.wot.td.security.APIKeySecurityScheme;
@@ -14,21 +12,12 @@ import ch.unisg.ics.interactions.wot.td.vocabularies.HTV;
 import ch.unisg.ics.interactions.wot.td.vocabularies.TD;
 import vocabularies.MINES;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class PhantomXReactor extends Thing{
 
-    PhantomXReactor(ThingDescription td) {
-        super(td);
+    public PhantomXReactor(String baseURI, String relativeURI, String title) {
+        super(baseURI, relativeURI, title);
         this.namespaces.put("htv", HTV.PREFIX);
         this.namespaces.put("onto", MINES.PREFIX);
-    }
-
-    public static PhantomXReactor instantiate(String baseURI, String relativeURI, String title) {
-
-        List<ActionAffordance> actions = new ArrayList<>();
-        List<PropertyAffordance> properties = new ArrayList<>();
 
         //Action forms
         Form resetForm = new Form.Builder(baseURI + "reset")
@@ -59,8 +48,8 @@ public class PhantomXReactor extends Thing{
                         .addSemanticType(MINES.jointName)
                         .build())
                 .addProperty("value", new IntegerSchema.Builder()
-                                .addSemanticType(MINES.jointValue)
-                                .build())
+                        .addSemanticType(MINES.jointValue)
+                        .build())
                 .build();
 
         ObjectSchema postureObjectSchema = new ObjectSchema.Builder()
@@ -209,8 +198,11 @@ public class PhantomXReactor extends Thing{
                         .addRequiredProperties("value")
                         .build())
                 .build());
+    }
 
-        ThingDescription td = (new ThingDescription.Builder(title))
+    @Override
+    public ThingDescription exposeTD() {
+        return new ThingDescription.Builder(title)
                 .addThingURI(relativeURI)
                 .addBaseURI(baseURI)
                 .addSemanticType(MINES.phantomX)
@@ -219,9 +211,5 @@ public class PhantomXReactor extends Thing{
                 .addProperties(properties)
                 .addActions(actions)
                 .build();
-
-        return new PhantomXReactor(td);
     }
-
-
 }
