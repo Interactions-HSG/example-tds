@@ -7,19 +7,21 @@ import ch.unisg.ics.interactions.wot.td.schemas.IntegerSchema;
 import ch.unisg.ics.interactions.wot.td.schemas.NumberSchema;
 import ch.unisg.ics.interactions.wot.td.schemas.ObjectSchema;
 import ch.unisg.ics.interactions.wot.td.vocabularies.COV;
+import ch.unisg.ics.interactions.wot.td.vocabularies.HTV;
 import ch.unisg.ics.interactions.wot.td.vocabularies.TD;
 import org.eclipse.rdf4j.model.vocabulary.DCTERMS;
 
+import java.util.Arrays;
+
 import static org.eclipse.rdf4j.model.util.Values.iri;
 import static org.eclipse.rdf4j.model.util.Values.literal;
-
-// import ch.unisg.ics.interactions.wot.td.vocabularies.COV;
 
 public class MiroGate extends Thing {
 
     public MiroGate(String baseURI, String relativeURI, String title) {
         super(baseURI, relativeURI, title);
         this.namespaces.put("cov", COV.PREFIX);
+        this.namespaces.put("htv", HTV.PREFIX);
         this.namespaces.put("miro", "http://example.org/mirogate#");
 
 
@@ -38,6 +40,14 @@ public class MiroGate extends Thing {
                 .addOperationType(TD.observeProperty)
                 .addSubProtocol(COV.observe)
                 .build();
+        Form humHttpForm = new Form.Builder("http://10.2.1.88:8080/humidity")
+                .setMethodName("GET")
+                .addOperationType(TD.readProperty)
+                .build();
+        Form tempHttpForm = new Form.Builder("http://10.2.1.88:8080/temperature")
+                .setMethodName("GET")
+                .addOperationType(TD.readProperty)
+                .build();
 
         PropertyAffordance poseEvent = new PropertyAffordance.Builder(new ObjectSchema.Builder()
                 .addProperty("value", new IntegerSchema.Builder()
@@ -46,8 +56,8 @@ public class MiroGate extends Thing {
                         .addMaximum(4)
                         .build())
                 .build(), poseForm)
-                .addTitle("Observe pose")
-                .addSemanticType("http://example.org/mirogate#ObservePose")
+                .addTitle("Pose")
+                .addSemanticType("http://example.org/mirogate#Pose")
                 .addObserve()
                 .build();
 
@@ -57,9 +67,9 @@ public class MiroGate extends Thing {
                         .addMinimum(15.00)
                         .addMaximum(40.00)
                         .build())
-                .build(), humForm)
-                .addTitle("Observe humidity")
-                .addSemanticType("http://example.org/mirogate#ObserveHumidity")
+                .build(), Arrays.asList(humForm, humHttpForm))
+                .addTitle("Humidity")
+                .addSemanticType("http://example.org/mirogate#Humidity")
                 .addObserve()
                 .build();
 
@@ -69,9 +79,9 @@ public class MiroGate extends Thing {
                         .addMinimum(10.00)
                         .addMaximum(26.00)
                         .build())
-                .build(), tempForm)
-                .addTitle("Observe temperature")
-                .addSemanticType("http://example.org/mirogate#ObserveTemperature")
+                .build(), Arrays.asList(tempForm, tempHttpForm))
+                .addTitle("Temperature")
+                .addSemanticType("http://example.org/mirogate#Temperature")
                 .addObserve()
                 .build();
 
@@ -84,7 +94,6 @@ public class MiroGate extends Thing {
     public ThingDescription exposeTD() {
         return new ThingDescription.Builder(title)
                 .addThingURI(relativeURI)
-                .addBaseURI(baseURI)
                 .addTriple(iri(relativeURI), DCTERMS.DESCRIPTION,
                         literal("A Thing that provides affordances to consumers by using MiroCards."))
                 .addProperties(properties)
