@@ -33,10 +33,10 @@ public class TDGenerator {
 
         //Create MiroGate instance requires checking out wot-td-java to feature/coap-client 
 
-        /*
+
         MiroGate miroGate = new MiroGate("coap://10.2.1.227:5683", "urn:mirogate",
-                "mirogate");
-        */
+                "Mirogate");
+
 
         FertilizerBot uhura = new FertilizerBot("http://10.10.10.106/", "urn:tractorbot_uhura", "Smart tractor");
 
@@ -58,7 +58,7 @@ public class TDGenerator {
         writeToFile(spock.serializeTD(), "spock-tractorbot");
         writeToFile(uhura.serializeTD(), "uhura-tractorbot");
         writeToFile(hoverBot.serializeTD(), "hoverbot");
-       // writeToFile(miroGate.serializeTD(), "mirogate");
+        writeToFile(miroGate.serializeTD(), "mirogate");
         writeToFile(leubot1.serializeTD(), "leubot1");
         writeToFile(leubot2.serializeTD(), "leubot2");
         writeToFile(cherryBot.serializeTD(), "cherrybot");
