@@ -28,6 +28,10 @@ public class TDGenerator {
     public static void main(String[] args) {
         System.out.println("Hello World");
 
+        Engraver engraver = new Engraver("http://engraver.intelliot.org/services", "urn:intelliot" +
+                "-engraver",
+                "Engraver machine");
+
         CupProvider cupProvider = new CupProvider("http://localhost:1080/", "urn:cup_provider",
                 "cupProvider");
 
@@ -54,6 +58,7 @@ public class TDGenerator {
 
         XArm pretendaBot = new XArm("https://api.interactions.ics.unisg.ch/pretendabot/", "urn:pretendabot", "pretendBot");
 
+        writeToFile(engraver.serializeTD(), "engraver");
         writeToFile(cupProvider.serializeTD(), "cup-provider");
         writeToFile(spock.serializeTD(), "spock-tractorbot");
         writeToFile(uhura.serializeTD(), "uhura-tractorbot");
