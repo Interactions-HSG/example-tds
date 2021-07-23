@@ -15,7 +15,6 @@
   td:hasPropertyAffordance [ a td:PropertyAffordance, hsg:BatteryVoltage, js:ArraySchema;
       td:name "batteryLevel";
       td:hasForm [
-          htv:methodName "GET";
           hctl:hasTarget <http://10.10.10.103/things/tractorbot/properties/batteryvoltage>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
@@ -24,7 +23,6 @@
     ], [ a td:PropertyAffordance, hsg:RadarData, js:ArraySchema;
       td:name "lidar";
       td:hasForm [
-          htv:methodName "GET";
           hctl:hasTarget <http://10.10.10.103/things/tractorbot/properties/lidar>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
@@ -49,7 +47,6 @@
     ], [ a td:PropertyAffordance, hsg:SoilCondition, js:ArraySchema;
       td:name "soilCondition";
       td:hasForm [
-          htv:methodName "GET";
           hctl:hasTarget <http://10.10.10.103/things/tractorbot/properties/soilcondition>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty

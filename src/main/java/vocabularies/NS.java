@@ -13,6 +13,7 @@ public final class NS {
         defaultNamespaces.put("wotsec", "https://www.w3.org/2019/wot/security#");
         defaultNamespaces.put("dct", "http://purl.org/dc/terms/");
         defaultNamespaces.put("js", "https://www.w3.org/2019/wot/json-schema#");
+        defaultNamespaces.put("xsd", "http://www.w3.org/2001/XMLSchema#");
         return defaultNamespaces;
     }
 
