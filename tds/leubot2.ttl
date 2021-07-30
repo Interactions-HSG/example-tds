@@ -6,6 +6,8 @@
 @prefix htv: <http://www.w3.org/2011/http#> .
 @prefix onto: <https://ci.mines-stetienne.fr/kg/ontology#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex: <http://www.example.org#> .
 
 <http://yggdrasil.interactions.ics.unisg.ch/environments/61/workspaces/102/artifacts/leubot2>
   a td:Thing, <http://w3id.org/eve#Artifact>, onto:PhantomX;
@@ -51,6 +53,19 @@
               ] ;
           td:hasForm [
               hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/gripper> ;
+          ] ;
+      ] ;
+  td:hasPropertyAffordance [
+          a td:PropertyAffordance, js:ObjectSchema, ex:User ;
+      td:name "Current User Information" ;
+      js:properties [ a js:StringSchema, ex:UserName;
+                js:propertyName "name"
+              ],
+        [ a js:StringSchema, ex:UserEmail;
+                js:propertyName "email"
+              ] ;
+          td:hasForm [
+              hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/user> ;
           ] ;
       ] ;
   td:hasPropertyAffordance [
@@ -221,5 +236,22 @@
                 js:propertyName "value"
               ];
             js:required "value"
+          ]
+      ], [ a ex:RegisterUser, td:ActionAffordance;
+        td:name "Register User";
+        td:hasForm [
+            htv:methodName "POST";
+            hctl:forContentType "application/json";
+            hctl:hasOperationType td:invokeAction;
+            hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/user>
+          ];
+        td:hasInputSchema [ a ex:UserInfo, js:ObjectSchema;
+            js:properties [ a js:StringSchema, ex:UserName;
+                      js:propertyName "name"
+                    ],
+              [ a js:StringSchema, ex:UserEmail;
+                      js:propertyName "email"
+                    ];
+            js:required "name", "email"
           ]
       ].
