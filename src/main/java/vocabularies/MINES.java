@@ -27,6 +27,8 @@ public final class MINES {
     public static final String setBase = PREFIX + "SetBase";
     public static final String setGripper = PREFIX + "SetGripper";
     public static final String setShoulder = PREFIX + "SetShoulder";
+    public static final String logOut = PREFIX + "LogOut";
+    public static final String logIn = PREFIX + "LogIn";
 
     //Input schemas
     public static final String elbowJoint = PREFIX + "ElbowJoint";
@@ -46,6 +48,8 @@ public final class MINES {
 
     public static final String jointName = PREFIX + "JointName";
     public static final String jointValue = PREFIX + "JointValue";
+
+
 
     public static IRI createIRI(String fragment) {
         return SimpleValueFactory.getInstance().createIRI(PREFIX + fragment);
