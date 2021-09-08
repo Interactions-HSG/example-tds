@@ -7,13 +7,15 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix eve: <http://w3id.org/eve#> .
 @prefix mines: <https://ci.mines-stetienne.fr/kg/ontology#> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
 
-<urn:robotic_arm> a td:Thing, eve:Artifact, mines:PhantomX;
+<urn:robotic_arm_a> a td:Thing, eve:Artifact, mines:PhantomX;
   dct:title "A simple robotic arm.";
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
   td:hasBase <coap://example.org/robot>;
-  td:hasEventAffordance [ a td:EventAffordance, mines:Elbow;
+  td:hasEventAffordance [ a td:EventAffordance;
+      ssn:forProperty mines:Elbow;
       td:name "Read Elbow";
       dct:title "Read Elbow";
       td:hasForm [
@@ -24,12 +26,13 @@
           hctl:forSubProtocol cov:observe
         ];
       td:isObservable true;
-      td:hasNotificationSchema [ a js:IntegerSchema, <https://ci.mines-stetienne.fr/kg/ontology#ElbowJoint>;
+      td:hasNotificationSchema [ a js:IntegerSchema, mines:ElbowJointValue>;
           js:minimum "210"^^xsd:int;
           js:maximum "900"^^xsd:int
         ]
     ];
-  td:hasActionAffordance [ a td:ActionAffordance, <https://ci.mines-stetienne.fr/kg/ontology#SetElbow>;
+  td:hasActionAffordance [ a td:ActionAffordance, mines:SetElbow;
+      ssn:forProperty mines:Elbow;                                         
       td:name "Set Elbow";
       dct:title "Set Elbow";
       td:hasForm [
@@ -38,7 +41,7 @@
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
-      td:hasInputSchema [ a js:IntegerSchema, <https://ci.mines-stetienne.fr/kg/ontology#ElbowJoint>;
+      td:hasInputSchema [ a js:IntegerSchema, mines:ElbowJointValue;
           js:minimum "210"^^xsd:int;
           js:maximum "900"^^xsd:int
         ]
