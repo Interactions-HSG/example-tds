@@ -1,0 +1,45 @@
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix wotsec: <https://www.w3.org/2019/wot/security#> .
+@prefix js: <https://www.w3.org/2019/wot/json-schema#> .
+@prefix cov: <http://www.example.org/coap-binding#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix eve: <http://w3id.org/eve#> .
+@prefix mines: <https://ci.mines-stetienne.fr/kg/ontology#> .
+
+<urn:robotic_arm> a td:Thing, eve:Artifact, mines:PhantomX;
+  dct:title "A simple robotic arm.";
+  td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
+    ];
+  td:hasBase <coap://example.org/robot>;
+  td:hasEventAffordance [ a td:EventAffordance, mines:Elbow;
+      td:name "Read Elbow";
+      dct:title "Read Elbow";
+      td:hasForm [
+          cov:methodName "GET";
+          hctl:hasTarget <coap://example.org/robot/elbow>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:observeProperty;
+          hctl:forSubProtocol cov:observe
+        ];
+      td:isObservable true;
+      td:hasNotificationSchema [ a js:IntegerSchema, <https://ci.mines-stetienne.fr/kg/ontology#ElbowJoint>;
+          js:minimum "210"^^xsd:int;
+          js:maximum "900"^^xsd:int
+        ]
+    ];
+  td:hasActionAffordance [ a td:ActionAffordance, <https://ci.mines-stetienne.fr/kg/ontology#SetElbow>;
+      td:name "Set Elbow";
+      dct:title "Set Elbow";
+      td:hasForm [
+          cov:methodName "PUT";
+          hctl:hasTarget <coap://example.org/robot/elbow>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:IntegerSchema, <https://ci.mines-stetienne.fr/kg/ontology#ElbowJoint>;
+          js:minimum "210"^^xsd:int;
+          js:maximum "900"^^xsd:int
+        ]
+    ] .
