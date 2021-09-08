@@ -22,7 +22,7 @@
           cov:methodName "GET";
           hctl:hasTarget <coap://example.org/robot/elbow>;
           hctl:forContentType "application/json";
-          hctl:hasOperationType td:observeProperty;
+          hctl:hasOperationType td:subscribeevent, td:unsubscribeevent;
           hctl:forSubProtocol cov:observe
         ];
       td:isObservable true;
