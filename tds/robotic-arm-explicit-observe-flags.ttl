@@ -10,7 +10,8 @@
 @prefix ssn: <http://www.w3.org/ns/ssn/> .
 
 <urn:robotic_arm_b> a td:Thing, eve:Artifact, mines:PhantomX;
-  dct:title "Simple robotic arm.";
+  dct:title "Simple robotic arm";
+ dct:description "A simple robotic arm. Event affordances explicitly describe the values of the Observe option for subscribing and unsubscribing.";
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
   td:hasBase <coap://example.org/robot>;
