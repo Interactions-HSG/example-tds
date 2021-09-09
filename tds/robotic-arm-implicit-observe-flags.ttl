@@ -10,7 +10,7 @@
 @prefix ssn: <http://www.w3.org/ns/ssn/> .
 
 <urn:robotic_arm_a> a td:Thing, eve:Artifact, mines:PhantomX;
-  dct:title "A simple robotic arm.";
+  dct:title "Simple robotic arm";
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
   td:hasBase <coap://example.org/robot>;
