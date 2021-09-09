@@ -1,0 +1,61 @@
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix wotsec: <https://www.w3.org/2019/wot/security#> .
+@prefix js: <https://www.w3.org/2019/wot/json-schema#> .
+@prefix cov: <http://www.example.org/coap-binding#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix eve: <http://w3id.org/eve#> .
+@prefix mines: <https://ci.mines-stetienne.fr/kg/ontology#> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
+
+<urn:robotic_arm_b> a td:Thing, eve:Artifact, mines:PhantomX;
+  dct:title "Simple robotic arm.";
+  td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
+    ];
+  td:hasBase <coap://example.org/robot>;
+  td:hasEventAffordance [ a td:EventAffordance;
+      ssn:forProperty mines:Elbow;
+      td:name "Read Elbow";
+      dct:title "Read Elbow";
+      td:hasForm [
+          cov:methodName "GET";
+          hctl:hasTarget <coap://example.org/robot/elbow>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:subscribeevent;
+          cov:options [ a cov:MessageOption;
+              cov:optionName "Observe";
+              cov:optionValue "0"^^xsd:int;
+            ]
+        ],
+        [
+          cov:methodName "GET";
+          hctl:hasTarget <coap://example.org/robot/elbow>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:unsubscribeevent;
+          cov:options [ a cov:MessageOption;
+              cov:optionName "Observe";
+              cov:optionValue "1"^^xsd:int;
+            ]
+        ];
+      td:isObservable true;
+      td:hasNotificationSchema [ a js:IntegerSchema, mines:ElbowJointValue>;
+          js:minimum "210"^^xsd:int;
+          js:maximum "900"^^xsd:int
+        ]
+    ];
+  td:hasActionAffordance [ a td:ActionAffordance, mines:SetElbow;
+      ssn:forProperty mines:Elbow;                                         
+      td:name "Set Elbow";
+      dct:title "Set Elbow";
+      td:hasForm [
+          cov:methodName "PUT";
+          hctl:hasTarget <coap://example.org/robot/elbow>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:IntegerSchema, mines:ElbowJointValue;
+          js:minimum "210"^^xsd:int;
+          js:maximum "900"^^xsd:int
+        ]
+    ] .
