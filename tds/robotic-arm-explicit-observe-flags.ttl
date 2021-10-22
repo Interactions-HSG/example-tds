@@ -31,7 +31,7 @@
         ],
         [
           cov:methodName "GET";
-          hctl:hasTarget <coap://example.org/robot/elbow>;
+          hctl:hasTarget <coap://130.82.27.208:5683/elbow>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:unsubscribeevent;
           cov:options [ a cov:MessageOption;
@@ -41,8 +41,8 @@
         ];
       td:isObservable true;
       td:hasNotificationSchema [ a js:IntegerSchema, mines:ElbowJointValue>;
-          js:minimum "210"^^xsd:int;
-          js:maximum "900"^^xsd:int
+          js:minimum "200"^^xsd:int;
+          js:maximum "830"^^xsd:int
         ]
     ];
   td:hasActionAffordance [ a td:ActionAffordance, mines:SetElbow;
@@ -51,12 +51,12 @@
       dct:title "Set Elbow";
       td:hasForm [
           cov:methodName "PUT";
-          hctl:hasTarget <coap://example.org/robot/elbow>;
+          hctl:hasTarget <coap://130.82.27.208:5683/elbow>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
       td:hasInputSchema [ a js:IntegerSchema, mines:ElbowJointValue;
-          js:minimum "210"^^xsd:int;
-          js:maximum "900"^^xsd:int
+          js:minimum "200"^^xsd:int;
+          js:maximum "830"^^xsd:int
         ]
     ] .
