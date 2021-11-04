@@ -8,7 +8,7 @@
 @prefix wotsec: <https://www.w3.org/2019/wot/security#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<> a onto:PhantomX, td:Thing, eve:Artifact;
+<https://raw.githubusercontent.com/Interactions-HSG/example-tds/main/tds/leubot3.ttl> a onto:PhantomX, td:Thing, eve:Artifact;
   dct:title "leubot3";
   td:hasSecurityConfiguration [ a wotsec:APIKeySecurityScheme ;
       wotsec:in "header" ;
