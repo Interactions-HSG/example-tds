@@ -210,7 +210,7 @@
       td:name "Set Gripper";
       td:hasForm [
           htv:methodName "PUT";
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/cherrybot/tcp/gripper>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/cherrybot/gripper>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
