@@ -48,7 +48,7 @@ public class TDGenerator {
 
         Hoverbot hoverBot = new Hoverbot("http://10.10.10.105/", "urn:hoverbot_garuda", "hoverbot");
 
-        PhantomXReactor leubot1 = new PhantomXReactor("https://api.interactions.ics.unisg.ch/leubot1/v1.2/",
+        PhantomXReactor leubot1 = new PhantomXReactor("https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/",
                 "http://yggdrasil.interactions.ics.unisg.ch/environments/61/workspaces/102/artifacts/leubot1", "leubot1");
 
         PhantomXReactor leubot2 = new PhantomXReactor("https://api.interactions.ics.unisg.ch/leubot2/v1.2/",
