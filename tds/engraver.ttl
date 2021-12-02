@@ -85,7 +85,7 @@
             ]
         ]
     ], [ a td:ActionAffordance, intelliot:CreateEngravingJob;
-      td:name "job";
+      td:name "invokeJob";
       td:hasForm [
           hctl:hasTarget <http://engraver.intelliot.org/services/job>;
           hctl:forContentType "multipart/form-data";
@@ -129,7 +129,7 @@
             ]
         ]
     ], [ a td:ActionAffordance, intelliot:DeleteEngravingJob;
-      td:name "job";
+      td:name "deleteJob";
       td:hasForm [
           hctl:hasTarget <http://engraver.intelliot.org/services/job>;
           hctl:forContentType "application/json";

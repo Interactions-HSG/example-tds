@@ -13,10 +13,11 @@
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
   td:hasPropertyAffordance [ a td:PropertyAffordance, miro:Pose, js:ObjectSchema;
+      td:name "pose";
       dct:title "Pose";
       td:hasForm [
           cov:methodName "GET";
-          hctl:hasTarget <coap://127.0.0.1:5683/pose>;
+          hctl:hasTarget <coap://10.2.1.227:5683/pose>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:observeProperty;
           hctl:forSubProtocol cov:observe
@@ -28,16 +29,17 @@
           js:maximum "4"^^xsd:int
         ]
     ], [ a td:PropertyAffordance, miro:Humidity, js:ObjectSchema;
+      td:name "humidity";
       dct:title "Humidity";
       td:hasForm [
           cov:methodName "GET";
-          hctl:hasTarget <coap://127.0.0.1:5683/humidity>;
+          hctl:hasTarget <coap://10.2.1.227:5683/humidity>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:observeProperty;
           hctl:forSubProtocol cov:observe
         ], [
           htv:methodName "GET";
-          hctl:hasTarget <http://127.0.0.1:5683/humidity>;
+          hctl:hasTarget <http://10.2.1.88:8080/humidity>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
         ];
@@ -48,16 +50,17 @@
           js:maximum 4.0E1
         ]
     ], [ a td:PropertyAffordance, miro:Temperature, js:ObjectSchema;
+      td:name "temperature";
       dct:title "Temperature";
       td:hasForm [
           cov:methodName "GET";
-          hctl:hasTarget <coap://127.0.0.1:5683/temperature>;
+          hctl:hasTarget <coap://10.2.1.227:5683/temperature>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:observeProperty;
           hctl:forSubProtocol cov:observe
         ], [
           htv:methodName "GET";
-          hctl:hasTarget <http://127.0.0.1:5683/temperature>;
+          hctl:hasTarget <http://10.2.1.88:8080/temperature>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
         ];

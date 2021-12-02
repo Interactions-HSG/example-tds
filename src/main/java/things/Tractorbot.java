@@ -39,20 +39,17 @@ public class Tractorbot extends Thing {
                 .setMethodName("GET")
                 .build();
 
-        PropertyAffordance batteryLevel = new PropertyAffordance.Builder(new ArraySchema.Builder()
-                .build(), batteryLevelForm)
-                .addName("batteryLevel")
+        PropertyAffordance batteryLevel = new PropertyAffordance.Builder("batteryLevel", batteryLevelForm)
                 .addSemanticType("http://semantics.interactions.ics.unisg.ch/hackathon21#BatteryVoltage")
+                .addDataSchema(new ArraySchema.Builder().build())
                 .build();
 
-        PropertyAffordance lidar = new PropertyAffordance.Builder(new ArraySchema.Builder()
-                .build(), lidarForm)
-                .addName("lidar")
+        PropertyAffordance lidar = new PropertyAffordance.Builder("lidar", lidarForm)
                 .addSemanticType("http://semantics.interactions.ics.unisg.ch/hackathon21#RadarData")
+                .addDataSchema(new ArraySchema.Builder().build())
                 .build();
 
-        ActionAffordance wheelControl = new ActionAffordance.Builder(wheelControlForm)
-                .addName("wheelControl")
+        ActionAffordance wheelControl = new ActionAffordance.Builder("setWheelControl", wheelControlForm)
                 .addSemanticType("http://semantics.interactions.ics.unisg.ch/hackathon21#MecannumWheelAction")
                 .addInputSchema(new ObjectSchema.Builder()
                         .addProperty("axis", new IntegerSchema.Builder()
@@ -70,18 +67,16 @@ public class Tractorbot extends Thing {
                         .build())
                 .build();
 
-        PropertyAffordance highTemperature = new PropertyAffordance.Builder(new NumberSchema.Builder()
-                .build(), highTemperatureForm)
-                .addName("highTemperature")
+        PropertyAffordance highTemperature = new PropertyAffordance.Builder("highTemperature", highTemperatureForm)
                 .addObserve()
                 .addSemanticType("http://semantics.interactions.ics.unisg.ch/hackathon21#HighTemperatureEvent")
+                .addDataSchema(new NumberSchema.Builder().build())
                 .build();
 
-        PropertyAffordance lowBattery = new PropertyAffordance.Builder(new NumberSchema.Builder()
-                .build(), lowBatteryForm)
-                .addName("lowBattery")
+        PropertyAffordance lowBattery = new PropertyAffordance.Builder("lowBattery", lowBatteryForm)
                 .addObserve()
                 .addSemanticType("http://semantics.interactions.ics.unisg.ch/hackathon21#LowBattteryEvent")
+                .addDataSchema(new NumberSchema.Builder().build())
                 .build();
 
         properties.addAll(Arrays.asList(batteryLevel, lidar, highTemperature, lowBattery));

@@ -17,10 +17,9 @@
     ];
   td:hasBase <https://api.interactions.ics.unisg.ch/leubot2/v1.2/>;
   td:hasPropertyAffordance [ a td:PropertyAffordance, onto:Base, js:ObjectSchema;
-      td:name "Read Base State";
+      td:name "base";
       dct:title "Read Base State";
       td:hasForm [
-          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/base>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
@@ -32,10 +31,9 @@
           js:propertyName "value"
         ]
     ], [ a td:PropertyAffordance, onto:Shoulder, js:ObjectSchema;
-      td:name "Read Base State";
-      dct:title "Read Base State";
+      td:name "shoulder";
+      dct:title "Read Shoulder Angle";
       td:hasForm [
-          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/shoulder>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
@@ -47,10 +45,9 @@
           js:propertyName "value"
         ]
     ], [ a td:PropertyAffordance, onto:Elbow, js:ObjectSchema;
-      td:name "Read Elbow Angle";
+      td:name "elbow";
       dct:title "Read Elbow Angle";
       td:hasForm [
-          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/elbow>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
@@ -62,10 +59,9 @@
           js:propertyName "value"
         ]
     ], [ a td:PropertyAffordance, onto:WristAngle, js:ObjectSchema;
-      td:name "Read Wrist Angle";
+      td:name "wristAngle";
       dct:title "Read Wrist Angle";
       td:hasForm [
-          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/wrist/angle>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
@@ -77,10 +73,9 @@
           js:propertyName "value"
         ]
     ], [ a td:PropertyAffordance, onto:WristRotation, js:ObjectSchema;
-      td:name "Read Wrist Rotation";
+      td:name "wristRotation";
       dct:title "Read Wrist Rotation";
       td:hasForm [
-          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/wrist/rotation>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
@@ -92,7 +87,7 @@
           js:propertyName "value"
         ]
     ], [ a td:PropertyAffordance, onto:Gripper, js:ObjectSchema;
-      td:name "Read Gripper";
+      td:name "gripper";
       dct:title "Read Gripper";
       td:hasForm [
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/gripper>;
@@ -106,10 +101,9 @@
           js:propertyName "value"
         ]
     ], [ a td:PropertyAffordance, onto:Posture, js:ObjectSchema;
-      td:name "Read Posture Information";
+      td:name "posture";
       dct:title "Read Posture Information";
       td:hasForm [
-          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/posture>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
@@ -129,10 +123,9 @@
           js:propertyName "base"
         ]
     ], [ a td:PropertyAffordance, foaf:Agent, js:ObjectSchema;
-      td:name "Read User Information";
+      td:name "user";
       dct:title "Read User Information";
       td:hasForm [
-          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.2/user>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
@@ -145,7 +138,7 @@
         ]
     ];
   td:hasActionAffordance [ a td:ActionAffordance, onto:Reset;
-      td:name "Reset";
+      td:name "reset";
       dct:title "Reset";
       td:hasForm [
           htv:methodName "PUT";
@@ -154,7 +147,7 @@
           hctl:hasOperationType td:invokeAction
         ]
     ], [ a td:ActionAffordance, onto:SetBase;
-      td:name "Set Base";
+      td:name "setBase";
       dct:title "Set Base";
       td:hasForm [
           htv:methodName "PUT";
@@ -171,7 +164,7 @@
           js:required "value"
         ]
     ], [ a td:ActionAffordance, onto:SetShoulder;
-      td:name "Set Shoulder";
+      td:name "setShoulder";
       dct:title "Set Shoulder";
       td:hasForm [
           htv:methodName "PUT";
@@ -188,7 +181,7 @@
           js:required "value"
         ]
     ], [ a td:ActionAffordance, onto:SetElbow;
-      td:name "Set Elbow";
+      td:name "setElbow";
       dct:title "Set Elbow";
       td:hasForm [
           htv:methodName "PUT";
@@ -205,7 +198,7 @@
           js:required "value"
         ]
     ], [ a td:ActionAffordance, onto:SetWristAngle;
-      td:name "Set Wrist Angle";
+      td:name "setWristAngle";
       dct:title "Set Wrist Angle";
       td:hasForm [
           htv:methodName "PUT";
@@ -222,7 +215,7 @@
           js:required "value"
         ]
     ], [ a td:ActionAffordance, onto:SetWristAngle;
-      td:name "Set Wrist Rotation";
+      td:name "setWristRotation";
       dct:title "Set Wrist Rotation";
       td:hasForm [
           htv:methodName "PUT";
@@ -239,7 +232,7 @@
           js:required "value"
         ]
     ], [ a td:ActionAffordance, onto:SetGripper;
-      td:name "Set Gripper";
+      td:name "setGripper";
       dct:title "Set Gripper";
       td:hasForm [
           htv:methodName "PUT";
@@ -256,7 +249,7 @@
           js:required "value"
         ]
     ], [ a td:ActionAffordance, onto:LogIn;
-      td:name "Log In";
+      td:name "logIn";
       dct:title "Log In";
       td:hasForm [
           htv:methodName "POST";
@@ -273,7 +266,7 @@
           js:required "name", "email"
         ]
     ], [ a td:ActionAffordance, onto:LogOut;
-      td:name "Log Out";
+      td:name "logOut";
       dct:title "Log Out";
       td:hasForm [
           htv:methodName "DELETE";

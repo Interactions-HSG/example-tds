@@ -16,8 +16,8 @@
   td:hasBase <https://api.interactions.ics.unisg.ch/pretendabot/>;
   td:hasPropertyAffordance [ a td:PropertyAffordance, cherrybot:GetOperator, js:ObjectSchema,
         cherrybot:Operator_with_Token;
+      td:name "oeprator";
       td:hasForm [
-          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/pretendabot/operator>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
@@ -32,8 +32,8 @@
         ];
       js:required "name", "email", "token"
     ], [ a td:PropertyAffordance, cherrybot:getTCP, js:ObjectSchema, cherrybot:Target;
+      td:name "tcp";
       td:hasForm [
-          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/pretendabot/tcp>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
@@ -74,8 +74,8 @@
         ];
       js:required "coordinate", "rotation"
     ], [ a td:PropertyAffordance, cherrybot:GetTarget, js:ObjectSchema, cherrybot:Target;
+      td:name "tcpTarget";
       td:hasForm [
-          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/pretendabot/tcp/target>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
@@ -116,8 +116,8 @@
         ];
       js:required "coordinate", "rotation"
     ], [ a td:PropertyAffordance, cherrybot:getGripper, js:IntegerSchema;
+      td:name "gripper";
       td:hasForm [
-          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/pretendabot/gripper>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
@@ -127,6 +127,7 @@
       js:maximum "800"^^xsd:int
     ];
   td:hasActionAffordance [ a td:ActionAffordance, cherrybot:Initialize;
+      td:name "initialize";
       td:hasForm [
           htv:methodName "PUT";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/pretendabot/initialize>;
@@ -134,6 +135,7 @@
           hctl:hasOperationType td:invokeAction
         ]
     ], [ a td:ActionAffordance, cherrybot:PostOperator;
+      td:name "postOperator";
       td:hasForm [
           htv:methodName "POST";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/pretendabot/operator>;
@@ -149,6 +151,7 @@
           js:required "name", "email"
         ]
     ], [ a td:ActionAffordance, cherrybot:PutTarget;
+      td:name "putTarget";
       td:hasForm [
           htv:methodName "PUT";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/pretendabot/tcp/target>;
@@ -200,6 +203,7 @@
           js:required "target", "speed"
         ]
     ], [ a td:ActionAffordance, cherrybot:PutGripper;
+      td:name "putGripper";
       td:hasForm [
           htv:methodName "PUT";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/pretendabot/tcp/gripper>;

@@ -19,15 +19,13 @@ public class FertilizerBot extends Tractorbot {
                 .setMethodName("POST")
                 .build();
 
-        ActionAffordance irrigate = new ActionAffordance.Builder(irrigateForm)
-                .addName("irrigate")
+        ActionAffordance irrigate = new ActionAffordance.Builder("irrigate", irrigateForm)
                 .addTitle("Irrigation")
                 .addSemanticType("http://semantics.interactions.ics.unisg.ch/hackathon21#IrrigationAction")
                 .addInputSchema(new NumberSchema.Builder().build())
                 .build();
 
-        ActionAffordance fertilize = new ActionAffordance.Builder(fertilizeForm)
-                .addName("fertilize")
+        ActionAffordance fertilize = new ActionAffordance.Builder("fertilize", fertilizeForm)
                 .addTitle("Fertilization")
                 .addSemanticType("http://semantics.interactions.ics.unisg.ch/hackathon21#FertilizeAction")
                 .addInputSchema(new NumberSchema.Builder().build())

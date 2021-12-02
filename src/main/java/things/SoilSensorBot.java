@@ -14,10 +14,9 @@ public class SoilSensorBot extends Tractorbot {
                 .addOperationType(TD.readProperty)
                 .build();
 
-        PropertyAffordance soilCondition = new PropertyAffordance.Builder(new ArraySchema.Builder()
-                .build(), soilConditionForm)
-                .addName("soilCondition")
+        PropertyAffordance soilCondition = new PropertyAffordance.Builder("soilCondition", soilConditionForm)
                 .addSemanticType("http://semantics.interactions.ics.unisg.ch/hackathon21#SoilCondition")
+                .addDataSchema(new ArraySchema.Builder().build())
                 .build();
 
         properties.add(soilCondition);

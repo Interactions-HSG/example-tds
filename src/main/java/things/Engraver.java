@@ -7,12 +7,9 @@ import ch.unisg.ics.interactions.wot.td.affordances.PropertyAffordance;
 import ch.unisg.ics.interactions.wot.td.schemas.NumberSchema;
 import ch.unisg.ics.interactions.wot.td.schemas.ObjectSchema;
 import ch.unisg.ics.interactions.wot.td.schemas.StringSchema;
-import ch.unisg.ics.interactions.wot.td.security.APIKeySecurityScheme;
 import ch.unisg.ics.interactions.wot.td.vocabularies.HTV;
 import ch.unisg.ics.interactions.wot.td.vocabularies.TD;
 import org.eclipse.rdf4j.model.vocabulary.DCTERMS;
-import vocabularies.CHERRY;
-import vocabularies.MINES;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -163,33 +160,29 @@ public class Engraver extends Thing{
 
 
         //Properties
-        properties.add(new PropertyAffordance.Builder(engraverSpec, readSpecForm)
-                .addName("spec")
+        properties.add(new PropertyAffordance.Builder("spec", readSpecForm)
                 .addSemanticType("http://example.org/intellIoT#ReadEngraverMachineSpecification")
+                .addDataSchema(engraverSpec)
                 .build());
 
-        properties.add(new PropertyAffordance.Builder(engraverConfiguration,
-                readConfForm)
-                .addName("configuration")
+        properties.add(new PropertyAffordance.Builder("configuration", readConfForm)
                 .addSemanticType("http://example.org/intellIoT#ReadEngraverServiceConfiguration")
+                .addDataSchema(engraverConfiguration)
                 .build());
 
-        properties.add(new PropertyAffordance.Builder(engraverStatus,
-                readJobForm)
-                .addName("job")
+        properties.add(new PropertyAffordance.Builder("job", readJobForm)
                 .addSemanticType("http://example.org/intellIoT#ReadEngravingJobStatus")
+                .addDataSchema(engraverStatus)
                 .build());
 
         //Actions
-        actions.add(new ActionAffordance.Builder(invokeConfForm)
-                .addName("configuration")
+        actions.add(new ActionAffordance.Builder("configuration", invokeConfForm)
                 .addSemanticType("http://example.org/intellIoT#SetEngraverServiceConfiguration")
                 .addInputSchema(engraverConfiguration)
                 .addOutputSchema(engraverConfiguration)
                 .build());
 
-        actions.add(new ActionAffordance.Builder(invokeJobForm)
-                .addName("job")
+        actions.add(new ActionAffordance.Builder("invokeJob", invokeJobForm)
                 .addSemanticType("http://example.org/intellIoT#CreateEngravingJob")
                 .addInputSchema(new ObjectSchema.Builder()
                         .addSemanticType("http://example.org/intellIoT#EngravingJobWithImage")
@@ -201,8 +194,7 @@ public class Engraver extends Thing{
                 .addOutputSchema(engraverStatus)
                 .build());
 
-        actions.add(new ActionAffordance.Builder(deleteJobForm)
-                .addName("job")
+        actions.add(new ActionAffordance.Builder("deleteJob", deleteJobForm)
                 .addSemanticType("http://example.org/intellIoT#DeleteEngravingJob")
                 .addOutputSchema(engraverStatus)
                 .build());

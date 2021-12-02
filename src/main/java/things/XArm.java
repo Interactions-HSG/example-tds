@@ -116,50 +116,54 @@ public class XArm extends Thing {
 
 
         //Properties
-        properties.add(new PropertyAffordance.Builder(operatorWithTokenSchema,
+        properties.add(new PropertyAffordance.Builder("oeprator",
                 new Form.Builder(baseURI + "operator")
                         .addOperationType(TD.readProperty)
                         .build())
                 .addSemanticType(CHERRY.getOperator)
+                .addDataSchema(operatorWithTokenSchema)
                 .build());
 
-        properties.add(new PropertyAffordance.Builder(targetSchema,
+        properties.add(new PropertyAffordance.Builder("tcp",
                 new Form.Builder(baseURI + "tcp")
                         .addOperationType(TD.readProperty)
                         .build())
                 .addSemanticType(CHERRY.getTCP)
+                .addDataSchema(targetSchema)
                 .build());
 
-        properties.add(new PropertyAffordance.Builder(targetSchema,
+        properties.add(new PropertyAffordance.Builder("tcpTarget",
                 new Form.Builder(baseURI + "tcp/target")
                         .addOperationType(TD.readProperty)
                         .build())
                 .addSemanticType(CHERRY.getTarget)
+                .addDataSchema(targetSchema)
                 .build());
 
-        properties.add(new PropertyAffordance.Builder(gripperSchema,
+        properties.add(new PropertyAffordance.Builder("gripper",
                 new Form.Builder(baseURI + "gripper")
                         .addOperationType(TD.readProperty)
                         .build())
                 .addSemanticType(CHERRY.getGripper)
+                .addDataSchema(gripperSchema)
                 .build());
 
         //Actions
-        actions.add(new ActionAffordance.Builder(initializeForm)
+        actions.add(new ActionAffordance.Builder("initialize", initializeForm)
                 .addSemanticType(CHERRY.initialize)
                 .build());
 
-        actions.add(new ActionAffordance.Builder(postOperatorForm)
+        actions.add(new ActionAffordance.Builder("postOperator", postOperatorForm)
                 .addSemanticType(CHERRY.postOperator)
                 .addInputSchema(operatorSchema)
                 .build());
 
-        actions.add(new ActionAffordance.Builder(putTargetForm)
+        actions.add(new ActionAffordance.Builder("putTarget", putTargetForm)
                 .addSemanticType(CHERRY.putTarget)
                 .addInputSchema(tcpMovementSchema)
                 .build());
 
-        actions.add(new ActionAffordance.Builder(putGripperForm)
+        actions.add(new ActionAffordance.Builder("putGripper", putGripperForm)
                 .addSemanticType(CHERRY.putGripper)
                 .addInputSchema(gripperSchema)
                 .build());

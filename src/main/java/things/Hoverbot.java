@@ -27,13 +27,12 @@ public class Hoverbot extends Thing {
                 .setContentType("video/mpeg")
                 .build();
 
-        properties.add(new PropertyAffordance.Builder(new StringSchema.Builder().build(), streamForm)
-                .addName("stream")
+        properties.add(new PropertyAffordance.Builder("stream", streamForm)
                 .addSemanticType("http://semantics.interactions.ics.unisg.ch/hackathon21#MpegVideoStream")
+                .addDataSchema(new StringSchema.Builder().build())
                 .build());
 
-        actions.add(new ActionAffordance.Builder(takeSnapshotForm)
-                .addName("takeSnapshot")
+        actions.add(new ActionAffordance.Builder("takeSnapshot", takeSnapshotForm)
                 .addSemanticType("http://semantics.interactions.ics.unisg.ch/hackathon21#Image")
                 .build());
     }
