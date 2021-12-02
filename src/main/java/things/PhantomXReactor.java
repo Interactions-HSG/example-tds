@@ -20,6 +20,7 @@ public class PhantomXReactor extends Thing {
         this.namespaces.put("htv", HTV.PREFIX);
         this.namespaces.put("onto", MINES.PREFIX);
         this.namespaces.put("foaf", FOAF.PREFIX);
+        this.namespaces.put("eve", "http://w3id.org/eve#");
 
         //Action forms
         Form resetForm = new Form.Builder(baseURI + "reset")
@@ -251,10 +252,13 @@ public class PhantomXReactor extends Thing {
                         .build())
                 .build());
 
-        actions.add(new ActionAffordance.Builder("logOut", userDeleteForm)
-                .addTitle("Log Out")
-                .addSemanticType(MINES.logOut)
-                .build());
+        // [Andrei] this form cannot be properly implemented with the current version of wot-td-java,
+        // we need support for URI variables. I'm commenting this out to avoid confusion
+        // TODO: implement after we add URI variables to wot-td-java
+//        actions.add(new ActionAffordance.Builder("logOut", userDeleteForm)
+//                .addTitle("Log Out")
+//                .addSemanticType(MINES.logOut)
+//                .build());
     }
 
     @Override

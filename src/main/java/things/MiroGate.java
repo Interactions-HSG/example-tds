@@ -10,6 +10,7 @@ import ch.unisg.ics.interactions.wot.td.vocabularies.COV;
 import ch.unisg.ics.interactions.wot.td.vocabularies.HTV;
 import ch.unisg.ics.interactions.wot.td.vocabularies.TD;
 import org.eclipse.rdf4j.model.vocabulary.DCTERMS;
+import vocabularies.MIRO;
 
 import java.util.Arrays;
 
@@ -22,8 +23,7 @@ public class MiroGate extends Thing {
         super(baseURI, relativeURI, title);
         this.namespaces.put("cov", COV.PREFIX);
         this.namespaces.put("htv", HTV.PREFIX);
-        this.namespaces.put("miro", "http://example.org/mirogate#");
-
+        this.namespaces.put("miro", MIRO.PREFIX);
 
         Form poseForm = new Form.Builder(baseURI + "/pose")
                 .setMethodName("GET")
@@ -51,10 +51,10 @@ public class MiroGate extends Thing {
 
         PropertyAffordance poseEvent = new PropertyAffordance.Builder("pose", poseForm)
                 .addTitle("Pose")
-                .addSemanticType("http://example.org/mirogate#Pose")
+                .addSemanticType(MIRO.pose)
                 .addDataSchema(new ObjectSchema.Builder()
                         .addProperty("value", new IntegerSchema.Builder()
-                                .addSemanticType("http://example.org/mirogate#PoseValue")
+                                .addSemanticType(MIRO.poseValue)
                                 .addMinimum(0)
                                 .addMaximum(4)
                                 .build())
@@ -64,10 +64,10 @@ public class MiroGate extends Thing {
 
         PropertyAffordance humEvent = new PropertyAffordance.Builder("humidity", Arrays.asList(humFormObserve, humForm))
                 .addTitle("Humidity")
-                .addSemanticType("http://example.org/mirogate#Humidity")
+                .addSemanticType(MIRO.humidity)
                 .addDataSchema(new ObjectSchema.Builder()
                         .addProperty("value", new NumberSchema.Builder()
-                                .addSemanticType("http://example.org/mirogate#HumidityValue")
+                                .addSemanticType(MIRO.humidityValue)
                                 .addMinimum(15.00)
                                 .addMaximum(40.00)
                                 .build())
@@ -77,10 +77,10 @@ public class MiroGate extends Thing {
 
         PropertyAffordance tempEvent = new PropertyAffordance.Builder("temperature", Arrays.asList(tempFormObserve, tempForm))
                 .addTitle("Temperature")
-                .addSemanticType("http://example.org/mirogate#Temperature")
+                .addSemanticType(MIRO.temperature)
                 .addDataSchema(new ObjectSchema.Builder()
                         .addProperty("value", new NumberSchema.Builder()
-                                .addSemanticType("http://example.org/mirogate#TemperatureValue")
+                                .addSemanticType(MIRO.temperatureValue)
                                 .addMinimum(10.00)
                                 .addMaximum(26.00)
                                 .build())

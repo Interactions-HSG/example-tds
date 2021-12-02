@@ -1,6 +1,7 @@
 @prefix td: <https://www.w3.org/2019/wot/td#> .
 @prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
 @prefix dct: <http://purl.org/dc/terms/> .
+@prefix eve: <http://w3id.org/eve#> .
 @prefix wotsec: <https://www.w3.org/2019/wot/security#> .
 @prefix js: <https://www.w3.org/2019/wot/json-schema#> .
 @prefix htv: <http://www.w3.org/2011/http#> .
@@ -9,7 +10,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <http://yggdrasil.interactions.ics.unisg.ch/environments/61/workspaces/102/artifacts/leubot1>
-  a td:Thing, <http://w3id.org/eve#Artifact>, onto:PhantomX;
+  a td:Thing, eve:Artifact, onto:PhantomX;
   dct:title "leubot1";
   td:hasSecurityConfiguration [ a wotsec:APIKeySecurityScheme;
       wotsec:in "HEADER";
@@ -264,14 +265,5 @@
               js:propertyName "email"
             ];
           js:required "name", "email"
-        ]
-    ], [ a td:ActionAffordance, onto:LogOut;
-      td:name "logOut";
-      dct:title "Log Out";
-      td:hasForm [
-          htv:methodName "DELETE";
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.4/user>;
-          hctl:forContentType "application/json";
-          hctl:hasOperationType td:invokeAction
         ]
     ] .

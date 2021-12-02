@@ -88,7 +88,7 @@ public class TDGenerator {
 
     private static void readOperator(ThingDescription pretendabotTD) throws IOException {
         //Get property affordance http://www.example.org/cherrybot#GetOperator
-        Optional<PropertyAffordance> p = pretendabotTD.getFirstPropertyBySemanticType(CHERRY.getOperator);
+        Optional<PropertyAffordance> p = pretendabotTD.getFirstPropertyBySemanticType(CHERRY.operator);
         if (p.isPresent()) {
             PropertyAffordance getOperator = p.get();
 
@@ -105,7 +105,7 @@ public class TDGenerator {
                 int statusCode = resp.getStatusCode();
 
                 //Get response payload for schema http://www.example.org/cherrybot#OperatorWithToken
-                if (statusCode == 200 && getOperator.getSemanticTypes().contains(CHERRY.operatorWithToken)) {
+                if (statusCode == 200 && getOperator.getSemanticTypes().contains(CHERRY.operatorWithTokenSchema)) {
                     ObjectSchema schema = (ObjectSchema) getOperator.getDataSchema();
                     Map<String, Object> operatorWithToken = resp.getPayloadAsObject(schema);
 
@@ -120,7 +120,7 @@ public class TDGenerator {
 
     private static void invokePostOperator(ThingDescription pretendabotTD) throws IOException {
         //Get property affordance http://www.example.org/cherrybot#PostOperator
-        Optional<ActionAffordance> a = pretendabotTD.getFirstActionBySemanticType(CHERRY.postOperator);
+        Optional<ActionAffordance> a = pretendabotTD.getFirstActionBySemanticType(CHERRY.registerOperator);
         if (a.isPresent()) {
             ActionAffordance postOperator = a.get();
 
@@ -131,7 +131,7 @@ public class TDGenerator {
 
                 //Create request payload for schema http://www.example.org/cherrybot#Operator
                 Optional<DataSchema> s = postOperator.getInputSchema();
-                if (s.isPresent() && s.get().getSemanticTypes().contains(CHERRY.operator)) {
+                if (s.isPresent() && s.get().getSemanticTypes().contains(CHERRY.operatorSchema)) {
                     ObjectSchema inputSchema = (ObjectSchema) s.get();
                     Map<String, Object> payload = new HashMap<>();
                     payload.put("name", "Danai V");
