@@ -30,21 +30,21 @@ public class MiroGate extends Thing {
                 .addOperationType(TD.observeProperty)
                 .addSubProtocol(COV.observe)
                 .build();
+        Form humFormObserve = new Form.Builder(baseURI + "/humidity")
+                .setMethodName("GET")
+                .addOperationType(TD.observeProperty)
+                .addSubProtocol(COV.observe)
+                .build();
+        Form tempFormObserve = new Form.Builder(baseURI + "/temperature")
+                .setMethodName("GET")
+                .addOperationType(TD.observeProperty)
+                .addSubProtocol(COV.observe)
+                .build();
         Form humForm = new Form.Builder(baseURI + "/humidity")
-                .setMethodName("GET")
-                .addOperationType(TD.observeProperty)
-                .addSubProtocol(COV.observe)
-                .build();
-        Form tempForm = new Form.Builder(baseURI + "/temperature")
-                .setMethodName("GET")
-                .addOperationType(TD.observeProperty)
-                .addSubProtocol(COV.observe)
-                .build();
-        Form humHttpForm = new Form.Builder("http://10.2.1.88:8080/humidity")
                 .setMethodName("GET")
                 .addOperationType(TD.readProperty)
                 .build();
-        Form tempHttpForm = new Form.Builder("http://10.2.1.88:8080/temperature")
+        Form tempForm = new Form.Builder(baseURI + "/temperature")
                 .setMethodName("GET")
                 .addOperationType(TD.readProperty)
                 .build();
@@ -62,7 +62,7 @@ public class MiroGate extends Thing {
                 .addObserve()
                 .build();
 
-        PropertyAffordance humEvent = new PropertyAffordance.Builder("humidity", Arrays.asList(humForm, humHttpForm))
+        PropertyAffordance humEvent = new PropertyAffordance.Builder("humidity", Arrays.asList(humFormObserve, humForm))
                 .addTitle("Humidity")
                 .addSemanticType("http://example.org/mirogate#Humidity")
                 .addDataSchema(new ObjectSchema.Builder()
@@ -75,7 +75,7 @@ public class MiroGate extends Thing {
                 .addObserve()
                 .build();
 
-        PropertyAffordance tempEvent = new PropertyAffordance.Builder("temperature", Arrays.asList(tempForm, tempHttpForm))
+        PropertyAffordance tempEvent = new PropertyAffordance.Builder("temperature", Arrays.asList(tempFormObserve, tempForm))
                 .addTitle("Temperature")
                 .addSemanticType("http://example.org/mirogate#Temperature")
                 .addDataSchema(new ObjectSchema.Builder()

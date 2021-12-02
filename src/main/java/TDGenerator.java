@@ -38,7 +38,7 @@ public class TDGenerator {
         //Create MiroGate instance requires checking out wot-td-java to feature/coap-client 
 
 
-        MiroGate miroGate = new MiroGate("coap://10.2.1.227:5683", "urn:mirogate",
+        MiroGate miroGate = new MiroGate("coap://130.82.171.10:5683", "urn:mirogate",
                 "Mirogate");
 
 
