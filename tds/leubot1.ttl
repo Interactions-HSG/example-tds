@@ -15,12 +15,12 @@
       wotsec:in "HEADER";
       wotsec:name "X-API-Key"
     ];
-  td:hasBase <https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/>;
+  td:hasBase <https://api.interactions.ics.unisg.ch/leubot1/v1.3.4/>;
   td:hasPropertyAffordance [ a td:PropertyAffordance, onto:Base, js:ObjectSchema;
       td:name "base";
       dct:title "Read Base State";
       td:hasForm [
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/base>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.4/base>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
         ];
@@ -34,7 +34,7 @@
       td:name "shoulder";
       dct:title "Read Shoulder Angle";
       td:hasForm [
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/shoulder>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.4/shoulder>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
         ];
@@ -48,7 +48,7 @@
       td:name "elbow";
       dct:title "Read Elbow Angle";
       td:hasForm [
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/elbow>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.4/elbow>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
         ];
@@ -62,7 +62,7 @@
       td:name "wristAngle";
       dct:title "Read Wrist Angle";
       td:hasForm [
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/wrist/angle>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.4/wrist/angle>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
         ];
@@ -76,7 +76,7 @@
       td:name "wristRotation";
       dct:title "Read Wrist Rotation";
       td:hasForm [
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/wrist/rotation>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.4/wrist/rotation>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
         ];
@@ -90,7 +90,7 @@
       td:name "gripper";
       dct:title "Read Gripper";
       td:hasForm [
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/gripper>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.4/gripper>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -104,7 +104,7 @@
       td:name "posture";
       dct:title "Read Posture Information";
       td:hasForm [
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/posture>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.4/posture>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
         ];
@@ -126,7 +126,7 @@
       td:name "user";
       dct:title "Read User Information";
       td:hasForm [
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/user>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.4/user>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
         ];
@@ -142,7 +142,7 @@
       dct:title "Reset";
       td:hasForm [
           htv:methodName "PUT";
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/reset>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.4/reset>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]
@@ -151,7 +151,7 @@
       dct:title "Set Base";
       td:hasForm [
           htv:methodName "PUT";
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/base>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.4/base>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -168,7 +168,7 @@
       dct:title "Set Shoulder";
       td:hasForm [
           htv:methodName "PUT";
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/shoulder>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.4/shoulder>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -185,7 +185,7 @@
       dct:title "Set Elbow";
       td:hasForm [
           htv:methodName "PUT";
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/elbow>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.4/elbow>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -202,7 +202,7 @@
       dct:title "Set Wrist Angle";
       td:hasForm [
           htv:methodName "PUT";
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/wrist/angle>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.4/wrist/angle>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -219,7 +219,7 @@
       dct:title "Set Wrist Rotation";
       td:hasForm [
           htv:methodName "PUT";
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/wrist/rotation>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.4/wrist/rotation>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -236,7 +236,7 @@
       dct:title "Set Gripper";
       td:hasForm [
           htv:methodName "PUT";
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/gripper>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.4/gripper>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -253,7 +253,7 @@
       dct:title "Log In";
       td:hasForm [
           htv:methodName "POST";
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/user>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.4/user>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -270,7 +270,7 @@
       dct:title "Log Out";
       td:hasForm [
           htv:methodName "DELETE";
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/user>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.4/user>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]
