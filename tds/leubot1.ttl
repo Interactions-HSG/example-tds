@@ -259,9 +259,9 @@
           hctl:hasOperationType td:invokeAction
         ];
       td:hasInputSchema [ a js:ObjectSchema, foaf:Agent;
-          js:properties [ a js:StringSchema;
+          js:properties [ a js:StringSchema, foaf:Name;
               js:propertyName "name"
-            ], [ a js:StringSchema;
+            ], [ a js:StringSchema, foaf:Mbox;
               js:propertyName "email"
             ];
           js:required "name", "email"
