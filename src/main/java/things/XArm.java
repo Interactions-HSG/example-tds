@@ -36,7 +36,7 @@ public class XArm extends Thing {
                 .setMethodName("PUT")
                 .build();
 
-        Form putGripperForm = new Form.Builder(baseURI + "tcp/gripper")
+        Form putGripperForm = new Form.Builder(baseURI + "gripper")
                 .setMethodName("PUT")
                 .build();
 
@@ -117,6 +117,7 @@ public class XArm extends Thing {
                 .addSemanticType(CHERRY.tcpMovementSchema)
                 .addProperty("target", targetSchema)
                 .addProperty("speed", new IntegerSchema.Builder()
+                        .addSemanticType(CHERRY.speed)
                         .addMinimum(10)
                         .addMaximum(400)
                         .build())
