@@ -34,4 +34,5 @@ public class CHERRY {
     public static final String roll = PREFIX + "Roll";
     public static final String pitch = PREFIX + "Pitch";
     public static final String yaw = PREFIX + "Yaw";
+    public static final String speed = PREFIX + "Speed";
 }
