@@ -161,7 +161,7 @@
           hctl:hasOperationType td:invokeAction
         ];
       td:hasInputSchema [ a js:ObjectSchema, cherrybot:TcpMovementSchema;
-          js:properties [ a js:IntegerSchema;
+          js:properties [ a js:IntegerSchema, cherrybot:Speed;
               js:propertyName "speed";
               js:minimum "10"^^xsd:int;
               js:maximum "400"^^xsd:int
@@ -208,7 +208,7 @@
       td:name "setGripper";
       td:hasForm [
           htv:methodName "PUT";
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/cherrybot/tcp/gripper>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/cherrybot/gripper>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
