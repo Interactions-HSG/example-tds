@@ -30,7 +30,8 @@
           js:propertyName "name"
         ], [ a js:IntegerSchema, onto:JointValue;
           js:propertyName "value"
-        ]
+        ];
+      js:required "name", "value"
     ], [ a td:PropertyAffordance, onto:Shoulder, js:ObjectSchema;
       td:name "shoulder";
       dct:title "Read Shoulder Angle";
@@ -44,7 +45,8 @@
           js:propertyName "name"
         ], [ a js:IntegerSchema, onto:JointValue;
           js:propertyName "value"
-        ]
+        ];
+      js:required "name", "value"
     ], [ a td:PropertyAffordance, onto:Elbow, js:ObjectSchema;
       td:name "elbow";
       dct:title "Read Elbow Angle";
@@ -58,7 +60,8 @@
           js:propertyName "name"
         ], [ a js:IntegerSchema, onto:JointValue;
           js:propertyName "value"
-        ]
+        ];
+      js:required "name", "value"
     ], [ a td:PropertyAffordance, onto:WristAngle, js:ObjectSchema;
       td:name "wristAngle";
       dct:title "Read Wrist Angle";
@@ -72,7 +75,8 @@
           js:propertyName "name"
         ], [ a js:IntegerSchema, onto:JointValue;
           js:propertyName "value"
-        ]
+        ];
+      js:required "name", "value"
     ], [ a td:PropertyAffordance, onto:WristRotation, js:ObjectSchema;
       td:name "wristRotation";
       dct:title "Read Wrist Rotation";
@@ -86,7 +90,8 @@
           js:propertyName "name"
         ], [ a js:IntegerSchema, onto:JointValue;
           js:propertyName "value"
-        ]
+        ];
+      js:required "name", "value"
     ], [ a td:PropertyAffordance, onto:Gripper, js:ObjectSchema;
       td:name "gripper";
       dct:title "Read Gripper";
@@ -100,7 +105,8 @@
           js:propertyName "name"
         ], [ a js:IntegerSchema, onto:JointValue;
           js:propertyName "value"
-        ]
+        ];
+      js:required "name", "value"
     ], [ a td:PropertyAffordance, onto:Posture, js:ObjectSchema;
       td:name "posture";
       dct:title "Read Posture Information";
@@ -110,19 +116,20 @@
           hctl:hasOperationType td:readProperty
         ];
       td:isObservable false;
-      js:properties [ a js:IntegerSchema, onto:ElbowJointValue;
-          js:propertyName "elbow"
-        ], [ a js:IntegerSchema, onto:WristRotationJointValue;
-          js:propertyName "wristRotation"
-        ], [ a js:IntegerSchema, onto:WristAngleJointValue;
-          js:propertyName "wristAngle"
-        ], [ a js:IntegerSchema, onto:ShoulderJointValue;
-          js:propertyName "shoulder"
+      js:properties [ a js:IntegerSchema, onto:WristAngleJointValue;
+          js:propertyName "WristAngle"
         ], [ a js:IntegerSchema, onto:GripperJointValue;
-          js:propertyName "gripper"
-        ], [ a js:StringSchema, onto:BaseJointValue;
-          js:propertyName "base"
-        ]
+          js:propertyName "Gripper"
+        ], [ a js:IntegerSchema, onto:ShoulderJointValue;
+          js:propertyName "Shoulder"
+        ], [ a js:IntegerSchema, onto:ElbowJointValue;
+          js:propertyName "Elbow"
+        ], [ a js:IntegerSchema, onto:BaseJointValue;
+          js:propertyName "Base"
+        ], [ a js:IntegerSchema, onto:WristRotationJointValue;
+          js:propertyName "WristRotation"
+        ];
+      js:required "Base", "Shoulder", "Elbow", "WristAngle", "WristRotation", "Gripper"
     ], [ a td:PropertyAffordance, foaf:Agent, js:ObjectSchema;
       td:name "user";
       dct:title "Read User Information";
@@ -134,9 +141,10 @@
       td:isObservable false;
       js:properties [ a js:StringSchema, foaf:Name;
           js:propertyName "name"
-        ], [ a js:IntegerSchema, foaf:Mbox;
+        ], [ a js:StringSchema, foaf:Mbox;
           js:propertyName "email"
-        ]
+        ];
+      js:required "name", "email"
     ];
   td:hasActionAffordance [ a td:ActionAffordance, onto:Reset;
       td:name "reset";
@@ -157,7 +165,7 @@
           hctl:hasOperationType td:invokeAction
         ];
       td:hasInputSchema [ a js:ObjectSchema, onto:BaseJoint;
-          js:properties [ a js:IntegerSchema;
+          js:properties [ a js:IntegerSchema, onto:JointValue;
               js:propertyName "value";
               js:minimum "512"^^xsd:int;
               js:maximum "1023"^^xsd:int
@@ -174,7 +182,7 @@
           hctl:hasOperationType td:invokeAction
         ];
       td:hasInputSchema [ a js:ObjectSchema, onto:ShoulderJoint;
-          js:properties [ a js:IntegerSchema;
+          js:properties [ a js:IntegerSchema, onto:JointValue;
               js:propertyName "value";
               js:minimum "205"^^xsd:int;
               js:maximum "810"^^xsd:int
@@ -191,10 +199,10 @@
           hctl:hasOperationType td:invokeAction
         ];
       td:hasInputSchema [ a js:ObjectSchema, onto:ElbowJoint;
-          js:properties [ a js:IntegerSchema;
+          js:properties [ a js:IntegerSchema, onto:JointValue;
               js:propertyName "value";
-              js:minimum "210"^^xsd:int;
-              js:maximum "900"^^xsd:int
+              js:minimum "400"^^xsd:int;
+              js:maximum "650"^^xsd:int
             ];
           js:required "value"
         ]
@@ -208,14 +216,14 @@
           hctl:hasOperationType td:invokeAction
         ];
       td:hasInputSchema [ a js:ObjectSchema, onto:WristAngleJoint;
-          js:properties [ a js:IntegerSchema;
+          js:properties [ a js:IntegerSchema, onto:JointValue;
               js:propertyName "value";
               js:minimum "200"^^xsd:int;
               js:maximum "830"^^xsd:int
             ];
           js:required "value"
         ]
-    ], [ a td:ActionAffordance, onto:SetWristAngle;
+    ], [ a td:ActionAffordance, onto:SetWristRotation;
       td:name "setWristRotation";
       dct:title "Set Wrist Rotation";
       td:hasForm [
@@ -225,7 +233,7 @@
           hctl:hasOperationType td:invokeAction
         ];
       td:hasInputSchema [ a js:ObjectSchema, onto:WristRotateJoint;
-          js:properties [ a js:IntegerSchema;
+          js:properties [ a js:IntegerSchema, onto:JointValue;
               js:propertyName "value";
               js:minimum "0"^^xsd:int;
               js:maximum "1023"^^xsd:int
@@ -242,7 +250,7 @@
           hctl:hasOperationType td:invokeAction
         ];
       td:hasInputSchema [ a js:ObjectSchema, onto:GripperJoint;
-          js:properties [ a js:IntegerSchema;
+          js:properties [ a js:IntegerSchema, onto:JointValue;
               js:propertyName "value";
               js:minimum "0"^^xsd:int;
               js:maximum "512"^^xsd:int
