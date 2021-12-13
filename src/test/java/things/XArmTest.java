@@ -27,7 +27,7 @@ import static things.ThingTestUtil.*;
 public class XArmTest {
 
     /* set THING_NAME to "cherrybot" to test the real robot */
-    private static final String THING_NAME = "pretendabot";
+    private static final String THING_NAME = "cherrybot";
 
     private static final XArm XARM = new XArm("https://api.interactions.ics.unisg" +
             ".ch/" + THING_NAME + "/", "urn:" + THING_NAME, THING_NAME);
@@ -307,7 +307,7 @@ public class XArmTest {
         List<ActionAffordance> actions = THING_DESCRIPTION.getActions();
 
         assertEquals(4, properties.size());
-        assertEquals(4, actions.size());
+        assertEquals(5, actions.size());
 
         testRegisterOperator();
         Thread.sleep(1000);
@@ -323,8 +323,10 @@ public class XArmTest {
         Thread.sleep(5000);
         testSetGripper();
         Thread.sleep(1000);
+
         testInitialize();
         Thread.sleep(1000);
+        testRemoveOperator();
     }
 
     private void testRegisterOperator() throws IOException {
@@ -548,4 +550,34 @@ public class XArmTest {
             assertEquals(401, res.getStatusCode());
         }
     }
+
+    private void testRemoveOperator() throws IOException {
+        ActionAffordance action = testActionMetadata(THING_DESCRIPTION, "removeOperator",
+                CHERRY.removeOperator, false, false) ;
+
+        assertTrue(action.getFirstFormForOperationType(TD.invokeAction).isPresent());
+        Form form = action.getFirstFormForOperationType(TD.invokeAction).get();
+
+        assertTrue(action.getUriVariables().isPresent());
+
+        Map<String, DataSchema> uriVariables = action.getUriVariables().get();
+        assertTrue(uriVariables.containsKey("token"));
+
+        DataSchema schema = uriVariables.get("token");
+        assertTrue(schema instanceof StringSchema);
+        assertTrue(schema.isA(CHERRY.operatorToken));
+
+        Map<String, Object> uriValues = new HashMap<>();
+        //TODO should be string
+        uriValues.put("token", LOG_IN_TOKEN);
+        TDHttpRequest req = new TDHttpRequest(form, TD.invokeAction, uriVariables, uriValues);
+        TDHttpResponse res = req.execute();
+
+        if (LOG_IN_STATUS == 200) {
+            assertEquals(200, res.getStatusCode());
+        } else {
+            assertEquals(404, res.getStatusCode());
+        }
+    }
+
 }

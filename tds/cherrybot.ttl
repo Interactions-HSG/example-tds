@@ -216,4 +216,15 @@
           js:minimum "0"^^xsd:int;
           js:maximum "800"^^xsd:int
         ]
+    ], [ a td:ActionAffordance, cherrybot:RemoveOperator;
+      td:name "removeOperator";
+      td:hasUriTemplateSchema [ a js:StringSchema, cherrybot:OperatorToken;
+          td:name "token"
+        ];
+      td:hasForm [
+          htv:methodName "DELETE";
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/cherrybot/operator/%7Btoken%7D>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ]
     ] .
