@@ -6,7 +6,7 @@ public class CHERRY {
 
     // Action types
     public static final String registerOperator = PREFIX + "RegisterOperator";
-    public static final String deleteOperator = PREFIX + "DeleteOperator";
+    public static final String removeOperator = PREFIX + "RemoveOperator";
     public static final String initialize = PREFIX + "Initialize";
     public static final String setTarget = PREFIX + "SetTarget";
     public static final String setGripper = PREFIX + "SetGripper";
