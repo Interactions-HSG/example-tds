@@ -12,6 +12,8 @@ import ch.unisg.ics.interactions.wot.td.security.APIKeySecurityScheme;
 import ch.unisg.ics.interactions.wot.td.vocabularies.HTV;
 import ch.unisg.ics.interactions.wot.td.vocabularies.TD;
 import vocabularies.CHERRY;
+import vocabularies.FOAF;
+import vocabularies.MINES;
 
 public class XArm extends Thing {
 
@@ -19,6 +21,8 @@ public class XArm extends Thing {
         super(baseURI, relativeURI, title);
         this.namespaces.put("htv", HTV.PREFIX);
         this.namespaces.put("cherrybot", CHERRY.PREFIX);
+        this.namespaces.put("foaf", FOAF.PREFIX);
+        this.namespaces.put("eve", "http://w3id.org/eve#");
 
         //Action forms
         Form postOperatorForm = new Form.Builder(baseURI + "operator")
@@ -33,42 +37,53 @@ public class XArm extends Thing {
                 .setMethodName("PUT")
                 .build();
 
-        Form putGripperForm = new Form.Builder(baseURI + "tcp/gripper")
+        Form putGripperForm = new Form.Builder(baseURI + "gripper")
                 .setMethodName("PUT")
+                .build();
+        Form deleteOperatorForm = new Form.Builder(baseURI + "operator/{token}")
+                .setMethodName("DELETE")
                 .build();
 
         //Schemas
         ObjectSchema operatorSchema = new ObjectSchema.Builder()
-                .addSemanticType(CHERRY.operator)
+                .addSemanticType(CHERRY.operatorSchema)
                 .addProperty("name", new StringSchema.Builder()
+                        .addSemanticType(FOAF.name)
                         .build())
                 .addProperty("email", new StringSchema.Builder()
+                        .addSemanticType(FOAF.mbox)
                         .build())
                 .addRequiredProperties("name", "email")
                 .build();
 
         ObjectSchema operatorWithTokenSchema = new ObjectSchema.Builder()
-                .addSemanticType(CHERRY.operatorWithToken)
+                .addSemanticType(CHERRY.operatorWithTokenSchema)
                 .addProperty("name", new StringSchema.Builder()
+                        .addSemanticType(FOAF.name)
                         .build())
                 .addProperty("email", new StringSchema.Builder()
+                        .addSemanticType(FOAF.mbox)
                         .build())
                 .addProperty("token", new StringSchema.Builder()
+                        .addSemanticType(CHERRY.operatorToken)
                         .build())
                 .addRequiredProperties("name", "email", "token")
                 .build();
 
         ObjectSchema coordinatesSchema = new ObjectSchema.Builder()
-                .addSemanticType(CHERRY.coordinates)
+                .addSemanticType(CHERRY.coordinatesSchema)
                 .addProperty("x", new NumberSchema.Builder()
+                        .addSemanticType(CHERRY.xCoordinate)
                         .addMinimum((double) -720)
                         .addMaximum((double) 720)
                         .build())
                 .addProperty("y", new NumberSchema.Builder()
+                        .addSemanticType(CHERRY.yCoordinate)
                         .addMinimum((double) -720)
                         .addMaximum((double) 720)
                         .build())
                 .addProperty("z", new NumberSchema.Builder()
+                        .addSemanticType(CHERRY.zCoordinate)
                         .addMinimum((double) -178.3)
                         .addMaximum((double) 1010)
                         .build())
@@ -76,16 +91,19 @@ public class XArm extends Thing {
                 .build();
 
         ObjectSchema rotationSchema = new ObjectSchema.Builder()
-                .addSemanticType(CHERRY.rotation)
+                .addSemanticType(CHERRY.rotationSchema)
                 .addProperty("roll", new NumberSchema.Builder()
+                        .addSemanticType(CHERRY.roll)
                         .addMinimum((double) -180)
                         .addMaximum((double) 180)
                         .build())
                 .addProperty("pitch", new NumberSchema.Builder()
+                        .addSemanticType(CHERRY.pitch)
                         .addMinimum((double) -180)
                         .addMaximum((double) 180)
                         .build())
                 .addProperty("yaw", new NumberSchema.Builder()
+                        .addSemanticType(CHERRY.yaw)
                         .addMinimum((double) -180)
                         .addMaximum((double) 180)
                         .build())
@@ -93,16 +111,17 @@ public class XArm extends Thing {
                 .build();
 
         ObjectSchema targetSchema = new ObjectSchema.Builder()
-                .addSemanticType(CHERRY.target)
+                .addSemanticType(CHERRY.tcpTargetSchema)
                 .addProperty("coordinate", coordinatesSchema)
                 .addProperty("rotation", rotationSchema)
                 .addRequiredProperties("coordinate", "rotation")
                 .build();
 
         ObjectSchema tcpMovementSchema = new ObjectSchema.Builder()
-                .addSemanticType(CHERRY.tcpMovement)
+                .addSemanticType(CHERRY.tcpMovementSchema)
                 .addProperty("target", targetSchema)
                 .addProperty("speed", new IntegerSchema.Builder()
+                        .addSemanticType(CHERRY.speed)
                         .addMinimum(10)
                         .addMaximum(400)
                         .build())
@@ -110,58 +129,70 @@ public class XArm extends Thing {
                 .build();
 
         NumberSchema gripperSchema = new IntegerSchema.Builder()
+                .addSemanticType(CHERRY.gripperIntegerSchema)
                 .addMinimum(0)
                 .addMaximum(800)
                 .build();
 
 
         //Properties
-        properties.add(new PropertyAffordance.Builder(operatorWithTokenSchema,
+        properties.add(new PropertyAffordance.Builder("operator",
                 new Form.Builder(baseURI + "operator")
                         .addOperationType(TD.readProperty)
                         .build())
-                .addSemanticType(CHERRY.getOperator)
+                .addSemanticType(CHERRY.operator)
+                .addDataSchema(operatorWithTokenSchema)
                 .build());
 
-        properties.add(new PropertyAffordance.Builder(targetSchema,
+        properties.add(new PropertyAffordance.Builder("tcp",
                 new Form.Builder(baseURI + "tcp")
                         .addOperationType(TD.readProperty)
                         .build())
-                .addSemanticType(CHERRY.getTCP)
+                .addSemanticType(CHERRY.tcp)
+                .addDataSchema(targetSchema)
                 .build());
 
-        properties.add(new PropertyAffordance.Builder(targetSchema,
+        properties.add(new PropertyAffordance.Builder("tcpTarget",
                 new Form.Builder(baseURI + "tcp/target")
                         .addOperationType(TD.readProperty)
                         .build())
-                .addSemanticType(CHERRY.getTarget)
+                .addSemanticType(CHERRY.tcpTarget)
+                .addDataSchema(targetSchema)
                 .build());
 
-        properties.add(new PropertyAffordance.Builder(gripperSchema,
+        properties.add(new PropertyAffordance.Builder("gripper",
                 new Form.Builder(baseURI + "gripper")
                         .addOperationType(TD.readProperty)
                         .build())
-                .addSemanticType(CHERRY.getGripper)
+                .addSemanticType(CHERRY.gripper)
+                .addDataSchema(gripperSchema)
                 .build());
 
         //Actions
-        actions.add(new ActionAffordance.Builder(initializeForm)
+        actions.add(new ActionAffordance.Builder("initialize", initializeForm)
                 .addSemanticType(CHERRY.initialize)
                 .build());
 
-        actions.add(new ActionAffordance.Builder(postOperatorForm)
-                .addSemanticType(CHERRY.postOperator)
+        actions.add(new ActionAffordance.Builder("registerOperator", postOperatorForm)
+                .addSemanticType(CHERRY.registerOperator)
                 .addInputSchema(operatorSchema)
                 .build());
 
-        actions.add(new ActionAffordance.Builder(putTargetForm)
-                .addSemanticType(CHERRY.putTarget)
+        actions.add(new ActionAffordance.Builder("setTarget", putTargetForm)
+                .addSemanticType(CHERRY.setTarget)
                 .addInputSchema(tcpMovementSchema)
                 .build());
 
-        actions.add(new ActionAffordance.Builder(putGripperForm)
-                .addSemanticType(CHERRY.putGripper)
+        actions.add(new ActionAffordance.Builder("setGripper", putGripperForm)
+                .addSemanticType(CHERRY.setGripper)
                 .addInputSchema(gripperSchema)
+                .build());
+
+        actions.add(new ActionAffordance.Builder("removeOperator", deleteOperatorForm)
+                .addSemanticType(CHERRY.removeOperator)
+                .addUriVariable("token", new StringSchema.Builder()
+                        .addSemanticType(CHERRY.operatorToken)
+                        .build())
                 .build());
     }
 

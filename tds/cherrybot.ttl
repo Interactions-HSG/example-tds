@@ -1,73 +1,73 @@
 @prefix td: <https://www.w3.org/2019/wot/td#> .
 @prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
-@prefix cherrybot: <http://www.example.org/cherrybot#> .
+@prefix cherrybot: <https://interactions.ics.unisg.ch/cherrybot#> .
 @prefix dct: <http://purl.org/dc/terms/> .
+@prefix eve: <http://w3id.org/eve#> .
 @prefix wotsec: <https://www.w3.org/2019/wot/security#> .
 @prefix js: <https://www.w3.org/2019/wot/json-schema#> .
 @prefix htv: <http://www.w3.org/2011/http#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<urn:cherrybot> a td:Thing, <http://w3id.org/eve#Artifact>;
+<urn:cherrybot> a td:Thing, eve:Artifact;
   dct:title "cherryBot";
   td:hasSecurityConfiguration [ a wotsec:APIKeySecurityScheme;
       wotsec:in "HEADER";
       wotsec:name "Authentication"
     ];
   td:hasBase <https://api.interactions.ics.unisg.ch/cherrybot/>;
-  td:hasPropertyAffordance [ a td:PropertyAffordance, cherrybot:GetOperator, js:ObjectSchema,
-        cherrybot:Operator_with_Token;
-      td:name "Get Operator";
+  td:hasPropertyAffordance [ a td:PropertyAffordance, cherrybot:Operator, js:ObjectSchema,
+        cherrybot:OperatorWithTokenSchema;
+      td:name "operator";
       td:hasForm [
-          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/cherrybot/operator>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
         ];
       td:isObservable false;
-      js:properties [ a js:StringSchema;
+      js:properties [ a js:StringSchema, foaf:Name;
           js:propertyName "name"
-        ], [ a js:StringSchema;
+        ], [ a js:StringSchema, foaf:Mbox;
           js:propertyName "email"
-        ], [ a js:StringSchema;
+        ], [ a js:StringSchema, cherrybot:OperatorToken;
           js:propertyName "token"
         ];
       js:required "name", "email", "token"
-    ], [ a td:PropertyAffordance, cherrybot:getTCP, js:ObjectSchema, cherrybot:Target;
-      td:name "Get TCP";
+    ], [ a td:PropertyAffordance, cherrybot:Tcp, js:ObjectSchema, cherrybot:TcpTargetSchema;
+      td:name "tcp";
       td:hasForm [
-          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/cherrybot/tcp>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
         ];
       td:isObservable false;
-      js:properties [ a js:ObjectSchema, cherrybot:Coordinates;
+      js:properties [ a js:ObjectSchema, cherrybot:CoordinatesSchema;
           js:propertyName "coordinate";
-          js:properties [ a js:NumberSchema;
+          js:properties [ a js:NumberSchema, cherrybot:XCoordinate;
               js:propertyName "x";
               js:minimum -7.2E2;
               js:maximum 7.2E2
-            ], [ a js:NumberSchema;
+            ], [ a js:NumberSchema, cherrybot:YCoordinate;
               js:propertyName "y";
               js:minimum -7.2E2;
               js:maximum 7.2E2
-            ], [ a js:NumberSchema;
+            ], [ a js:NumberSchema, cherrybot:ZCoordinate;
               js:propertyName "z";
               js:minimum -1.783E2;
               js:maximum 1.01E3
             ];
           js:required "x", "y", "z"
-        ], [ a js:ObjectSchema, cherrybot:Rotation;
+        ], [ a js:ObjectSchema, cherrybot:RotationSchema;
           js:propertyName "rotation";
-          js:properties [ a js:NumberSchema;
+          js:properties [ a js:NumberSchema, cherrybot:Roll;
               js:propertyName "roll";
               js:minimum -1.8E2;
               js:maximum 1.8E2
-            ], [ a js:NumberSchema;
+            ], [ a js:NumberSchema, cherrybot:Pitch;
               js:propertyName "pitch";
               js:minimum -1.8E2;
               js:maximum 1.8E2
-            ], [ a js:NumberSchema;
+            ], [ a js:NumberSchema, cherrybot:Yaw;
               js:propertyName "yaw";
               js:minimum -1.8E2;
               js:maximum 1.8E2
@@ -75,42 +75,41 @@
           js:required "roll", "pitch", "yaw"
         ];
       js:required "coordinate", "rotation"
-    ], [ a td:PropertyAffordance, cherrybot:GetTarget, js:ObjectSchema, cherrybot:Target;
-      td:name "Get Target";
+    ], [ a td:PropertyAffordance, cherrybot:TcpTarget, js:ObjectSchema, cherrybot:TcpTargetSchema;
+      td:name "tcpTarget";
       td:hasForm [
-          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/cherrybot/tcp/target>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
         ];
       td:isObservable false;
-      js:properties [ a js:ObjectSchema, cherrybot:Coordinates;
+      js:properties [ a js:ObjectSchema, cherrybot:CoordinatesSchema;
           js:propertyName "coordinate";
-          js:properties [ a js:NumberSchema;
+          js:properties [ a js:NumberSchema, cherrybot:XCoordinate;
               js:propertyName "x";
               js:minimum -7.2E2;
               js:maximum 7.2E2
-            ], [ a js:NumberSchema;
+            ], [ a js:NumberSchema, cherrybot:YCoordinate;
               js:propertyName "y";
               js:minimum -7.2E2;
               js:maximum 7.2E2
-            ], [ a js:NumberSchema;
+            ], [ a js:NumberSchema, cherrybot:ZCoordinate;
               js:propertyName "z";
               js:minimum -1.783E2;
               js:maximum 1.01E3
             ];
           js:required "x", "y", "z"
-        ], [ a js:ObjectSchema, cherrybot:Rotation;
+        ], [ a js:ObjectSchema, cherrybot:RotationSchema;
           js:propertyName "rotation";
-          js:properties [ a js:NumberSchema;
+          js:properties [ a js:NumberSchema, cherrybot:Roll;
               js:propertyName "roll";
               js:minimum -1.8E2;
               js:maximum 1.8E2
-            ], [ a js:NumberSchema;
+            ], [ a js:NumberSchema, cherrybot:Pitch;
               js:propertyName "pitch";
               js:minimum -1.8E2;
               js:maximum 1.8E2
-            ], [ a js:NumberSchema;
+            ], [ a js:NumberSchema, cherrybot:Yaw;
               js:propertyName "yaw";
               js:minimum -1.8E2;
               js:maximum 1.8E2
@@ -118,10 +117,9 @@
           js:required "roll", "pitch", "yaw"
         ];
       js:required "coordinate", "rotation"
-    ], [ a td:PropertyAffordance, cherrybot:getGripper, js:IntegerSchema;
-      td:name "Get Gripper";
+    ], [ a td:PropertyAffordance, cherrybot:Gripper, js:IntegerSchema, cherrybot:GripperValue;
+      td:name "gripper";
       td:hasForm [
-          htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/cherrybot/gripper>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
@@ -131,71 +129,71 @@
       js:maximum "800"^^xsd:int
     ];
   td:hasActionAffordance [ a td:ActionAffordance, cherrybot:Initialize;
-      td:name "Initialize";
+      td:name "initialize";
       td:hasForm [
           htv:methodName "PUT";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/cherrybot/initialize>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]
-    ], [ a td:ActionAffordance, cherrybot:PostOperator;
-      td:name "Set operator";
+    ], [ a td:ActionAffordance, cherrybot:RegisterOperator;
+      td:name "registerOperator";
       td:hasForm [
           htv:methodName "POST";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/cherrybot/operator>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
-      td:hasInputSchema [ a js:ObjectSchema, cherrybot:Operator;
-          js:properties [ a js:StringSchema;
+      td:hasInputSchema [ a js:ObjectSchema, cherrybot:OperatorSchema;
+          js:properties [ a js:StringSchema, foaf:Name;
               js:propertyName "name"
-            ], [ a js:StringSchema;
+            ], [ a js:StringSchema, foaf:Mbox;
               js:propertyName "email"
             ];
           js:required "name", "email"
         ]
-    ], [ a td:ActionAffordance, cherrybot:PutTarget;
-      td:name "Set Target";
+    ], [ a td:ActionAffordance, cherrybot:SetTarget;
+      td:name "setTarget";
       td:hasForm [
           htv:methodName "PUT";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/cherrybot/tcp/target>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
-      td:hasInputSchema [ a js:ObjectSchema, cherrybot:TcpMovement;
-          js:properties [ a js:IntegerSchema;
+      td:hasInputSchema [ a js:ObjectSchema, cherrybot:TcpMovementSchema;
+          js:properties [ a js:IntegerSchema, cherrybot:Speed;
               js:propertyName "speed";
               js:minimum "10"^^xsd:int;
               js:maximum "400"^^xsd:int
-            ], [ a js:ObjectSchema, cherrybot:Target;
+            ], [ a js:ObjectSchema, cherrybot:TcpTargetSchema;
               js:propertyName "target";
-              js:properties [ a js:ObjectSchema, cherrybot:Coordinates;
+              js:properties [ a js:ObjectSchema, cherrybot:CoordinatesSchema;
                   js:propertyName "coordinate";
-                  js:properties [ a js:NumberSchema;
+                  js:properties [ a js:NumberSchema, cherrybot:XCoordinate;
                       js:propertyName "x";
                       js:minimum -7.2E2;
                       js:maximum 7.2E2
-                    ], [ a js:NumberSchema;
+                    ], [ a js:NumberSchema, cherrybot:YCoordinate;
                       js:propertyName "y";
                       js:minimum -7.2E2;
                       js:maximum 7.2E2
-                    ], [ a js:NumberSchema;
+                    ], [ a js:NumberSchema, cherrybot:ZCoordinate;
                       js:propertyName "z";
                       js:minimum -1.783E2;
                       js:maximum 1.01E3
                     ];
                   js:required "x", "y", "z"
-                ], [ a js:ObjectSchema, cherrybot:Rotation;
+                ], [ a js:ObjectSchema, cherrybot:RotationSchema;
                   js:propertyName "rotation";
-                  js:properties [ a js:NumberSchema;
+                  js:properties [ a js:NumberSchema, cherrybot:Roll;
                       js:propertyName "roll";
                       js:minimum -1.8E2;
                       js:maximum 1.8E2
-                    ], [ a js:NumberSchema;
+                    ], [ a js:NumberSchema, cherrybot:Pitch;
                       js:propertyName "pitch";
                       js:minimum -1.8E2;
                       js:maximum 1.8E2
-                    ], [ a js:NumberSchema;
+                    ], [ a js:NumberSchema, cherrybot:Yaw;
                       js:propertyName "yaw";
                       js:minimum -1.8E2;
                       js:maximum 1.8E2
@@ -206,16 +204,27 @@
             ];
           js:required "target", "speed"
         ]
-    ], [ a td:ActionAffordance, cherrybot:PutGripper;
-      td:name "Set Gripper";
+    ], [ a td:ActionAffordance, cherrybot:SetGripper;
+      td:name "setGripper";
       td:hasForm [
           htv:methodName "PUT";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/cherrybot/gripper>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
-      td:hasInputSchema [ a js:IntegerSchema;
+      td:hasInputSchema [ a js:IntegerSchema, cherrybot:GripperValue;
           js:minimum "0"^^xsd:int;
           js:maximum "800"^^xsd:int
+        ]
+    ], [ a td:ActionAffordance, cherrybot:RemoveOperator;
+      td:name "removeOperator";
+      td:hasUriTemplateSchema [ a js:StringSchema, cherrybot:OperatorToken;
+          td:name "token"
+        ];
+      td:hasForm [
+          htv:methodName "DELETE";
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/cherrybot/operator/%7Btoken%7D>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
         ]
     ] .

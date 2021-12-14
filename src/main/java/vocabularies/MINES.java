@@ -49,6 +49,8 @@ public final class MINES {
     public static final String jointName = PREFIX + "JointName";
     public static final String jointValue = PREFIX + "JointValue";
 
+    public static final String userToken = PREFIX + "UserToken";
+
 
 
     public static IRI createIRI(String fragment) {

@@ -10,6 +10,7 @@ import ch.unisg.ics.interactions.wot.td.vocabularies.COV;
 import ch.unisg.ics.interactions.wot.td.vocabularies.HTV;
 import ch.unisg.ics.interactions.wot.td.vocabularies.TD;
 import org.eclipse.rdf4j.model.vocabulary.DCTERMS;
+import vocabularies.MIRO;
 
 import java.util.Arrays;
 
@@ -22,66 +23,68 @@ public class MiroGate extends Thing {
         super(baseURI, relativeURI, title);
         this.namespaces.put("cov", COV.PREFIX);
         this.namespaces.put("htv", HTV.PREFIX);
-        this.namespaces.put("miro", "http://example.org/mirogate#");
-
+        this.namespaces.put("miro", MIRO.PREFIX);
 
         Form poseForm = new Form.Builder(baseURI + "/pose")
                 .setMethodName("GET")
                 .addOperationType(TD.observeProperty)
                 .addSubProtocol(COV.observe)
                 .build();
-        Form humForm = new Form.Builder(baseURI + "/humidity")
+        Form humFormObserve = new Form.Builder(baseURI + "/humidity")
                 .setMethodName("GET")
                 .addOperationType(TD.observeProperty)
                 .addSubProtocol(COV.observe)
+                .build();
+        Form tempFormObserve = new Form.Builder(baseURI + "/temperature")
+                .setMethodName("GET")
+                .addOperationType(TD.observeProperty)
+                .addSubProtocol(COV.observe)
+                .build();
+        Form humForm = new Form.Builder(baseURI + "/humidity")
+                .setMethodName("GET")
+                .addOperationType(TD.readProperty)
                 .build();
         Form tempForm = new Form.Builder(baseURI + "/temperature")
                 .setMethodName("GET")
-                .addOperationType(TD.observeProperty)
-                .addSubProtocol(COV.observe)
-                .build();
-        Form humHttpForm = new Form.Builder("http://10.2.1.88:8080/humidity")
-                .setMethodName("GET")
-                .addOperationType(TD.readProperty)
-                .build();
-        Form tempHttpForm = new Form.Builder("http://10.2.1.88:8080/temperature")
-                .setMethodName("GET")
                 .addOperationType(TD.readProperty)
                 .build();
 
-        PropertyAffordance poseEvent = new PropertyAffordance.Builder(new ObjectSchema.Builder()
-                .addProperty("value", new IntegerSchema.Builder()
-                        .addSemanticType("http://example.org/mirogate#PoseValue")
-                        .addMinimum(0)
-                        .addMaximum(4)
-                        .build())
-                .build(), poseForm)
+        PropertyAffordance poseEvent = new PropertyAffordance.Builder("pose", poseForm)
                 .addTitle("Pose")
-                .addSemanticType("http://example.org/mirogate#Pose")
+                .addSemanticType(MIRO.pose)
+                .addDataSchema(new ObjectSchema.Builder()
+                        .addProperty("value", new IntegerSchema.Builder()
+                                .addSemanticType(MIRO.poseValue)
+                                .addMinimum(0)
+                                .addMaximum(4)
+                                .build())
+                        .build())
                 .addObserve()
                 .build();
 
-        PropertyAffordance humEvent = new PropertyAffordance.Builder(new ObjectSchema.Builder()
-                .addProperty("value", new NumberSchema.Builder()
-                        .addSemanticType("http://example.org/mirogate#HumidityValue")
-                        .addMinimum(15.00)
-                        .addMaximum(40.00)
-                        .build())
-                .build(), Arrays.asList(humForm, humHttpForm))
+        PropertyAffordance humEvent = new PropertyAffordance.Builder("humidity", Arrays.asList(humFormObserve, humForm))
                 .addTitle("Humidity")
-                .addSemanticType("http://example.org/mirogate#Humidity")
+                .addSemanticType(MIRO.humidity)
+                .addDataSchema(new ObjectSchema.Builder()
+                        .addProperty("value", new NumberSchema.Builder()
+                                .addSemanticType(MIRO.humidityValue)
+                                .addMinimum(15.00)
+                                .addMaximum(40.00)
+                                .build())
+                        .build())
                 .addObserve()
                 .build();
 
-        PropertyAffordance tempEvent = new PropertyAffordance.Builder(new ObjectSchema.Builder()
-                .addProperty("value", new NumberSchema.Builder()
-                        .addSemanticType("http://example.org/mirogate#TemperatureValue")
-                        .addMinimum(10.00)
-                        .addMaximum(26.00)
-                        .build())
-                .build(), Arrays.asList(tempForm, tempHttpForm))
+        PropertyAffordance tempEvent = new PropertyAffordance.Builder("temperature", Arrays.asList(tempFormObserve, tempForm))
                 .addTitle("Temperature")
-                .addSemanticType("http://example.org/mirogate#Temperature")
+                .addSemanticType(MIRO.temperature)
+                .addDataSchema(new ObjectSchema.Builder()
+                        .addProperty("value", new NumberSchema.Builder()
+                                .addSemanticType(MIRO.temperatureValue)
+                                .addMinimum(10.00)
+                                .addMaximum(26.00)
+                                .build())
+                        .build())
                 .addObserve()
                 .build();
 

@@ -35,10 +35,7 @@ public class TDGenerator {
         CupProvider cupProvider = new CupProvider("http://localhost:1080/", "urn:cup_provider",
                 "cupProvider");
 
-        //Create MiroGate instance requires checking out wot-td-java to feature/coap-client 
-
-
-        MiroGate miroGate = new MiroGate("coap://10.2.1.227:5683", "urn:mirogate",
+        MiroGate miroGate = new MiroGate("coap://130.82.171.10:5683", "urn:mirogate",
                 "Mirogate");
 
 
@@ -48,10 +45,10 @@ public class TDGenerator {
 
         Hoverbot hoverBot = new Hoverbot("http://10.10.10.105/", "urn:hoverbot_garuda", "hoverbot");
 
-        PhantomXReactor leubot1 = new PhantomXReactor("https://api.interactions.ics.unisg.ch/leubot1/v1.3.0/",
+        PhantomXReactor leubot1 = new PhantomXReactor("https://api.interactions.ics.unisg.ch/leubot1/v1.3.4/",
                 "http://yggdrasil.interactions.ics.unisg.ch/environments/61/workspaces/102/artifacts/leubot1", "leubot1");
 
-        PhantomXReactor leubot2 = new PhantomXReactor("https://api.interactions.ics.unisg.ch/leubot2/v1.2/",
+        PhantomXReactor leubot2 = new PhantomXReactor("https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/",
                 "http://yggdrasil.interactions.ics.unisg.ch/environments/61/workspaces/102/artifacts/leubot2", "leubot2");
 
         XArm cherryBot = new XArm("https://api.interactions.ics.unisg.ch/cherrybot/", "urn:cherrybot", "cherryBot");
@@ -88,7 +85,7 @@ public class TDGenerator {
 
     private static void readOperator(ThingDescription pretendabotTD) throws IOException {
         //Get property affordance http://www.example.org/cherrybot#GetOperator
-        Optional<PropertyAffordance> p = pretendabotTD.getFirstPropertyBySemanticType(CHERRY.getOperator);
+        Optional<PropertyAffordance> p = pretendabotTD.getFirstPropertyBySemanticType(CHERRY.operator);
         if (p.isPresent()) {
             PropertyAffordance getOperator = p.get();
 
@@ -105,7 +102,7 @@ public class TDGenerator {
                 int statusCode = resp.getStatusCode();
 
                 //Get response payload for schema http://www.example.org/cherrybot#OperatorWithToken
-                if (statusCode == 200 && getOperator.getSemanticTypes().contains(CHERRY.operatorWithToken)) {
+                if (statusCode == 200 && getOperator.getSemanticTypes().contains(CHERRY.operatorWithTokenSchema)) {
                     ObjectSchema schema = (ObjectSchema) getOperator.getDataSchema();
                     Map<String, Object> operatorWithToken = resp.getPayloadAsObject(schema);
 
@@ -120,7 +117,7 @@ public class TDGenerator {
 
     private static void invokePostOperator(ThingDescription pretendabotTD) throws IOException {
         //Get property affordance http://www.example.org/cherrybot#PostOperator
-        Optional<ActionAffordance> a = pretendabotTD.getFirstActionBySemanticType(CHERRY.postOperator);
+        Optional<ActionAffordance> a = pretendabotTD.getFirstActionBySemanticType(CHERRY.registerOperator);
         if (a.isPresent()) {
             ActionAffordance postOperator = a.get();
 
@@ -131,7 +128,7 @@ public class TDGenerator {
 
                 //Create request payload for schema http://www.example.org/cherrybot#Operator
                 Optional<DataSchema> s = postOperator.getInputSchema();
-                if (s.isPresent() && s.get().getSemanticTypes().contains(CHERRY.operator)) {
+                if (s.isPresent() && s.get().getSemanticTypes().contains(CHERRY.operatorSchema)) {
                     ObjectSchema inputSchema = (ObjectSchema) s.get();
                     Map<String, Object> payload = new HashMap<>();
                     payload.put("name", "Danai V");

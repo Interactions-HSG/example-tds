@@ -13,6 +13,7 @@
     ];
   td:hasBase <http://localhost:1080/>;
   td:hasActionAffordance [ a td:ActionAffordance, ex:Order;
+      td:name "order";
       dct:title "order";
       td:hasForm [
           htv:methodName "POST";

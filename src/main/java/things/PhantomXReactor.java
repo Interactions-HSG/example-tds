@@ -20,6 +20,7 @@ public class PhantomXReactor extends Thing {
         this.namespaces.put("htv", HTV.PREFIX);
         this.namespaces.put("onto", MINES.PREFIX);
         this.namespaces.put("foaf", FOAF.PREFIX);
+        this.namespaces.put("eve", "http://w3id.org/eve#");
 
         //Action forms
         Form resetForm = new Form.Builder(baseURI + "reset")
@@ -46,7 +47,7 @@ public class PhantomXReactor extends Thing {
         Form userForm = new Form.Builder(baseURI + "user")
                 .setMethodName("POST")
                 .build();
-        Form userDeleteForm = new Form.Builder(baseURI + "user")
+        Form userDeleteForm = new Form.Builder(baseURI + "user/{token}")
                 .setMethodName("DELETE")
                 .build();
 
@@ -58,116 +59,121 @@ public class PhantomXReactor extends Thing {
                 .addProperty("value", new IntegerSchema.Builder()
                         .addSemanticType(MINES.jointValue)
                         .build())
+                .addRequiredProperties("name", "value")
                 .build();
 
         ObjectSchema userObjectSchema = new ObjectSchema.Builder()
+                .addSemanticType(FOAF.agent)
                 .addProperty("name", new StringSchema.Builder()
                         .addSemanticType(FOAF.name)
                         .build())
-                .addProperty("email", new IntegerSchema.Builder()
+                .addProperty("email", new StringSchema.Builder()
                         .addSemanticType(FOAF.mbox)
                         .build())
+                .addRequiredProperties("name", "email")
                 .build();
 
         ObjectSchema postureObjectSchema = new ObjectSchema.Builder()
-                .addProperty("base", new StringSchema.Builder()
+                .addSemanticType(MINES.posture)
+                .addProperty("Base", new IntegerSchema.Builder()
                         .addSemanticType(MINES.baseJointValue)
                         .build())
-                .addProperty("shoulder", new IntegerSchema.Builder()
+                .addProperty("Shoulder", new IntegerSchema.Builder()
                         .addSemanticType(MINES.shoulderJointValue)
                         .build())
-                .addProperty("elbow", new IntegerSchema.Builder()
+                .addProperty("Elbow", new IntegerSchema.Builder()
                         .addSemanticType(MINES.elbowJointValue)
                         .build())
-                .addProperty("wristAngle", new IntegerSchema.Builder()
+                .addProperty("WristAngle", new IntegerSchema.Builder()
                         .addSemanticType(MINES.wristAngleJointValue)
                         .build())
-                .addProperty("wristRotation", new IntegerSchema.Builder()
+                .addProperty("WristRotation", new IntegerSchema.Builder()
                         .addSemanticType(MINES.wristRotationJointValue)
                         .build())
-                .addProperty("gripper", new IntegerSchema.Builder()
+                .addProperty("Gripper", new IntegerSchema.Builder()
                         .addSemanticType(MINES.gripperJointValue)
                         .build())
+                .addRequiredProperties("Base", "Shoulder", "Elbow", "WristAngle", "WristRotation",
+                        "Gripper")
                 .build();
 
-        properties.add(new PropertyAffordance.Builder(propObjectSchema,
+        properties.add(new PropertyAffordance.Builder("base",
                 new Form.Builder(baseURI + "base")
                         .addOperationType(TD.readProperty).build())
                 .addSemanticType(MINES.base)
                 .addTitle("Read Base State")
-                .addName("Read Base State")
+                .addDataSchema(propObjectSchema)
                 .build());
 
-        properties.add(new PropertyAffordance.Builder(propObjectSchema,
+        properties.add(new PropertyAffordance.Builder("shoulder",
                 new Form.Builder(baseURI + "shoulder")
                         .addOperationType(TD.readProperty).build())
                 .addSemanticType(MINES.shoulder)
-                .addTitle("Read Base State")
-                .addName("Read Base State")
+                .addTitle("Read Shoulder Angle")
+                .addDataSchema(propObjectSchema)
                 .build());
 
-        properties.add(new PropertyAffordance.Builder(propObjectSchema,
+        properties.add(new PropertyAffordance.Builder("elbow",
                 new Form.Builder(baseURI + "elbow")
                         .addOperationType(TD.readProperty).build())
                 .addSemanticType(MINES.elbow)
                 .addTitle("Read Elbow Angle")
-                .addName("Read Elbow Angle")
+                .addDataSchema(propObjectSchema)
                 .build());
 
-        properties.add(new PropertyAffordance.Builder(propObjectSchema,
+        properties.add(new PropertyAffordance.Builder("wristAngle",
                 new Form.Builder(baseURI + "wrist/angle")
                         .addOperationType(TD.readProperty).build())
                 .addSemanticType(MINES.wristAngle)
                 .addTitle("Read Wrist Angle")
-                .addName("Read Wrist Angle")
+                .addDataSchema(propObjectSchema)
                 .build());
 
-        properties.add(new PropertyAffordance.Builder(propObjectSchema,
+        properties.add(new PropertyAffordance.Builder("wristRotation",
                 new Form.Builder(baseURI + "wrist/rotation")
                         .addOperationType(TD.readProperty).build())
                 .addSemanticType(MINES.wristRotation)
                 .addTitle("Read Wrist Rotation")
-                .addName("Read Wrist Rotation")
+                .addDataSchema(propObjectSchema)
                 .build());
 
-        properties.add(new PropertyAffordance.Builder(propObjectSchema,
+        properties.add(new PropertyAffordance.Builder("gripper",
                 new Form.Builder(baseURI + "gripper").build())
                 .addSemanticType(MINES.gripper)
                 .addTitle("Read Gripper")
-                .addName("Read Gripper")
+                .addDataSchema(propObjectSchema)
                 .build());
 
-        properties.add(new PropertyAffordance.Builder(postureObjectSchema,
+        properties.add(new PropertyAffordance.Builder("posture",
                 new Form.Builder(baseURI + "posture")
                         .addOperationType(TD.readProperty).build())
                 .addSemanticType(MINES.posture)
                 .addTitle("Read Posture Information")
-                .addName("Read Posture Information")
+                .addDataSchema(postureObjectSchema)
                 .build());
 
-        properties.add(new PropertyAffordance.Builder(userObjectSchema,
+        properties.add(new PropertyAffordance.Builder("user",
                 new Form.Builder(baseURI + "user")
                         .addOperationType(TD.readProperty).build())
                 .addSemanticType(FOAF.agent)
                 .addTitle("Read User Information")
-                .addName("Read User Information")
+                .addDataSchema(userObjectSchema)
                 .build());
 
 
         //Actions
-        actions.add(new ActionAffordance.Builder(resetForm)
+        actions.add(new ActionAffordance.Builder("reset", resetForm)
                 .addTitle("Reset")
-                .addName("Reset")
                 .addSemanticType(MINES.reset)
                 .build());
 
-        actions.add(new ActionAffordance.Builder(baseForm)
+        actions.add(new ActionAffordance.Builder("setBase", baseForm)
                 .addTitle("Set Base")
-                .addName("Set Base")
                 .addSemanticType(MINES.setBase)
                 .addInputSchema(new ObjectSchema.Builder()
                         .addSemanticType(MINES.baseJoint)
                         .addProperty("value", new IntegerSchema.Builder()
+                                .addSemanticType(MINES.jointValue)
                                 .addMinimum(512)
                                 .addMaximum(1023)
                                 .build())
@@ -175,13 +181,13 @@ public class PhantomXReactor extends Thing {
                         .build())
                 .build());
 
-        actions.add(new ActionAffordance.Builder(shoulderForm)
+        actions.add(new ActionAffordance.Builder("setShoulder", shoulderForm)
                 .addTitle("Set Shoulder")
-                .addName("Set Shoulder")
                 .addSemanticType(MINES.setShoulder)
                 .addInputSchema(new ObjectSchema.Builder()
                         .addSemanticType(MINES.shoulderJoint)
                         .addProperty("value", new IntegerSchema.Builder()
+                                .addSemanticType(MINES.jointValue)
                                 .addMinimum(205)
                                 .addMaximum(810)
                                 .build())
@@ -189,27 +195,27 @@ public class PhantomXReactor extends Thing {
                         .build())
                 .build());
 
-        actions.add(new ActionAffordance.Builder(elbowForm)
+        actions.add(new ActionAffordance.Builder("setElbow", elbowForm)
                 .addTitle("Set Elbow")
-                .addName("Set Elbow")
                 .addSemanticType(MINES.setElbow)
                 .addInputSchema(new ObjectSchema.Builder()
                         .addSemanticType(MINES.elbowJoint)
                         .addProperty("value", new IntegerSchema.Builder()
-                                .addMinimum(210)
-                                .addMaximum(900)
+                                .addSemanticType(MINES.jointValue)
+                                .addMinimum(400)
+                                .addMaximum(650)
                                 .build())
                         .addRequiredProperties("value")
                         .build())
                 .build());
 
-        actions.add(new ActionAffordance.Builder(wristAngleForm)
+        actions.add(new ActionAffordance.Builder("setWristAngle", wristAngleForm)
                 .addTitle("Set Wrist Angle")
-                .addName("Set Wrist Angle")
                 .addSemanticType(MINES.setWristAngle)
                 .addInputSchema(new ObjectSchema.Builder()
                         .addSemanticType(MINES.wristAngleJoint)
                         .addProperty("value", new IntegerSchema.Builder()
+                                .addSemanticType(MINES.jointValue)
                                 .addMinimum(200)
                                 .addMaximum(830)
                                 .build())
@@ -217,13 +223,13 @@ public class PhantomXReactor extends Thing {
                         .build())
                 .build());
 
-        actions.add(new ActionAffordance.Builder(wristRotationForm)
+        actions.add(new ActionAffordance.Builder("setWristRotation", wristRotationForm)
                 .addTitle("Set Wrist Rotation")
-                .addName("Set Wrist Rotation")
-                .addSemanticType(MINES.setWristAngle)
+                .addSemanticType(MINES.setWristRotation)
                 .addInputSchema(new ObjectSchema.Builder()
                         .addSemanticType(MINES.wristRotateJoint)
                         .addProperty("value", new IntegerSchema.Builder()
+                                .addSemanticType(MINES.jointValue)
                                 .addMinimum(0)
                                 .addMaximum(1023)
                                 .build())
@@ -231,13 +237,13 @@ public class PhantomXReactor extends Thing {
                         .build())
                 .build());
 
-        actions.add(new ActionAffordance.Builder(gripperForm)
+        actions.add(new ActionAffordance.Builder("setGripper", gripperForm)
                 .addTitle("Set Gripper")
-                .addName("Set Gripper")
                 .addSemanticType(MINES.setGripper)
                 .addInputSchema(new ObjectSchema.Builder()
                         .addSemanticType(MINES.gripperJoint)
                         .addProperty("value", new IntegerSchema.Builder()
+                                .addSemanticType(MINES.jointValue)
                                 .addMinimum(0)
                                 .addMaximum(512)
                                 .build())
@@ -245,24 +251,27 @@ public class PhantomXReactor extends Thing {
                         .build())
                 .build());
 
-        actions.add(new ActionAffordance.Builder(userForm)
+        actions.add(new ActionAffordance.Builder("logIn", userForm)
                 .addTitle("Log In")
-                .addName("Log In")
                 .addSemanticType(MINES.logIn)
                 .addInputSchema(new ObjectSchema.Builder()
                         .addSemanticType(FOAF.agent)
                         .addProperty("name", new StringSchema.Builder()
+                                .addSemanticType(FOAF.name)
                                 .build())
                         .addProperty("email", new StringSchema.Builder()
+                                .addSemanticType(FOAF.mbox)
                                 .build())
                         .addRequiredProperties("name", "email")
                         .build())
                 .build());
 
-        actions.add(new ActionAffordance.Builder(userDeleteForm)
-                .addTitle("Log Out")
-                .addName("Log Out")
+        actions.add(new ActionAffordance.Builder("logOut", userDeleteForm)
+                        .addTitle("Log Out")
                 .addSemanticType(MINES.logOut)
+                .addUriVariable("token", new StringSchema.Builder()
+                        .addSemanticType(MINES.userToken)
+                        .build())
                 .build());
     }
 

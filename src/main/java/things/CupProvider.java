@@ -15,7 +15,7 @@ public class CupProvider extends Thing {
         Form orderForm = new Form.Builder(baseURI + "order")
                 .build();
 
-        ActionAffordance orderAction = new ActionAffordance.Builder(orderForm)
+        ActionAffordance orderAction = new ActionAffordance.Builder("order", orderForm)
                 .addTitle("order")
                 .addSemanticType("http://example.org#Order")
                 .addInputSchema(new IntegerSchema.Builder()
