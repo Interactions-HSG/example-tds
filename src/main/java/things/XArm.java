@@ -13,6 +13,7 @@ import ch.unisg.ics.interactions.wot.td.vocabularies.HTV;
 import ch.unisg.ics.interactions.wot.td.vocabularies.TD;
 import vocabularies.CHERRY;
 import vocabularies.FOAF;
+import vocabularies.MINES;
 
 public class XArm extends Thing {
 
@@ -38,6 +39,9 @@ public class XArm extends Thing {
 
         Form putGripperForm = new Form.Builder(baseURI + "gripper")
                 .setMethodName("PUT")
+                .build();
+        Form deleteOperatorForm = new Form.Builder(baseURI + "operator/{token}")
+                .setMethodName("DELETE")
                 .build();
 
         //Schemas
@@ -182,6 +186,13 @@ public class XArm extends Thing {
         actions.add(new ActionAffordance.Builder("setGripper", putGripperForm)
                 .addSemanticType(CHERRY.setGripper)
                 .addInputSchema(gripperSchema)
+                .build());
+
+        actions.add(new ActionAffordance.Builder("removeOperator", deleteOperatorForm)
+                .addSemanticType(CHERRY.removeOperator)
+                .addUriVariable("token", new StringSchema.Builder()
+                        .addSemanticType(CHERRY.operatorToken)
+                        .build())
                 .build());
     }
 

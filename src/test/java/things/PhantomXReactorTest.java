@@ -18,10 +18,7 @@ import vocabularies.FOAF;
 import vocabularies.MINES;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -256,7 +253,7 @@ public class PhantomXReactorTest {
         List<ActionAffordance> actions = THING_DESCRIPTION.getActions();
 
         assertEquals(8, properties.size());
-        assertEquals(8, actions.size());
+        assertEquals(9, actions.size());
 
         testLogIn();
         Thread.sleep(1000);
@@ -292,6 +289,8 @@ public class PhantomXReactorTest {
         Thread.sleep(3000);
 
         testReset();
+        Thread.sleep(3000);
+        testLogOut();
     }
 
     private void testLogIn() throws IOException {
@@ -609,6 +608,35 @@ public class PhantomXReactorTest {
         } else {
             TDHttpResponse res = req.execute();
             assertEquals(401, res.getStatusCode());
+        }
+    }
+
+    private void testLogOut() throws IOException {
+        ActionAffordance action = testActionMetadata(THING_DESCRIPTION, "logOut",
+                MINES.logOut, false, false) ;
+
+        assertTrue(action.getFirstFormForOperationType(TD.invokeAction).isPresent());
+        Form form = action.getFirstFormForOperationType(TD.invokeAction).get();
+
+        assertTrue(action.getUriVariables().isPresent());
+
+        Map<String, DataSchema> uriVariables = action.getUriVariables().get();
+        assertTrue(uriVariables.containsKey("token"));
+
+        DataSchema schema = uriVariables.get("token");
+        assertTrue(schema instanceof StringSchema);
+        assertTrue(schema.isA(MINES.userToken));
+
+        Map<String, Object> uriValues = new HashMap<>();
+        //TODO should be string
+        uriValues.put("token", LOG_IN_TOKEN);
+        TDHttpRequest req = new TDHttpRequest(form, TD.invokeAction, uriVariables, uriValues);
+        TDHttpResponse res = req.execute();
+
+        if (LOG_IN_STATUS == 201) {
+            assertEquals(204, res.getStatusCode());
+        } else {
+            assertEquals(404, res.getStatusCode());
         }
     }
 }

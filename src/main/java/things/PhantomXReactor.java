@@ -47,7 +47,7 @@ public class PhantomXReactor extends Thing {
         Form userForm = new Form.Builder(baseURI + "user")
                 .setMethodName("POST")
                 .build();
-        Form userDeleteForm = new Form.Builder(baseURI + "user")
+        Form userDeleteForm = new Form.Builder(baseURI + "user/{token}")
                 .setMethodName("DELETE")
                 .build();
 
@@ -266,13 +266,13 @@ public class PhantomXReactor extends Thing {
                         .build())
                 .build());
 
-        // [Andrei] this form cannot be properly implemented with the current version of wot-td-java,
-        // we need support for URI variables. I'm commenting this out to avoid confusion
-        // TODO: implement after we add URI variables to wot-td-java
-//        actions.add(new ActionAffordance.Builder("logOut", userDeleteForm)
-//                .addTitle("Log Out")
-//                .addSemanticType(MINES.logOut)
-//                .build());
+        actions.add(new ActionAffordance.Builder("logOut", userDeleteForm)
+                        .addTitle("Log Out")
+                .addSemanticType(MINES.logOut)
+                .addUriVariable("token", new StringSchema.Builder()
+                        .addSemanticType(MINES.userToken)
+                        .build())
+                .build());
     }
 
     @Override

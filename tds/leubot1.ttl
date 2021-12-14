@@ -274,4 +274,16 @@
             ];
           js:required "name", "email"
         ]
+    ], [ a td:ActionAffordance, onto:LogOut;
+      td:name "logOut";
+      td:hasUriTemplateSchema [ a js:StringSchema, onto:UserToken;
+          td:name "token"
+        ];
+      dct:title "Log Out";
+      td:hasForm [
+          htv:methodName "DELETE";
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot1/v1.3.4/user/%7Btoken%7D>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ]
     ] .
