@@ -28,6 +28,9 @@ public class TDGenerator {
     public static void main(String[] args) {
         System.out.println("Hello World");
 
+        RobotController  uRxRobotController = new RobotController("http://robotcontroller.intelliot.org/",
+                "urn:intelliot-urx-robot-controller", "URx Robot Controller");
+
         Engraver engraver = new Engraver("http://engraver.intelliot.org/services", "urn:intelliot" +
                 "-engraver",
                 "Engraver machine");
@@ -55,6 +58,7 @@ public class TDGenerator {
 
         XArm pretendaBot = new XArm("https://api.interactions.ics.unisg.ch/pretendabot/", "urn:pretendabot", "pretendBot");
 
+        writeToFile(uRxRobotController.serializeTD(), "urx-robot-controller");
         writeToFile(engraver.serializeTD(), "engraver");
         writeToFile(cupProvider.serializeTD(), "cup-provider");
         writeToFile(spock.serializeTD(), "spock-tractorbot");
