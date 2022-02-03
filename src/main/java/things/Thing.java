@@ -2,6 +2,7 @@ package things;
 
 import ch.unisg.ics.interactions.wot.td.ThingDescription;
 import ch.unisg.ics.interactions.wot.td.affordances.ActionAffordance;
+import ch.unisg.ics.interactions.wot.td.affordances.EventAffordance;
 import ch.unisg.ics.interactions.wot.td.affordances.PropertyAffordance;
 import ch.unisg.ics.interactions.wot.td.io.TDGraphWriter;
 import vocabularies.NS;
@@ -19,6 +20,7 @@ public abstract class Thing {
     Map<String, String> namespaces = NS.getDefaultNamespaces();
     List<PropertyAffordance> properties = new ArrayList<>();
     List<ActionAffordance> actions = new ArrayList<>();
+    List<EventAffordance> events = new ArrayList<>();
 
     Thing(String baseURI, String relativeURI, String title) {
         this.baseURI = baseURI;
@@ -57,5 +59,9 @@ public abstract class Thing {
 
     public List<ActionAffordance> getActions() {
         return actions;
+    }
+
+    public List<EventAffordance> getEvents() {
+        return events;
     }
 }
