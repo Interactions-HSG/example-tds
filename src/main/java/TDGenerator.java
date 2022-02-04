@@ -58,6 +58,8 @@ public class TDGenerator {
 
         XArm pretendaBot = new XArm("https://api.interactions.ics.unisg.ch/pretendabot/", "urn:pretendabot", "pretendBot");
 
+        TwilioServer twilioServer = new TwilioServer("http://localhost:8080", "urn:twilio_server", "twilioServer");
+
         writeToFile(uRxRobotController.serializeTD(), "urx-robot-controller");
         writeToFile(engraver.serializeTD(), "engraver");
         writeToFile(cupProvider.serializeTD(), "cup-provider");
@@ -69,6 +71,7 @@ public class TDGenerator {
         writeToFile(leubot2.serializeTD(), "leubot2");
         writeToFile(cherryBot.serializeTD(), "cherrybot");
         writeToFile(pretendaBot.serializeTD(), "pretendabot");
+        writeToFile(twilioServer.serializeTD(), "twilio_server");
 
         try {
             //Read TD from file
