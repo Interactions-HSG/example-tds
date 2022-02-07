@@ -1,0 +1,36 @@
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix wotsec: <https://www.w3.org/2019/wot/security#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix js: <https://www.w3.org/2019/wot/json-schema#> .
+
+<http://localhost:8080/environments/intelliot/workspaces/wksp1/artifacts/twilio> a
+    td:Thing, <http://w3id.org/eve#Artifact>;
+  dct:title "twilioServer";
+  td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
+    ];
+  td:hasBase <http://localhost:591/>;
+  td:hasActionAffordance [ a td:ActionAffordance;
+      td:name "sendMessage";
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://localhost:591/>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema;
+          js:properties [ a js:StringSchema;
+              js:propertyName "api_key"
+            ], [ a js:StringSchema;
+              js:propertyName "phone2"
+            ], [ a js:StringSchema;
+              js:propertyName "account_sid"
+            ], [ a js:StringSchema;
+              js:propertyName "message"
+            ], [ a js:StringSchema;
+              js:propertyName "phone1"
+            ];
+          js:required "message", "phone1", "phone2", "account_sid", "api_key"
+        ]
+    ] .

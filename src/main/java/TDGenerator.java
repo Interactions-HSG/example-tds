@@ -58,7 +58,7 @@ public class TDGenerator {
 
         XArm pretendaBot = new XArm("https://api.interactions.ics.unisg.ch/pretendabot/", "urn:pretendabot", "pretendBot");
 
-        TwilioServer twilioServer = new TwilioServer("http://localhost:8080", "urn:twilio_server", "twilioServer");
+        TwilioServer twilioServer = new TwilioServer("http://localhost:591/", "http://localhost:8080/environments/intelliot/workspaces/wksp1/artifacts/twilio", "twilioServer");
 
         writeToFile(uRxRobotController.serializeTD(), "urx-robot-controller");
         writeToFile(engraver.serializeTD(), "engraver");

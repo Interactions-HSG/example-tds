@@ -3,10 +3,12 @@ package things;
 import ch.unisg.ics.interactions.wot.td.ThingDescription;
 import ch.unisg.ics.interactions.wot.td.affordances.ActionAffordance;
 import ch.unisg.ics.interactions.wot.td.affordances.Form;
+import ch.unisg.ics.interactions.wot.td.affordances.PropertyAffordance;
 import ch.unisg.ics.interactions.wot.td.schemas.DataSchema;
 import ch.unisg.ics.interactions.wot.td.schemas.ObjectSchema;
 import ch.unisg.ics.interactions.wot.td.schemas.StringSchema;
 import ch.unisg.ics.interactions.wot.td.security.APIKeySecurityScheme;
+import ch.unisg.ics.interactions.wot.td.security.NoSecurityScheme;
 import ch.unisg.ics.interactions.wot.td.vocabularies.TD;
 
 public class TwilioServer extends Thing {
@@ -21,20 +23,26 @@ public class TwilioServer extends Thing {
                 .addRequiredProperties("message", "phone1", "phone2", "account_sid", "api_key")
                 .build();
 
-        Form sendMessageForm = new Form.Builder(baseURI + "message")
+        Form sendMessageForm = new Form.Builder(baseURI)
                 .addOperationType(TD.invokeAction)
                 .build();
         ActionAffordance sendMessage = new ActionAffordance.Builder("sendMessage", sendMessageForm)
                 .addInputSchema(sendMessageSchema)
                 .build();
         actions.add(sendMessage);
+
+        /*Form f = new Form.Builder(baseURI+"property")
+                .addOperationType(TD.readProperty)
+                .build();
+        PropertyAffordance p = new PropertyAffordance.Builder("property",f).build();
+        properties.add(p);*/
     }
 
     @Override
     public ThingDescription exposeTD() {
         return new ThingDescription.Builder(title)
-                .addSecurityScheme(new APIKeySecurityScheme(APIKeySecurityScheme
-                        .TokenLocation.HEADER, "X-API-Key"))
+                .addSemanticType("http://w3id.org/eve#Artifact")
+                .addSecurityScheme(new NoSecurityScheme())
                 .addThingURI(relativeURI)
                 .addBaseURI(baseURI)
                 .addActions(actions)
