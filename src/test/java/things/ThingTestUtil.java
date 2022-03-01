@@ -76,8 +76,8 @@ public final class ThingTestUtil {
             DataSchema schemaByName = propertyByName.get().getDataSchema();
             DataSchema schemaByType = propertyByType.get().getDataSchema();
 
-            assertNotEquals(DataSchema.EMPTY, schemaByName.getDatatype());
-            assertNotEquals(DataSchema.EMPTY, schemaByType.getDatatype());
+            assertNotEquals(DataSchema.DATA, schemaByName.getDatatype());
+            assertNotEquals(DataSchema.DATA, schemaByType.getDatatype());
         }
 
         return propertyByName.get();
