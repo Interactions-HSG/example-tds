@@ -246,8 +246,8 @@ public class RobotController extends Thing {
                 .addSemanticType(INTELLIOT.readPose)
                 .addDataSchema(new ObjectSchema.Builder()
                         .addProperty("value",
-                                DataSchema.getSuperSchema(Arrays.asList(poseJointSchema, poseTcpSchema,
-                                        poseNamedPoseSchema, poseAiSchema)))
+                                new DataSchema.Builder().oneOf(poseJointSchema, poseTcpSchema,
+                                        poseNamedPoseSchema, poseAiSchema).build())
                         .addRequiredProperties("value")
                         .build())
                 .build();
@@ -293,8 +293,8 @@ public class RobotController extends Thing {
                                 .addSemanticType(INTELLIOT.callbackLocation)
                                 .build())
                         .addProperty("value",
-                                DataSchema.getSuperSchema(Arrays.asList(poseJointSchema, poseTcpSchema,
-                                        poseNamedPoseSchema, poseAiSchema)))
+                                new DataSchema.Builder().oneOf(poseJointSchema, poseTcpSchema,
+                                        poseNamedPoseSchema, poseAiSchema).build())
                         .addRequiredProperties("value")
                         .build())
                 .addNotificationSchema(doneSchema)
