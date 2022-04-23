@@ -6,7 +6,7 @@ import ch.unisg.ics.interactions.wot.td.affordances.PropertyAffordance;
 import ch.unisg.ics.interactions.wot.td.schemas.*;
 
 public class AIService extends Thing{
-    AIService(String baseURI, String relativeURI, String title) {
+    public AIService(String baseURI, String relativeURI, String title) {
         super(baseURI, relativeURI, title);
 
         DataSchema grabspotSchema = new ObjectSchema.Builder()

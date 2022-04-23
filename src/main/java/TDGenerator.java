@@ -60,6 +60,10 @@ public class TDGenerator {
 
         TwilioServer twilioServer = new TwilioServer("http://localhost:591/", "http://localhost:8080/environments/intelliot/workspaces/wksp1/artifacts/twilio", "twilioServer");
 
+        HILService hilService = new HILService("http://hil.intelliot.org/services", "urn:intelliot-hil", "hilService");
+
+        AIService aiService = new AIService("http://ai.intelliot.org/services", "urn:intelliot-ai", "aiService");
+
         writeToFile(uRxRobotController.serializeTD(), "urx-robot-controller");
         writeToFile(engraver.serializeTD(), "engraver");
         writeToFile(cupProvider.serializeTD(), "cup-provider");
@@ -72,6 +76,8 @@ public class TDGenerator {
         writeToFile(cherryBot.serializeTD(), "cherrybot");
         writeToFile(pretendaBot.serializeTD(), "pretendabot");
         writeToFile(twilioServer.serializeTD(), "twilio_server");
+        writeToFile(hilService.serializeTD(), "hil_service");
+        writeToFile(aiService.serializeTD(), "ai_service");
 
         try {
             //Read TD from file

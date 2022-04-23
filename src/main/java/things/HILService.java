@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class HILService extends Thing{
-    HILService(String baseURI, String relativeURI, String title) {
+    public HILService(String baseURI, String relativeURI, String title) {
         super(baseURI, relativeURI, title);
 
 
