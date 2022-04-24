@@ -24,7 +24,7 @@
           hctl:hasOperationType td:readProperty
         ];
       td:isObservable false;
-      js:properties [ a js:IntegerSchema, qudt:DateTimeStringEncodingType;
+      js:properties [ a js:StringSchema, qudt:DateTimeStringEncodingType;
           js:propertyName "time"
         ], [ a js:NumberSchema, qudt:DEG_C;
           js:propertyName "value";
@@ -41,7 +41,7 @@
           hctl:hasOperationType td:readProperty
         ];
       td:isObservable false;
-      js:properties [ a js:IntegerSchema, qudt:DateTimeStringEncodingType;
+      js:properties [ a js:StringSchema, qudt:DateTimeStringEncodingType;
           js:propertyName "time"
         ], [ a js:NumberSchema, qudt:LUX;
           js:propertyName "value";
