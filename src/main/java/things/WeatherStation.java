@@ -6,6 +6,7 @@ import ch.unisg.ics.interactions.wot.td.affordances.PropertyAffordance;
 import ch.unisg.ics.interactions.wot.td.schemas.IntegerSchema;
 import ch.unisg.ics.interactions.wot.td.schemas.NumberSchema;
 import ch.unisg.ics.interactions.wot.td.schemas.ObjectSchema;
+import ch.unisg.ics.interactions.wot.td.schemas.StringSchema;
 import ch.unisg.ics.interactions.wot.td.security.NoSecurityScheme;
 import ch.unisg.ics.interactions.wot.td.vocabularies.TD;
 
@@ -36,7 +37,7 @@ public class WeatherStation extends Thing {
                             .addMinimum(-50.00)
                             .addMaximum(80.00)
                             .build())
-                    .addProperty("time", new IntegerSchema.Builder()
+                    .addProperty("time", new StringSchema.Builder()
                             .addSemanticType("http://qudt.org/vocab/unit/DateTimeStringEncodingType")
                             .build())
                     .build())
@@ -51,7 +52,7 @@ public class WeatherStation extends Thing {
                             .addMinimum(0.00)
                             .addMaximum(10000.00)
                             .build())
-                    .addProperty("time", new IntegerSchema.Builder()
+                    .addProperty("time", new StringSchema.Builder()
                             .addSemanticType("http://qudt.org/vocab/unit/DateTimeStringEncodingType")
                             .build())
                     .build())
