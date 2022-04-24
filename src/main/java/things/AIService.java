@@ -17,7 +17,7 @@ public class AIService extends Thing{
                 .addRequiredProperties("xcoordinate", "ycoordinate", "angle", "confidence")
                 .build();
 
-        Form getGrabspotForm = new Form.Builder(baseURI + "/AI_Service/GET_grabspot")
+        Form getGrabspotForm = new Form.Builder(baseURI + "/AI_Service/GET_grabspot{?storageId,cameraHostname,cameraId}")
                 .setMethodName("GET")
                 .build();
 
@@ -36,7 +36,7 @@ public class AIService extends Thing{
                 .addRequiredProperties("xcoordinate", "ycoordinate", "radius-mm", "confidence")
                 .build();
 
-        Form computeEngravingAreaForm = new Form.Builder(baseURI + "/AI_Service/compute_engravingArea")
+        Form computeEngravingAreaForm = new Form.Builder(baseURI + "/AI_Service/compute_engravingArea{?storageId,cameraHostname,cameraId}")
                 .setMethodName("GET")
                 .build();
 
