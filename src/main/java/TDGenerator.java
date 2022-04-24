@@ -28,6 +28,11 @@ public class TDGenerator {
     public static void main(String[] args) {
         System.out.println("Hello World");
 
+        WeatherStation weatherStation = new WeatherStation(
+                "http://10.2.2.33:1880/InfluxDB?measurement=weather_station",
+                "urn:rbg30_weather_station",
+                "KNX Weather Station at Rosenberg 30");
+
         Engraver engraver = new Engraver("http://engraver.intelliot.org/services", "urn:intelliot" +
                 "-engraver",
                 "Engraver machine");
@@ -55,6 +60,7 @@ public class TDGenerator {
 
         XArm pretendaBot = new XArm("https://api.interactions.ics.unisg.ch/pretendabot/", "urn:pretendabot", "pretendBot");
 
+        writeToFile(weatherStation.serializeTD(), "weather-station");
         writeToFile(engraver.serializeTD(), "engraver");
         writeToFile(cupProvider.serializeTD(), "cup-provider");
         writeToFile(spock.serializeTD(), "spock-tractorbot");
