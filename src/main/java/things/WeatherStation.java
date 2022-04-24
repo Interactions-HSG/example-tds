@@ -28,7 +28,7 @@ public class WeatherStation extends Thing {
             .build();
 
     PropertyAffordance readAirTemp = new PropertyAffordance.Builder("Temperature", readAirTempForm)
-            .addTitle("Outside Air Temperature\"")
+            .addTitle("Outside Air Temperature")
             .addSemanticType("https://brickschema.org/schema/Brick#Temperature")
             .addDataSchema(new ObjectSchema.Builder()
                     .addProperty("value", new NumberSchema.Builder()

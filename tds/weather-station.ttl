@@ -16,7 +16,7 @@
   td:hasBase <https://api.interactions.ics.unisg.ch/was?measurement=weather_station>;
   td:hasPropertyAffordance [ a td:PropertyAffordance, brick:Temperature, js:ObjectSchema;
       td:name "Temperature";
-      td:title "Outside Air Temperature\"";
+      td:title "Read Outside Air Temperature";
       td:hasForm [
           htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/was?measurement=weather_station&field=temperature>;
@@ -33,7 +33,7 @@
         ]
     ], [ a td:PropertyAffordance, brick:Outside_Illuminance_Sensor, js:ObjectSchema;
       td:name "LightLevel";
-      td:title "Light level in Lux";
+      td:title "Read Light level in Lux";
       td:hasForm [
           htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/was?measurement=weather_station&field=light_level>;
