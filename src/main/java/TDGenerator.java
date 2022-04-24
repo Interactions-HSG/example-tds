@@ -29,7 +29,7 @@ public class TDGenerator {
         System.out.println("Hello World");
 
         WeatherStation weatherStation = new WeatherStation(
-                "http://10.2.2.33:1880/InfluxDB?measurement=weather_station",
+                "https://api.interactions.ics.unisg.ch/was?measurement=weather_station",
                 "urn:rbg30_weather_station",
                 "KNX Weather Station at Rosenberg 30");
 
