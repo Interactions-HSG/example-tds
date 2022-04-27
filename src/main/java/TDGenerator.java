@@ -28,10 +28,10 @@ public class TDGenerator {
     public static void main(String[] args) {
         System.out.println("Hello World");
 
-        RobotController  uRxRobotController = new RobotController("http://robotcontroller.intelliot.org/",
+        RobotController  uRxRobotController = new RobotController("http://micro1.fritz.box:38080/robot-controller",
                 "urn:intelliot-urx-robot-controller", "URx Robot Controller");
 
-        Engraver engraver = new Engraver("http://engraver.intelliot.org/services", "urn:intelliot" +
+        Engraver engraver = new Engraver("http://micro1.fritz.box:38080/engraver-laser/api", "urn:intelliot" +
                 "-engraver",
                 "Engraver machine");
 
@@ -60,9 +60,9 @@ public class TDGenerator {
 
         TwilioServer twilioServer = new TwilioServer("http://localhost:591/", "http://localhost:8080/environments/intelliot/workspaces/wksp1/artifacts/twilio", "twilioServer");
 
-        HILService hilService = new HILService("http://hil.intelliot.org/services", "urn:intelliot-hil", "hilService");
+        HILService hilService = new HILService("http://micro1.fritz.box:38080/hil-service/service", "urn:intelliot-hil", "hilService");
 
-        AIService aiService = new AIService("http://ai.intelliot.org/services", "urn:intelliot-ai", "aiService");
+        AIService aiService = new AIService("http://micro1.fritz.box:38080/camera-ai", "urn:intelliot-ai", "aiService");
 
         writeToFile(uRxRobotController.serializeTD(), "urx-robot-controller");
         writeToFile(engraver.serializeTD(), "engraver");

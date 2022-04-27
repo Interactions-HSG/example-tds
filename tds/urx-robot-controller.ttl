@@ -15,12 +15,12 @@
       wotsec:in "HEADER";
       wotsec:name "X-API-Key"
     ];
-  td:hasBase <http://robotcontroller.intelliot.org/>;
+  td:hasBase <http://micro1.fritz.box:38080/robot-controller>;
   td:hasPropertyAffordance [ a td:PropertyAffordance, intelliot:ReadStatus, js:ObjectSchema;
       td:name "readStatus";
       td:hasForm [
           htv:methodName "GET";
-          hctl:hasTarget <http://robotcontroller.intelliot.org/services/status>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/robot-controllerservices/status>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
         ];
@@ -33,7 +33,7 @@
       td:name "readOperator";
       td:hasForm [
           htv:methodName "GET";
-          hctl:hasTarget <http://robotcontroller.intelliot.org/services/operator>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/robot-controllerservices/operator>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
         ];
@@ -48,7 +48,7 @@
       td:name "readHandles";
       td:hasForm [
           htv:methodName "GET";
-          hctl:hasTarget <http://robotcontroller.intelliot.org/services/handle>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/robot-controllerservices/handle>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
         ];
@@ -63,22 +63,22 @@
       td:name "readPose";
       td:hasForm [
           htv:methodName "GET";
-          hctl:hasTarget <http://robotcontroller.intelliot.org/services/pose>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/robot-controllerservices/pose>;
           hctl:forContentType "application/joint+json";
           hctl:hasOperationType td:readProperty
         ], [
           htv:methodName "GET";
-          hctl:hasTarget <http://robotcontroller.intelliot.org/services/pose>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/robot-controllerservices/pose>;
           hctl:forContentType "application/tcp+json";
           hctl:hasOperationType td:readProperty
         ], [
           htv:methodName "GET";
-          hctl:hasTarget <http://robotcontroller.intelliot.org/services/pose>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/robot-controllerservices/pose>;
           hctl:forContentType "application/namedpose+json";
           hctl:hasOperationType td:readProperty
         ], [
           htv:methodName "GET";
-          hctl:hasTarget <http://robotcontroller.intelliot.org/services/pose>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/robot-controllerservices/pose>;
           hctl:forContentType "application/ai+json";
           hctl:hasOperationType td:readProperty
         ];
@@ -137,7 +137,7 @@
       td:name "readGripper";
       td:hasForm [
           htv:methodName "GET";
-          hctl:hasTarget <http://robotcontroller.intelliot.org/services/gripper>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/robot-controllerservices/gripper>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
         ];
@@ -150,7 +150,7 @@
       td:name "register";
       td:hasForm [
           htv:methodName "POST";
-          hctl:hasTarget <http://robotcontroller.intelliot.org/services/operator>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/robot-controllerservices/operator>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -166,7 +166,7 @@
       td:name "deregister";
       td:hasForm [
           htv:methodName "DELETE";
-          hctl:hasTarget <http://robotcontroller.intelliot.org/services/operator>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/robot-controllerservices/operator>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]
@@ -174,7 +174,7 @@
       td:name "setGripper";
       td:hasForm [
           htv:methodName "PUT";
-          hctl:hasTarget <http://robotcontroller.intelliot.org/services/gripper>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/robot-controllerservices/gripper>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -187,19 +187,19 @@
   td:hasEventAffordance [ a td:EventAffordance, intelliot:SetPose, intelliot:SubscribePose;
       td:name "setPose";
       td:hasForm [
-          hctl:hasTarget <http://robotcontroller.intelliot.org/pose>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/robot-controllerpose>;
           hctl:forContentType "application/joint+json";
           hctl:hasOperationType td:subscribeEvent, td:unsubscribeEvent
         ], [
-          hctl:hasTarget <http://robotcontroller.intelliot.org/pose>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/robot-controllerpose>;
           hctl:forContentType "application/tcp+json";
           hctl:hasOperationType td:subscribeEvent, td:unsubscribeEvent
         ], [
-          hctl:hasTarget <http://robotcontroller.intelliot.org/pose>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/robot-controllerpose>;
           hctl:forContentType "application/namedpose+json";
           hctl:hasOperationType td:subscribeEvent, td:unsubscribeEvent
         ], [
-          hctl:hasTarget <http://robotcontroller.intelliot.org/pose>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/robot-controllerpose>;
           hctl:forContentType "application/ai+json";
           hctl:hasOperationType td:subscribeEvent, td:unsubscribeEvent
         ];

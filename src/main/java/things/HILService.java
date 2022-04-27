@@ -135,10 +135,20 @@ public class HILService extends Thing{
         ActionAffordance createSession = new ActionAffordance.Builder("createSession", createSessionForm)
                 .addInputSchema(hilSessionDescriptionSchema)
                 .addOutputSchema(hilSessionSchema)
-                .addUriVariable("?callbackUrl", new StringSchema.Builder().build())
                 .build();
 
         this.actions.add(createSession);
+
+        Form createSessionWithCallbackForm = new Form.Builder(baseURI + "/sessions{?callbackUrl}")
+                .build();
+
+        ActionAffordance createSessionWithCallback = new ActionAffordance.Builder("createSessionWithCallback", createSessionWithCallbackForm)
+                .addInputSchema(hilSessionDescriptionSchema)
+                .addOutputSchema(hilSessionSchema)
+                .addUriVariable("callbackUrl", new StringSchema.Builder().build())
+                .build();
+
+        this.actions.add(createSessionWithCallback);
 
         Form getAllSessionsForm = new Form.Builder(baseURI + "/sessions")
                 .setMethodName("GET")

@@ -15,7 +15,7 @@
         js:ObjectSchema, intelliot:EngraverMachineSpecification;
       td:name "spec";
       td:hasForm [
-          hctl:hasTarget <http://engraver.intelliot.org/services/spec>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/api/spec>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, "GET"
         ];
@@ -34,7 +34,7 @@
         intelliot:EngraverServiceConfiguration;
       td:name "configuration";
       td:hasForm [
-          hctl:hasTarget <http://engraver.intelliot.org/services/configuration>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/api/configuration>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, "GET"
         ];
@@ -48,7 +48,7 @@
     ], [ a td:PropertyAffordance, intelliot:ReadEngravingJobStatus, js:ObjectSchema, intelliot:EngraverStatus;
       td:name "job";
       td:hasForm [
-          hctl:hasTarget <http://engraver.intelliot.org/services/job>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/api/job>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, "GET"
         ];
@@ -64,7 +64,7 @@
   td:hasActionAffordance [ a td:ActionAffordance, intelliot:SetEngraverServiceConfiguration;
       td:name "configuration";
       td:hasForm [
-          hctl:hasTarget <http://engraver.intelliot.org/services/configuration>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/api/configuration>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction, "POST"
         ];
@@ -87,7 +87,7 @@
     ], [ a td:ActionAffordance, intelliot:CreateEngravingJob;
       td:name "invokeJob";
       td:hasForm [
-          hctl:hasTarget <http://engraver.intelliot.org/services/job>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/api/job>;
           hctl:forContentType "multipart/form-data";
           hctl:hasOperationType td:invokeAction, "POST"
         ];
@@ -131,7 +131,7 @@
     ], [ a td:ActionAffordance, intelliot:DeleteEngravingJob;
       td:name "deleteJob";
       td:hasForm [
-          hctl:hasTarget <http://engraver.intelliot.org/services/job>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/api/job>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction, "DELETE"
         ];

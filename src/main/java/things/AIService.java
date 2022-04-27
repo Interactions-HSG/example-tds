@@ -1,6 +1,7 @@
 package things;
 
 import ch.unisg.ics.interactions.wot.td.ThingDescription;
+import ch.unisg.ics.interactions.wot.td.affordances.ActionAffordance;
 import ch.unisg.ics.interactions.wot.td.affordances.Form;
 import ch.unisg.ics.interactions.wot.td.affordances.PropertyAffordance;
 import ch.unisg.ics.interactions.wot.td.schemas.*;
@@ -21,12 +22,14 @@ public class AIService extends Thing{
                 .setMethodName("GET")
                 .build();
 
-        PropertyAffordance getGrabspot = new PropertyAffordance.Builder("getGrabspot", getGrabspotForm)
+        ActionAffordance getGrabspot = new ActionAffordance.Builder("getGrabspot", getGrabspotForm)
                 .addUriVariable("storageId", new StringSchema.Builder().build())
                 .addUriVariable("cameraHostname", new StringSchema.Builder().build())
                 .addUriVariable("cameraId", new StringSchema.Builder().build())
-                .addDataSchema(new ArraySchema.Builder().addItem(grabspotSchema).build())
+                .addOutputSchema(new ArraySchema.Builder().addItem(grabspotSchema).build())
                 .build();
+
+        actions.add(getGrabspot);
 
         DataSchema engravingAreaSchema = new ObjectSchema.Builder()
                 .addProperty("xcoordinate", new NumberSchema.Builder().build())
@@ -40,12 +43,14 @@ public class AIService extends Thing{
                 .setMethodName("GET")
                 .build();
 
-        PropertyAffordance computeEngravingArea = new PropertyAffordance.Builder("computeEngravingArea", computeEngravingAreaForm)
+        ActionAffordance computeEngravingArea = new ActionAffordance.Builder("computeEngravingArea", computeEngravingAreaForm)
                 .addUriVariable("storageId", new StringSchema.Builder().build())
                 .addUriVariable("cameraHostname", new StringSchema.Builder().build())
                 .addUriVariable("cameraId", new StringSchema.Builder().build())
-                .addDataSchema(new ArraySchema.Builder().addItem(engravingAreaSchema).build())
+                .addOutputSchema(new ArraySchema.Builder().addItem(engravingAreaSchema).build())
                 .build();
+
+        actions.add(computeEngravingArea);
 
     }
 

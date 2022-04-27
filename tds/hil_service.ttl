@@ -11,11 +11,11 @@
       wotsec:in "HEADER";
       wotsec:name "X-API-Key"
     ];
-  td:hasBase <http://hil.intelliot.org/services>;
+  td:hasBase <http://micro1.fritz.box:38080/hil-service/service>;
   td:hasPropertyAffordance [ a td:PropertyAffordance, js:ArraySchema;
       td:name "getOperators";
       td:hasForm [
-          hctl:hasTarget <http://hil.intelliot.org/services/operators>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/hil-service/service/operators>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -40,7 +40,7 @@
           td:name "operatorId"
         ];
       td:hasForm [
-          hctl:hasTarget <http://hil.intelliot.org/services/operators/%7BoperatorId%7D>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/hil-service/service/operators/%7BoperatorId%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -60,7 +60,7 @@
     ], [ a td:PropertyAffordance, js:ArraySchema;
       td:name "getAllSessions";
       td:hasForm [
-          hctl:hasTarget <http://hil.intelliot.org/services/sessions>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/hil-service/service/sessions>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -116,7 +116,7 @@
           td:name "sessionId"
         ];
       td:hasForm [
-          hctl:hasTarget <http://hil.intelliot.org/services/sessions/%7BsessionId%7D>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/hil-service/service/sessions/%7BsessionId%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -169,7 +169,7 @@
       td:name "createOperator";
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://hil.intelliot.org/services/operators>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/hil-service/service/operators>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -202,18 +202,84 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "DELETE";
-          hctl:hasTarget <http://hil.intelliot.org/services/operators/%7BoperatorId%7D>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/hil-service/service/operators/%7BoperatorId%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]
     ], [ a td:ActionAffordance;
       td:name "createSession";
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://micro1.fritz.box:38080/hil-service/service/sessions>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema;
+          js:properties [ a js:StringSchema;
+              js:propertyName "cameraId"
+            ], [ a js:StringSchema;
+              js:propertyName "sessionType";
+              js:enum "wood_piece_picking"
+            ], [ a js:StringSchema;
+              js:propertyName "aiSessionId"
+            ], [ a js:StringSchema;
+              js:propertyName "robotId"
+            ];
+          js:required "aiSessionId", "robotId", "cameraId", "sessionType"
+        ];
+      td:hasOutputSchema [ a js:ObjectSchema;
+          js:properties [ a js:StringSchema;
+              js:propertyName "creationTime"
+            ], [ a js:ObjectSchema;
+              js:propertyName "description";
+              js:properties [ a js:StringSchema;
+                  js:propertyName "cameraId"
+                ], [ a js:StringSchema;
+                  js:propertyName "sessionType";
+                  js:enum "wood_piece_picking"
+                ], [ a js:StringSchema;
+                  js:propertyName "aiSessionId"
+                ], [ a js:StringSchema;
+                  js:propertyName "robotId"
+                ];
+              js:required "aiSessionId", "robotId", "cameraId", "sessionType"
+            ], [ a js:StringSchema;
+              js:propertyName "robotId"
+            ], [ a js:StringSchema;
+              js:propertyName "workResult";
+              js:enum "unfinished", "completed", "failed"
+            ], [ a js:StringSchema;
+              js:propertyName "finishedAt"
+            ], [ a js:StringSchema;
+              js:propertyName "willExpireAt"
+            ], [ a js:StringSchema;
+              js:propertyName "hilAppIpAddress"
+            ], [ a js:StringSchema;
+              js:propertyName "cameraId"
+            ], [ a js:StringSchema;
+              js:propertyName "hyperMasCallbackUrl"
+            ], [ a js:StringSchema;
+              js:propertyName "operatorId"
+            ], [ a js:StringSchema;
+              js:propertyName "takenOverAt"
+            ], [ a js:StringSchema;
+              js:propertyName "status";
+              js:enum "preparing", "expired", "started", "finished", "unstarted", "failed"
+            ], [ a js:IntegerSchema;
+              js:propertyName "numberReassignments"
+            ];
+          js:required "creationTime", "willExpireAt", "takenOverAt", "finishedAt", "status",
+            "workResult", "operatorId", "cameraId", "robotId", "hilAppIpAddress", "hyperMasCallbackUrl",
+            "numberReassignments", "description"
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "createSessionWithCallback";
       td:hasUriTemplateSchema [ a js:StringSchema;
-          td:name "?callbackUrl"
+          td:name "callbackUrl"
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://hil.intelliot.org/services/sessions>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/hil-service/service/sessions%7B?callbackUrl%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -279,7 +345,7 @@
       td:name "deleteAllSessions";
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "DELETE";
-          hctl:hasTarget <http://hil.intelliot.org/services/sessions>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/hil-service/service/sessions>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]
@@ -290,7 +356,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "DELETE";
-          hctl:hasTarget <http://hil.intelliot.org/services/sessions/%7BsessionId%7D>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/hil-service/service/sessions/%7BsessionId%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]
@@ -301,7 +367,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://hil.intelliot.org/services/sessions/%7BaiSessionId%7D/takeover>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/hil-service/service/sessions/%7BaiSessionId%7D/takeover>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -329,7 +395,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://hil.intelliot.org/services/sessions/%7BaiSessionId%7D/reject>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/hil-service/service/sessions/%7BaiSessionId%7D/reject>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]
@@ -340,7 +406,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://hil.intelliot.org/services/sessions/%7BaiSessionId%7D/done>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/hil-service/service/sessions/%7BaiSessionId%7D/done>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -354,7 +420,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://hil.intelliot.org/services/sessions/%7BaiSessionId%7D/reassign>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/hil-service/service/sessions/%7BaiSessionId%7D/reassign>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]
