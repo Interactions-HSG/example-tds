@@ -28,7 +28,7 @@ public class TDGenerator {
     public static void main(String[] args) {
         System.out.println("Hello World");
 
-        RobotController  uRxRobotController = new RobotController("http://micro1.fritz.box:38080/robot-controller",
+        RobotController  uRxRobotController = new RobotController("http://micro1.fritz.box:38080/robot-controller/",
                 "urn:intelliot-urx-robot-controller", "URx Robot Controller");
 
         Engraver engraver = new Engraver("http://micro1.fritz.box:38080/engraver-laser/api", "urn:intelliot" +
@@ -64,6 +64,22 @@ public class TDGenerator {
 
         AIService aiService = new AIService("http://micro1.fritz.box:38080/camera-ai", "urn:intelliot-ai", "aiService");
 
+        AIService aiServiceAWS = new AIService("http://apps.intelliot.siemens.cloud/camera-ai", "urn:intelliot-ai", "aiService");
+
+        RobotController robotControllerAWS =  new RobotController("http://apps.intelliot.siemens.cloud/robot-controller/",
+                "urn:intelliot-urx-robot-controller", "URx Robot Controller");
+
+        Engraver engraverAWS = new Engraver("http://apps.intelliot.siemens.cloud/engraver-laser/api", "urn:intelliot" +
+                "-engraver",
+                "Engraver machine");
+
+        HILService hilServiceAWS = new HILService("http://apps.intelliot.siemens.cloud/hil-service/service", "urn:intelliot-hil", "hilService");
+
+        Engraver2 engraver2AWS = new Engraver2("http://apps.intelliot.siemens.cloud/engraver-laser/api", "urn:intelliot-engraver",
+                "Engraver machine");
+
+        EngraverActuators engraverActuatorsAWS = new EngraverActuators("http://apps.intelliot.siemens.cloud/engraver-laser/actuators-api", "urn:intelliot-actuators", "Engraver Actuators");
+
         writeToFile(uRxRobotController.serializeTD(), "urx-robot-controller");
         writeToFile(engraver.serializeTD(), "engraver");
         writeToFile(cupProvider.serializeTD(), "cup-provider");
@@ -78,6 +94,12 @@ public class TDGenerator {
         writeToFile(twilioServer.serializeTD(), "twilio_server");
         writeToFile(hilService.serializeTD(), "hil_service");
         writeToFile(aiService.serializeTD(), "ai_service");
+        writeToFile(aiServiceAWS.serializeTD(), "ai_service_aws");
+        writeToFile(robotControllerAWS.serializeTD(), "robot_controller_aws");
+        writeToFile(engraverAWS.serializeTD(), "engraver_aws");
+        writeToFile(hilServiceAWS.serializeTD(), "hil_service_aws");
+        writeToFile(engraver2AWS.serializeTD(), "engraver2_aws");
+        writeToFile(engraverActuatorsAWS.serializeTD(), "engraver_actuators_aws");
 
         try {
             //Read TD from file

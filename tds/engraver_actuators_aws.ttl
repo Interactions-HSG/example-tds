@@ -1,0 +1,108 @@
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix wotsec: <https://www.w3.org/2019/wot/security#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix js: <https://www.w3.org/2019/wot/json-schema#> .
+
+<urn:intelliot-actuators> a td:Thing, <http://w3id.org/eve#Artifact>;
+  td:title "Engraver Actuators";
+  td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
+    ];
+  td:hasActionAffordance [ a td:ActionAffordance;
+      td:name "open";
+      td:hasUriTemplateSchema [ a js:StringSchema;
+          td:name "machineId"
+        ];
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://apps.intelliot.siemens.cloud/engraver-laser/actuators-api/lid/open%7B?machineId%7D>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasOutputSchema [ a js:ObjectSchema;
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "demo"
+            ], [ a js:StringSchema;
+              js:propertyName "status"
+            ];
+          js:required "status", "demo"
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "close";
+      td:hasUriTemplateSchema [ a js:StringSchema;
+          td:name "machineId"
+        ];
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://apps.intelliot.siemens.cloud/engraver-laser/actuators-api/lid/close%7B?machineId%7D>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasOutputSchema [ a js:ObjectSchema;
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "demo"
+            ], [ a js:StringSchema;
+              js:propertyName "status"
+            ];
+          js:required "status", "demo"
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "liftup";
+      td:hasUriTemplateSchema [ a js:StringSchema;
+          td:name "machineId"
+        ];
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://apps.intelliot.siemens.cloud/engraver-laser/actuators-api/table/liftup%7B?machineId%7D>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasOutputSchema [ a js:ObjectSchema;
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "demo"
+            ], [ a js:StringSchema;
+              js:propertyName "status"
+            ];
+          js:required "status", "demo"
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "lowerdown";
+      td:hasUriTemplateSchema [ a js:StringSchema;
+          td:name "machineId"
+        ];
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://apps.intelliot.siemens.cloud/engraver-laser/actuators-api/table/lowerdown%7B?machineId%7D>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasOutputSchema [ a js:ObjectSchema;
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "demo"
+            ], [ a js:StringSchema;
+              js:propertyName "status"
+            ];
+          js:required "status", "demo"
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "pushstart";
+      td:hasUriTemplateSchema [ a js:StringSchema;
+          td:name "machineId"
+        ];
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://apps.intelliot.siemens.cloud/engraver-laser/actuators-api/push-start-button%7B?machineId%7D>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasOutputSchema [ a js:ObjectSchema;
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "demo"
+            ], [ a js:StringSchema;
+              js:propertyName "status"
+            ];
+          js:required "status", "demo"
+        ]
+    ];
+  dct:description "Actuators for the engraver" .

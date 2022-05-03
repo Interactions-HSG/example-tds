@@ -1,0 +1,71 @@
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix wotsec: <https://www.w3.org/2019/wot/security#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix js: <https://www.w3.org/2019/wot/json-schema#> .
+
+<urn:intelliot-ai> a td:Thing;
+  td:title "aiService";
+  td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
+    ];
+  td:hasBase <http://apps.intelliot.siemens.cloud/camera-ai>;
+  td:hasActionAffordance [ a td:ActionAffordance;
+      td:name "getGrabspot";
+      td:hasUriTemplateSchema [ a js:StringSchema;
+          td:name "cameraId"
+        ], [ a js:StringSchema;
+          td:name "cameraHostname"
+        ], [ a js:StringSchema;
+          td:name "storageId"
+        ];
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "GET";
+          hctl:hasTarget <http://apps.intelliot.siemens.cloud/camera-ai/AI_Service/GET_grabspot%7B?storageId,cameraHostname,cameraId%7D>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasOutputSchema [ a js:ArraySchema;
+          js:items [ a js:ObjectSchema;
+              js:properties [ a js:NumberSchema;
+                  js:propertyName "ycoordinate"
+                ], [ a js:NumberSchema;
+                  js:propertyName "confidence"
+                ], [ a js:NumberSchema;
+                  js:propertyName "angle"
+                ], [ a js:NumberSchema;
+                  js:propertyName "xcoordinate"
+                ];
+              js:required "xcoordinate", "ycoordinate", "angle", "confidence"
+            ]
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "computeEngravingArea";
+      td:hasUriTemplateSchema [ a js:StringSchema;
+          td:name "cameraId"
+        ], [ a js:StringSchema;
+          td:name "cameraHostname"
+        ], [ a js:StringSchema;
+          td:name "storageId"
+        ];
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "GET";
+          hctl:hasTarget <http://apps.intelliot.siemens.cloud/camera-ai/AI_Service/compute_engravingArea%7B?storageId,cameraHostname,cameraId%7D>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasOutputSchema [ a js:ArraySchema;
+          js:items [ a js:ObjectSchema;
+              js:properties [ a js:NumberSchema;
+                  js:propertyName "ycoordinate"
+                ], [ a js:NumberSchema;
+                  js:propertyName "radius-mm"
+                ], [ a js:NumberSchema;
+                  js:propertyName "confidence"
+                ], [ a js:NumberSchema;
+                  js:propertyName "xcoordinate"
+                ];
+              js:required "xcoordinate", "ycoordinate", "radius-mm", "confidence"
+            ]
+        ]
+    ] .

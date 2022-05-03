@@ -1,0 +1,102 @@
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix wotsec: <https://www.w3.org/2019/wot/security#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix js: <https://www.w3.org/2019/wot/json-schema#> .
+
+<urn:intelliot-engraver> a td:Thing, <http://w3id.org/eve#Artifact>, <http://example.org/intellIoT#EngraverMachine>;
+  td:title "Engraver machine";
+  td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
+    ];
+  td:hasActionAffordance [ a td:ActionAffordance;
+      td:name "createEngraveText";
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://apps.intelliot.siemens.cloud/engraver-laser/api/job/text>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema;
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "laserOn"
+            ], [ a js:StringSchema;
+              js:propertyName "positionReference"
+            ], [ a js:StringSchema;
+              js:propertyName "variant"
+            ], [ a js:NumberSchema;
+              js:propertyName "x"
+            ], [ a js:NumberSchema;
+              js:propertyName "fontsize"
+            ], [ a js:NumberSchema;
+              js:propertyName "y"
+            ], [ a js:ArraySchema;
+              js:propertyName "text";
+              js:items [ a js:StringSchema
+                ]
+            ], [ a js:StringSchema;
+              js:propertyName "font"
+            ]
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "lowerTable";
+      td:hasUriTemplateSchema [ a js:StringSchema;
+          td:name "id"
+        ];
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://apps.intelliot.siemens.cloud/engraver-laser/api/actuators/table/lower/%7Bid%7D>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "liftTable";
+      td:hasUriTemplateSchema [ a js:StringSchema;
+          td:name "id"
+        ];
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://apps.intelliot.siemens.cloud/engraver-laser/api/actuators/table/lift/%7Bid%7D>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "closeCover";
+      td:hasUriTemplateSchema [ a js:StringSchema;
+          td:name "id"
+        ];
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://apps.intelliot.siemens.cloud/engraver-laser/api/actuators/cover/close/%7Bid%7D>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "openCover";
+      td:hasUriTemplateSchema [ a js:StringSchema;
+          td:name "id"
+        ];
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://apps.intelliot.siemens.cloud/engraver-laser/api/actuators/cover/open/%7Bid%7D>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "jobStatus";
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://apps.intelliot.siemens.cloud/engraver-laser/api/actuators/cover/close/%7Bid%7D>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "pushstart";
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://apps.intelliot.siemens.cloud/engraver-laser/api/actuators/cover/close/%7Bid%7D>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ]
+    ];
+  dct:description "An engraver machine used on the IntellIoT project" .
