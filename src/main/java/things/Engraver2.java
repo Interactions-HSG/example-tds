@@ -3,8 +3,14 @@ package things;
 import ch.unisg.ics.interactions.wot.td.ThingDescription;
 import ch.unisg.ics.interactions.wot.td.affordances.ActionAffordance;
 import ch.unisg.ics.interactions.wot.td.affordances.Form;
+import ch.unisg.ics.interactions.wot.td.affordances.PropertyAffordance;
 import ch.unisg.ics.interactions.wot.td.schemas.*;
 import org.eclipse.rdf4j.model.vocabulary.DCTERMS;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static org.eclipse.rdf4j.model.util.Values.iri;
 import static org.eclipse.rdf4j.model.util.Values.literal;
@@ -28,59 +34,84 @@ public class Engraver2 extends Thing{
                 .build();
         actions.add(createEngraveText);
 
-        Form lowerTableForm = new Form.Builder(baseURI + "/actuators/table/lower/{id}")
+        Form getJobForm = new Form.Builder(baseURI + "/job").setMethodName("GET").build();
+
+
+
+        Set<String> states = new HashSet<>(Arrays.asList(new String[] {"unconnected", "available", "working", "finished", "paused", "waiting", "error" }));
+
+        DataSchema stateSchema = new StringSchema.Builder().addEnum(states).build();
+
+        DataSchema engraverStatus = new ObjectSchema.Builder()
+                .addProperty("state", stateSchema)
+                .addProperty("secondsToFinish", new IntegerSchema.Builder().build())
+                .addProperty("percentageCompleted", new DataSchema.Builder().build())
                 .build();
 
-        ActionAffordance lowerTable = new ActionAffordance.Builder("lowerTable", lowerTableForm)
-                .addUriVariable("id", new StringSchema.Builder().build())
+        PropertyAffordance getJob = new PropertyAffordance.Builder("getJob", getJobForm)
+                .addDataSchema(engraverStatus)
                 .build();
 
-        actions.add(lowerTable);
+        properties.add(getJob);
 
-        Form liftTableForm = new Form.Builder(baseURI + "/actuators/table/lift/{id}")
+        Form deleteJobForm = new Form.Builder(baseURI + "/job").setMethodName("DELETE").build();
+
+        ActionAffordance deleteJob = new ActionAffordance.Builder("deleteJob", deleteJobForm)
+                .addOutputSchema(engraverStatus)
                 .build();
 
-        ActionAffordance liftTable = new ActionAffordance.Builder("liftTable", liftTableForm)
-                .addUriVariable("id", new StringSchema.Builder().build())
+        actions.add(deleteJob);
+
+        Form getSpecForm = new Form.Builder(baseURI + "/spec").setMethodName("GET").build();
+
+        Set<String> machineTypes = new HashSet<>(Arrays.asList(new String[]{"LaserCutter", "MillingMachine"}));
+
+        DataSchema machineTypeSchema = new DataSchema.Builder().addEnum(machineTypes).build();
+
+        DataSchema specSchema = new ObjectSchema.Builder()
+                .addProperty("model", new StringSchema.Builder().build())
+                .addProperty("type", machineTypeSchema)
+                .addProperty("workingAreaWidthMillimeter", new NumberSchema.Builder().build())
+                .addProperty("workingAreaLengthMillimeter", new NumberSchema.Builder().build())
+                .addProperty("workingAreaHeightMillimeter", new NumberSchema.Builder().build())
+                .addProperty("laserClass", new StringSchema.Builder().build())
                 .build();
 
-        actions.add(liftTable);
-
-        Form closeCoverForm = new Form.Builder(baseURI + "/actuators/cover/close/{id}")
+        PropertyAffordance getSpec = new PropertyAffordance.Builder("getSpec", getSpecForm)
+                .addDataSchema(specSchema)
                 .build();
 
-        ActionAffordance closeCover = new ActionAffordance.Builder("closeCover", closeCoverForm)
-                .addUriVariable("id", new StringSchema.Builder().build())
+        properties.add(getSpec);
+
+        Form getConfigurationForm = new Form.Builder(baseURI + "/configuration").setMethodName("GET").build();
+
+        Set<String> authenticationModes = new HashSet<>(Arrays.asList(new String[]{"unauthenticated", "BasicAuth"}));
+
+        DataSchema authenticationModeSchema = new StringSchema.Builder().addEnum(machineTypes).build();
+
+        DataSchema configurationSchema = new ObjectSchema.Builder()
+                .addProperty("host", new StringSchema.Builder().build())
+                .addProperty("authenticationMode", authenticationModeSchema)
+                .addRequiredProperties("host","authenticationMode" )
                 .build();
 
-        actions.add(closeCover);
 
-        Form openCoverForm = new Form.Builder(baseURI + "/actuators/cover/open/{id}")
+        PropertyAffordance getConfiguration = new PropertyAffordance.Builder("getConfiguration", getConfigurationForm)
+                .addDataSchema(configurationSchema)
                 .build();
 
-        ActionAffordance openCover = new ActionAffordance.Builder("openCover", openCoverForm)
-                .addUriVariable("id", new StringSchema.Builder().build())
+        properties.add(getConfiguration);
+
+        Form setConfigurationForm = new Form.Builder(baseURI + "/configuration").setMethodName("POST").build();
+
+        ActionAffordance setConfiguration = new ActionAffordance.Builder("getConfiguration", getConfigurationForm)
+                .addInputSchema(configurationSchema)
+                .addOutputSchema(configurationSchema)
                 .build();
 
-        actions.add(openCover);
+        actions.add(setConfiguration);
 
-        Form jobStatusForm = new Form.Builder(baseURI + "/job/status")
-                .setMethodName("GET")
-                .build();
 
-        ActionAffordance jobStatus = new ActionAffordance.Builder("jobStatus", closeCoverForm)
-                .build();
-
-        actions.add(jobStatus);
-
-        Form pushstartForm = new Form.Builder(baseURI + "/actuators/pushstart")
-                .setMethodName("GET")
-                .build();
-
-        ActionAffordance pushstart = new ActionAffordance.Builder("pushstart", closeCoverForm)
-                .build();
-
-        actions.add(pushstart);
     }
 
     @Override
