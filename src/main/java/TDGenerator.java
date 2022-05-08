@@ -78,10 +78,13 @@ public class TDGenerator {
         Engraver2 engraver2AWS = new Engraver2("http://apps.intelliot.siemens.cloud/engraver-laser/api", "urn:intelliot-engraver",
                 "Engraver machine");
 
+        Engraver2 engraver2 = new Engraver2("http://micro1.fritz.box:38080/engraver-laser/api", "urn:intelliot-engraver",
+                "Engraver machine");
 
-        EngraverActuators engraverActuators = new EngraverActuators("http://apps.intelliot.siemens.cloud/engraver-laser/actuator-api", "urn:intelliot-actuators", "Engraver Actuators");
 
-        EngraverActuators engraverActuatorsAWS = new EngraverActuators("micro1.fritz.box:38080/engraver-laser/actuator-api", "urn:intelliot-actuators", "Engraver Actuators");
+        EngraverActuators engraverActuatorsAWS = new EngraverActuators("http://apps.intelliot.siemens.cloud/engraver-laser/actuator-api", "urn:intelliot-actuators", "Engraver Actuators");
+
+        EngraverActuators engraverActuators = new EngraverActuators("micro1.fritz.box:38080/engraver-laser/actuator-api", "urn:intelliot-actuators", "Engraver Actuators");
 
         writeToFile(uRxRobotController.serializeTD(), "urx-robot-controller");
         writeToFile(engraver.serializeTD(), "engraver");
@@ -104,6 +107,7 @@ public class TDGenerator {
         writeToFile(engraver2AWS.serializeTD(), "engraver2_aws");
         writeToFile(engraverActuatorsAWS.serializeTD(), "engraver_actuators_aws");
         writeToFile(engraverActuators.serializeTD(), "engraver_actuators");
+        writeToFile(engraver2.serializeTD(), "engraver2");
 
         try {
             //Read TD from file
