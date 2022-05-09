@@ -84,7 +84,7 @@ public class TDGenerator {
 
         EngraverActuators engraverActuatorsAWS = new EngraverActuators("http://apps.intelliot.siemens.cloud/engraver-laser/actuator-api", "urn:intelliot-actuators", "Engraver Actuators");
 
-        EngraverActuators engraverActuators = new EngraverActuators("micro1.fritz.box:38080/engraver-laser/actuator-api", "urn:intelliot-actuators", "Engraver Actuators");
+        EngraverActuators engraverActuators = new EngraverActuators("http://micro1.fritz.box:38080/engraver-laser/actuator-api", "urn:intelliot-actuators", "Engraver Actuators");
 
         writeToFile(uRxRobotController.serializeTD(), "urx-robot-controller");
         writeToFile(engraver.serializeTD(), "engraver");

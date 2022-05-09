@@ -15,7 +15,8 @@
           td:name "machineId"
         ];
       td:hasForm [
-          hctl:hasTarget <micro1.fritz.box:38080/engraver-laser/actuator-api/lid/open%7B?machineId%7D>;
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/actuator-api/lid/open%7B?machineId%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -33,7 +34,8 @@
           td:name "machineId"
         ];
       td:hasForm [
-          hctl:hasTarget <micro1.fritz.box:38080/engraver-laser/actuator-api/lid/close%7B?machineId%7D>;
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/actuator-api/lid/close%7B?machineId%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -51,7 +53,8 @@
           td:name "machineId"
         ];
       td:hasForm [
-          hctl:hasTarget <micro1.fritz.box:38080/engraver-laser/actuator-api/table/liftup%7B?machineId%7D>;
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/actuator-api/table/liftup%7B?machineId%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -69,7 +72,8 @@
           td:name "machineId"
         ];
       td:hasForm [
-          hctl:hasTarget <micro1.fritz.box:38080/engraver-laser/actuator-api/table/lowerdown%7B?machineId%7D>;
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/actuator-api/table/lowerdown%7B?machineId%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -87,7 +91,8 @@
           td:name "machineId"
         ];
       td:hasForm [
-          hctl:hasTarget <micro1.fritz.box:38080/engraver-laser/actuator-api/push-start-button%7B?machineId%7D>;
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/actuator-api/push-start-button%7B?machineId%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
