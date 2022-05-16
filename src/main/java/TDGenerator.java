@@ -28,6 +28,9 @@ public class TDGenerator {
     public static void main(String[] args) {
         System.out.println("Hello World");
 
+        InteractionsLabSimulator interactionsLab = new InteractionsLabSimulator("http://localhost:1880/was/rl/",
+                "urn:interactions_lab", "The lab of the Interactions team");
+
         WeatherStation weatherStation = new WeatherStation(
                 "https://api.interactions.ics.unisg.ch/InfluxDB?measurement=weather_station",
                 "urn:rbg30_weather_station",
@@ -60,6 +63,7 @@ public class TDGenerator {
 
         XArm pretendaBot = new XArm("https://api.interactions.ics.unisg.ch/pretendabot/", "urn:pretendabot", "pretendBot");
 
+        writeToFile(interactionsLab.serializeTD(), "interactions-lab");
         writeToFile(weatherStation.serializeTD(), "weather-station");
         writeToFile(engraver.serializeTD(), "engraver");
         writeToFile(cupProvider.serializeTD(), "cup-provider");
