@@ -33,7 +33,7 @@
           js:propertyName "Energy"
         ], [ a js:NumberSchema, <http://example.org/was#Hour>;
           js:propertyName "Hour"
-        ], [ a js:NumberSchema, <http://example.org/was#Sunlight>;
+        ], [ a js:NumberSchema, <http://example.org/was#Sunshine>;
           js:propertyName "Sunshine"
         ], [ a js:BooleanSchema, <http://example.org/was#Z1Blinds>;
           js:propertyName "Z1Blinds"

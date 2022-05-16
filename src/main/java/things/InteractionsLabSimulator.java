@@ -51,7 +51,7 @@ public class InteractionsLabSimulator extends Thing {
                             .addSemanticType("http://example.org/was#Z2Blinds")
                             .build())
                     .addProperty("Sunshine", new NumberSchema.Builder()
-                            .addSemanticType("http://example.org/was#Sunlight")
+                            .addSemanticType("http://example.org/was#Sunshine")
                             .build())
                     .addProperty("Energy", new NumberSchema.Builder()
                             .addSemanticType("http://example.org/was#Energy")
