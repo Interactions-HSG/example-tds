@@ -27,7 +27,7 @@
           js:propertyName "Z1Level"
         ]
     ];
-  td:hasActionAffordance [ a td:ActionAffordance, <http://example.org/was#Z1Light>;
+  td:hasActionAffordance [ a td:ActionAffordance, <http://example.org/was#SetZ1Light>;
       td:name "Control Lights Z1";
       td:title "Turn on and off the lights in Z1";
       td:hasForm [
@@ -42,7 +42,7 @@
               js:enum "off", "on"
             ]
         ]
-    ], [ a td:ActionAffordance, <http://example.org/was#Z2Light>;
+    ], [ a td:ActionAffordance, <http://example.org/was#SetZ2Light>;
       td:name "Control Lights Z2";
       td:title "Turn on and off the lights in Z2";
       td:hasForm [
@@ -57,7 +57,7 @@
               js:enum "off", "on"
             ]
         ]
-    ], [ a td:ActionAffordance, <http://example.org/was#Z1Blinds>;
+    ], [ a td:ActionAffordance, <http://example.org/was#SetZ1Blinds>;
       td:name "Control Blinds Z1";
       td:title "Raise and lower the blinds in Z1";
       td:hasForm [
@@ -72,7 +72,7 @@
               js:enum "up", "down"
             ]
         ]
-    ], [ a td:ActionAffordance, <http://example.org/was#Z1Blinds>;
+    ], [ a td:ActionAffordance, <http://example.org/was#SetZ2Blinds>;
       td:name "Control Blinds Z2";
       td:title "Raise and lower the blinds in Z2";
       td:hasForm [
@@ -83,7 +83,7 @@
         ];
       td:hasInputSchema [ a js:ObjectSchema;
           js:properties [ a js:StringSchema;
-              js:propertyName "Z1Blinds";
+              js:propertyName "Z2Blinds";
               js:enum "up", "down"
             ]
         ]
