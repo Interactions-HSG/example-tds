@@ -83,7 +83,7 @@
         ];
       td:hasInputSchema [ a js:ObjectSchema;
           js:properties [ a js:StringSchema;
-              js:propertyName "Z2Blinds";
+              js:propertyName "Z1Blinds";
               js:enum "up", "down"
             ]
         ]

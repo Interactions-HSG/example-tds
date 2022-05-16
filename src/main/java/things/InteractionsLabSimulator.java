@@ -43,7 +43,7 @@ public class InteractionsLabSimulator extends Thing {
 
     ActionAffordance controlLightsZ1 = new ActionAffordance.Builder("Control Lights Z1", setStatusForm)
             .addTitle("Turn on and off the lights in Z1")
-            .addSemanticType("http://example.org/was#Z1Light")
+            .addSemanticType("http://example.org/was#SetZ1Light")
             .addInputSchema(new ObjectSchema.Builder()
                     .addProperty("Z1Light", new StringSchema.Builder()
                             .addEnum(new HashSet<>(Arrays.asList("on", "off")))
@@ -53,7 +53,7 @@ public class InteractionsLabSimulator extends Thing {
 
     ActionAffordance controlLightsZ2 = new ActionAffordance.Builder("Control Lights Z2", setStatusForm)
             .addTitle("Turn on and off the lights in Z2")
-            .addSemanticType("http://example.org/was#Z2Light")
+            .addSemanticType("http://example.org/was#SetZ2Light")
             .addInputSchema(new ObjectSchema.Builder()
                     .addProperty("Z2Light", new StringSchema.Builder()
                             .addEnum(new HashSet<>(Arrays.asList("on", "off")))
@@ -63,7 +63,7 @@ public class InteractionsLabSimulator extends Thing {
 
     ActionAffordance controlBlindsZ1 = new ActionAffordance.Builder("Control Blinds Z1", setStatusForm)
             .addTitle("Raise and lower the blinds in Z1")
-            .addSemanticType("http://example.org/was#Z1Blinds")
+            .addSemanticType("http://example.org/was#SetZ1Blinds")
             .addInputSchema(new ObjectSchema.Builder()
                     .addProperty("Z1Blinds", new StringSchema.Builder()
                             .addEnum(new HashSet<>(Arrays.asList("up", "down")))
@@ -73,7 +73,7 @@ public class InteractionsLabSimulator extends Thing {
 
     ActionAffordance controlBlindsZ2 = new ActionAffordance.Builder("Control Blinds Z2", setStatusForm)
             .addTitle("Raise and lower the blinds in Z2")
-            .addSemanticType("http://example.org/was#Z1Blinds")
+            .addSemanticType("http://example.org/was#SetZ1Blinds")
             .addInputSchema(new ObjectSchema.Builder()
                     .addProperty("Z2Blinds", new StringSchema.Builder()
                             .addEnum(new HashSet<>(Arrays.asList("up", "down")))
