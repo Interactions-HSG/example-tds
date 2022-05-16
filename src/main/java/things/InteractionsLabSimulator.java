@@ -94,7 +94,7 @@ public class InteractionsLabSimulator extends Thing {
 
     ActionAffordance controlBlindsZ2 = new ActionAffordance.Builder("Control Blinds Z2", setStatusForm)
             .addTitle("Raise and lower the blinds in Z2")
-            .addSemanticType("http://example.org/was#SetZ1Blinds")
+            .addSemanticType("http://example.org/was#SetZ2Blinds")
             .addInputSchema(new ObjectSchema.Builder()
                     .addProperty("Z2Blinds", new StringSchema.Builder()
                             .addEnum(new HashSet<>(Arrays.asList("up", "down")))
