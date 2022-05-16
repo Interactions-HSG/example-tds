@@ -1,12 +1,18 @@
 package things;
 
 import ch.unisg.ics.interactions.wot.td.ThingDescription;
+import ch.unisg.ics.interactions.wot.td.affordances.ActionAffordance;
 import ch.unisg.ics.interactions.wot.td.affordances.Form;
 import ch.unisg.ics.interactions.wot.td.affordances.PropertyAffordance;
+import ch.unisg.ics.interactions.wot.td.schemas.IntegerSchema;
 import ch.unisg.ics.interactions.wot.td.schemas.NumberSchema;
 import ch.unisg.ics.interactions.wot.td.schemas.ObjectSchema;
+import ch.unisg.ics.interactions.wot.td.schemas.StringSchema;
 import ch.unisg.ics.interactions.wot.td.security.NoSecurityScheme;
 import ch.unisg.ics.interactions.wot.td.vocabularies.TD;
+
+import java.util.Arrays;
+import java.util.HashSet;
 
 public class InteractionsLabSimulator extends Thing {
 
@@ -35,7 +41,48 @@ public class InteractionsLabSimulator extends Thing {
                     .build())
             .build();
 
+    ActionAffordance controlLightsZ1 = new ActionAffordance.Builder("Control Lights Z1", setStatusForm)
+            .addTitle("Turn on and off the lights in Z1")
+            .addSemanticType("http://example.org/was#Z1Light")
+            .addInputSchema(new ObjectSchema.Builder()
+                    .addProperty("Z1Light", new StringSchema.Builder()
+                            .addEnum(new HashSet<>(Arrays.asList("on", "off")))
+                            .build())
+                    .build())
+            .build();
+
+    ActionAffordance controlLightsZ2 = new ActionAffordance.Builder("Control Lights Z2", setStatusForm)
+            .addTitle("Turn on and off the lights in Z2")
+            .addSemanticType("http://example.org/was#Z2Light")
+            .addInputSchema(new ObjectSchema.Builder()
+                    .addProperty("Z2Light", new StringSchema.Builder()
+                            .addEnum(new HashSet<>(Arrays.asList("on", "off")))
+                            .build())
+                    .build())
+            .build();
+
+    ActionAffordance controlBlindsZ1 = new ActionAffordance.Builder("Control Blinds Z1", setStatusForm)
+            .addTitle("Raise and lower the blinds in Z1")
+            .addSemanticType("http://example.org/was#Z1Blinds")
+            .addInputSchema(new ObjectSchema.Builder()
+                    .addProperty("Z1Blinds", new StringSchema.Builder()
+                            .addEnum(new HashSet<>(Arrays.asList("up", "down")))
+                            .build())
+                    .build())
+            .build();
+
+    ActionAffordance controlBlindsZ2 = new ActionAffordance.Builder("Control Blinds Z2", setStatusForm)
+            .addTitle("Raise and lower the blinds in Z2")
+            .addSemanticType("http://example.org/was#Z1Blinds")
+            .addInputSchema(new ObjectSchema.Builder()
+                    .addProperty("Z2Blinds", new StringSchema.Builder()
+                            .addEnum(new HashSet<>(Arrays.asList("up", "down")))
+                            .build())
+                    .build())
+            .build();
+
     properties.add(readStatus);
+    actions.addAll(Arrays.asList(controlLightsZ1, controlLightsZ2, controlBlindsZ1, controlBlindsZ2));
   }
 
   @Override
@@ -47,6 +94,7 @@ public class InteractionsLabSimulator extends Thing {
             .addSemanticType("http://w3id.org/eve#Artifact")
             .addSecurityScheme(new NoSecurityScheme())
             .addProperties(properties)
+            .addActions(actions)
             .build();
   }
 }

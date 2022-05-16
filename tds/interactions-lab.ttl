@@ -26,4 +26,65 @@
       js:properties [ a js:NumberSchema, <http://qudt.org/vocab/unit/LUX>;
           js:propertyName "Z1Level"
         ]
+    ];
+  td:hasActionAffordance [ a td:ActionAffordance, <http://example.org/was#Z1Light>;
+      td:name "Control Lights Z1";
+      td:title "Turn on and off the lights in Z1";
+      td:hasForm [
+          htv:methodName "POST";
+          hctl:hasTarget <http://localhost:1880/was/rl/action>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema;
+          js:properties [ a js:StringSchema;
+              js:propertyName "Z1Light";
+              js:enum "off", "on"
+            ]
+        ]
+    ], [ a td:ActionAffordance, <http://example.org/was#Z2Light>;
+      td:name "Control Lights Z2";
+      td:title "Turn on and off the lights in Z2";
+      td:hasForm [
+          htv:methodName "POST";
+          hctl:hasTarget <http://localhost:1880/was/rl/action>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema;
+          js:properties [ a js:StringSchema;
+              js:propertyName "Z2Light";
+              js:enum "off", "on"
+            ]
+        ]
+    ], [ a td:ActionAffordance, <http://example.org/was#Z1Blinds>;
+      td:name "Control Blinds Z1";
+      td:title "Raise and lower the blinds in Z1";
+      td:hasForm [
+          htv:methodName "POST";
+          hctl:hasTarget <http://localhost:1880/was/rl/action>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema;
+          js:properties [ a js:StringSchema;
+              js:propertyName "Z1Blinds";
+              js:enum "up", "down"
+            ]
+        ]
+    ], [ a td:ActionAffordance, <http://example.org/was#Z1Blinds>;
+      td:name "Control Blinds Z2";
+      td:title "Raise and lower the blinds in Z2";
+      td:hasForm [
+          htv:methodName "POST";
+          hctl:hasTarget <http://localhost:1880/was/rl/action>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema;
+          js:properties [ a js:StringSchema;
+              js:propertyName "Z2Blinds";
+              js:enum "up", "down"
+            ]
+        ]
     ] .
