@@ -4,10 +4,7 @@ import ch.unisg.ics.interactions.wot.td.ThingDescription;
 import ch.unisg.ics.interactions.wot.td.affordances.ActionAffordance;
 import ch.unisg.ics.interactions.wot.td.affordances.Form;
 import ch.unisg.ics.interactions.wot.td.affordances.PropertyAffordance;
-import ch.unisg.ics.interactions.wot.td.schemas.IntegerSchema;
-import ch.unisg.ics.interactions.wot.td.schemas.NumberSchema;
-import ch.unisg.ics.interactions.wot.td.schemas.ObjectSchema;
-import ch.unisg.ics.interactions.wot.td.schemas.StringSchema;
+import ch.unisg.ics.interactions.wot.td.schemas.*;
 import ch.unisg.ics.interactions.wot.td.security.NoSecurityScheme;
 import ch.unisg.ics.interactions.wot.td.vocabularies.TD;
 
@@ -36,7 +33,31 @@ public class InteractionsLabSimulator extends Thing {
             .addSemanticType("https://example.org/was#Status")
             .addDataSchema(new ObjectSchema.Builder()
                     .addProperty("Z1Level", new NumberSchema.Builder()
-                            .addSemanticType("http://qudt.org/vocab/unit/LUX")
+                            .addSemanticType("http://example.org/was#Z1Level")
+                            .build())
+                    .addProperty("Z2Level", new NumberSchema.Builder()
+                            .addSemanticType("http://example.org/was#Z2Level")
+                            .build())
+                    .addProperty("Z1Light", new BooleanSchema.Builder()
+                            .addSemanticType("http://example.org/was#Z1Light")
+                            .build())
+                    .addProperty("Z2Light", new BooleanSchema.Builder()
+                            .addSemanticType("http://example.org/was#Z2Light")
+                            .build())
+                    .addProperty("Z1Blinds", new BooleanSchema.Builder()
+                            .addSemanticType("http://example.org/was#Z1Blinds")
+                            .build())
+                    .addProperty("Z2Blinds", new BooleanSchema.Builder()
+                            .addSemanticType("http://example.org/was#Z2Blinds")
+                            .build())
+                    .addProperty("Sunshine", new NumberSchema.Builder()
+                            .addSemanticType("http://example.org/was#Sunlight")
+                            .build())
+                    .addProperty("Energy", new NumberSchema.Builder()
+                            .addSemanticType("http://example.org/was#Energy")
+                            .build())
+                    .addProperty("Hour", new NumberSchema.Builder()
+                            .addSemanticType("http://example.org/was#Hour")
                             .build())
                     .build())
             .build();

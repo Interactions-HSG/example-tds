@@ -23,8 +23,24 @@
           hctl:hasOperationType td:readProperty
         ];
       td:isObservable false;
-      js:properties [ a js:NumberSchema, <http://qudt.org/vocab/unit/LUX>;
+      js:properties [ a js:NumberSchema, <http://example.org/was#Z1Level>;
           js:propertyName "Z1Level"
+        ], [ a js:BooleanSchema, <http://example.org/was#Z1Light>;
+          js:propertyName "Z1Light"
+        ], [ a js:BooleanSchema, <http://example.org/was#Z2Blinds>;
+          js:propertyName "Z2Blinds"
+        ], [ a js:NumberSchema, <http://example.org/was#Energy>;
+          js:propertyName "Energy"
+        ], [ a js:NumberSchema, <http://example.org/was#Hour>;
+          js:propertyName "Hour"
+        ], [ a js:NumberSchema, <http://example.org/was#Sunlight>;
+          js:propertyName "Sunshine"
+        ], [ a js:BooleanSchema, <http://example.org/was#Z1Blinds>;
+          js:propertyName "Z1Blinds"
+        ], [ a js:NumberSchema, <http://example.org/was#Z2Level>;
+          js:propertyName "Z2Level"
+        ], [ a js:BooleanSchema, <http://example.org/was#Z2Light>;
+          js:propertyName "Z2Light"
         ]
     ];
   td:hasActionAffordance [ a td:ActionAffordance, <http://example.org/was#SetZ1Light>;
@@ -72,7 +88,7 @@
               js:enum "up", "down"
             ]
         ]
-    ], [ a td:ActionAffordance, <http://example.org/was#SetZ2Blinds>;
+    ], [ a td:ActionAffordance, <http://example.org/was#SetZ1Blinds>;
       td:name "Control Blinds Z2";
       td:title "Raise and lower the blinds in Z2";
       td:hasForm [
