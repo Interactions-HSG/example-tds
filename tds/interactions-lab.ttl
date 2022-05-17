@@ -53,9 +53,8 @@
           hctl:hasOperationType td:invokeAction
         ];
       td:hasInputSchema [ a js:ObjectSchema;
-          js:properties [ a js:StringSchema;
-              js:propertyName "Z1Light";
-              js:enum "off", "on"
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "Z1Light"
             ]
         ]
     ], [ a td:ActionAffordance, <http://example.org/was#SetZ2Light>;
@@ -68,9 +67,8 @@
           hctl:hasOperationType td:invokeAction
         ];
       td:hasInputSchema [ a js:ObjectSchema;
-          js:properties [ a js:StringSchema;
-              js:propertyName "Z2Light";
-              js:enum "off", "on"
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "Z2Light"
             ]
         ]
     ], [ a td:ActionAffordance, <http://example.org/was#SetZ1Blinds>;
@@ -83,9 +81,8 @@
           hctl:hasOperationType td:invokeAction
         ];
       td:hasInputSchema [ a js:ObjectSchema;
-          js:properties [ a js:StringSchema;
-              js:propertyName "Z1Blinds";
-              js:enum "up", "down"
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "Z1Blinds"
             ]
         ]
     ], [ a td:ActionAffordance, <http://example.org/was#SetZ2Blinds>;
@@ -98,9 +95,8 @@
           hctl:hasOperationType td:invokeAction
         ];
       td:hasInputSchema [ a js:ObjectSchema;
-          js:properties [ a js:StringSchema;
-              js:propertyName "Z2Blinds";
-              js:enum "up", "down"
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "Z2Blinds"
             ]
         ]
     ] .

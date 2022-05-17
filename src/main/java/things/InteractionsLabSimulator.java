@@ -66,8 +66,7 @@ public class InteractionsLabSimulator extends Thing {
             .addTitle("Turn on and off the lights in Z1")
             .addSemanticType("http://example.org/was#SetZ1Light")
             .addInputSchema(new ObjectSchema.Builder()
-                    .addProperty("Z1Light", new StringSchema.Builder()
-                            .addEnum(new HashSet<>(Arrays.asList("on", "off")))
+                    .addProperty("Z1Light", new BooleanSchema.Builder()
                             .build())
                     .build())
             .build();
@@ -76,8 +75,7 @@ public class InteractionsLabSimulator extends Thing {
             .addTitle("Turn on and off the lights in Z2")
             .addSemanticType("http://example.org/was#SetZ2Light")
             .addInputSchema(new ObjectSchema.Builder()
-                    .addProperty("Z2Light", new StringSchema.Builder()
-                            .addEnum(new HashSet<>(Arrays.asList("on", "off")))
+                    .addProperty("Z2Light", new BooleanSchema.Builder()
                             .build())
                     .build())
             .build();
@@ -86,8 +84,7 @@ public class InteractionsLabSimulator extends Thing {
             .addTitle("Raise and lower the blinds in Z1")
             .addSemanticType("http://example.org/was#SetZ1Blinds")
             .addInputSchema(new ObjectSchema.Builder()
-                    .addProperty("Z1Blinds", new StringSchema.Builder()
-                            .addEnum(new HashSet<>(Arrays.asList("up", "down")))
+                    .addProperty("Z1Blinds", new BooleanSchema.Builder()
                             .build())
                     .build())
             .build();
@@ -96,8 +93,7 @@ public class InteractionsLabSimulator extends Thing {
             .addTitle("Raise and lower the blinds in Z2")
             .addSemanticType("http://example.org/was#SetZ2Blinds")
             .addInputSchema(new ObjectSchema.Builder()
-                    .addProperty("Z2Blinds", new StringSchema.Builder()
-                            .addEnum(new HashSet<>(Arrays.asList("up", "down")))
+                    .addProperty("Z2Blinds", new BooleanSchema.Builder()
                             .build())
                     .build())
             .build();
