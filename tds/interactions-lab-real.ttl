@@ -1,0 +1,102 @@
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix eve: <http://w3id.org/eve#> .
+@prefix wotsec: <https://www.w3.org/2019/wot/security#> .
+@prefix js: <https://www.w3.org/2019/wot/json-schema#> .
+@prefix htv: <http://www.w3.org/2011/http#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:interactions_lab> a td:Thing, eve:Artifact, <https://example.org/was#Lab>;
+  td:title "The lab of the Interactions team";
+  td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
+    ];
+  td:hasBase <https://api.interactions.ics.unisg.ch/was/rl/>;
+  td:hasPropertyAffordance [ a td:PropertyAffordance, <https://example.org/was#Status>,
+        js:ObjectSchema;
+      td:name "Status";
+      td:title "Read the lab status";
+      td:hasForm [
+          htv:methodName "GET";
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/was/rl/status>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty
+        ];
+      td:isObservable false;
+      js:properties [ a js:NumberSchema, <http://example.org/was#Z1Level>;
+          js:propertyName "Z1Level"
+        ], [ a js:BooleanSchema, <http://example.org/was#Z1Light>;
+          js:propertyName "Z1Light"
+        ], [ a js:BooleanSchema, <http://example.org/was#Z2Blinds>;
+          js:propertyName "Z2Blinds"
+        ], [ a js:NumberSchema, <http://example.org/was#Energy>;
+          js:propertyName "Energy"
+        ], [ a js:NumberSchema, <http://example.org/was#Hour>;
+          js:propertyName "Hour"
+        ], [ a js:NumberSchema, <http://example.org/was#Sunshine>;
+          js:propertyName "Sunshine"
+        ], [ a js:BooleanSchema, <http://example.org/was#Z1Blinds>;
+          js:propertyName "Z1Blinds"
+        ], [ a js:NumberSchema, <http://example.org/was#Z2Level>;
+          js:propertyName "Z2Level"
+        ], [ a js:BooleanSchema, <http://example.org/was#Z2Light>;
+          js:propertyName "Z2Light"
+        ]
+    ];
+  td:hasActionAffordance [ a td:ActionAffordance, <http://example.org/was#SetZ1Light>;
+      td:name "Control Lights Z1";
+      td:title "Turn on and off the lights in Z1";
+      td:hasForm [
+          htv:methodName "POST";
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/was/rl/action>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema;
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "Z1Light"
+            ]
+        ]
+    ], [ a td:ActionAffordance, <http://example.org/was#SetZ2Light>;
+      td:name "Control Lights Z2";
+      td:title "Turn on and off the lights in Z2";
+      td:hasForm [
+          htv:methodName "POST";
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/was/rl/action>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema;
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "Z2Light"
+            ]
+        ]
+    ], [ a td:ActionAffordance, <http://example.org/was#SetZ1Blinds>;
+      td:name "Control Blinds Z1";
+      td:title "Raise and lower the blinds in Z1";
+      td:hasForm [
+          htv:methodName "POST";
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/was/rl/action>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema;
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "Z1Blinds"
+            ]
+        ]
+    ], [ a td:ActionAffordance, <http://example.org/was#SetZ2Blinds>;
+      td:name "Control Blinds Z2";
+      td:title "Raise and lower the blinds in Z2";
+      td:hasForm [
+          htv:methodName "POST";
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/was/rl/action>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema;
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "Z2Blinds"
+            ]
+        ]
+    ] .
