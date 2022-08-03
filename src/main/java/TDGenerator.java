@@ -86,6 +86,9 @@ public class TDGenerator {
 
         EngraverActuators engraverActuators = new EngraverActuators("http://micro1.fritz.box:38080/engraver-laser/actuator-api", "urn:intelliot-actuators", "Engraver Actuators");
 
+
+        TractorController tractorController = new TractorController("http://example/org/tractor_controller", "urn:tractor_controller","Tractor Controller");
+
         writeToFile(uRxRobotController.serializeTD(), "urx-robot-controller");
         writeToFile(engraver.serializeTD(), "engraver");
         writeToFile(cupProvider.serializeTD(), "cup-provider");
@@ -108,6 +111,7 @@ public class TDGenerator {
         writeToFile(engraverActuatorsAWS.serializeTD(), "engraver_actuators_aws");
         writeToFile(engraverActuators.serializeTD(), "engraver_actuators");
         writeToFile(engraver2.serializeTD(), "engraver2");
+        writeToFile(tractorController.serializeTD(), "tractor_controller");
 
         try {
             //Read TD from file
