@@ -89,6 +89,8 @@ public class TDGenerator {
 
         TractorController tractorController = new TractorController("http://example/org/tractor_controller", "urn:tractor_controller","Tractor Controller");
 
+        IKHRoboticPlatform ikhRoboticPlatform = new IKHRoboticPlatform("http://example/org/ikh", "urn:ikh_robotic_platform", "IKH Robotic Platform");
+
         writeToFile(uRxRobotController.serializeTD(), "urx-robot-controller");
         writeToFile(engraver.serializeTD(), "engraver");
         writeToFile(cupProvider.serializeTD(), "cup-provider");
@@ -112,6 +114,7 @@ public class TDGenerator {
         writeToFile(engraverActuators.serializeTD(), "engraver_actuators");
         writeToFile(engraver2.serializeTD(), "engraver2");
         writeToFile(tractorController.serializeTD(), "tractor_controller");
+        writeToFile(ikhRoboticPlatform.serializeTD(), "ikh_robotic_platform");
 
         try {
             //Read TD from file

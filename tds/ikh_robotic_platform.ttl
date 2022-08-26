@@ -1,0 +1,198 @@
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix wotsec: <https://www.w3.org/2019/wot/security#> .
+@prefix js: <https://www.w3.org/2019/wot/json-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:ikh_robotic_platform> a td:Thing;
+  td:title "IKH Robotic Platform";
+  td:hasSecurityConfiguration [ a wotsec:APIKeySecurityScheme;
+      wotsec:in "HEADER";
+      wotsec:name "X-API-Key"
+    ];
+  td:hasBase <http://example/org/ikh>;
+  td:hasPropertyAffordance [ a td:PropertyAffordance;
+      td:name "getOperator";
+      td:hasForm [
+          hctl:hasTarget <http://example/org/ikh/Operator>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty, td:writeProperty
+        ];
+      td:isObservable false
+    ], [ a td:PropertyAffordance;
+      td:name "getTCP";
+      td:hasForm [
+          hctl:hasTarget <http://example/org/ikh/tcp>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty, td:writeProperty
+        ];
+      td:isObservable false
+    ], [ a td:PropertyAffordance;
+      td:name "getTCPTarget";
+      td:hasForm [
+          hctl:hasTarget <http://example/org/ikh/tcp/target>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty, td:writeProperty
+        ];
+      td:isObservable false
+    ], [ a td:PropertyAffordance;
+      td:name "getJoints";
+      td:hasForm [
+          hctl:hasTarget <http://example/org/ikh/joints>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty, td:writeProperty
+        ];
+      td:isObservable false
+    ], [ a td:PropertyAffordance;
+      td:name "getJointsTarget";
+      td:hasForm [
+          hctl:hasTarget <http://example/org/ikh/joints_target>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty, td:writeProperty
+        ];
+      td:isObservable false
+    ], [ a td:PropertyAffordance;
+      td:name "getJointsVelocity";
+      td:hasForm [
+          hctl:hasTarget <http://example/org/ikh/joints_velocity>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty, td:writeProperty
+        ];
+      td:isObservable false
+    ], [ a td:PropertyAffordance;
+      td:name "getSpray";
+      td:hasForm [
+          hctl:hasTarget <http://example/org/ikh/spray>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty, td:writeProperty
+        ];
+      td:isObservable false
+    ];
+  td:hasActionAffordance [ a td:ActionAffordance;
+      td:name "getOperator";
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://example/org/ikh/Operator>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema;
+          js:properties [ a js:StringSchema;
+              js:propertyName "name"
+            ], [ a js:StringSchema;
+              js:propertyName "email"
+            ];
+          js:required "name", "email"
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "getOperator";
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "delete";
+          hctl:hasTarget <http://example/org/ikh/Operator>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema;
+          js:properties [ a js:StringSchema;
+              js:propertyName "token"
+            ];
+          js:required "token"
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "putTCPTarget";
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "PUT";
+          hctl:hasTarget <http://example/org/ikh/tcp/target>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema;
+          js:properties [ a js:StringSchema;
+              js:propertyName "pos_y"
+            ], [ a js:StringSchema;
+              js:propertyName "ori_z"
+            ], [ a js:StringSchema;
+              js:propertyName "pos_z"
+            ], [ a js:StringSchema;
+              js:propertyName "ori_y"
+            ], [ a js:StringSchema;
+              js:propertyName "pos_x"
+            ], [ a js:StringSchema;
+              js:propertyName "ori_x"
+            ], [ a js:StringSchema;
+              js:propertyName "ori_w"
+            ];
+          js:required "pos_x", "pos_y", "pos_z", "ori_x", "ori_y", "ori_z", "ori_w"
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "putTCPVelocity";
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "PUT";
+          hctl:hasTarget <http://example/org/ikh/tcp/velocity>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema;
+          js:properties [ a js:StringSchema;
+              js:propertyName "acceleration"
+            ], [ a js:StringSchema;
+              js:propertyName "velocity"
+            ];
+          js:required "velocity", "acceleration"
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "initialize";
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "PUT";
+          hctl:hasTarget <http://example/org/ikhinitialize>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "lookback";
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "PUT";
+          hctl:hasTarget <http://example/org/ikhlookback>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "putJointsTarget";
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "PUT";
+          hctl:hasTarget <http://example/org/ikh/joints_target>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "putTeleop";
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "PUT";
+          hctl:hasTarget <http://example/org/ikh/teleop>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema;
+          js:properties [ a js:StringSchema;
+              js:propertyName "axis_linear"
+            ], [ a js:StringSchema;
+              js:propertyName "axis_angular"
+            ], [ a js:StringSchema;
+              js:propertyName "speed_down"
+            ], [ a js:StringSchema;
+              js:propertyName "deadman"
+            ], [ a js:StringSchema;
+              js:propertyName "speed_up"
+            ];
+          js:required "axis_linear", "axis_angular", "speed_up", "speed_down", "deadman"
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "putSpray";
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "PUT";
+          hctl:hasTarget <http://example/org/ikh/spray>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ]
+    ] .

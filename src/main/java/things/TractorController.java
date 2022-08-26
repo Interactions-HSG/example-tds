@@ -7,7 +7,6 @@ import ch.unisg.ics.interactions.wot.td.affordances.Form;
 import ch.unisg.ics.interactions.wot.td.affordances.PropertyAffordance;
 import ch.unisg.ics.interactions.wot.td.schemas.*;
 import ch.unisg.ics.interactions.wot.td.security.APIKeySecurityScheme;
-import com.sun.xml.internal.ws.api.message.Header;
 
 import java.util.HashSet;
 import java.util.Set;
