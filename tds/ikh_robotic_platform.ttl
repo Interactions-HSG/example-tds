@@ -11,11 +11,11 @@
       wotsec:in "HEADER";
       wotsec:name "X-API-Key"
     ];
-  td:hasBase <http://example/org/ikh>;
+  td:hasBase <85.74.232.128:3001>;
   td:hasPropertyAffordance [ a td:PropertyAffordance;
       td:name "getOperator";
       td:hasForm [
-          hctl:hasTarget <http://example/org/ikh/Operator>;
+          hctl:hasTarget <85.74.232.128:3001/Operator>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -23,7 +23,7 @@
     ], [ a td:PropertyAffordance;
       td:name "getTCP";
       td:hasForm [
-          hctl:hasTarget <http://example/org/ikh/tcp>;
+          hctl:hasTarget <85.74.232.128:3001/tcp>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -31,7 +31,7 @@
     ], [ a td:PropertyAffordance;
       td:name "getTCPTarget";
       td:hasForm [
-          hctl:hasTarget <http://example/org/ikh/tcp/target>;
+          hctl:hasTarget <85.74.232.128:3001/tcp/target>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -39,7 +39,7 @@
     ], [ a td:PropertyAffordance;
       td:name "getJoints";
       td:hasForm [
-          hctl:hasTarget <http://example/org/ikh/joints>;
+          hctl:hasTarget <85.74.232.128:3001/joints>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -47,7 +47,7 @@
     ], [ a td:PropertyAffordance;
       td:name "getJointsTarget";
       td:hasForm [
-          hctl:hasTarget <http://example/org/ikh/joints_target>;
+          hctl:hasTarget <85.74.232.128:3001/joints_target>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -55,7 +55,7 @@
     ], [ a td:PropertyAffordance;
       td:name "getJointsVelocity";
       td:hasForm [
-          hctl:hasTarget <http://example/org/ikh/joints_velocity>;
+          hctl:hasTarget <85.74.232.128:3001/joints_velocity>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -63,7 +63,7 @@
     ], [ a td:PropertyAffordance;
       td:name "getSpray";
       td:hasForm [
-          hctl:hasTarget <http://example/org/ikh/spray>;
+          hctl:hasTarget <85.74.232.128:3001/spray>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -71,127 +71,103 @@
     ];
   td:hasActionAffordance [ a td:ActionAffordance;
       td:name "getOperator";
+      td:hasUriTemplateSchema [ a js:StringSchema;
+          td:name "name"
+        ], [ a js:StringSchema;
+          td:name "email"
+        ];
       td:hasForm [
-          <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://example/org/ikh/Operator>;
+          hctl:hasTarget <85.74.232.128:3001/Operator>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
-        ];
-      td:hasInputSchema [ a js:ObjectSchema;
-          js:properties [ a js:StringSchema;
-              js:propertyName "name"
-            ], [ a js:StringSchema;
-              js:propertyName "email"
-            ];
-          js:required "name", "email"
         ]
     ], [ a td:ActionAffordance;
       td:name "getOperator";
+      td:hasUriTemplateSchema [ a js:StringSchema;
+          td:name "token"
+        ];
       td:hasForm [
-          <http://www.w3.org/2011/http#methodName> "delete";
-          hctl:hasTarget <http://example/org/ikh/Operator>;
+          hctl:hasTarget <85.74.232.128:3001/Operator>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
-        ];
-      td:hasInputSchema [ a js:ObjectSchema;
-          js:properties [ a js:StringSchema;
-              js:propertyName "token"
-            ];
-          js:required "token"
         ]
     ], [ a td:ActionAffordance;
       td:name "putTCPTarget";
+      td:hasUriTemplateSchema [ a js:StringSchema;
+          td:name "pos_y"
+        ], [ a js:StringSchema;
+          td:name "ori_z"
+        ], [ a js:StringSchema;
+          td:name "pos_z"
+        ], [ a js:StringSchema;
+          td:name "ori_y"
+        ], [ a js:StringSchema;
+          td:name "pos_x"
+        ], [ a js:StringSchema;
+          td:name "ori_x"
+        ], [ a js:StringSchema;
+          td:name "ori_w"
+        ];
       td:hasForm [
-          <http://www.w3.org/2011/http#methodName> "PUT";
-          hctl:hasTarget <http://example/org/ikh/tcp/target>;
+          hctl:hasTarget <85.74.232.128:3001/tcp/target>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
-        ];
-      td:hasInputSchema [ a js:ObjectSchema;
-          js:properties [ a js:StringSchema;
-              js:propertyName "pos_y"
-            ], [ a js:StringSchema;
-              js:propertyName "ori_z"
-            ], [ a js:StringSchema;
-              js:propertyName "pos_z"
-            ], [ a js:StringSchema;
-              js:propertyName "ori_y"
-            ], [ a js:StringSchema;
-              js:propertyName "pos_x"
-            ], [ a js:StringSchema;
-              js:propertyName "ori_x"
-            ], [ a js:StringSchema;
-              js:propertyName "ori_w"
-            ];
-          js:required "pos_x", "pos_y", "pos_z", "ori_x", "ori_y", "ori_z", "ori_w"
         ]
     ], [ a td:ActionAffordance;
       td:name "putTCPVelocity";
+      td:hasUriTemplateSchema [ a js:StringSchema;
+          td:name "acceleration"
+        ], [ a js:StringSchema;
+          td:name "velocity"
+        ];
       td:hasForm [
-          <http://www.w3.org/2011/http#methodName> "PUT";
-          hctl:hasTarget <http://example/org/ikh/tcp/velocity>;
+          hctl:hasTarget <85.74.232.128:3001/tcp/velocity>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
-        ];
-      td:hasInputSchema [ a js:ObjectSchema;
-          js:properties [ a js:StringSchema;
-              js:propertyName "acceleration"
-            ], [ a js:StringSchema;
-              js:propertyName "velocity"
-            ];
-          js:required "velocity", "acceleration"
         ]
     ], [ a td:ActionAffordance;
       td:name "initialize";
       td:hasForm [
-          <http://www.w3.org/2011/http#methodName> "PUT";
-          hctl:hasTarget <http://example/org/ikhinitialize>;
+          hctl:hasTarget <85.74.232.128:3001initialize>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]
     ], [ a td:ActionAffordance;
       td:name "lookback";
       td:hasForm [
-          <http://www.w3.org/2011/http#methodName> "PUT";
-          hctl:hasTarget <http://example/org/ikhlookback>;
+          hctl:hasTarget <85.74.232.128:3001lookback>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]
     ], [ a td:ActionAffordance;
       td:name "putJointsTarget";
       td:hasForm [
-          <http://www.w3.org/2011/http#methodName> "PUT";
-          hctl:hasTarget <http://example/org/ikh/joints_target>;
+          hctl:hasTarget <85.74.232.128:3001/joints_target>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]
     ], [ a td:ActionAffordance;
       td:name "putTeleop";
+      td:hasUriTemplateSchema [ a js:StringSchema;
+          td:name "axis_angular"
+        ], [ a js:StringSchema;
+          td:name "axis_linear"
+        ], [ a js:StringSchema;
+          td:name "speed_down"
+        ], [ a js:StringSchema;
+          td:name "deadman"
+        ], [ a js:StringSchema;
+          td:name "speed_up"
+        ];
       td:hasForm [
-          <http://www.w3.org/2011/http#methodName> "PUT";
-          hctl:hasTarget <http://example/org/ikh/teleop>;
+          hctl:hasTarget <85.74.232.128:3001/teleop>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
-        ];
-      td:hasInputSchema [ a js:ObjectSchema;
-          js:properties [ a js:StringSchema;
-              js:propertyName "axis_linear"
-            ], [ a js:StringSchema;
-              js:propertyName "axis_angular"
-            ], [ a js:StringSchema;
-              js:propertyName "speed_down"
-            ], [ a js:StringSchema;
-              js:propertyName "deadman"
-            ], [ a js:StringSchema;
-              js:propertyName "speed_up"
-            ];
-          js:required "axis_linear", "axis_angular", "speed_up", "speed_down", "deadman"
         ]
     ], [ a td:ActionAffordance;
       td:name "putSpray";
       td:hasForm [
-          <http://www.w3.org/2011/http#methodName> "PUT";
-          hctl:hasTarget <http://example/org/ikh/spray>;
+          hctl:hasTarget <85.74.232.128:3001/spray>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]

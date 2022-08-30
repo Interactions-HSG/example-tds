@@ -4,9 +4,13 @@ import ch.unisg.ics.interactions.wot.td.ThingDescription;
 import ch.unisg.ics.interactions.wot.td.affordances.ActionAffordance;
 import ch.unisg.ics.interactions.wot.td.affordances.Form;
 import ch.unisg.ics.interactions.wot.td.affordances.PropertyAffordance;
+import ch.unisg.ics.interactions.wot.td.schemas.DataSchema;
 import ch.unisg.ics.interactions.wot.td.schemas.ObjectSchema;
 import ch.unisg.ics.interactions.wot.td.schemas.StringSchema;
 import ch.unisg.ics.interactions.wot.td.security.APIKeySecurityScheme;
+
+import java.util.Hashtable;
+import java.util.Map;
 
 public class IKHRoboticPlatform extends Thing{
     public IKHRoboticPlatform(String baseURI, String relativeURI, String title) {
@@ -20,10 +24,19 @@ public class IKHRoboticPlatform extends Thing{
                 .addRequiredProperties("name", "email")
                 .build();
 
+        Map<String, DataSchema> operatorVariables = new Hashtable<>();
+        operatorVariables.put("name", new StringSchema.Builder().build());
+        operatorVariables.put("email", new StringSchema.Builder().build());
+
+
+
         ObjectSchema operatorDelSchema = new ObjectSchema.Builder()
                 .addProperty("token", new StringSchema.Builder().build())
                 .addRequiredProperties("token")
                 .build();
+
+        Map<String, DataSchema> operatorDelVariables = new Hashtable<>();
+        operatorDelVariables.put("token", new StringSchema.Builder().build());
 
         ObjectSchema tcpSchema = new ObjectSchema.Builder()
                 .addProperty("pos_x", new StringSchema.Builder().build())
@@ -36,11 +49,24 @@ public class IKHRoboticPlatform extends Thing{
                 .addRequiredProperties("pos_x", "pos_y", "pos_z", "ori_x", "ori_y","ori_z","ori_w")
                 .build();
 
+        Map<String, DataSchema> tcpVariables = new Hashtable<>();
+        tcpVariables.put("pos_x", new StringSchema.Builder().build());
+        tcpVariables.put("pos_y", new StringSchema.Builder().build());
+        tcpVariables.put("pos_z", new StringSchema.Builder().build());
+        tcpVariables.put("ori_x", new StringSchema.Builder().build());
+        tcpVariables.put("ori_y", new StringSchema.Builder().build());
+        tcpVariables.put("ori_z", new StringSchema.Builder().build());
+        tcpVariables.put("ori_w", new StringSchema.Builder().build());
+
         ObjectSchema velocitySchema = new ObjectSchema.Builder()
                 .addProperty("velocity", new StringSchema.Builder().build())
                 .addProperty("acceleration", new StringSchema.Builder().build())
                 .addRequiredProperties("velocity", "acceleration")
                 .build();
+
+        Map<String, DataSchema> velocityVariables = new Hashtable<>();
+        velocityVariables.put("velocity", new StringSchema.Builder().build());
+        velocityVariables.put("acceleration", new StringSchema.Builder().build());
 
         ObjectSchema teleopSchema = new ObjectSchema.Builder()
                 .addProperty("axis_linear", new StringSchema.Builder().build())
@@ -50,6 +76,13 @@ public class IKHRoboticPlatform extends Thing{
                 .addProperty("deadman", new StringSchema.Builder().build())
                 .addRequiredProperties("axis_linear", "axis_angular", "speed_up", "speed_down", "deadman")
                 .build();
+
+        Map<String, DataSchema> teleopVariables = new Hashtable<>();
+        teleopVariables.put("axis_linear", new StringSchema.Builder().build());
+        teleopVariables.put("axis_angular", new StringSchema.Builder().build());
+        teleopVariables.put("speed_up", new StringSchema.Builder().build());
+        teleopVariables.put("speed_down", new StringSchema.Builder().build());
+        teleopVariables.put("deadman", new StringSchema.Builder().build());
 
         //Operator
 
@@ -66,7 +99,8 @@ public class IKHRoboticPlatform extends Thing{
                 .build();
 
         ActionAffordance postOperator = new ActionAffordance.Builder("getOperator", postOperatorForm)
-                .addInputSchema(operatorSchema)
+                //.addInputSchema(operatorSchema)
+                .addUriVariables(operatorVariables)
                 .build();
 
         actions.add(postOperator);
@@ -76,7 +110,8 @@ public class IKHRoboticPlatform extends Thing{
                 .build();
 
         ActionAffordance deleteOperator = new ActionAffordance.Builder("getOperator", deleteOperatorForm)
-                .addInputSchema(operatorDelSchema)
+                //.addInputSchema(operatorDelSchema)
+                .addUriVariables(operatorDelVariables)
                 .build();
 
         actions.add(deleteOperator);
@@ -106,7 +141,8 @@ public class IKHRoboticPlatform extends Thing{
                 .build();
 
         ActionAffordance putTCPTarget = new ActionAffordance.Builder("putTCPTarget", putTCPTargetForm)
-                .addInputSchema(tcpSchema)
+                //.addInputSchema(tcpSchema)
+                .addUriVariables(tcpVariables)
                 .build();
 
         actions.add(putTCPTarget);
@@ -116,7 +152,8 @@ public class IKHRoboticPlatform extends Thing{
                 .build();
 
         ActionAffordance putTCPVelocity = new ActionAffordance.Builder("putTCPVelocity", putTCPVelocityForm)
-                .addInputSchema(velocitySchema)
+                //.addInputSchema(velocitySchema)
+                .addUriVariables(velocityVariables)
                 .build();
 
         actions.add(putTCPVelocity);
@@ -186,7 +223,8 @@ public class IKHRoboticPlatform extends Thing{
                 .build();
 
         ActionAffordance putTeleop = new ActionAffordance.Builder("putTeleop", putTeleopForm)
-                .addInputSchema(teleopSchema)
+                //.addInputSchema(teleopSchema)
+                .addUriVariables(teleopVariables)
                 .build();
 
         actions.add(putTeleop);

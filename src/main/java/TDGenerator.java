@@ -89,7 +89,7 @@ public class TDGenerator {
 
         TractorController tractorController = new TractorController("http://example/org/tractor_controller", "urn:tractor_controller","Tractor Controller");
 
-        IKHRoboticPlatform ikhRoboticPlatform = new IKHRoboticPlatform("http://example/org/ikh", "urn:ikh_robotic_platform", "IKH Robotic Platform");
+        IKHRoboticPlatform ikhRoboticPlatform = new IKHRoboticPlatform("85.74.232.128:3001", "urn:ikh_robotic_platform", "IKH Robotic Platform");
 
         writeToFile(uRxRobotController.serializeTD(), "urx-robot-controller");
         writeToFile(engraver.serializeTD(), "engraver");
