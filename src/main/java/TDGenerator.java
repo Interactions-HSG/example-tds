@@ -87,9 +87,19 @@ public class TDGenerator {
         EngraverActuators engraverActuators = new EngraverActuators("http://micro1.fritz.box:38080/engraver-laser/actuator-api", "urn:intelliot-actuators", "Engraver Actuators");
 
 
-        TractorController tractorController = new TractorController("http://example/org/tractor_controller", "urn:tractor_controller","Tractor Controller");
+        //TractorController tractorController = new TractorController("http://example.org/tractor_controller", "urn:tractor_controller","Tractor Controller");
 
-        IKHRoboticPlatform ikhRoboticPlatform = new IKHRoboticPlatform("85.74.232.128:3001", "urn:ikh_robotic_platform", "IKH Robotic Platform");
+        TractorController tractorController = new TractorController("http://192.168.88.240", "http://localhost:8080/workspaces/uc1/artifacts/tractor_controller","Tractor Controller");
+
+        WaypointService1 waypointService1 = new WaypointService1("http://localhost:80", "http://localhost:8080/workspaces/uc1/artifacts/waypoint_service", "Waypoint Service");
+
+        WaypointService waypointService = new WaypointService("http://localhost:80", "http://localhost:8080/workspaces/uc1/artifacts/waypoint_service", "Waypoint Service");
+
+        //IKHRoboticPlatform ikhRoboticPlatform = new IKHRoboticPlatform("85.74.232.128:3001", "http://localhost:8080/workspaces/uc1/artifacts/ikh_robotic_platform", "IKH Robotic Platform");
+
+        IKHRoboticPlatform ikhRoboticPlatform = new IKHRoboticPlatform("http://10.42.0.1:3001", "http://localhost:8080/workspaces/uc1/artifacts/ikh_robotic_platform", "IKH Robotic Platform");
+
+        HotWater hotWater =  new HotWater("http://localhost", "http://localhost","Hot Water");
 
         writeToFile(uRxRobotController.serializeTD(), "urx-robot-controller");
         writeToFile(engraver.serializeTD(), "engraver");
@@ -114,7 +124,10 @@ public class TDGenerator {
         writeToFile(engraverActuators.serializeTD(), "engraver_actuators");
         writeToFile(engraver2.serializeTD(), "engraver2");
         writeToFile(tractorController.serializeTD(), "tractor_controller");
+        writeToFile(waypointService1.serializeTD(), "waypoint_service1");
+        writeToFile(waypointService.serializeTD(), "waypoint_service");
         writeToFile(ikhRoboticPlatform.serializeTD(), "ikh_robotic_platform");
+        writeToFile(hotWater.serializeTD(), "hot_water");
 
         try {
             //Read TD from file

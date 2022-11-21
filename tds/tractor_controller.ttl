@@ -5,17 +5,17 @@
 @prefix js: <https://www.w3.org/2019/wot/json-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<urn:tractor_controller> a td:Thing;
+<http://localhost:8080/workspaces/uc1/artifacts/tractor_controller> a td:Thing;
   td:title "Tractor Controller";
   td:hasSecurityConfiguration [ a wotsec:APIKeySecurityScheme;
       wotsec:in "HEADER";
       wotsec:name "X-API-Key"
     ];
-  td:hasBase <http://example/org/tractor_controller>;
+  td:hasBase <http://192.168.88.240>;
   td:hasPropertyAffordance [ a td:PropertyAffordance;
       td:name "getCurrentMode";
       td:hasForm [
-          hctl:hasTarget <http://example/org/tractor_controller/eTractorMode/currentMode>;
+          hctl:hasTarget <http://192.168.88.240/eTractorMode/currentMode>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -23,7 +23,7 @@
     ], [ a td:PropertyAffordance, js:ArraySchema;
       td:name "getAllModes";
       td:hasForm [
-          hctl:hasTarget <http://example/org/tractor_controller/eTractorModes>;
+          hctl:hasTarget <http://192.168.88.240/eTractorModes>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -35,7 +35,7 @@
     ], [ a td:PropertyAffordance;
       td:name "isProcessing";
       td:hasForm [
-          hctl:hasTarget <http://example/org/tractor_controller/waypoint_operated/isProcessing>;
+          hctl:hasTarget <http://192.168.88.240/waypoint_operated/isProcessing>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -43,7 +43,7 @@
     ], [ a td:PropertyAffordance, js:ObjectSchema;
       td:name "currentGoal";
       td:hasForm [
-          hctl:hasTarget <http://example/org/tractor_controller/waypoint_operated/currentGoal>;
+          hctl:hasTarget <http://192.168.88.240/waypoint_operated/currentGoal>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -65,7 +65,7 @@
     ], [ a td:PropertyAffordance;
       td:name "isRoutineProcessing";
       td:hasForm [
-          hctl:hasTarget <http://example/org/tractor_controller/routine_operated/isProcessing>;
+          hctl:hasTarget <http://192.168.88.240/routine_operated/isProcessing>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -73,7 +73,7 @@
     ], [ a td:PropertyAffordance, js:ObjectSchema;
       td:name "currentCmd";
       td:hasForm [
-          hctl:hasTarget <http://example/org/tractor_controller/routine_operated/currentCmd>;
+          hctl:hasTarget <http://192.168.88.240/routine_operated/currentCmd>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -108,7 +108,7 @@
     ], [ a td:PropertyAffordance, js:ObjectSchema;
       td:name "getVcuMsg";
       td:hasForm [
-          hctl:hasTarget <http://example/org/tractor_controller/sensors/vcuMsg>;
+          hctl:hasTarget <http://192.168.88.240/sensors/vcuMsg>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -154,7 +154,7 @@
           td:name "imu_position"
         ];
       td:hasForm [
-          hctl:hasTarget <http://example/org/tractor_controller/sensors/imu/%7Bimu_position%7D>;
+          hctl:hasTarget <http://192.168.88.240/sensors/imu/%7Bimu_position%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -221,7 +221,7 @@
     ], [ a td:PropertyAffordance, js:ObjectSchema;
       td:name "getGps";
       td:hasForm [
-          hctl:hasTarget <http://example/org/tractor_controller/sensors/gps>;
+          hctl:hasTarget <http://192.168.88.240/sensors/gps>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -294,7 +294,7 @@
           td:name "cam_position"
         ];
       td:hasForm [
-          hctl:hasTarget <http://example/org/tractor_controller/sensors/CameraHandleRosTopic/%7Bcam_position%7D>;
+          hctl:hasTarget <http://192.168.88.240/sensors/CameraHandleRosTopic/%7Bcam_position%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -306,7 +306,7 @@
           td:name "cam_position"
         ];
       td:hasForm [
-          hctl:hasTarget <http://example/org/tractor_controller/sensors/CameraHandleRosTopic/%7Bcam_position%7D>;
+          hctl:hasTarget <http://192.168.88.240/sensors/CameraHandleRosTopic/%7Bcam_position%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -314,7 +314,7 @@
     ], [ a td:PropertyAffordance, js:ObjectSchema;
       td:name "getHeading";
       td:hasForm [
-          hctl:hasTarget <http://example/org/tractor_controller/sensors/heading>;
+          hctl:hasTarget <http://192.168.88.240/sensors/heading>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -344,7 +344,7 @@
     ], [ a td:PropertyAffordance, js:ObjectSchema;
       td:name "getVelocity";
       td:hasForm [
-          hctl:hasTarget <http://example/org/tractor_controller/sensors/velocity>;
+          hctl:hasTarget <http://192.168.88.240/sensors/velocity>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -373,7 +373,7 @@
     ], [ a td:PropertyAffordance, js:ArraySchema;
       td:name "getImplements";
       td:hasForm [
-          hctl:hasTarget <http://example/org/tractor_controller/implements>;
+          hctl:hasTarget <http://192.168.88.240/implements>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -384,7 +384,7 @@
     ], [ a td:PropertyAffordance, js:StringSchema;
       td:name "getCurrentImplement";
       td:hasForm [
-          hctl:hasTarget <http://example/org/tractor_controller/currImplement>;
+          hctl:hasTarget <http://192.168.88.240/currImplement>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -393,11 +393,22 @@
     ], [ a td:PropertyAffordance, js:StringSchema;
       td:name "readRoot";
       td:hasForm [
-          hctl:hasTarget <http://example/org/tractor_controller/>;
+          hctl:hasTarget <http://192.168.88.240/>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
       td:isObservable false
+    ], [ a td:PropertyAffordance, js:ObjectSchema;
+      td:name "getHeartbeat";
+      td:hasForm [
+          hctl:hasTarget <http://192.168.88.240/ros_hb>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty, td:writeProperty
+        ];
+      td:isObservable false;
+      js:properties [ a js:BooleanSchema;
+          js:propertyName "data"
+        ]
     ];
   td:hasActionAffordance [ a td:ActionAffordance;
       td:name "putCurrentMode";
@@ -410,7 +421,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "PUT";
-          hctl:hasTarget <http://example/org/tractor_controller/eTractorMode/currentMode%7B?mode,%20feedback_callback_url%7D>;
+          hctl:hasTarget <http://192.168.88.240/eTractorMode/currentMode%7B?mode,%20feedback_callback_url%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]
@@ -421,7 +432,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "PUT";
-          hctl:hasTarget <http://example/org/tractor_controller/waypoint_operated/missionGoals%7B?feedback_callback_url%7D>;
+          hctl:hasTarget <http://192.168.88.240/waypoint_operated/missionGoals%7B?feedback_callback_url%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -445,7 +456,7 @@
       td:name "putWpoCancel";
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "PUT";
-          hctl:hasTarget <http://example/org/tractor_controller/waypoint_operated/cancel>;
+          hctl:hasTarget <http://192.168.88.240/waypoint_operated/cancel>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]
@@ -456,7 +467,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "PUT";
-          hctl:hasTarget <http://example/org/tractor_controller/routine_operated/missionCmds%7B?feedback_callback_url%7D>;
+          hctl:hasTarget <http://192.168.88.240/routine_operated/missionCmds%7B?feedback_callback_url%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -493,9 +504,39 @@
       td:name "putRtoCancel";
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "PUT";
-          hctl:hasTarget <http://example/org/tractor_controller/routine_operated/cancel>;
+          hctl:hasTarget <http://192.168.88.240/routine_operated/cancel>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "startRTPSStream";
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "PUT";
+          hctl:hasTarget <http://192.168.88.240/sensors/startRTPSStream/%7Bcam_position%7D>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasOutputSchema [ a js:ObjectSchema;
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "was_succes"
+            ], [ a js:StringSchema;
+              js:propertyName "description"
+            ]
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "stopRTPSStream";
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "PUT";
+          hctl:hasTarget <http://192.168.88.240/sensors/stopRTPSStream/%7Bcam_position%7D>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasOutputSchema [ a js:ObjectSchema;
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "was_succes"
+            ], [ a js:StringSchema;
+              js:propertyName "description"
+            ]
         ]
     ], [ a td:ActionAffordance;
       td:name "putCurrentImplement";
@@ -505,7 +546,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "PUT";
-          hctl:hasTarget <http://example/org/tractor_controller/implements/implement%7B?implement%7D>;
+          hctl:hasTarget <http://192.168.88.240/implements/implement%7B?implement%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -521,7 +562,7 @@
       td:name "manualDriveCmds";
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "PUT";
-          hctl:hasTarget <http://example/org/tractor_controller/manualDriveCmds>;
+          hctl:hasTarget <http://192.168.88.240/manualDriveCmds>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];

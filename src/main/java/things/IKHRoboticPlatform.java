@@ -84,6 +84,15 @@ public class IKHRoboticPlatform extends Thing{
         teleopVariables.put("speed_down", new StringSchema.Builder().build());
         teleopVariables.put("deadman", new StringSchema.Builder().build());
 
+        ObjectSchema teleopVariablesSchema = new ObjectSchema.Builder()
+                .addProperty("axis_linear", new StringSchema.Builder().build())
+                .addProperty("axis_angular", new StringSchema.Builder().build())
+                .addProperty("speed_up", new StringSchema.Builder().build())
+                .addProperty("speed_down", new StringSchema.Builder().build())
+                .addProperty("deadman", new StringSchema.Builder().build())
+                .addRequiredProperties("axis_linear", "axis_angular", "speed_up", "speed_down", "deadman")
+                .build();
+
         //Operator
 
         Form getOperatorForm = new Form.Builder(baseURI + "/Operator")
@@ -98,7 +107,7 @@ public class IKHRoboticPlatform extends Thing{
         Form postOperatorForm = new Form.Builder(baseURI + "/Operator")
                 .build();
 
-        ActionAffordance postOperator = new ActionAffordance.Builder("getOperator", postOperatorForm)
+        ActionAffordance postOperator = new ActionAffordance.Builder("postOperator", postOperatorForm)
                 //.addInputSchema(operatorSchema)
                 .addUriVariables(operatorVariables)
                 .build();
@@ -109,7 +118,7 @@ public class IKHRoboticPlatform extends Thing{
                 .setMethodName("delete")
                 .build();
 
-        ActionAffordance deleteOperator = new ActionAffordance.Builder("getOperator", deleteOperatorForm)
+        ActionAffordance deleteOperator = new ActionAffordance.Builder("deleteOperator", deleteOperatorForm)
                 //.addInputSchema(operatorDelSchema)
                 .addUriVariables(operatorDelVariables)
                 .build();
@@ -160,7 +169,7 @@ public class IKHRoboticPlatform extends Thing{
 
         //Joints
 
-        Form initializeForm = new Form.Builder(baseURI + "initialize")
+        Form initializeForm = new Form.Builder(baseURI + "/initialize")
                 .setMethodName("PUT")
                 .build();
 
@@ -169,7 +178,7 @@ public class IKHRoboticPlatform extends Thing{
 
         actions.add(initialize);
 
-        Form lookbackForm = new Form.Builder(baseURI + "lookback")
+        Form lookbackForm = new Form.Builder(baseURI + "/lookback")
                 .setMethodName("PUT")
                 .build();
 
@@ -224,7 +233,8 @@ public class IKHRoboticPlatform extends Thing{
 
         ActionAffordance putTeleop = new ActionAffordance.Builder("putTeleop", putTeleopForm)
                 //.addInputSchema(teleopSchema)
-                .addUriVariables(teleopVariables)
+                //.addUriVariables(teleopVariables)
+                .addInputSchema(teleopVariablesSchema)
                 .build();
 
         actions.add(putTeleop);

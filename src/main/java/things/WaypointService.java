@@ -1,47 +1,44 @@
 package things;
 
 import ch.unisg.ics.interactions.wot.td.ThingDescription;
+import ch.unisg.ics.interactions.wot.td.affordances.ActionAffordance;
 import ch.unisg.ics.interactions.wot.td.affordances.Form;
 import ch.unisg.ics.interactions.wot.td.affordances.PropertyAffordance;
-import ch.unisg.ics.interactions.wot.td.schemas.*;
+import ch.unisg.ics.interactions.wot.td.schemas.ArraySchema;
+import ch.unisg.ics.interactions.wot.td.schemas.ObjectSchema;
+import ch.unisg.ics.interactions.wot.td.schemas.StringSchema;
 import ch.unisg.ics.interactions.wot.td.security.NoSecurityScheme;
 
-import java.nio.charset.StandardCharsets;
-
 public class WaypointService extends Thing{
-    WaypointService(String baseURI, String relativeURI, String title) {
+    public WaypointService(String baseURI, String relativeURI, String title) {
         super(baseURI, relativeURI, title);
 
-        DataSchema coordinateSchema = new ArraySchema.Builder()
-                .addItem(new NumberSchema.Builder().build())
-                .addItem(new NumberSchema.Builder().build())
+        Form getWaypointForm = new Form.Builder(baseURI + "/waypoint")
+                .setMethodName("GET")
                 .build();
 
-        DataSchema geometrySchema = new ObjectSchema.Builder()
-                .addProperty("type", new StringSchema.Builder().build())
-                .addProperty("coordinates", coordinateSchema)
-                .addRequiredProperties("type", "coordinates")
+        PropertyAffordance getWaypoint = new PropertyAffordance.Builder("getWaypoint", getWaypointForm)
+                .addUriVariable("?field", new StringSchema.Builder().build())
+                .addDataSchema(new ArraySchema.Builder().build())
                 .build();
 
-        DataSchema propertiesSchema = new ObjectSchema.Builder()
-                .addProperty("name", new StringSchema.Builder().build())
-                .addRequiredProperties("name")
+        properties.add(getWaypoint);
+
+        Form registerFieldForm = new Form.Builder(baseURI + "/register")
                 .build();
 
-        DataSchema waypointSchema = new ObjectSchema.Builder()
-                .addProperty("type", new StringSchema.Builder().build())
-                .addProperty("geometry", geometrySchema)
-                .addProperty("properties", propertiesSchema)
-                .addRequiredProperties("type", "geometry", "properties")
+        ObjectSchema registerFieldSchema = new ObjectSchema.Builder()
+                .addProperty("field", new StringSchema.Builder().build())
+                .addProperty("polygon", new ArraySchema.Builder().build())
+                .addRequiredProperties("field", "polygon")
                 .build();
 
-        Form getWaypointForm = new Form.Builder(baseURI + "/waypoint").setMethodName("GET").build();
-
-        PropertyAffordance getNextWaypoint = new PropertyAffordance.Builder("getNextWaypoint", getWaypointForm)
-                .addDataSchema(waypointSchema)
+        ActionAffordance registerField = new ActionAffordance.Builder("registerField", registerFieldForm)
+                .addInputSchema(registerFieldSchema)
                 .build();
 
-        this.properties.add(getNextWaypoint);
+        actions.add(registerField);
+
     }
 
     @Override

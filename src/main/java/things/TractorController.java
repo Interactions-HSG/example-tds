@@ -424,6 +424,14 @@ public class TractorController extends Thing{
 
         properties.add(getVcuMsg);
 
+        Form driveCmdsForm = new Form.Builder(baseURI + "/sensors/driveCmds")
+                .setMethodName("GET")
+                .build();
+
+        PropertyAffordance driveCmds = new PropertyAffordance.Builder("getDriveCmds",driveCmdsForm )
+                .addDataSchema(driveCmdsSchema)
+                .build();
+
         Form getImuForm = new Form.Builder(baseURI + "/sensors/imu/{imu_position}")
                 .setMethodName("GET")
                 .build();
@@ -444,6 +452,14 @@ public class TractorController extends Thing{
                 .build();
 
         properties.add(getGps);
+
+        Form getGPSBufferedMsgsForm = new Form.Builder(baseURI + "/sensors/gps/buffered_gps{?reset}")
+                .setMethodName("GET")
+                .build();
+
+        ActionAffordance getGPSBufferedMsgs = new ActionAffordance.Builder("getGPSBufferedMsgs", getGPSBufferedMsgsForm)
+                .addOutputSchema(NavSatFixSchema)
+                .build();
 
         Form getCameraHandleRosTopicForm = new Form.Builder(baseURI + "/sensors/CameraHandleRosTopic/{cam_position}")
                 .setMethodName("GET")
@@ -466,6 +482,28 @@ public class TractorController extends Thing{
                 .build();
 
         properties.add(getCameraHandleRosTopic);
+
+        Form startRTPSStreamForm = new Form.Builder(baseURI + "/sensors/startRTPSStream/{cam_position}")
+                .setMethodName("PUT")
+                .build();
+
+        ActionAffordance startRTPSStream = new ActionAffordance.Builder( "startRTPSStream", startRTPSStreamForm)
+                .addOutputSchema(setValues)
+                .build();
+
+        actions.add(startRTPSStream);
+
+        Form stopRTPSStreamForm = new Form.Builder(baseURI + "/sensors/stopRTPSStream/{cam_position}")
+                .setMethodName("PUT")
+                .build();
+
+        ActionAffordance stopRTPSStream = new ActionAffordance.Builder("stopRTPSStream", stopRTPSStreamForm)
+                .addOutputSchema(setValues)
+                .build();
+
+        actions.add(stopRTPSStream);
+
+
 
         Form getHeadingForm = new Form.Builder(baseURI + "/sensors/heading")
                 .setMethodName("GET")
@@ -541,6 +579,19 @@ public class TractorController extends Thing{
                 .build();
 
         properties.add(readRoot);
+
+        Form getHeartbeatForm = new Form.Builder(baseURI + "/ros_hb")
+                .setMethodName("GET")
+                .build();
+
+        PropertyAffordance getHeartbeat = new PropertyAffordance.Builder("getHeartbeat", getHeartbeatForm)
+                .addDataSchema(new ObjectSchema.Builder()
+                        .addProperty("data", new BooleanSchema.Builder().build())
+                        .build())
+                .build();
+
+        properties.add(getHeartbeat);
+
     }
 
     @Override
