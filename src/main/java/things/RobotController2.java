@@ -16,68 +16,68 @@ import java.util.HashSet;
 import java.util.List;
 
 public class RobotController2 extends Thing{
-    RobotController2(String baseURI, String relativeURI, String title) {
+    public RobotController2(String baseURI, String relativeURI, String title) {
         super(baseURI, relativeURI, title);
 
         // Read handles form
-        Form getHandleForm = new Form.Builder(baseURI + "services/handle")
+        Form getHandleForm = new Form.Builder(baseURI + "/handle")
                 .setMethodName("GET")
                 .addOperationType(TD.readProperty)
                 .build();
 
         // Read status form
-        Form getStatusForm = new Form.Builder(baseURI + "services/status")
+        Form getStatusForm = new Form.Builder(baseURI + "/status")
                 .setMethodName("GET")
                 .addOperationType(TD.readProperty)
                 .build();
 
         // Read pose forms
-        Form getPoseJointForm = new Form.Builder(baseURI + "services/pose")
+        Form getPoseJointForm = new Form.Builder(baseURI + "/pose")
                 .setMethodName("GET")
                 .addOperationType(TD.readProperty)
                 .setContentType("application/joint+json")
                 .build();
-        Form getPoseTcpForm = new Form.Builder(baseURI + "services/pose")
+        Form getPoseTcpForm = new Form.Builder(baseURI + "/pose")
                 .setMethodName("GET")
                 .addOperationType(TD.readProperty)
                 .setContentType("application/tcp+json")
                 .build();
-        Form getPoseNamedPoseForm = new Form.Builder(baseURI + "services/pose")
+        Form getPoseNamedPoseForm = new Form.Builder(baseURI + "/pose")
                 .setMethodName("GET")
                 .addOperationType(TD.readProperty)
                 .setContentType("application/namedpose+json")
                 .build();
-        Form getPoseAiForm = new Form.Builder(baseURI + "services/pose")
+        Form getPoseAiForm = new Form.Builder(baseURI + "/pose")
                 .setMethodName("GET")
                 .addOperationType(TD.readProperty)
                 .setContentType("application/ai+json")
                 .build();
 
         // Read gripper form
-        Form getGripperForm = new Form.Builder(baseURI + "services/gripper")
+        Form getGripperForm = new Form.Builder(baseURI + "/gripper")
                 .setMethodName("GET")
                 .addOperationType(TD.readProperty)
                 .build();
 
         // Set gripper form
-        Form putGripperForm = new Form.Builder(baseURI + "services/gripper")
+        Form putGripperForm = new Form.Builder(baseURI + "/gripper")
                 .setMethodName("PUT")
                 .build();
 
         // Event forms
-        Form putPoseJointForm = new Form.Builder(baseURI + "pose")
+        Form putPoseJointForm = new Form.Builder(baseURI + "/pose")
                 .setMethodName("PUT")
                 .setContentType("application/joint+json")
                 .build();
-        Form putPoseTcpForm = new Form.Builder(baseURI + "pose")
+        Form putPoseTcpForm = new Form.Builder(baseURI + "/pose")
                 .setMethodName("PUT")
                 .setContentType("application/tcp+json")
                 .build();
-        Form putPoseNamedPoseForm = new Form.Builder(baseURI + "pose")
+        Form putPoseNamedPoseForm = new Form.Builder(baseURI + "/pose")
                 .setMethodName("PUT")
                 .setContentType("application/namedpose+json")
                 .build();
-        Form putPoseAiForm = new Form.Builder(baseURI + "pose")
+        Form putPoseAiForm = new Form.Builder(baseURI + "/pose")
                 .setMethodName("PUT")
                 .setContentType("application/ai+json")
                 .build();
@@ -231,11 +231,10 @@ public class RobotController2 extends Thing{
         ActionAffordance putManualReset = new ActionAffordance.Builder("putManualReset", putManualResetForm)
                 .build();
 
-        // Event affordances
-        // Set pose
+
         List<Form> setPoseForms = new ArrayList<>();
         setPoseForms.addAll(Arrays.asList(putPoseJointForm, putPoseTcpForm, putPoseNamedPoseForm, putPoseAiForm));
-        EventAffordance putPose = new EventAffordance.Builder("setPose", setPoseForms)
+        /*EventAffordance putPose = new EventAffordance.Builder("setPose", setPoseForms)
                 .addSemanticType(INTELLIOT.setPose)
                 .addSemanticType(INTELLIOT.subscribePose)
                 .addSubscriptionSchema(new ObjectSchema.Builder()
@@ -249,7 +248,48 @@ public class RobotController2 extends Thing{
                         .build())
                 .addNotificationSchema(doneSchema)
                 .build();
-        events.add(putPose);
+        events.add(putPose);*/
+
+        ActionAffordance setAIPose = new ActionAffordance.Builder("setAIPose", putPoseAiForm)
+                .addInputSchema(new ObjectSchema.Builder()
+                        .addProperty("value", poseAiSchema)
+                        .addProperty("callback", new StringSchema.Builder().build())
+                        .addRequiredProperties("value","callback")
+                        .build())
+
+                .build();
+
+        actions.add(setAIPose);
+
+        ActionAffordance setNamedPose = new ActionAffordance.Builder("setNamedPose", putPoseNamedPoseForm)
+                .addInputSchema(new ObjectSchema.Builder()
+                        .addProperty("value", poseNamedPoseSchema)
+                        .addProperty("callback", new StringSchema.Builder().build())
+                        .addRequiredProperties("value","callback")
+                        .build())
+                .build();
+
+        actions.add(setNamedPose);
+
+        ActionAffordance setJointPose = new ActionAffordance.Builder("setJointPose", putPoseJointForm)
+                .addInputSchema(new ObjectSchema.Builder()
+                        .addProperty("value", poseJointSchema)
+                        .addProperty("callback", new StringSchema.Builder().build())
+                        .addRequiredProperties("value","callback")
+                        .build())
+                .build();
+
+        actions.add(setJointPose);
+
+        ActionAffordance setTcpPose = new ActionAffordance.Builder("setTcpPose", putPoseTcpForm)
+                .addInputSchema(new ObjectSchema.Builder()
+                        .addProperty("value", poseTcpSchema)
+                        .addProperty("callback", new StringSchema.Builder().build())
+                        .addRequiredProperties("value","callback")
+                        .build())
+                .build();
+
+        actions.add(setTcpPose);
 
     }
 

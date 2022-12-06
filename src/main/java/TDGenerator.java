@@ -101,6 +101,17 @@ public class TDGenerator {
 
         HotWater hotWater =  new HotWater("http://localhost", "http://localhost","Hot Water");
 
+        RobotController2 vmRobot = new RobotController2("http://130.82.171.209:1080/robot-controller", "http://localhost:8080/workspaces/uc3/artifacts/robot-controller", "Robot Controller");
+
+        HILService vmHil = new HILService("http://130.82.171.209:1081", "http://localhost:8080/workspaces/uc3/artifacts/hil-service", "HIL Service");
+
+        AIService vmAI = new AIService("http://130.82.171.209:1082", "http://localhost:8080/workspaces/uc3/artifacts/camera-ai", "Camera AI");
+
+        Engraver2 vmEngraver = new Engraver2("http://130.82.171.209:1083", "http://localhost:8080/workspaces/uc3/artifacts/engraver", "Engraver");
+
+        EngraverActuators vmActuators = new EngraverActuators("http://130.82.171.209:1084","http://localhost:8080/workspaces/uc3/artifacts/actuators", "Actuators" );
+
+
         writeToFile(uRxRobotController.serializeTD(), "urx-robot-controller");
         writeToFile(engraver.serializeTD(), "engraver");
         writeToFile(cupProvider.serializeTD(), "cup-provider");
@@ -128,6 +139,11 @@ public class TDGenerator {
         writeToFile(waypointService.serializeTD(), "waypoint_service");
         writeToFile(ikhRoboticPlatform.serializeTD(), "ikh_robotic_platform");
         writeToFile(hotWater.serializeTD(), "hot_water");
+        writeToFile(vmRobot.serializeTD(), "vm_robot");
+        writeToFile(vmHil.serializeTD(), "vm_hil");
+        writeToFile(vmAI.serializeTD(), "vm_ai");
+        writeToFile(vmEngraver.serializeTD(), "vm_engraver");
+        writeToFile(vmActuators.serializeTD(), "vm_actuators");
 
         try {
             //Read TD from file
