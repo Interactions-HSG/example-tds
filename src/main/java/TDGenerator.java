@@ -28,6 +28,11 @@ public class TDGenerator {
     public static void main(String[] args) {
         System.out.println("Hello World");
 
+        ImageAnnotator imgAnnotator = new ImageAnnotator(
+                "http://127.0.0.1:5000",
+                "urn:image_annotator",
+                "An Image Annotator. The service does reverse image search using the Google Reverse Image API, and then annotates the searched image with the original source using the Hypothesis API");
+
         WeatherStation weatherStation = new WeatherStation(
                 "http://10.2.2.33:1880/InfluxDB?measurement=weather_station",
                 "urn:rbg30_weather_station",
@@ -60,6 +65,7 @@ public class TDGenerator {
 
         XArm pretendaBot = new XArm("https://api.interactions.ics.unisg.ch/pretendabot/", "urn:pretendabot", "pretendBot");
 
+        writeToFile(imgAnnotator.serializeTD(), "img-annotator");
         writeToFile(weatherStation.serializeTD(), "weather-station");
         writeToFile(engraver.serializeTD(), "engraver");
         writeToFile(cupProvider.serializeTD(), "cup-provider");

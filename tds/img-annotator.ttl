@@ -1,0 +1,54 @@
+@prefix dctypes: <http://purl.org/dc/dcmitype/> .
+@prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
+@prefix hmas: <https://purl.org/hmas/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix tod: <http://example.org/tackling-online-disinformation/ontology#> .
+@prefix js: <https://www.w3.org/2019/wot/json-schema#> .
+@prefix htv: <http://www.w3.org/2011/http#> .
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix as: <http://www.w3.org/ns/activitystreams#> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix wotsec: <https://www.w3.org/2019/wot/security#> .
+
+<urn:image_annotator> a td:Thing, hmas:Artifact, as:Application;
+  td:title "An Image Annotator. The service does reverse image search using the Google Reverse Image API, and then annotates the searched image with the original source using the Hypothesis API";
+  td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
+    ];
+  td:hasBase <http://127.0.0.1:5000>;
+  td:hasActionAffordance [ a td:ActionAffordance, tod:AnnotateImage;
+      td:name "annotate image";
+      td:title "Annotate Image";
+      td:hasForm [
+          htv:methodName "POST";
+          hctl:hasTarget <http://127.0.0.1:5000/annotations>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema;
+          js:properties [ a js:StringSchema, dctypes:StillImage;
+              js:propertyName "imageUrl"
+            ]
+        ];
+      td:hasOutputSchema [ a js:ObjectSchema, oa:Annotation;
+          js:properties [ a js:StringSchema, oa:created;
+              js:propertyName "created"
+            ], [ a js:StringSchema, rdf:ID;
+              js:propertyName "id"
+            ], [ a js:StringSchema, dctypes:Text;
+              js:propertyName "text"
+            ], [ a js:StringSchema, oa:updated;
+              js:propertyName "updated"
+            ], [ a js:StringSchema, dctypes:StillImage;
+              js:propertyName "uri"
+            ], [ a js:ArraySchema, oa:hasTarget;
+              js:propertyName "target";
+              js:items [ a js:ObjectSchema, oa:SpecificResource;
+                  js:properties [ a js:StringSchema, oa:hasSource;
+                      js:propertyName "source"
+                    ]
+                ]
+            ]
+        ]
+    ] .
