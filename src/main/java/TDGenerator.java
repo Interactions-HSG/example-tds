@@ -31,7 +31,7 @@ public class TDGenerator {
         MoistureDetectorTractor tractor1 = new MoistureDetectorTractor("http://localhost:1080/api/tractors/1/",
                 "urn:tractor1", "A tractor that can be used for monitoring the moisture level of soil in a farm.");
 
-        IrrigatorTractor tractor2 = new IrrigatorTractor("http://localhost:80/api/tractors/2/",
+        IrrigatorTractor tractor2 = new IrrigatorTractor("http://localhost:1080/api/tractors/2/",
                 "urn:tractor2", "A tractor that can be used for irrigating sections in a farm.");
 
         InteractionsLabSimulator interactionsLabReal = new InteractionsLabSimulator("https://api.interactions.ics.unisg.ch/was/rl/",

@@ -11,12 +11,12 @@
   td:title "A tractor that can be used for irrigating sections in a farm.";
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
-  td:hasBase <http://localhost:80/api/tractors/2/>;
+  td:hasBase <http://localhost:1080/api/tractors/2/>;
   td:hasActionAffordance [ a td:ActionAffordance, farm:Irrigate;
       td:name "Irrigate";
       td:hasForm [
           htv:methodName "PUT";
-          hctl:hasTarget <http://localhost:80/api/tractors/2/sprayer>;
+          hctl:hasTarget <http://localhost:1080/api/tractors/2/sprayer>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
