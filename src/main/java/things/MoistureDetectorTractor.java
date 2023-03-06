@@ -3,16 +3,12 @@ package things;
 import ch.unisg.ics.interactions.wot.td.ThingDescription;
 import ch.unisg.ics.interactions.wot.td.affordances.ActionAffordance;
 import ch.unisg.ics.interactions.wot.td.affordances.Form;
-import ch.unisg.ics.interactions.wot.td.affordances.PropertyAffordance;
 import ch.unisg.ics.interactions.wot.td.schemas.ArraySchema;
 import ch.unisg.ics.interactions.wot.td.schemas.IntegerSchema;
-import ch.unisg.ics.interactions.wot.td.schemas.ObjectSchema;
-import ch.unisg.ics.interactions.wot.td.schemas.StringSchema;
-import ch.unisg.ics.interactions.wot.td.vocabularies.TD;
 
-public class SimpleIrrigatorTractor extends Thing {
+public class MoistureDetectorTractor extends Thing {
 
-  public SimpleIrrigatorTractor(String baseURI, String relativeURI, String title) {
+  public MoistureDetectorTractor(String baseURI, String relativeURI, String title) {
     super(baseURI, relativeURI, title);
     this.namespaces.put("htv", "http://www.w3.org/2011/http#");
     this.namespaces.put("farm", "http://www.semanticweb.org/farm-ontology#");
