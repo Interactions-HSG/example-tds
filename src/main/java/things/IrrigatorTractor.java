@@ -10,15 +10,16 @@ public class IrrigatorTractor extends Thing {
   public IrrigatorTractor(String baseURI, String relativeURI, String title) {
     super(baseURI, relativeURI, title);
     this.namespaces.put("htv", "http://www.w3.org/2011/http#");
-    this.namespaces.put("farm", "http://www.semanticweb.org/farm-ontology#");
+    this.namespaces.put("was", "https://was-course.interactions.ics.unisg.ch/farm-ontology#");
 
     Form form = new Form.Builder(baseURI + "sprayer")
             .setMethodName("PUT")
             .build();
 
     actions.add(new ActionAffordance.Builder("Irrigate", form)
-            .addSemanticType("http://www.semanticweb.org/farm-ontology#Irrigate")
+            .addSemanticType("https://was-course.interactions.ics.unisg.ch/farm-ontology#IrrigateAffordance")
             .addInputSchema(new ArraySchema.Builder()
+                    .addSemanticType("https://was-course.interactions.ics.unisg.ch/farm-ontology#Coordinates")
                     .addMaxItems(4)
                     .addMinItems(4)
                     .addItem(new IntegerSchema.Builder()
@@ -34,7 +35,7 @@ public class IrrigatorTractor extends Thing {
     return new ThingDescription.Builder(title)
             .addThingURI(relativeURI)
             .addBaseURI(baseURI)
-            .addSemanticType("http://www.semanticweb.org/farm-ontology#Tractor")
+            .addSemanticType("https://was-course.interactions.ics.unisg.ch/farm-ontology#Tractor")
             .addActions(actions)
             .build();
   }

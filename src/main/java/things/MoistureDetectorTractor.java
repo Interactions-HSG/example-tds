@@ -11,15 +11,16 @@ public class MoistureDetectorTractor extends Thing {
   public MoistureDetectorTractor(String baseURI, String relativeURI, String title) {
     super(baseURI, relativeURI, title);
     this.namespaces.put("htv", "http://www.w3.org/2011/http#");
-    this.namespaces.put("farm", "http://www.semanticweb.org/farm-ontology#");
+    this.namespaces.put("was", "https://was-course.interactions.ics.unisg.ch/farm-ontology#");
 
     Form form = new Form.Builder(baseURI + "moisture")
             .setMethodName("GET")
             .build();
 
     actions.add(new ActionAffordance.Builder("Read Moisture Level", form)
-            .addSemanticType("http://www.semanticweb.org/farm-ontology#ReadMoisture")
+            .addSemanticType("https://was-course.interactions.ics.unisg.ch/farm-ontology#ReadSoilMoistureAffordance")
             .addInputSchema(new ArraySchema.Builder()
+                    .addSemanticType("https://was-course.interactions.ics.unisg.ch/farm-ontology#Coordinates")
                     .addMaxItems(4)
                     .addMinItems(4)
                     .addItem(new IntegerSchema.Builder()
@@ -28,7 +29,7 @@ public class MoistureDetectorTractor extends Thing {
                             .build())
                     .build())
                     .addOutputSchema(new IntegerSchema.Builder()
-                            .addSemanticType("http://www.semanticweb.org/farm-ontology#Moisture")
+                            .addSemanticType("https://was-course.interactions.ics.unisg.ch/farm-ontology#SoilMoisture")
                             .build())
             .build());
   }
@@ -38,7 +39,7 @@ public class MoistureDetectorTractor extends Thing {
     return new ThingDescription.Builder(title)
             .addThingURI(relativeURI)
             .addBaseURI(baseURI)
-            .addSemanticType("http://www.semanticweb.org/farm-ontology#Tractor")
+            .addSemanticType("https://was-course.interactions.ics.unisg.ch/farm-ontology#Tractor")
             .addActions(actions)
             .build();
   }

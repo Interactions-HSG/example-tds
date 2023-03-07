@@ -2,17 +2,17 @@
 @prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix wotsec: <https://www.w3.org/2019/wot/security#> .
+@prefix was: <https://was-course.interactions.ics.unisg.ch/farm-ontology#> .
 @prefix js: <https://www.w3.org/2019/wot/json-schema#> .
-@prefix farm: <http://www.semanticweb.org/farm-ontology#> .
 @prefix htv: <http://www.w3.org/2011/http#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<urn:tractor1> a td:Thing, farm:Tractor;
+<urn:tractor1> a td:Thing, was:Tractor;
   td:title "A tractor that can be used for monitoring the moisture level of soil in a farm.";
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
   td:hasBase <http://localhost:1080/api/tractors/1/>;
-  td:hasActionAffordance [ a td:ActionAffordance, farm:ReadMoisture;
+  td:hasActionAffordance [ a td:ActionAffordance, was:ReadSoilMoistureAffordance;
       td:name "Read Moisture Level";
       td:hasForm [
           htv:methodName "GET";
@@ -20,7 +20,7 @@
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
-      td:hasInputSchema [ a js:ArraySchema;
+      td:hasInputSchema [ a js:ArraySchema, was:Coordinates;
           js:minItems "4"^^xsd:int;
           js:maxItems "4"^^xsd:int;
           js:items [ a js:IntegerSchema;
@@ -28,6 +28,6 @@
               js:maximum "2"^^xsd:int
             ]
         ];
-      td:hasOutputSchema [ a js:IntegerSchema, farm:Moisture
+      td:hasOutputSchema [ a js:IntegerSchema, was:SoilMoisture
         ]
     ] .
