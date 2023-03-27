@@ -28,6 +28,9 @@ public class TDGenerator {
     public static void main(String[] args) {
         System.out.println("Hello World");
 
+        CalendarService calendar = new CalendarService("http://localhost:1080/api/calendar/1/",
+                "urn:calendar-service", "A calendar service that can be used for managing a user's events");
+
         MoistureDetectorTractor tractor1 = new MoistureDetectorTractor("http://localhost:1080/api/tractors/1/",
                 "urn:tractor1", "A tractor that can be used for monitoring the moisture level of soil in a farm.");
 
@@ -72,6 +75,7 @@ public class TDGenerator {
 
         XArm pretendaBot = new XArm("https://api.interactions.ics.unisg.ch/pretendabot/", "urn:pretendabot", "pretendBot");
 
+        writeToFile(calendar.serializeTD(), "calendar-service");
         writeToFile(tractor1.serializeTD(), "tractor1");
         writeToFile(tractor2.serializeTD(), "tractor2");
         writeToFile(interactionsLabReal.serializeTD(), "interactions-lab-real");
