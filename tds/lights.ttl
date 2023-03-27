@@ -1,0 +1,26 @@
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix wotsec: <https://www.w3.org/2019/wot/security#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix was: <https://was-course.interactions.ics.unisg.ch/wake-up-ontology#> .
+@prefix js: <https://www.w3.org/2019/wot/json-schema#> .
+@prefix htv: <http://www.w3.org/2011/http#> .
+
+<urn:lights> a td:Thing, was:Lights;
+  td:title "A set of lights in a room that can be turned on or off";
+  td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
+    ];
+  td:hasBase <http://localhost:1080/api/lights/1/>;
+  td:hasActionAffordance [ a td:ActionAffordance, was:SetState;
+      td:name "Set the lights state";
+      td:hasForm [
+          htv:methodName "PUT";
+          hctl:hasTarget <http://localhost:1080/api/lights/1/state>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:StringSchema, was:LightsState;
+          js:enum "off", "on"
+        ]
+    ] .

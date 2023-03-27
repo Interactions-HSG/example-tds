@@ -28,6 +28,12 @@ public class TDGenerator {
     public static void main(String[] args) {
         System.out.println("Hello World");
 
+        Lights lights = new Lights("http://localhost:1080/api/lights/1/",
+                "urn:lights", "A set of lights in a room that can be turned on or off");
+
+        Blinds blinds = new Blinds("http://localhost:1080/api/blinds/1/",
+                "urn:blinds", "A set of blinds in a room that can be raised or lowered");
+
         WristbandSimulator wristbandSim = new WristbandSimulator("http://localhost:1080/api/wristband/1/",
                 "urn:wristband-simu", "A wristband that can be used for monitoring a user's state");
 
@@ -78,6 +84,8 @@ public class TDGenerator {
 
         XArm pretendaBot = new XArm("https://api.interactions.ics.unisg.ch/pretendabot/", "urn:pretendabot", "pretendBot");
 
+        writeToFile(lights.serializeTD(), "lights");
+        writeToFile(blinds.serializeTD(), "blinds");
         writeToFile(wristbandSim.serializeTD(), "wristband-simu");
         writeToFile(calendar.serializeTD(), "calendar-service");
         writeToFile(tractor1.serializeTD(), "tractor1");
