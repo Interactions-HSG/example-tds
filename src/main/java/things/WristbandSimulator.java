@@ -3,9 +3,11 @@ package things;
 import ch.unisg.ics.interactions.wot.td.ThingDescription;
 import ch.unisg.ics.interactions.wot.td.affordances.ActionAffordance;
 import ch.unisg.ics.interactions.wot.td.affordances.Form;
+import ch.unisg.ics.interactions.wot.td.affordances.PropertyAffordance;
 import ch.unisg.ics.interactions.wot.td.schemas.ArraySchema;
 import ch.unisg.ics.interactions.wot.td.schemas.IntegerSchema;
 import ch.unisg.ics.interactions.wot.td.schemas.StringSchema;
+import ch.unisg.ics.interactions.wot.td.vocabularies.TD;
 
 public class WristbandSimulator extends Thing {
   public WristbandSimulator(String baseURI, String relativeURI, String title) {
@@ -15,16 +17,12 @@ public class WristbandSimulator extends Thing {
 
     Form form = new Form.Builder(baseURI + "owner-state")
             .setMethodName("GET")
+            .addOperationType(TD.readProperty)
             .build();
 
-    actions.add(new ActionAffordance.Builder("Read owner state", form)
+    properties.add(new PropertyAffordance.Builder("Read owner state", form)
             .addSemanticType("https://was-course.interactions.ics.unisg.ch/wake-up-ontology#ReadOwnerState")
-            .addInputSchema(new StringSchema.Builder()
-                    .addSemanticType("https://was-course.interactions.ics.unisg.ch/wake-up-ontology#Intuition")
-                    .build())
-            .addOutputSchema(new StringSchema.Builder()
-                    .addSemanticType("https://was-course.interactions.ics.unisg.ch/wake-up-ontology#OwnerState")
-                    .build())
+            .addDataSchema(new StringSchema.Builder().build())
             .build());
   }
 
@@ -34,7 +32,7 @@ public class WristbandSimulator extends Thing {
             .addThingURI(relativeURI)
             .addBaseURI(baseURI)
             .addSemanticType("https://was-course.interactions.ics.unisg.ch/wake-up-ontology#Wristband")
-            .addActions(actions)
+            .addProperties(properties)
             .build();
   }
 }
