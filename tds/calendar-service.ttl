@@ -13,7 +13,7 @@
     ];
   td:hasBase <http://localhost:1080/api/calendar/1/>;
   td:hasPropertyAffordance [ a td:PropertyAffordance, was:ReadUpcomingEvent, js:StringSchema;
-      td:name "upcoming event";
+      td:name "Read upcoming event";
       td:hasForm [
           htv:methodName "GET";
           hctl:hasTarget <http://localhost:1080/api/calendar/1/upcoming>;

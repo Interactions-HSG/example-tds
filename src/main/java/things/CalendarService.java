@@ -17,7 +17,7 @@ public class CalendarService extends Thing {
             .addOperationType(TD.readProperty)
             .build();
 
-    properties.add(new PropertyAffordance.Builder("upcoming event", form)
+    properties.add(new PropertyAffordance.Builder("Read upcoming event", form)
             .addSemanticType("https://was-course.interactions.ics.unisg.ch/wake-up-ontology#ReadUpcomingEvent")
             .addDataSchema(new StringSchema.Builder().build())
             .build());
