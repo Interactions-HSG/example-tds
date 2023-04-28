@@ -1,5 +1,7 @@
 apply plugin: "application"
 
+apply plugin: "eclipse"
+
 mainClassName = "TDGenerator"
 
 group 'org.example'

@@ -174,21 +174,24 @@ public class TractorController extends Thing{
                 .addRequiredProperties("drive_cmds", "task")
                 .build();
 
-        DataSchema MissionGoalSchema = new ObjectSchema.Builder()
-                .addProperty("latitude", new NumberSchema.Builder()
-                        .addMinimum(-90.0)
-                        .addMinimum(90.0)
+        DataSchema MissionGoalSchema = new ArraySchema.Builder()
+                .addItem(new ObjectSchema.Builder()
+                        .addProperty("latitude", new NumberSchema.Builder()
+                                .addMinimum(-90.0)
+                                .addMinimum(90.0)
+                                .build())
+                        .addProperty("longitude", new NumberSchema.Builder()
+                                .addMinimum(-180.0)
+                                .addMinimum(180.0)
+                                .build())
+                        .addProperty("heading", new NumberSchema.Builder()
+                                .addMinimum((double) 0)
+                                .addMaximum(359.0)
+                                .build())
+                        .addProperty("task", tasksEnumSchema)
                         .build())
-                .addProperty("longitude", new NumberSchema.Builder()
-                        .addMinimum(-180.0)
-                        .addMinimum(180.0)
-                        .build())
-                .addProperty("heading", new NumberSchema.Builder()
-                        .addMinimum((double) 0)
-                        .addMaximum(359.0)
-                        .build())
-                .addProperty("task", tasksEnumSchema)
                 .build();
+
 
         DataSchema NavSatSatus = new ObjectSchema.Builder()
                 .addProperty("STATUS_NO_FIX", integerSchema)
@@ -332,16 +335,28 @@ public class TractorController extends Thing{
 
         //waypoint operated
 
-        Form putWpoMissionGoalsForm = new Form.Builder(baseURI + "/waypoint_operated/missionGoals{?feedback_callback_url}")
+        Form putWpoMissionGoalsForm = new Form.Builder(baseURI + "/waypoint_operated/missionGoals{?restart}")
                 .setMethodName("PUT")
                 .build();
 
         ActionAffordance putWpoMissionGoals = new ActionAffordance.Builder("putWpoMissionGoals", putWpoMissionGoalsForm)
                 .addInputSchema(MissionGoalSchema)
-                .addUriVariable("feedback_callback_url", new StringSchema.Builder().build())
+                .addUriVariable("restart", new BooleanSchema.Builder().build()) //Check also with boolean
                 .build();
 
         actions.add(putWpoMissionGoals);
+
+        Form putWpoMissionGoalsWithFeedbackForm = new Form.Builder(baseURI + "/waypoint_operated/missionGoals{?restart,feedback_callback_url}")
+                .setMethodName("PUT")
+                .build();
+
+        ActionAffordance putWpoMissionGoalsWithFeedback = new ActionAffordance.Builder("putWpoMissionGoalsWithFeedback", putWpoMissionGoalsWithFeedbackForm)
+                .addInputSchema(MissionGoalSchema)
+                .addUriVariable("restart", new BooleanSchema.Builder().build())
+                .addUriVariable("feedback_callback_url", new StringSchema.Builder().build())
+                .build();
+
+        actions.add(putWpoMissionGoalsWithFeedback);
 
         Form putWpoCancelForm = new Form.Builder(baseURI + "/waypoint_operated/cancel")
                 .setMethodName("PUT")

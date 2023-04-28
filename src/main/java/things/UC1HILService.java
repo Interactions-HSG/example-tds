@@ -10,8 +10,8 @@ import ch.unisg.ics.interactions.wot.td.security.APIKeySecurityScheme;
 import java.util.HashSet;
 import java.util.Set;
 
-public class HILService extends Thing{
-    public HILService(String baseURI, String relativeURI, String title) {
+public class UC1HILService extends Thing{
+    public UC1HILService(String baseURI, String relativeURI, String title) {
         super(baseURI, relativeURI, title);
 
 
@@ -28,17 +28,25 @@ public class HILService extends Thing{
                 .build();
 
         Set<String> sessions = new HashSet<>();
-        sessions.add("wood_piece_picking");
+        sessions.add("obstacle_avoidance_tractor");
         DataSchema sessionTypeSchema = new StringSchema.Builder().addEnum(sessions).build();
 
 
 
         DataSchema hilSessionDescriptionSchema = new ObjectSchema.Builder()
                 .addProperty("aiSessionId", new StringSchema.Builder().build())
-                .addProperty("robotId", new StringSchema.Builder().build())
+                .addProperty("tractorId", new StringSchema.Builder().build())
                 .addProperty("cameraId", new StringSchema.Builder().build())
                 .addProperty("sessionType", sessionTypeSchema)
-                .addRequiredProperties("aiSessionId", "robotId", "cameraId", "sessionType")
+                .addRequiredProperties("aiSessionId", "tractorId", "cameraId", "sessionType")
+                .build();
+
+        DataSchema mqttHilOperatorDescriptionSchema= new ObjectSchema.Builder()
+                .addProperty("aiSessionId", new StringSchema.Builder().build())
+                .addProperty("hilAppIpAddress", new StringSchema.Builder().build())
+                .addProperty("tractorId", new StringSchema.Builder().build())
+                .addProperty("cameraId", new StringSchema.Builder().build())
+                .addRequiredProperties("aiSessionId", "hilAppIpAddress", "tractorId", "cameraId")
                 .build();
 
 
@@ -79,12 +87,12 @@ public class HILService extends Thing{
                 .addProperty("workResult", hilWorkResultSchema)
                 .addProperty("operatorId", new StringSchema.Builder().build())
                 .addProperty("cameraId", new StringSchema.Builder().build())
-                .addProperty("robotId", new StringSchema.Builder().build())
+                .addProperty("tractorId", new StringSchema.Builder().build())
                 .addProperty("hilAppIpAddress", new StringSchema.Builder().build())
                 .addProperty("hyperMasCallbackUrl", new StringSchema.Builder().build())
                 .addProperty("numberReassignments", new IntegerSchema.Builder().build())
                 .addProperty("description", hilSessionDescriptionSchema)
-                .addRequiredProperties("creationTime", "willExpireAt", "takenOverAt", "finishedAt", "status", "workResult", "operatorId", "cameraId", "robotId",
+                .addRequiredProperties("creationTime", "willExpireAt", "takenOverAt", "finishedAt", "status", "workResult", "operatorId", "cameraId", "tractorId",
                         "hilAppIpAddress", "hyperMasCallbackUrl", "numberReassignments","description" )
                 .build();
 

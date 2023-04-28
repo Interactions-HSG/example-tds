@@ -17,7 +17,7 @@
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
       td:isObservable false;
-      js:properties [
+      js:properties [ a js:IntegerSchema;
           js:propertyName "percentageCompleted"
         ], [ a js:IntegerSchema;
           js:propertyName "secondsToFinish"
@@ -71,7 +71,9 @@
           hctl:hasOperationType td:invokeAction
         ];
       td:hasInputSchema [ a js:ObjectSchema;
-          js:properties [ a js:BooleanSchema;
+          js:properties [ a js:NumberSchema;
+              js:propertyName "textHeight"
+            ], [ a js:BooleanSchema;
               js:propertyName "laserOn"
             ], [ a js:StringSchema;
               js:propertyName "positionReference"
@@ -83,6 +85,8 @@
               js:propertyName "fontsize"
             ], [ a js:NumberSchema;
               js:propertyName "y"
+            ], [ a js:NumberSchema;
+              js:propertyName "textWidth"
             ], [ a js:ArraySchema;
               js:propertyName "text";
               js:items [ a js:StringSchema
@@ -100,7 +104,7 @@
           hctl:hasOperationType td:invokeAction
         ];
       td:hasOutputSchema [ a js:ObjectSchema;
-          js:properties [
+          js:properties [ a js:IntegerSchema;
               js:propertyName "percentageCompleted"
             ], [ a js:IntegerSchema;
               js:propertyName "secondsToFinish"

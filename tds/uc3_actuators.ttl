@@ -13,7 +13,7 @@
       td:name "open";
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://130.82.171.209:1084/lid/open>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/actuator-api/lid/open>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -32,7 +32,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://130.82.171.209:1084/lid/open%7B?machineId%7D>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/actuator-api/lid/open%7B?machineId%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -48,7 +48,7 @@
       td:name "close";
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://130.82.171.209:1084/lid/close>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/actuator-api/lid/close>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -67,7 +67,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://130.82.171.209:1084/lid/close%7B?machineId%7D>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/actuator-api/lid/close%7B?machineId%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -83,7 +83,7 @@
       td:name "liftup";
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://130.82.171.209:1084/table/liftup>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/actuator-api/table/liftup>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -102,7 +102,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://130.82.171.209:1084/table/liftup%7B?machineId%7D>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/actuator-api/table/liftup%7B?machineId%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -118,7 +118,7 @@
       td:name "lowerdown";
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://130.82.171.209:1084/table/lowerdown>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/actuator-api/table/lowerdown>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -137,7 +137,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://130.82.171.209:1084/table/lowerdown%7B?machineId%7D>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/actuator-api/table/lowerdown%7B?machineId%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -153,7 +153,7 @@
       td:name "pushstart";
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://130.82.171.209:1084/push-start-button>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/actuator-api/push-start-button>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -172,7 +172,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://130.82.171.209:1084/push-start-button%7B?machineId%7D>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/actuator-api/push-start-button%7B?machineId%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];

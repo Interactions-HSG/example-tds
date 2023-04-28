@@ -106,7 +106,7 @@ public class RobotController2 extends Thing{
                         .build())
                 .addRequiredProperties("inMovement")
                 .build();
-        PropertyAffordance getStatus = new PropertyAffordance.Builder("readStatus", getStatusForm)
+        PropertyAffordance getStatus = new PropertyAffordance.Builder("status", getStatusForm)
                 .addSemanticType(INTELLIOT.readStatus)
                 .addDataSchema(statusSchema)
                 .build();

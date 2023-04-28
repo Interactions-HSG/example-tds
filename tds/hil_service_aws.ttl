@@ -111,7 +111,7 @@
             "numberReassignments", "description"
         ]
     ], [ a td:PropertyAffordance, js:ObjectSchema;
-      td:name "getSessions";
+      td:name "getSession";
       td:hasUriTemplateSchema [ a js:StringSchema;
           td:name "sessionId"
         ];

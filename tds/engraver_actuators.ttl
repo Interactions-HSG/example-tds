@@ -11,6 +11,22 @@
     ];
   td:hasActionAffordance [ a td:ActionAffordance;
       td:name "open";
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/actuator-api/lid/open>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasOutputSchema [ a js:ObjectSchema;
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "demo"
+            ], [ a js:StringSchema;
+              js:propertyName "status"
+            ];
+          js:required "status", "demo"
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "openWithId";
       td:hasUriTemplateSchema [ a js:StringSchema;
           td:name "machineId"
         ];
@@ -30,6 +46,22 @@
         ]
     ], [ a td:ActionAffordance;
       td:name "close";
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/actuator-api/lid/close>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasOutputSchema [ a js:ObjectSchema;
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "demo"
+            ], [ a js:StringSchema;
+              js:propertyName "status"
+            ];
+          js:required "status", "demo"
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "closeWithId";
       td:hasUriTemplateSchema [ a js:StringSchema;
           td:name "machineId"
         ];
@@ -49,6 +81,22 @@
         ]
     ], [ a td:ActionAffordance;
       td:name "liftup";
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/actuator-api/table/liftup>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasOutputSchema [ a js:ObjectSchema;
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "demo"
+            ], [ a js:StringSchema;
+              js:propertyName "status"
+            ];
+          js:required "status", "demo"
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "liftupWithId";
       td:hasUriTemplateSchema [ a js:StringSchema;
           td:name "machineId"
         ];
@@ -68,6 +116,22 @@
         ]
     ], [ a td:ActionAffordance;
       td:name "lowerdown";
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/actuator-api/table/lowerdown>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasOutputSchema [ a js:ObjectSchema;
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "demo"
+            ], [ a js:StringSchema;
+              js:propertyName "status"
+            ];
+          js:required "status", "demo"
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "lowerdownWithId";
       td:hasUriTemplateSchema [ a js:StringSchema;
           td:name "machineId"
         ];
@@ -87,6 +151,22 @@
         ]
     ], [ a td:ActionAffordance;
       td:name "pushstart";
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/actuator-api/push-start-button>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasOutputSchema [ a js:ObjectSchema;
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "demo"
+            ], [ a js:StringSchema;
+              js:propertyName "status"
+            ];
+          js:required "status", "demo"
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "pushstartWithId";
       td:hasUriTemplateSchema [ a js:StringSchema;
           td:name "machineId"
         ];

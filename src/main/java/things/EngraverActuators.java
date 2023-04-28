@@ -16,7 +16,7 @@ public class EngraverActuators extends Thing{
     public EngraverActuators(String baseURI, String relativeURI, String title) {
         super(baseURI, relativeURI, title);
 
-        Form openForm = new Form.Builder(baseURI + "/lid/open{?machineId}").build();
+        Form openForm = new Form.Builder(baseURI + "/lid/open").build();
 
         DataSchema actionResponseSchema = new ObjectSchema.Builder()
                 .addProperty("status", new StringSchema.Builder().build())
@@ -25,51 +25,96 @@ public class EngraverActuators extends Thing{
                 .build();
 
         ActionAffordance open = new ActionAffordance.Builder("open", openForm)
-                .addUriVariable("machineId", new StringSchema.Builder().build())
                 .addOutputSchema(actionResponseSchema)
                 .build();
 
         actions.add(open);
 
-        Form closeForm = new Form.Builder(baseURI + "/lid/close{?machineId}").build();
+        Form openWithIdForm = new Form.Builder(baseURI + "/lid/open{?machineId}").build();
+
+
+        ActionAffordance openWithId = new ActionAffordance.Builder("openWithId", openWithIdForm)
+                .addUriVariable("machineId", new StringSchema.Builder().build())
+                .addOutputSchema(actionResponseSchema)
+                .build();
+
+        actions.add(openWithId);
+
+        Form closeForm = new Form.Builder(baseURI + "/lid/close").build();
 
 
         ActionAffordance close= new ActionAffordance.Builder("close", closeForm)
-                .addUriVariable("machineId", new StringSchema.Builder().build())
                 .addOutputSchema(actionResponseSchema)
                 .build();
 
         actions.add(close);
 
-        Form liftupForm = new Form.Builder(baseURI + "/table/liftup{?machineId}").build();
+        Form closeWithIdForm = new Form.Builder(baseURI + "/lid/close{?machineId}").build();
+
+
+        ActionAffordance closeWithId= new ActionAffordance.Builder("closeWithId", closeWithIdForm)
+                .addUriVariable("machineId", new StringSchema.Builder().build())
+                .addOutputSchema(actionResponseSchema)
+                .build();
+
+        actions.add(closeWithId);
+
+        Form liftupForm = new Form.Builder(baseURI + "/table/liftup").build();
 
 
         ActionAffordance liftup= new ActionAffordance.Builder("liftup", liftupForm)
-                .addUriVariable("machineId", new StringSchema.Builder().build())
                 .addOutputSchema(actionResponseSchema)
                 .build();
 
         actions.add(liftup);
 
-        Form lowerdownForm = new Form.Builder(baseURI + "/table/lowerdown{?machineId}").build();
+        Form liftupWithIdForm = new Form.Builder(baseURI + "/table/liftup{?machineId}").build();
+
+
+        ActionAffordance liftupWithId= new ActionAffordance.Builder("liftupWithId", liftupWithIdForm)
+                .addUriVariable("machineId", new StringSchema.Builder().build())
+                .addOutputSchema(actionResponseSchema)
+                .build();
+
+        actions.add(liftupWithId);
+
+        Form lowerdownForm = new Form.Builder(baseURI + "/table/lowerdown").build();
 
 
         ActionAffordance lowerdown= new ActionAffordance.Builder("lowerdown", lowerdownForm)
-                .addUriVariable("machineId", new StringSchema.Builder().build())
                 .addOutputSchema(actionResponseSchema)
                 .build();
 
         actions.add(lowerdown);
 
-        Form pushstartForm = new Form.Builder(baseURI + "/push-start-button{?machineId}").build();
+        Form lowerdownWithIdForm = new Form.Builder(baseURI + "/table/lowerdown{?machineId}").build();
 
 
-        ActionAffordance pushstart =  new ActionAffordance.Builder("pushstart", pushstartForm)
+        ActionAffordance lowerdownWithId= new ActionAffordance.Builder("lowerdownWithId", lowerdownWithIdForm)
                 .addUriVariable("machineId", new StringSchema.Builder().build())
                 .addOutputSchema(actionResponseSchema)
                 .build();
 
+        actions.add(lowerdownWithId);
+
+        Form pushstartForm = new Form.Builder(baseURI + "/push-start-button").build();
+
+
+        ActionAffordance pushstart =  new ActionAffordance.Builder("pushstart", pushstartForm)
+                .addOutputSchema(actionResponseSchema)
+                .build();
+
         actions.add(pushstart);
+
+        Form pushstartWithIdForm = new Form.Builder(baseURI + "/push-start-button{?machineId}").build();
+
+
+        ActionAffordance pushstartWithId =  new ActionAffordance.Builder("pushstartWithId", pushstartWithIdForm)
+                .addUriVariable("machineId", new StringSchema.Builder().build())
+                .addOutputSchema(actionResponseSchema)
+                .build();
+
+        actions.add(pushstartWithId);
     }
 
     @Override

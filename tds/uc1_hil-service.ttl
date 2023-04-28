@@ -5,17 +5,17 @@
 @prefix js: <https://www.w3.org/2019/wot/json-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://localhost:8080/workspaces/uc3/artifacts/hil-service> a td:Thing;
+<http://localhost:8080/workspaces/uc1/artifacts/hil_service> a td:Thing;
   td:title "HIL Service";
   td:hasSecurityConfiguration [ a wotsec:APIKeySecurityScheme;
       wotsec:in "HEADER";
       wotsec:name "X-API-Key"
     ];
-  td:hasBase <http://130.82.171.209:1081>;
+  td:hasBase <http://localhost:80/hil-service/services>;
   td:hasPropertyAffordance [ a td:PropertyAffordance, js:ArraySchema;
       td:name "getOperators";
       td:hasForm [
-          hctl:hasTarget <http://130.82.171.209:1081/operators>;
+          hctl:hasTarget <http://localhost:80/hil-service/services/operators>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -40,7 +40,7 @@
           td:name "operatorId"
         ];
       td:hasForm [
-          hctl:hasTarget <http://130.82.171.209:1081/operators/%7BoperatorId%7D>;
+          hctl:hasTarget <http://localhost:80/hil-service/services/operators/%7BoperatorId%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -60,7 +60,7 @@
     ], [ a td:PropertyAffordance, js:ArraySchema;
       td:name "getAllSessions";
       td:hasForm [
-          hctl:hasTarget <http://130.82.171.209:1081/sessions>;
+          hctl:hasTarget <http://localhost:80/hil-service/services/sessions>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -73,16 +73,14 @@
               js:properties [ a js:StringSchema;
                   js:propertyName "cameraId"
                 ], [ a js:StringSchema;
+                  js:propertyName "tractorId"
+                ], [ a js:StringSchema;
                   js:propertyName "sessionType";
-                  js:enum "wood_piece_picking"
+                  js:enum "obstacle_avoidance_tractor"
                 ], [ a js:StringSchema;
                   js:propertyName "aiSessionId"
-                ], [ a js:StringSchema;
-                  js:propertyName "robotId"
                 ];
-              js:required "aiSessionId", "robotId", "cameraId", "sessionType"
-            ], [ a js:StringSchema;
-              js:propertyName "robotId"
+              js:required "aiSessionId", "tractorId", "cameraId", "sessionType"
             ], [ a js:StringSchema;
               js:propertyName "workResult";
               js:enum "unfinished", "completed", "failed"
@@ -97,6 +95,8 @@
             ], [ a js:StringSchema;
               js:propertyName "hyperMasCallbackUrl"
             ], [ a js:StringSchema;
+              js:propertyName "tractorId"
+            ], [ a js:StringSchema;
               js:propertyName "operatorId"
             ], [ a js:StringSchema;
               js:propertyName "takenOverAt"
@@ -107,7 +107,7 @@
               js:propertyName "numberReassignments"
             ];
           js:required "creationTime", "willExpireAt", "takenOverAt", "finishedAt", "status",
-            "workResult", "operatorId", "cameraId", "robotId", "hilAppIpAddress", "hyperMasCallbackUrl",
+            "workResult", "operatorId", "cameraId", "tractorId", "hilAppIpAddress", "hyperMasCallbackUrl",
             "numberReassignments", "description"
         ]
     ], [ a td:PropertyAffordance, js:ObjectSchema;
@@ -116,7 +116,7 @@
           td:name "sessionId"
         ];
       td:hasForm [
-          hctl:hasTarget <http://130.82.171.209:1081/sessions/%7BsessionId%7D>;
+          hctl:hasTarget <http://localhost:80/hil-service/services/sessions/%7BsessionId%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -128,16 +128,14 @@
           js:properties [ a js:StringSchema;
               js:propertyName "cameraId"
             ], [ a js:StringSchema;
+              js:propertyName "tractorId"
+            ], [ a js:StringSchema;
               js:propertyName "sessionType";
-              js:enum "wood_piece_picking"
+              js:enum "obstacle_avoidance_tractor"
             ], [ a js:StringSchema;
               js:propertyName "aiSessionId"
-            ], [ a js:StringSchema;
-              js:propertyName "robotId"
             ];
-          js:required "aiSessionId", "robotId", "cameraId", "sessionType"
-        ], [ a js:StringSchema;
-          js:propertyName "robotId"
+          js:required "aiSessionId", "tractorId", "cameraId", "sessionType"
         ], [ a js:StringSchema;
           js:propertyName "workResult";
           js:enum "unfinished", "completed", "failed"
@@ -152,6 +150,8 @@
         ], [ a js:StringSchema;
           js:propertyName "hyperMasCallbackUrl"
         ], [ a js:StringSchema;
+          js:propertyName "tractorId"
+        ], [ a js:StringSchema;
           js:propertyName "operatorId"
         ], [ a js:StringSchema;
           js:propertyName "takenOverAt"
@@ -162,14 +162,14 @@
           js:propertyName "numberReassignments"
         ];
       js:required "creationTime", "willExpireAt", "takenOverAt", "finishedAt", "status",
-        "workResult", "operatorId", "cameraId", "robotId", "hilAppIpAddress", "hyperMasCallbackUrl",
+        "workResult", "operatorId", "cameraId", "tractorId", "hilAppIpAddress", "hyperMasCallbackUrl",
         "numberReassignments", "description"
     ];
   td:hasActionAffordance [ a td:ActionAffordance;
       td:name "createOperator";
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://130.82.171.209:1081/operators>;
+          hctl:hasTarget <http://localhost:80/hil-service/services/operators>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -202,7 +202,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "DELETE";
-          hctl:hasTarget <http://130.82.171.209:1081/operators/%7BoperatorId%7D>;
+          hctl:hasTarget <http://localhost:80/hil-service/services/operators/%7BoperatorId%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]
@@ -210,7 +210,7 @@
       td:name "createSession";
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://130.82.171.209:1081/sessions>;
+          hctl:hasTarget <http://localhost:80/hil-service/services/sessions>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -218,14 +218,14 @@
           js:properties [ a js:StringSchema;
               js:propertyName "cameraId"
             ], [ a js:StringSchema;
+              js:propertyName "tractorId"
+            ], [ a js:StringSchema;
               js:propertyName "sessionType";
-              js:enum "wood_piece_picking"
+              js:enum "obstacle_avoidance_tractor"
             ], [ a js:StringSchema;
               js:propertyName "aiSessionId"
-            ], [ a js:StringSchema;
-              js:propertyName "robotId"
             ];
-          js:required "aiSessionId", "robotId", "cameraId", "sessionType"
+          js:required "aiSessionId", "tractorId", "cameraId", "sessionType"
         ];
       td:hasOutputSchema [ a js:ObjectSchema;
           js:properties [ a js:StringSchema;
@@ -235,16 +235,14 @@
               js:properties [ a js:StringSchema;
                   js:propertyName "cameraId"
                 ], [ a js:StringSchema;
+                  js:propertyName "tractorId"
+                ], [ a js:StringSchema;
                   js:propertyName "sessionType";
-                  js:enum "wood_piece_picking"
+                  js:enum "obstacle_avoidance_tractor"
                 ], [ a js:StringSchema;
                   js:propertyName "aiSessionId"
-                ], [ a js:StringSchema;
-                  js:propertyName "robotId"
                 ];
-              js:required "aiSessionId", "robotId", "cameraId", "sessionType"
-            ], [ a js:StringSchema;
-              js:propertyName "robotId"
+              js:required "aiSessionId", "tractorId", "cameraId", "sessionType"
             ], [ a js:StringSchema;
               js:propertyName "workResult";
               js:enum "unfinished", "completed", "failed"
@@ -259,6 +257,8 @@
             ], [ a js:StringSchema;
               js:propertyName "hyperMasCallbackUrl"
             ], [ a js:StringSchema;
+              js:propertyName "tractorId"
+            ], [ a js:StringSchema;
               js:propertyName "operatorId"
             ], [ a js:StringSchema;
               js:propertyName "takenOverAt"
@@ -269,7 +269,7 @@
               js:propertyName "numberReassignments"
             ];
           js:required "creationTime", "willExpireAt", "takenOverAt", "finishedAt", "status",
-            "workResult", "operatorId", "cameraId", "robotId", "hilAppIpAddress", "hyperMasCallbackUrl",
+            "workResult", "operatorId", "cameraId", "tractorId", "hilAppIpAddress", "hyperMasCallbackUrl",
             "numberReassignments", "description"
         ]
     ], [ a td:ActionAffordance;
@@ -279,7 +279,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://130.82.171.209:1081/sessions%7B?callbackUrl%7D>;
+          hctl:hasTarget <http://localhost:80/hil-service/services/sessions%7B?callbackUrl%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -287,14 +287,14 @@
           js:properties [ a js:StringSchema;
               js:propertyName "cameraId"
             ], [ a js:StringSchema;
+              js:propertyName "tractorId"
+            ], [ a js:StringSchema;
               js:propertyName "sessionType";
-              js:enum "wood_piece_picking"
+              js:enum "obstacle_avoidance_tractor"
             ], [ a js:StringSchema;
               js:propertyName "aiSessionId"
-            ], [ a js:StringSchema;
-              js:propertyName "robotId"
             ];
-          js:required "aiSessionId", "robotId", "cameraId", "sessionType"
+          js:required "aiSessionId", "tractorId", "cameraId", "sessionType"
         ];
       td:hasOutputSchema [ a js:ObjectSchema;
           js:properties [ a js:StringSchema;
@@ -304,16 +304,14 @@
               js:properties [ a js:StringSchema;
                   js:propertyName "cameraId"
                 ], [ a js:StringSchema;
+                  js:propertyName "tractorId"
+                ], [ a js:StringSchema;
                   js:propertyName "sessionType";
-                  js:enum "wood_piece_picking"
+                  js:enum "obstacle_avoidance_tractor"
                 ], [ a js:StringSchema;
                   js:propertyName "aiSessionId"
-                ], [ a js:StringSchema;
-                  js:propertyName "robotId"
                 ];
-              js:required "aiSessionId", "robotId", "cameraId", "sessionType"
-            ], [ a js:StringSchema;
-              js:propertyName "robotId"
+              js:required "aiSessionId", "tractorId", "cameraId", "sessionType"
             ], [ a js:StringSchema;
               js:propertyName "workResult";
               js:enum "unfinished", "completed", "failed"
@@ -328,6 +326,8 @@
             ], [ a js:StringSchema;
               js:propertyName "hyperMasCallbackUrl"
             ], [ a js:StringSchema;
+              js:propertyName "tractorId"
+            ], [ a js:StringSchema;
               js:propertyName "operatorId"
             ], [ a js:StringSchema;
               js:propertyName "takenOverAt"
@@ -338,14 +338,14 @@
               js:propertyName "numberReassignments"
             ];
           js:required "creationTime", "willExpireAt", "takenOverAt", "finishedAt", "status",
-            "workResult", "operatorId", "cameraId", "robotId", "hilAppIpAddress", "hyperMasCallbackUrl",
+            "workResult", "operatorId", "cameraId", "tractorId", "hilAppIpAddress", "hyperMasCallbackUrl",
             "numberReassignments", "description"
         ]
     ], [ a td:ActionAffordance;
       td:name "deleteAllSessions";
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "DELETE";
-          hctl:hasTarget <http://130.82.171.209:1081/sessions>;
+          hctl:hasTarget <http://localhost:80/hil-service/services/sessions>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]
@@ -356,7 +356,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "DELETE";
-          hctl:hasTarget <http://130.82.171.209:1081/sessions/%7BsessionId%7D>;
+          hctl:hasTarget <http://localhost:80/hil-service/services/sessions/%7BsessionId%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]
@@ -367,7 +367,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://130.82.171.209:1081/sessions/%7BaiSessionId%7D/takeover>;
+          hctl:hasTarget <http://localhost:80/hil-service/services/sessions/%7BaiSessionId%7D/takeover>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -395,7 +395,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://130.82.171.209:1081/sessions/%7BaiSessionId%7D/reject>;
+          hctl:hasTarget <http://localhost:80/hil-service/services/sessions/%7BaiSessionId%7D/reject>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]
@@ -406,7 +406,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://130.82.171.209:1081/sessions/%7BaiSessionId%7D/done>;
+          hctl:hasTarget <http://localhost:80/hil-service/services/sessions/%7BaiSessionId%7D/done>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -420,7 +420,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://130.82.171.209:1081/sessions/%7BaiSessionId%7D/reassign>;
+          hctl:hasTarget <http://localhost:80/hil-service/services/sessions/%7BaiSessionId%7D/reassign>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]

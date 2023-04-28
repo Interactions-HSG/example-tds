@@ -13,7 +13,7 @@
   td:hasPropertyAffordance [ a td:PropertyAffordance, js:ObjectSchema;
       td:name "getJob";
       td:hasForm [
-          hctl:hasTarget <http://130.82.171.209:1083/job>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/api/job>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -29,7 +29,7 @@
     ], [ a td:PropertyAffordance, js:ObjectSchema;
       td:name "getSpec";
       td:hasForm [
-          hctl:hasTarget <http://130.82.171.209:1083/spec>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/api/spec>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -50,7 +50,7 @@
     ], [ a td:PropertyAffordance, js:ObjectSchema;
       td:name "getConfiguration";
       td:hasForm [
-          hctl:hasTarget <http://130.82.171.209:1083/configuration>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/api/configuration>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction, td:readProperty, td:writeProperty
         ];
@@ -67,7 +67,7 @@
       td:name "createEngraveText";
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://130.82.171.209:1083/job/text>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/api/job/text>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -100,7 +100,7 @@
       td:name "deleteJob";
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "DELETE";
-          hctl:hasTarget <http://130.82.171.209:1083/job>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/api/job>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -117,7 +117,7 @@
     ], [ a td:ActionAffordance;
       td:name "getConfiguration";
       td:hasForm [
-          hctl:hasTarget <http://130.82.171.209:1083/configuration>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-laser/api/configuration>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction, td:readProperty, td:writeProperty
         ];

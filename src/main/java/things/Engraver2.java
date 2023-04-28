@@ -22,6 +22,8 @@ public class Engraver2 extends Thing{
         DataSchema engraveTextSchema = new ObjectSchema.Builder()
                 .addProperty("font", new StringSchema.Builder().build())
                 .addProperty("fontsize", new NumberSchema.Builder().build())
+                .addProperty("textWidth", new NumberSchema.Builder().build())
+                .addProperty("textHeight", new NumberSchema.Builder().build())
                 .addProperty("positionReference", new StringSchema.Builder().build())
                 .addProperty("text", new ArraySchema.Builder().addItem(new StringSchema.Builder().build()).build())
                 .addProperty("variant", new StringSchema.Builder().build())
@@ -45,7 +47,7 @@ public class Engraver2 extends Thing{
         DataSchema engraverStatus = new ObjectSchema.Builder()
                 .addProperty("state", stateSchema)
                 .addProperty("secondsToFinish", new IntegerSchema.Builder().build())
-                .addProperty("percentageCompleted", new DataSchema.Builder().build())
+                .addProperty("percentageCompleted", new IntegerSchema.Builder().build())
                 .build();
 
         PropertyAffordance getJob = new PropertyAffordance.Builder("getJob", getJobForm)
