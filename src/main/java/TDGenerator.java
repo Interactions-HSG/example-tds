@@ -28,10 +28,10 @@ public class TDGenerator {
     public static void main(String[] args) {
         System.out.println("Hello World");
 
-        RobotController  uRxRobotController = new RobotController("http://robotcontroller.intelliot.org/",
+        RobotController  uRxRobotController = new RobotController("http://micro1.fritz.box:38080/robot-controller/",
                 "urn:intelliot-urx-robot-controller", "URx Robot Controller");
 
-        Engraver engraver = new Engraver("http://engraver.intelliot.org/services", "urn:intelliot" +
+        Engraver engraver = new Engraver("http://micro1.fritz.box:38080/engraver-laser/api", "urn:intelliot" +
                 "-engraver",
                 "Engraver machine");
 
@@ -60,6 +60,86 @@ public class TDGenerator {
 
         TwilioServer twilioServer = new TwilioServer("http://localhost:591/", "http://localhost:8080/environments/intelliot/workspaces/wksp1/artifacts/twilio", "twilioServer");
 
+        HILService hilService = new HILService("http://micro1.fritz.box:38080/hil-service/service", "urn:intelliot-hil", "hilService");
+
+        AIService aiService = new AIService("http://micro1.fritz.box:38080/camera-ai", "urn:intelliot-ai", "aiService");
+
+        AIService aiServiceAWS = new AIService("http://apps.intelliot.siemens.cloud/camera-ai", "urn:intelliot-ai", "aiService");
+
+        RobotController robotControllerAWS =  new RobotController("http://apps.intelliot.siemens.cloud/robot-controller/",
+                "urn:intelliot-urx-robot-controller", "URx Robot Controller");
+
+        Engraver engraverAWS = new Engraver("http://apps.intelliot.siemens.cloud/engraver-laser/api", "urn:intelliot" +
+                "-engraver",
+                "Engraver machine");
+
+        HILService hilServiceAWS = new HILService("http://apps.intelliot.siemens.cloud/hil-service/service", "urn:intelliot-hil", "hilService");
+
+        Engraver2 engraver2AWS = new Engraver2("http://apps.intelliot.siemens.cloud/engraver-laser/api", "urn:intelliot-engraver",
+                "Engraver machine");
+
+        Engraver2 engraver2 = new Engraver2("http://micro1.fritz.box:38080/engraver-laser/api", "urn:intelliot-engraver",
+                "Engraver machine");
+
+
+        EngraverActuators engraverActuatorsAWS = new EngraverActuators("http://apps.intelliot.siemens.cloud/engraver-laser/actuator-api", "urn:intelliot-actuators", "Engraver Actuators");
+
+        EngraverActuators engraverActuators = new EngraverActuators("http://micro1.fritz.box:38080/engraver-laser/actuator-api", "urn:intelliot-actuators", "Engraver Actuators");
+
+
+        //TractorController tractorController = new TractorController("http://example.org/tractor_controller", "urn:tractor_controller","Tractor Controller");
+
+        TractorController tractorController = new TractorController("http://192.168.88.12", "http://localhost:8080/workspaces/uc1/artifacts/tractor_controller","Tractor Controller");
+
+        WaypointService1 waypointService1 = new WaypointService1("http://localhost:80", "http://localhost:8080/workspaces/uc1/artifacts/waypoint_service", "Waypoint Service");
+
+        WaypointService waypointService = new WaypointService("http://localhost:80", "http://localhost:8080/workspaces/uc1/artifacts/waypoint_service", "Waypoint Service");
+
+        UC1HILService uc1HILService = new UC1HILService("http://localhost:80/hil-service/services","http://localhost:8080/workspaces/uc1/artifacts/hil_service", "HIL Service" );
+
+        //IKHRoboticPlatform ikhRoboticPlatform = new IKHRoboticPlatform("85.74.232.128:3001", "http://localhost:8080/workspaces/uc1/artifacts/ikh_robotic_platform", "IKH Robotic Platform");
+
+        IKHRoboticPlatform ikhRoboticPlatform = new IKHRoboticPlatform("http://10.42.0.1:3001", "http://localhost:8080/workspaces/uc1/artifacts/ikh_robotic_platform", "IKH Robotic Platform");
+
+        HotWater hotWater =  new HotWater("http://localhost", "http://localhost","Hot Water");
+
+        RobotController2 vmRobot = new RobotController2("http://130.82.171.209:1080/robot-controller", "http://localhost:8080/workspaces/uc3/artifacts/robot-controller", "Robot Controller");
+
+        HILService vmHil = new HILService("http://130.82.171.209:1081", "http://localhost:8080/workspaces/uc3/artifacts/hil-service", "HIL Service");
+
+        AIService vmAI = new AIService("http://130.82.171.209:1082", "http://localhost:8080/workspaces/uc3/artifacts/camera-ai", "Camera AI");
+
+        Engraver2 vmEngraver = new Engraver2("http://130.82.171.209:1083", "http://localhost:8080/workspaces/uc3/artifacts/engraver", "Engraver");
+
+        EngraverActuators vmActuators = new EngraverActuators("http://130.82.171.209:1084","http://localhost:8080/workspaces/uc3/artifacts/actuators", "Actuators" );
+
+
+        RobotController2 uc3Robot = new RobotController2("http://micro1.fritz.box:38080/robot-controller/robot-controller", "http://localhost:8080/workspaces/uc3/artifacts/robot-controller", "Robot Controller");
+
+        HILService uc3Hil = new HILService("http://micro1.fritz.box:38080/hil-service/service", "http://localhost:8080/workspaces/uc3/artifacts/hil-service", "HIL Service");
+
+        AIService uc3AI = new AIService("http://micro1.fritz.box:38080/camera-ai", "http://localhost:8080/workspaces/uc3/artifacts/camera-ai", "Camera AI");
+
+        Engraver2 uc3Engraver = new Engraver2("http://micro1.fritz.box:38080/engraver-laser/api", "http://localhost:8080/workspaces/uc3/artifacts/engraver", "Engraver");
+
+        EngraverActuators uc3Actuators = new EngraverActuators("http://micro1.fritz.box:38080/engraver-laser/actuator-api","http://localhost:8080/workspaces/uc3/artifacts/actuators", "Actuators" );
+
+
+        RobotController2 uc3RobotLocalhostMockserver = new RobotController2("http://localhost:8011/robot-controller", "http://localhost:8080/workspaces/uc3/artifacts/robot-controller", "Robot Controller");
+
+        HILService uc3HilLocalhostMockserver = new HILService("http://localhost:8011/hil-service/service", "http://localhost:8080/workspaces/uc3/artifacts/hil-service", "HIL Service");
+
+        AIService uc3AILocalhostMockserver = new AIService("http://localhost:8011/camera-ai", "http://localhost:8080/workspaces/uc3/artifacts/camera-ai", "Camera AI");
+
+        Engraver2 uc3EngraverLocalhostMockserver = new Engraver2("http://localhost:8011/engraver-laser/api", "http://localhost:8080/workspaces/uc3/artifacts/engraver", "Engraver");
+
+        EngraverActuators uc3ActuatorsLocalhostMockserver = new EngraverActuators("http://localhost:8011/engraver-laser/actuator-api","http://localhost:8080/workspaces/uc3/artifacts/actuators", "Actuators" );
+
+
+        DLTClient localDLTClient = new DLTClient("http://localhost:9090", "http://localhost:8080/workspaces/uc1/artifacts/dlt-client", "DLT Client");
+
+        DLTClient uc3DLTClient = new DLTClient("http://edge.fritz.box:9090", "http://edge.fritz.box:8888/workspaces/uc1/artifacts/dlt-client", "DLT Client");
+
         writeToFile(uRxRobotController.serializeTD(), "urx-robot-controller");
         writeToFile(engraver.serializeTD(), "engraver");
         writeToFile(cupProvider.serializeTD(), "cup-provider");
@@ -72,6 +152,41 @@ public class TDGenerator {
         writeToFile(cherryBot.serializeTD(), "cherrybot");
         writeToFile(pretendaBot.serializeTD(), "pretendabot");
         writeToFile(twilioServer.serializeTD(), "twilio_server");
+        writeToFile(hilService.serializeTD(), "hil_service");
+        writeToFile(aiService.serializeTD(), "ai_service");
+        writeToFile(aiServiceAWS.serializeTD(), "ai_service_aws");
+        writeToFile(robotControllerAWS.serializeTD(), "robot_controller_aws");
+        writeToFile(engraverAWS.serializeTD(), "engraver_aws");
+        writeToFile(hilServiceAWS.serializeTD(), "hil_service_aws");
+        writeToFile(engraver2AWS.serializeTD(), "engraver2_aws");
+        writeToFile(engraverActuatorsAWS.serializeTD(), "engraver_actuators_aws");
+        writeToFile(engraverActuators.serializeTD(), "engraver_actuators");
+        writeToFile(engraver2.serializeTD(), "engraver2");
+        writeToFile(tractorController.serializeTD(), "tractor_controller");
+        writeToFile(waypointService1.serializeTD(), "waypoint_service1");
+        writeToFile(waypointService.serializeTD(), "waypoint_service");
+        writeToFile(uc1HILService.serializeTD(), "uc1_hil-service");
+        writeToFile(ikhRoboticPlatform.serializeTD(), "ikh_robotic_platform");
+        writeToFile(hotWater.serializeTD(), "hot_water");
+        writeToFile(vmRobot.serializeTD(), "vm_robot");
+        writeToFile(vmHil.serializeTD(), "vm_hil");
+        writeToFile(vmAI.serializeTD(), "vm_ai");
+        writeToFile(vmEngraver.serializeTD(), "vm_engraver");
+        writeToFile(vmActuators.serializeTD(), "vm_actuators");
+        writeToFile(uc3Robot.serializeTD(), "uc3_robot");
+        writeToFile(uc3Hil.serializeTD(), "uc3_hil");
+        writeToFile(uc3AI.serializeTD(), "uc3_ai");
+        writeToFile(uc3Engraver.serializeTD(), "uc3_engraver");
+        writeToFile(uc3Actuators.serializeTD(), "uc3_actuators");
+        //Localhost mockserver uc3
+        writeToFile(uc3RobotLocalhostMockserver.serializeTD(), "uc3_robot_localhost_mockserver");
+        writeToFile(uc3HilLocalhostMockserver.serializeTD(), "uc3_hil_localhost_mockserver");
+        writeToFile(uc3AILocalhostMockserver.serializeTD(), "uc3_ai_localhost_mockserver");
+        writeToFile(uc3EngraverLocalhostMockserver.serializeTD(), "uc3_engraver_localhost_mockserver");
+        writeToFile(uc3ActuatorsLocalhostMockserver.serializeTD(), "uc3_actuators_localhost_mockserver");
+
+        writeToFile(localDLTClient.serializeTD(), "local_dlt_client");
+        writeToFile(uc3DLTClient.serializeTD(), "uc3_dlt_client");
 
         try {
             //Read TD from file

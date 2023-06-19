@@ -7,9 +7,7 @@ import ch.unisg.ics.interactions.wot.td.affordances.Form;
 import ch.unisg.ics.interactions.wot.td.affordances.PropertyAffordance;
 import ch.unisg.ics.interactions.wot.td.schemas.*;
 import ch.unisg.ics.interactions.wot.td.security.APIKeySecurityScheme;
-import ch.unisg.ics.interactions.wot.td.vocabularies.HTV;
 import ch.unisg.ics.interactions.wot.td.vocabularies.TD;
-import vocabularies.FOAF;
 import vocabularies.INTELLIOT;
 
 import java.util.ArrayList;
@@ -17,107 +15,77 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-public class RobotController extends Thing {
-
-    public RobotController(String baseURI, String relativeURI, String title) {
+public class RobotController2 extends Thing{
+    public RobotController2(String baseURI, String relativeURI, String title) {
         super(baseURI, relativeURI, title);
-        this.namespaces.put("htv", HTV.PREFIX);
-        this.namespaces.put("intelliot", INTELLIOT.PREFIX);
-        this.namespaces.put("foaf", FOAF.PREFIX);
-        this.namespaces.put("eve", "http://w3id.org/eve#");
-
-        // Property forms
-        // Read operator form
-        Form getOperatorForm = new Form.Builder(baseURI + "services/operator")
-                .setMethodName("GET")
-                .addOperationType(TD.readProperty)
-                .build();
 
         // Read handles form
-        Form getHandleForm = new Form.Builder(baseURI + "services/handle")
+        Form getHandleForm = new Form.Builder(baseURI + "/handle")
                 .setMethodName("GET")
                 .addOperationType(TD.readProperty)
                 .build();
 
         // Read status form
-        Form getStatusForm = new Form.Builder(baseURI + "services/status")
+        Form getStatusForm = new Form.Builder(baseURI + "/status")
                 .setMethodName("GET")
                 .addOperationType(TD.readProperty)
                 .build();
 
         // Read pose forms
-        Form getPoseJointForm = new Form.Builder(baseURI + "services/pose")
+        Form getPoseJointForm = new Form.Builder(baseURI + "/pose")
                 .setMethodName("GET")
                 .addOperationType(TD.readProperty)
                 .setContentType("application/joint+json")
                 .build();
-        Form getPoseTcpForm = new Form.Builder(baseURI + "services/pose")
+        Form getPoseTcpForm = new Form.Builder(baseURI + "/pose")
                 .setMethodName("GET")
                 .addOperationType(TD.readProperty)
                 .setContentType("application/tcp+json")
                 .build();
-        Form getPoseNamedPoseForm = new Form.Builder(baseURI + "services/pose")
+        Form getPoseNamedPoseForm = new Form.Builder(baseURI + "/pose")
                 .setMethodName("GET")
                 .addOperationType(TD.readProperty)
                 .setContentType("application/namedpose+json")
                 .build();
-        Form getPoseAiForm = new Form.Builder(baseURI + "services/pose")
+        Form getPoseAiForm = new Form.Builder(baseURI + "/pose")
                 .setMethodName("GET")
                 .addOperationType(TD.readProperty)
                 .setContentType("application/ai+json")
                 .build();
 
         // Read gripper form
-        Form getGripperForm = new Form.Builder(baseURI + "services/gripper")
+        Form getGripperForm = new Form.Builder(baseURI + "/gripper")
                 .setMethodName("GET")
                 .addOperationType(TD.readProperty)
                 .build();
 
-
-        // Action forms
-        // Register form
-        Form postOperatorForm = new Form.Builder(baseURI + "services/operator").build();
-
-        // Deregister operator form
-        Form deleteOperatorForm = new Form.Builder(baseURI + "services/operator")
-                .setMethodName("DELETE")
-                .build();
-
         // Set gripper form
-        Form putGripperForm = new Form.Builder(baseURI + "services/gripper")
+        Form putGripperForm = new Form.Builder(baseURI + "/gripper")
                 .setMethodName("PUT")
                 .build();
 
         // Event forms
-        Form putPoseJointForm = new Form.Builder(baseURI + "pose")
+        Form putPoseJointForm = new Form.Builder(baseURI + "/pose")
                 .setMethodName("PUT")
                 .setContentType("application/joint+json")
                 .build();
-        Form putPoseTcpForm = new Form.Builder(baseURI + "pose")
+        Form putPoseTcpForm = new Form.Builder(baseURI + "/pose")
                 .setMethodName("PUT")
                 .setContentType("application/tcp+json")
                 .build();
-        Form putPoseNamedPoseForm = new Form.Builder(baseURI + "pose")
+        Form putPoseNamedPoseForm = new Form.Builder(baseURI + "/pose")
                 .setMethodName("PUT")
                 .setContentType("application/namedpose+json")
                 .build();
-        Form putPoseAiForm = new Form.Builder(baseURI + "pose")
+        Form putPoseAiForm = new Form.Builder(baseURI + "/pose")
                 .setMethodName("PUT")
                 .setContentType("application/ai+json")
                 .build();
 
-        // Data schemas
-        // Operator profile schema
-        DataSchema operatorSchema = new ObjectSchema.Builder()
-                .addSemanticType(INTELLIOT.operatorProfile)
-                .addProperty("name", new StringSchema.Builder()
-                        .addSemanticType(FOAF.name)
-                        .build())
-                .addProperty("email", new StringSchema.Builder()
-                        .addSemanticType(FOAF.mbox)
-                        .build())
-                .addRequiredProperties("name", "email")
+        Form putManualResetForm = new Form.Builder(baseURI + "/manual_reset")
+                .setMethodName("PUT")
                 .build();
+
 
         // Handle schema
         DataSchema handleSchema = new ObjectSchema.Builder()
@@ -138,7 +106,7 @@ public class RobotController extends Thing {
                         .build())
                 .addRequiredProperties("inMovement")
                 .build();
-        PropertyAffordance getStatus = new PropertyAffordance.Builder("readStatus", getStatusForm)
+        PropertyAffordance getStatus = new PropertyAffordance.Builder("status", getStatusForm)
                 .addSemanticType(INTELLIOT.readStatus)
                 .addDataSchema(statusSchema)
                 .build();
@@ -198,8 +166,8 @@ public class RobotController extends Thing {
         DataSchema poseNamedPoseSchema = new StringSchema.Builder()
                 .addSemanticType(INTELLIOT.namedPose)
                 .addSemanticType(INTELLIOT.poseValue)
-                .addEnum(new HashSet<>(Arrays.asList("home", "milling_machine_load",
-                        "engraver_load", "dump_workpiece")))
+                .addEnum(new HashSet<>(Arrays.asList("home", "milling_machine_pick", "milling_machine_place",
+                        "engraver_load", "error")))
                 .setContentMediaType("application/namedpose+json")
                 .build();
 
@@ -224,13 +192,6 @@ public class RobotController extends Thing {
                         .build())
                 .build();
 
-        // Property affordances
-        // Read operator
-        PropertyAffordance getOperator = new PropertyAffordance.Builder("readOperator", getOperatorForm)
-                .addDataSchema(operatorSchema)
-                .addSemanticType(INTELLIOT.readOperator)
-                .build();
-        properties.add(getOperator);
 
         // Read handle
         PropertyAffordance getHandle = new PropertyAffordance.Builder("readHandles", getHandleForm)
@@ -260,20 +221,6 @@ public class RobotController extends Thing {
                 .build();
         properties.add(getGripper);
 
-        // Action affordances
-        // Register
-        ActionAffordance postOperator = new ActionAffordance.Builder("register", postOperatorForm)
-                .addSemanticType(INTELLIOT.register)
-                .addInputSchema(operatorSchema)
-                .build();
-        actions.add(postOperator);
-
-        // Deregister
-        ActionAffordance deleteOperator = new ActionAffordance.Builder("deregister", deleteOperatorForm)
-                .addSemanticType(INTELLIOT.deregister)
-                .build();
-        actions.add(deleteOperator);
-
         // Set gripper
         ActionAffordance putGripper = new ActionAffordance.Builder("setGripper", putGripperForm)
                 .addInputSchema(gripperSchema)
@@ -281,11 +228,13 @@ public class RobotController extends Thing {
                 .build();
         actions.add(putGripper);
 
-        // Event affordances
-        // Set pose
+        ActionAffordance putManualReset = new ActionAffordance.Builder("putManualReset", putManualResetForm)
+                .build();
+
+
         List<Form> setPoseForms = new ArrayList<>();
         setPoseForms.addAll(Arrays.asList(putPoseJointForm, putPoseTcpForm, putPoseNamedPoseForm, putPoseAiForm));
-        EventAffordance putPose = new EventAffordance.Builder("setPose", setPoseForms)
+        /*EventAffordance putPose = new EventAffordance.Builder("setPose", setPoseForms)
                 .addSemanticType(INTELLIOT.setPose)
                 .addSemanticType(INTELLIOT.subscribePose)
                 .addSubscriptionSchema(new ObjectSchema.Builder()
@@ -299,7 +248,49 @@ public class RobotController extends Thing {
                         .build())
                 .addNotificationSchema(doneSchema)
                 .build();
-        events.add(putPose);
+        events.add(putPose);*/
+
+        ActionAffordance setAIPose = new ActionAffordance.Builder("setAIPose", putPoseAiForm)
+                .addInputSchema(new ObjectSchema.Builder()
+                        .addProperty("value", poseAiSchema)
+                        .addProperty("callback", new StringSchema.Builder().build())
+                        .addRequiredProperties("value","callback")
+                        .build())
+
+                .build();
+
+        actions.add(setAIPose);
+
+        ActionAffordance setNamedPose = new ActionAffordance.Builder("setNamedPose", putPoseNamedPoseForm)
+                .addInputSchema(new ObjectSchema.Builder()
+                        .addProperty("value", poseNamedPoseSchema)
+                        .addProperty("callback", new StringSchema.Builder().build())
+                        .addRequiredProperties("value","callback")
+                        .build())
+                .build();
+
+        actions.add(setNamedPose);
+
+        ActionAffordance setJointPose = new ActionAffordance.Builder("setJointPose", putPoseJointForm)
+                .addInputSchema(new ObjectSchema.Builder()
+                        .addProperty("value", poseJointSchema)
+                        .addProperty("callback", new StringSchema.Builder().build())
+                        .addRequiredProperties("value","callback")
+                        .build())
+                .build();
+
+        actions.add(setJointPose);
+
+        ActionAffordance setTcpPose = new ActionAffordance.Builder("setTcpPose", putPoseTcpForm)
+                .addInputSchema(new ObjectSchema.Builder()
+                        .addProperty("value", poseTcpSchema)
+                        .addProperty("callback", new StringSchema.Builder().build())
+                        .addRequiredProperties("value","callback")
+                        .build())
+                .build();
+
+        actions.add(setTcpPose);
+
     }
 
     @Override

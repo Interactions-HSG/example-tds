@@ -1,0 +1,148 @@
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix wotsec: <https://www.w3.org/2019/wot/security#> .
+@prefix js: <https://www.w3.org/2019/wot/json-schema#> .
+@prefix htv: <http://www.w3.org/2011/http#> .
+@prefix intelliot: <http://example.org/intellIoT#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:intelliot-engraver> a td:Thing, <http://w3id.org/eve#Artifact>, intelliot:EngraverMachine;
+  td:title "Engraver machine";
+  td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
+    ];
+  td:hasPropertyAffordance [ a td:PropertyAffordance, intelliot:ReadEngraverMachineSpecification,
+        js:ObjectSchema, intelliot:EngraverMachineSpecification;
+      td:name "spec";
+      td:hasForm [
+          hctl:hasTarget <http://apps.intelliot.siemens.cloud/engraver-laser/api/spec>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty, "GET"
+        ];
+      td:isObservable false;
+      js:properties [ a js:NumberSchema, intelliot:WorkingAreaHeight;
+          js:propertyName "workingAreaHeight"
+        ], [ a js:StringSchema, intelliot:Model;
+          js:propertyName "model"
+        ], [ a js:NumberSchema, intelliot:WorkingAreaWidth;
+          js:propertyName "workingAreaWidth"
+        ], [ a js:StringSchema, intelliot:MachineType;
+          js:propertyName "type";
+          js:enum "LaserCutter", "MillingMachine"
+        ]
+    ], [ a td:PropertyAffordance, intelliot:ReadEngraverServiceConfiguration, js:ObjectSchema,
+        intelliot:EngraverServiceConfiguration;
+      td:name "configuration";
+      td:hasForm [
+          hctl:hasTarget <http://apps.intelliot.siemens.cloud/engraver-laser/api/configuration>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty, "GET"
+        ];
+      td:isObservable false;
+      js:properties [ a js:StringSchema, intelliot:Host;
+          js:propertyName "host"
+        ], [ a js:StringSchema, intelliot:AuthenticationMode;
+          js:propertyName "authenticationMode";
+          js:enum "unauthenticated", "BasicAuth"
+        ]
+    ], [ a td:PropertyAffordance, intelliot:ReadEngravingJobStatus, js:ObjectSchema, intelliot:EngraverStatus;
+      td:name "job";
+      td:hasForm [
+          hctl:hasTarget <http://apps.intelliot.siemens.cloud/engraver-laser/api/job>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty, "GET"
+        ];
+      td:isObservable false;
+      js:properties [ a js:NumberSchema, intelliot:MillisToFinished;
+          js:propertyName "millisToFinished"
+        ], [ a js:StringSchema, intelliot:EngraverState;
+          js:propertyName "state";
+          js:enum "offline", "paused", "waiting", "unavailable", "available", "working", "finished",
+            "failed", "error"
+        ]
+    ];
+  td:hasActionAffordance [ a td:ActionAffordance, intelliot:SetEngraverServiceConfiguration;
+      td:name "configuration";
+      td:hasForm [
+          hctl:hasTarget <http://apps.intelliot.siemens.cloud/engraver-laser/api/configuration>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction, "POST"
+        ];
+      td:hasInputSchema [ a js:ObjectSchema, intelliot:EngraverServiceConfiguration;
+          js:properties [ a js:StringSchema, intelliot:Host;
+              js:propertyName "host"
+            ], [ a js:StringSchema, intelliot:AuthenticationMode;
+              js:propertyName "authenticationMode";
+              js:enum "unauthenticated", "BasicAuth"
+            ]
+        ];
+      td:hasOutputSchema [ a js:ObjectSchema, intelliot:EngraverServiceConfiguration;
+          js:properties [ a js:StringSchema, intelliot:Host;
+              js:propertyName "host"
+            ], [ a js:StringSchema, intelliot:AuthenticationMode;
+              js:propertyName "authenticationMode";
+              js:enum "unauthenticated", "BasicAuth"
+            ]
+        ]
+    ], [ a td:ActionAffordance, intelliot:CreateEngravingJob;
+      td:name "invokeJob";
+      td:hasForm [
+          hctl:hasTarget <http://apps.intelliot.siemens.cloud/engraver-laser/api/job>;
+          hctl:forContentType "multipart/form-data";
+          hctl:hasOperationType td:invokeAction, "POST"
+        ];
+      td:hasInputSchema [ a js:ObjectSchema, intelliot:EngravingJobWithImage;
+          js:properties [ a js:StringSchema, intelliot:Image;
+              js:propertyName "image"
+            ], [ a js:ObjectSchema, intelliot:EngravingJob;
+              js:propertyName "jobDescription";
+              js:properties [ a js:NumberSchema, intelliot:LineColorEngrave;
+                  js:propertyName "lineColorEngrave"
+                ], [ a js:StringSchema, intelliot:MachineType;
+                  js:propertyName "material";
+                  js:enum "LaserCutter", "MillingMachine"
+                ], [ a js:NumberSchema, intelliot:Thickness;
+                  js:propertyName "thickness"
+                ], [ a js:NumberSchema, intelliot:XCoordinate;
+                  js:propertyName "x"
+                ], [ a js:NumberSchema, intelliot:Width;
+                  js:propertyName "width"
+                ], [ a js:NumberSchema, intelliot:YCoordinate;
+                  js:propertyName "y"
+                ], [ a js:NumberSchema, intelliot:Angle;
+                  js:propertyName "angle"
+                ], [ a js:NumberSchema, intelliot:Height;
+                  js:propertyName "height"
+                ], [ a js:NumberSchema, intelliot:LineColorCut;
+                  js:propertyName "lineColorCut"
+                ];
+              js:required "x", "y", "material", "thickness"
+            ]
+        ];
+      td:hasOutputSchema [ a js:ObjectSchema, intelliot:EngraverStatus;
+          js:properties [ a js:NumberSchema, intelliot:MillisToFinished;
+              js:propertyName "millisToFinished"
+            ], [ a js:StringSchema, intelliot:EngraverState;
+              js:propertyName "state";
+              js:enum "offline", "paused", "waiting", "unavailable", "available", "working", "finished",
+                "failed", "error"
+            ]
+        ]
+    ], [ a td:ActionAffordance, intelliot:DeleteEngravingJob;
+      td:name "deleteJob";
+      td:hasForm [
+          hctl:hasTarget <http://apps.intelliot.siemens.cloud/engraver-laser/api/job>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction, "DELETE"
+        ];
+      td:hasOutputSchema [ a js:ObjectSchema, intelliot:EngraverStatus;
+          js:properties [ a js:NumberSchema, intelliot:MillisToFinished;
+              js:propertyName "millisToFinished"
+            ], [ a js:StringSchema, intelliot:EngraverState;
+              js:propertyName "state";
+              js:enum "offline", "paused", "waiting", "unavailable", "available", "working", "finished",
+                "failed", "error"
+            ]
+        ]
+    ];
+  dct:description "An engraver machine used on the IntellIoT project" .

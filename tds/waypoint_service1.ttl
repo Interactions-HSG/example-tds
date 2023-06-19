@@ -1,0 +1,42 @@
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix wotsec: <https://www.w3.org/2019/wot/security#> .
+@prefix js: <https://www.w3.org/2019/wot/json-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://localhost:8080/workspaces/uc1/artifacts/waypoint_service> a td:Thing, <http://w3id.org/eve#Artifact>;
+  td:title "Waypoint Service";
+  td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
+    ];
+  td:hasBase <http://localhost:80>;
+  td:hasPropertyAffordance [ a td:PropertyAffordance, js:ObjectSchema;
+      td:name "getNextWaypoint";
+      td:hasForm [
+          hctl:hasTarget <http://localhost:80/waypoint>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty, td:writeProperty
+        ];
+      td:isObservable false;
+      js:properties [ a js:ObjectSchema;
+          js:propertyName "geometry";
+          js:properties [ a js:ArraySchema;
+              js:propertyName "coordinates";
+              js:items [ a js:NumberSchema
+                ], [ a js:NumberSchema
+                ]
+            ], [ a js:StringSchema;
+              js:propertyName "type"
+            ];
+          js:required "type", "coordinates"
+        ], [ a js:StringSchema;
+          js:propertyName "type"
+        ], [ a js:ObjectSchema;
+          js:propertyName "properties";
+          js:properties [ a js:StringSchema;
+              js:propertyName "name"
+            ];
+          js:required "name"
+        ];
+      js:required "type", "geometry", "properties"
+    ] .
