@@ -1,0 +1,43 @@
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix wotsec: <https://www.w3.org/2019/wot/security#> .
+@prefix js: <https://www.w3.org/2019/wot/json-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://localhost:8080/workspaces/test/artifacts/test-artifact> a td:Thing;
+  td:title "Test Artifact";
+  td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
+    ];
+  td:hasBase <http://localhost:80>;
+  td:hasPropertyAffordance [ a td:PropertyAffordance, js:ObjectSchema;
+      td:name "property";
+      td:hasForm [
+          hctl:hasTarget <http://localhost:80/property>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty, td:writeProperty
+        ];
+      td:isObservable false;
+      js:properties [ a js:StringSchema;
+          js:propertyName "name"
+        ];
+      js:required "name"
+    ];
+  td:hasActionAffordance [ a td:ActionAffordance;
+      td:name "action";
+      td:hasUriTemplateSchema [ a js:StringSchema;
+          td:name "name"
+        ];
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://localhost:80/action>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasOutputSchema [ a js:ObjectSchema;
+          js:properties [ a js:StringSchema;
+              js:propertyName "name"
+            ];
+          js:required "name"
+        ]
+    ] .

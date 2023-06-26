@@ -89,7 +89,7 @@ public class TDGenerator {
 
         //TractorController tractorController = new TractorController("http://example.org/tractor_controller", "urn:tractor_controller","Tractor Controller");
 
-        TractorController tractorController = new TractorController("192.168.55.1", "http://localhost:8080/workspaces/uc1/artifacts/tractor_controller","Tractor Controller");
+        TractorController tractorController = new TractorController("http://192.168.55.1", "http://localhost:8080/workspaces/uc1/artifacts/tractor_controller","Tractor Controller");
 
         WaypointService1 waypointService1 = new WaypointService1("http://localhost:80", "http://localhost:8080/workspaces/uc1/artifacts/waypoint_service", "Waypoint Service");
 

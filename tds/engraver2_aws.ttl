@@ -6,7 +6,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:intelliot-engraver> a td:Thing, <http://w3id.org/eve#Artifact>, <http://example.org/intellIoT#EngraverMachine>;
-  dct:title "Engraver machine";
+  td:title "Engraver machine";
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
   td:hasPropertyAffordance [ a td:PropertyAffordance, js:ObjectSchema;
