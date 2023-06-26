@@ -13,42 +13,35 @@ import ch.unisg.ics.interactions.wot.td.security.APIKeySecurityScheme;
 public class TestServer extends Thing {
 
 
-    TestServer(String baseURI, String relativeURI, String title) {
+    public TestServer(String baseURI, String relativeURI, String title) {
         super(baseURI, relativeURI, title);
 
-        DataSchema schema = new ObjectSchema.Builder()
-                .addProperty("type", new StringSchema.Builder().build())
-                .addRequiredProperties("type")
+        DataSchema propertySchema = new ObjectSchema.Builder()
+                .addProperty("name", new StringSchema.Builder().build())
+                .addRequiredProperties("name")
                 .build();
 
-        Form propertyForm = new Form.Builder(baseURI + "/get").setMethodName("GET").build();
+        Form propertyForm = new Form.Builder(baseURI + "/property").setMethodName("GET").build();
 
         PropertyAffordance property = new PropertyAffordance.Builder("property", propertyForm)
-                .addDataSchema(schema)
+                .addDataSchema(propertySchema)
                 .build();
 
         properties.add(property);
 
-        Form actionForm = new Form.Builder(baseURI + "/post").build();
+        Form actionForm = new Form.Builder(baseURI + "/action").build();
 
         DataSchema actionSchema = new ObjectSchema.Builder()
-                .addProperty("type", new StringSchema.Builder().build())
                 .addProperty("name", new StringSchema.Builder().build())
-                .addRequiredProperties("type", "name")
+                .addRequiredProperties("name")
                 .build();
 
         ActionAffordance action = new ActionAffordance.Builder("action", actionForm)
                 .addUriVariable("name", new StringSchema.Builder().build())
-                .addOutputSchema(schema)
+                .addOutputSchema(actionSchema)
                 .build();
 
         actions.add(action);
-
-        Form eventForm = new Form.Builder(baseURI + "/event").build();
-
-        EventAffordance event = new EventAffordance.Builder("event", eventForm).build();
-
-        events.add(event);
     }
 
     @Override

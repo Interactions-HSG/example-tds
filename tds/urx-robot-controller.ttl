@@ -10,7 +10,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:intelliot-urx-robot-controller> a td:Thing;
-  td:title "URx Robot Controller";
+  dct:title "URx Robot Controller";
   td:hasSecurityConfiguration [ a wotsec:APIKeySecurityScheme;
       wotsec:in "HEADER";
       wotsec:name "X-API-Key"

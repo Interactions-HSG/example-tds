@@ -7,7 +7,7 @@
 
 <http://localhost:8080/environments/intelliot/workspaces/wksp1/artifacts/twilio> a
     td:Thing, <http://w3id.org/eve#Artifact>;
-  td:title "twilioServer";
+  dct:title "twilioServer";
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
   td:hasBase <http://localhost:591/>;

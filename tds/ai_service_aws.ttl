@@ -6,7 +6,7 @@
 @prefix js: <https://www.w3.org/2019/wot/json-schema#> .
 
 <urn:intelliot-ai> a td:Thing;
-  td:title "aiService";
+  dct:title "aiService";
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
   td:hasBase <http://apps.intelliot.siemens.cloud/camera-ai>;

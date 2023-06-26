@@ -89,7 +89,7 @@ public class TDGenerator {
 
         //TractorController tractorController = new TractorController("http://example.org/tractor_controller", "urn:tractor_controller","Tractor Controller");
 
-        TractorController tractorController = new TractorController("http://192.168.88.12", "http://localhost:8080/workspaces/uc1/artifacts/tractor_controller","Tractor Controller");
+        TractorController tractorController = new TractorController("192.168.55.1", "http://localhost:8080/workspaces/uc1/artifacts/tractor_controller","Tractor Controller");
 
         WaypointService1 waypointService1 = new WaypointService1("http://localhost:80", "http://localhost:8080/workspaces/uc1/artifacts/waypoint_service", "Waypoint Service");
 
@@ -140,6 +140,8 @@ public class TDGenerator {
 
         DLTClient uc3DLTClient = new DLTClient("http://edge.fritz.box:9090", "http://edge.fritz.box:8888/workspaces/uc1/artifacts/dlt-client", "DLT Client");
 
+        TestServer testServer = new TestServer("http://localhost:80", "http://localhost:8080/workspaces/test/artifacts/test-artifact", "Test Artifact");
+
         writeToFile(uRxRobotController.serializeTD(), "urx-robot-controller");
         writeToFile(engraver.serializeTD(), "engraver");
         writeToFile(cupProvider.serializeTD(), "cup-provider");
@@ -187,6 +189,7 @@ public class TDGenerator {
 
         writeToFile(localDLTClient.serializeTD(), "local_dlt_client");
         writeToFile(uc3DLTClient.serializeTD(), "uc3_dlt_client");
+        writeToFile(testServer.serializeTD(), "test_server.ttl");
 
         try {
             //Read TD from file

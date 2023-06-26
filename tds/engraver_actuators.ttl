@@ -6,7 +6,7 @@
 @prefix js: <https://www.w3.org/2019/wot/json-schema#> .
 
 <urn:intelliot-actuators> a td:Thing, <http://w3id.org/eve#Artifact>;
-  td:title "Engraver Actuators";
+  dct:title "Engraver Actuators";
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
   td:hasActionAffordance [ a td:ActionAffordance;
