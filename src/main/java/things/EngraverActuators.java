@@ -3,6 +3,7 @@ package things;
 import ch.unisg.ics.interactions.wot.td.ThingDescription;
 import ch.unisg.ics.interactions.wot.td.affordances.ActionAffordance;
 import ch.unisg.ics.interactions.wot.td.affordances.Form;
+import ch.unisg.ics.interactions.wot.td.affordances.PropertyAffordance;
 import ch.unisg.ics.interactions.wot.td.schemas.BooleanSchema;
 import ch.unisg.ics.interactions.wot.td.schemas.DataSchema;
 import ch.unisg.ics.interactions.wot.td.schemas.ObjectSchema;
@@ -29,6 +30,18 @@ public class EngraverActuators extends Thing{
                 .build();
 
         actions.add(open);
+
+        Form tableStatusForm = new Form.Builder(baseURI + "/table")
+                .setMethodName("GET")
+                .build();
+
+
+
+        PropertyAffordance tableStatus = new PropertyAffordance.Builder("tableStatus", tableStatusForm)
+                .addDataSchema(actionResponseSchema)
+                .build();
+
+        properties.add(tableStatus);
 
         Form openWithIdForm = new Form.Builder(baseURI + "/lid/open{?machineId}").build();
 

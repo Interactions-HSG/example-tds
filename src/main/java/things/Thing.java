@@ -22,7 +22,7 @@ public abstract class Thing {
     List<ActionAffordance> actions = new ArrayList<>();
     List<EventAffordance> events = new ArrayList<>();
 
-    Thing(String baseURI, String relativeURI, String title) {
+    public Thing(String baseURI, String relativeURI, String title) {
         this.baseURI = baseURI;
         this.relativeURI = relativeURI;
         this.title = title;

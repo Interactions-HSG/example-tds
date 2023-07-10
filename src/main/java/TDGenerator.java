@@ -87,6 +87,9 @@ public class TDGenerator {
         EngraverActuators engraverActuators = new EngraverActuators("http://micro1.fritz.box:38080/engraver-laser/actuator-api", "urn:intelliot-actuators", "Engraver Actuators");
 
 
+        MillingMachine millingMachine = new MillingMachine("http://micro1.fritz.box:38080/engraver-milling", "urn:intelliot-milling",
+                "Milling machine");
+
         //TractorController tractorController = new TractorController("http://example.org/tractor_controller", "urn:tractor_controller","Tractor Controller");
 
         TractorController tractorController = new TractorController("http://192.168.55.1", "http://localhost:8080/workspaces/uc1/artifacts/tractor_controller","Tractor Controller");
@@ -164,6 +167,7 @@ public class TDGenerator {
         writeToFile(engraverActuatorsAWS.serializeTD(), "engraver_actuators_aws");
         writeToFile(engraverActuators.serializeTD(), "engraver_actuators");
         writeToFile(engraver2.serializeTD(), "engraver2");
+        writeToFile(millingMachine.serializeTD(), "milling_machine");
         writeToFile(tractorController.serializeTD(), "tractor_controller");
         writeToFile(waypointService1.serializeTD(), "waypoint_service1");
         writeToFile(waypointService.serializeTD(), "waypoint_service");
