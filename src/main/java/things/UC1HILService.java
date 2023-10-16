@@ -34,20 +34,13 @@ public class UC1HILService extends Thing{
 
 
         DataSchema hilSessionDescriptionSchema = new ObjectSchema.Builder()
-                .addProperty("aiSessionId", new StringSchema.Builder().build())
-                .addProperty("tractorId", new StringSchema.Builder().build())
-                .addProperty("cameraId", new StringSchema.Builder().build())
-                .addProperty("sessionType", sessionTypeSchema)
-                .addRequiredProperties("aiSessionId", "tractorId", "cameraId", "sessionType")
+                .addProperty("ai_session_id", new StringSchema.Builder().build())
+                .addProperty("tractor_id", new StringSchema.Builder().build())
+                .addProperty("camera_id", new StringSchema.Builder().build())
+                .addProperty("session_type", sessionTypeSchema)
+                .addRequiredProperties("ai_session_id", "tractor_id", "camera_id", "session_type")
                 .build();
 
-        DataSchema mqttHilOperatorDescriptionSchema= new ObjectSchema.Builder()
-                .addProperty("aiSessionId", new StringSchema.Builder().build())
-                .addProperty("hilAppIpAddress", new StringSchema.Builder().build())
-                .addProperty("tractorId", new StringSchema.Builder().build())
-                .addProperty("cameraId", new StringSchema.Builder().build())
-                .addRequiredProperties("aiSessionId", "hilAppIpAddress", "tractorId", "cameraId")
-                .build();
 
 
         Set<String> decisionTypes = new HashSet<>();

@@ -123,7 +123,7 @@ public class MillingMachine extends Thing{
 
         actions.add(openClamp);
 
-        Form closeClampForm = new Form.Builder(baseURI + "/actuator-api/clamp/open")
+        Form closeClampForm = new Form.Builder(baseURI + "/actuator-api/clamp/close")
                 .setMethodName("POST")
                 .build();
 

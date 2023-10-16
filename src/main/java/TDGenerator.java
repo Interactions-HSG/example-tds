@@ -87,7 +87,7 @@ public class TDGenerator {
         EngraverActuators engraverActuators = new EngraverActuators("http://micro1.fritz.box:38080/engraver-laser/actuator-api", "urn:intelliot-actuators", "Engraver Actuators");
 
 
-        MillingMachine millingMachine = new MillingMachine("http://micro1.fritz.box:38080/engraver-milling", "urn:intelliot-milling",
+        MillingMachine millingMachine = new MillingMachine("http://micro1.fritz.box:38080/engraver-milling", "http://edge.fritz.box:8888/workspaces/uc1/artifacts/milling",
                 "Milling machine");
 
         //TractorController tractorController = new TractorController("http://example.org/tractor_controller", "urn:tractor_controller","Tractor Controller");
@@ -145,6 +145,8 @@ public class TDGenerator {
 
         TestServer testServer = new TestServer("http://localhost:80", "http://localhost:8080/workspaces/test/artifacts/test-artifact", "Test Artifact");
 
+        GoalInterfaceUC3 goalInterfaceUC3 = new GoalInterfaceUC3("http://localhost:5000", "http://localhost:8080/workspaces/uc3/artifacts/goal-interface", "Goal Interface UC3");
+
         writeToFile(uRxRobotController.serializeTD(), "urx-robot-controller");
         writeToFile(engraver.serializeTD(), "engraver");
         writeToFile(cupProvider.serializeTD(), "cup-provider");
@@ -194,6 +196,7 @@ public class TDGenerator {
         writeToFile(localDLTClient.serializeTD(), "local_dlt_client");
         writeToFile(uc3DLTClient.serializeTD(), "uc3_dlt_client");
         writeToFile(testServer.serializeTD(), "test_server.ttl");
+        writeToFile(goalInterfaceUC3.serializeTD(), "goal_interface_uc3.ttl");
 
         try {
             //Read TD from file

@@ -311,7 +311,7 @@ public class TractorController extends Thing{
 
         //Modes
 
-        Form getCurrentModeForm = new Form.Builder(baseURI+"/eTractorMode/currentMode")
+        Form getCurrentModeForm = new Form.Builder(baseURI+"/eTractorModes/currentMode")
                 .setMethodName("GET")
                 .build();
 
@@ -319,7 +319,7 @@ public class TractorController extends Thing{
 
         properties.add(getCurrentMode);
 
-        Form putCurrentModeForm = new Form.Builder(baseURI+"/eTractorMode/currentMode{?mode, feedback_callback_url}")
+        Form putCurrentModeForm = new Form.Builder(baseURI+"/eTractorModes/mode/{mode}")
                 .setMethodName("PUT")
                 .build();
 
@@ -342,7 +342,7 @@ public class TractorController extends Thing{
 
         //waypoint operated
 
-        Form putWpoMissionGoalsForm = new Form.Builder(baseURI + "/waypoint_operated/missionGoals{?restart}")
+        Form putWpoMissionGoalsForm = new Form.Builder(baseURI + "/waypointOperated/missionGoals{?restart}")
                 .setMethodName("PUT")
                 .build();
 
@@ -353,7 +353,7 @@ public class TractorController extends Thing{
 
         actions.add(putWpoMissionGoals);
 
-        Form putWpoMissionGoalsWithFeedbackForm = new Form.Builder(baseURI + "/waypoint_operated/missionGoals{?restart,feedback_callback_url}")
+        Form putWpoMissionGoalsWithFeedbackForm = new Form.Builder(baseURI + "/waypointOperated/missionGoals{?restart,feedback_callback_url}")
                 .setMethodName("PUT")
                 .build();
 
@@ -365,7 +365,7 @@ public class TractorController extends Thing{
 
         actions.add(putWpoMissionGoalsWithFeedback);
 
-        Form putWpoCancelForm = new Form.Builder(baseURI + "/waypoint_operated/cancel")
+        Form putWpoCancelForm = new Form.Builder(baseURI + "/waypointOperated/cancelGoals")
                 .setMethodName("PUT")
                 .build();
 
@@ -374,7 +374,7 @@ public class TractorController extends Thing{
 
         actions.add(putWpoCancel);
 
-        Form isProcessingForm = new Form.Builder(baseURI + "/waypoint_operated/isProcessing")
+        Form isProcessingForm = new Form.Builder(baseURI + "/waypointOperated/isProcessing")
                 .setMethodName("GET")
                 .build();
 
@@ -383,7 +383,7 @@ public class TractorController extends Thing{
 
         properties.add(isProcessing);
 
-        Form currentGoalForm = new Form.Builder(baseURI + "/waypoint_operated/currentGoal")
+        Form currentGoalForm = new Form.Builder(baseURI + "/waypointOperated/currentGoal")
                 .setMethodName("GET")
                 .build();
 
@@ -395,7 +395,7 @@ public class TractorController extends Thing{
 
         //routine_operated
 
-        Form putMissionCmdsForm = new Form.Builder(baseURI + "/routine_operated/missionCmds{?feedback_callback_url}")
+        Form putMissionCmdsForm = new Form.Builder(baseURI + "/routineOperated/missionCmds{?feedback_callback_url}")
                 .setMethodName("PUT")
                 .build();
 
@@ -406,7 +406,7 @@ public class TractorController extends Thing{
 
         actions.add(putMissionCmds);
 
-        Form putRtoCancelForm = new Form.Builder(baseURI + "/routine_operated/cancel")
+        Form putRtoCancelForm = new Form.Builder(baseURI + "/routineOperated/cancelCmds")
                 .setMethodName("PUT")
                 .build();
 
@@ -415,7 +415,7 @@ public class TractorController extends Thing{
 
         actions.add(putRtoCancel);
 
-        Form isRoutineProcessingForm = new Form.Builder(baseURI + "/routine_operated/isProcessing")
+        Form isRoutineProcessingForm = new Form.Builder(baseURI + "/routineOperated/isProcessing")
                 .setMethodName("GET")
                 .build();
 
@@ -424,7 +424,7 @@ public class TractorController extends Thing{
 
         properties.add(isRoutineProcessing);
 
-        Form currentCmdForm = new Form.Builder(baseURI + "/routine_operated/currentCmd")
+        Form currentCmdForm = new Form.Builder(baseURI + "/routineOperated/currentCmd")
                 .setMethodName("GET")
                 .build();
 

@@ -71,16 +71,16 @@
             ], [ a js:ObjectSchema;
               js:propertyName "description";
               js:properties [ a js:StringSchema;
-                  js:propertyName "cameraId"
+                  js:propertyName "ai_session_id"
                 ], [ a js:StringSchema;
-                  js:propertyName "tractorId"
+                  js:propertyName "camera_id"
                 ], [ a js:StringSchema;
-                  js:propertyName "sessionType";
+                  js:propertyName "session_type";
                   js:enum "obstacle_avoidance_tractor"
                 ], [ a js:StringSchema;
-                  js:propertyName "aiSessionId"
+                  js:propertyName "tractor_id"
                 ];
-              js:required "aiSessionId", "tractorId", "cameraId", "sessionType"
+              js:required "ai_session_id", "tractor_id", "camera_id", "session_type"
             ], [ a js:StringSchema;
               js:propertyName "workResult";
               js:enum "unfinished", "completed", "failed"
@@ -126,16 +126,16 @@
         ], [ a js:ObjectSchema;
           js:propertyName "description";
           js:properties [ a js:StringSchema;
-              js:propertyName "cameraId"
+              js:propertyName "ai_session_id"
             ], [ a js:StringSchema;
-              js:propertyName "tractorId"
+              js:propertyName "camera_id"
             ], [ a js:StringSchema;
-              js:propertyName "sessionType";
+              js:propertyName "session_type";
               js:enum "obstacle_avoidance_tractor"
             ], [ a js:StringSchema;
-              js:propertyName "aiSessionId"
+              js:propertyName "tractor_id"
             ];
-          js:required "aiSessionId", "tractorId", "cameraId", "sessionType"
+          js:required "ai_session_id", "tractor_id", "camera_id", "session_type"
         ], [ a js:StringSchema;
           js:propertyName "workResult";
           js:enum "unfinished", "completed", "failed"
@@ -216,16 +216,16 @@
         ];
       td:hasInputSchema [ a js:ObjectSchema;
           js:properties [ a js:StringSchema;
-              js:propertyName "cameraId"
+              js:propertyName "ai_session_id"
             ], [ a js:StringSchema;
-              js:propertyName "tractorId"
+              js:propertyName "camera_id"
             ], [ a js:StringSchema;
-              js:propertyName "sessionType";
+              js:propertyName "session_type";
               js:enum "obstacle_avoidance_tractor"
             ], [ a js:StringSchema;
-              js:propertyName "aiSessionId"
+              js:propertyName "tractor_id"
             ];
-          js:required "aiSessionId", "tractorId", "cameraId", "sessionType"
+          js:required "ai_session_id", "tractor_id", "camera_id", "session_type"
         ];
       td:hasOutputSchema [ a js:ObjectSchema;
           js:properties [ a js:StringSchema;
@@ -233,16 +233,16 @@
             ], [ a js:ObjectSchema;
               js:propertyName "description";
               js:properties [ a js:StringSchema;
-                  js:propertyName "cameraId"
+                  js:propertyName "ai_session_id"
                 ], [ a js:StringSchema;
-                  js:propertyName "tractorId"
+                  js:propertyName "camera_id"
                 ], [ a js:StringSchema;
-                  js:propertyName "sessionType";
+                  js:propertyName "session_type";
                   js:enum "obstacle_avoidance_tractor"
                 ], [ a js:StringSchema;
-                  js:propertyName "aiSessionId"
+                  js:propertyName "tractor_id"
                 ];
-              js:required "aiSessionId", "tractorId", "cameraId", "sessionType"
+              js:required "ai_session_id", "tractor_id", "camera_id", "session_type"
             ], [ a js:StringSchema;
               js:propertyName "workResult";
               js:enum "unfinished", "completed", "failed"
@@ -285,16 +285,16 @@
         ];
       td:hasInputSchema [ a js:ObjectSchema;
           js:properties [ a js:StringSchema;
-              js:propertyName "cameraId"
+              js:propertyName "ai_session_id"
             ], [ a js:StringSchema;
-              js:propertyName "tractorId"
+              js:propertyName "camera_id"
             ], [ a js:StringSchema;
-              js:propertyName "sessionType";
+              js:propertyName "session_type";
               js:enum "obstacle_avoidance_tractor"
             ], [ a js:StringSchema;
-              js:propertyName "aiSessionId"
+              js:propertyName "tractor_id"
             ];
-          js:required "aiSessionId", "tractorId", "cameraId", "sessionType"
+          js:required "ai_session_id", "tractor_id", "camera_id", "session_type"
         ];
       td:hasOutputSchema [ a js:ObjectSchema;
           js:properties [ a js:StringSchema;
@@ -302,16 +302,16 @@
             ], [ a js:ObjectSchema;
               js:propertyName "description";
               js:properties [ a js:StringSchema;
-                  js:propertyName "cameraId"
+                  js:propertyName "ai_session_id"
                 ], [ a js:StringSchema;
-                  js:propertyName "tractorId"
+                  js:propertyName "camera_id"
                 ], [ a js:StringSchema;
-                  js:propertyName "sessionType";
+                  js:propertyName "session_type";
                   js:enum "obstacle_avoidance_tractor"
                 ], [ a js:StringSchema;
-                  js:propertyName "aiSessionId"
+                  js:propertyName "tractor_id"
                 ];
-              js:required "aiSessionId", "tractorId", "cameraId", "sessionType"
+              js:required "ai_session_id", "tractor_id", "camera_id", "session_type"
             ], [ a js:StringSchema;
               js:propertyName "workResult";
               js:enum "unfinished", "completed", "failed"

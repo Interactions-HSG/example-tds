@@ -5,7 +5,7 @@
 @prefix js: <https://www.w3.org/2019/wot/json-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<urn:intelliot-milling> a td:Thing, <http://w3id.org/eve#Artifact>;
+<http://edge.fritz.box:8888/workspaces/uc1/artifacts/milling> a td:Thing, <http://w3id.org/eve#Artifact>;
   td:title "Milling machine";
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
@@ -156,7 +156,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
-          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-milling/actuator-api/clamp/open>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-milling/actuator-api/clamp/close>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]

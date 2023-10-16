@@ -15,7 +15,7 @@
   td:hasPropertyAffordance [ a td:PropertyAffordance;
       td:name "getCurrentMode";
       td:hasForm [
-          hctl:hasTarget <http://192.168.55.1/eTractorMode/currentMode>;
+          hctl:hasTarget <http://192.168.55.1/eTractorModes/currentMode>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -35,7 +35,7 @@
     ], [ a td:PropertyAffordance;
       td:name "isProcessing";
       td:hasForm [
-          hctl:hasTarget <http://192.168.55.1/waypoint_operated/isProcessing>;
+          hctl:hasTarget <http://192.168.55.1/waypointOperated/isProcessing>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -43,7 +43,7 @@
     ], [ a td:PropertyAffordance, js:ArraySchema;
       td:name "currentGoal";
       td:hasForm [
-          hctl:hasTarget <http://192.168.55.1/waypoint_operated/currentGoal>;
+          hctl:hasTarget <http://192.168.55.1/waypointOperated/currentGoal>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -67,7 +67,7 @@
     ], [ a td:PropertyAffordance;
       td:name "isRoutineProcessing";
       td:hasForm [
-          hctl:hasTarget <http://192.168.55.1/routine_operated/isProcessing>;
+          hctl:hasTarget <http://192.168.55.1/routineOperated/isProcessing>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -75,7 +75,7 @@
     ], [ a td:PropertyAffordance, js:ObjectSchema;
       td:name "currentCmd";
       td:hasForm [
-          hctl:hasTarget <http://192.168.55.1/routine_operated/currentCmd>;
+          hctl:hasTarget <http://192.168.55.1/routineOperated/currentCmd>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -423,7 +423,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "PUT";
-          hctl:hasTarget <http://192.168.55.1/eTractorMode/currentMode%7B?mode,%20feedback_callback_url%7D>;
+          hctl:hasTarget <http://192.168.55.1/eTractorModes/mode/%7Bmode%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]
@@ -434,7 +434,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "PUT";
-          hctl:hasTarget <http://192.168.55.1/waypoint_operated/missionGoals%7B?restart%7D>;
+          hctl:hasTarget <http://192.168.55.1/waypointOperated/missionGoals%7B?restart%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -465,7 +465,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "PUT";
-          hctl:hasTarget <http://192.168.55.1/waypoint_operated/missionGoals%7B?restart,feedback_callback_url%7D>;
+          hctl:hasTarget <http://192.168.55.1/waypointOperated/missionGoals%7B?restart,feedback_callback_url%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -491,7 +491,7 @@
       td:name "putWpoCancel";
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "PUT";
-          hctl:hasTarget <http://192.168.55.1/waypoint_operated/cancel>;
+          hctl:hasTarget <http://192.168.55.1/waypointOperated/cancelGoals>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]
@@ -502,7 +502,7 @@
         ];
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "PUT";
-          hctl:hasTarget <http://192.168.55.1/routine_operated/missionCmds%7B?feedback_callback_url%7D>;
+          hctl:hasTarget <http://192.168.55.1/routineOperated/missionCmds%7B?feedback_callback_url%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -539,7 +539,7 @@
       td:name "putRtoCancel";
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "PUT";
-          hctl:hasTarget <http://192.168.55.1/routine_operated/cancel>;
+          hctl:hasTarget <http://192.168.55.1/routineOperated/cancelCmds>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]
