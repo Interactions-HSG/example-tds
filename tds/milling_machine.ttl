@@ -61,6 +61,40 @@
           js:enum "LaserCutter", "MillingMachine"
         ];
       js:required "host", "authenticationMode"
+    ], [ a td:PropertyAffordance, js:ObjectSchema;
+      td:name "getClamp";
+      td:hasUriTemplateSchema [ a js:StringSchema;
+          td:name "machineId"
+        ];
+      td:hasForm [
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-milling/actuator-api/clamp>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty, td:writeProperty
+        ];
+      td:isObservable false;
+      js:properties [ a js:BooleanSchema;
+          js:propertyName "demo"
+        ], [ a js:StringSchema;
+          js:propertyName "status"
+        ];
+      js:required "status", "demo"
+    ], [ a td:PropertyAffordance, js:ObjectSchema;
+      td:name "getSpindle";
+      td:hasUriTemplateSchema [ a js:StringSchema;
+          td:name "machineId"
+        ];
+      td:hasForm [
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-milling/actuator-api/spindle>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty, td:writeProperty
+        ];
+      td:isObservable false;
+      js:properties [ a js:BooleanSchema;
+          js:propertyName "demo"
+        ], [ a js:StringSchema;
+          js:propertyName "status"
+        ];
+      js:required "status", "demo"
     ];
   td:hasActionAffordance [ a td:ActionAffordance;
       td:name "createEngraveText";
@@ -85,6 +119,8 @@
               js:propertyName "fontsize"
             ], [ a js:NumberSchema;
               js:propertyName "y"
+            ], [ a js:BooleanSchema;
+              js:propertyName "noDrilling"
             ], [ a js:NumberSchema;
               js:propertyName "textWidth"
             ], [ a js:ArraySchema;
@@ -148,6 +184,14 @@
           hctl:hasTarget <http://micro1.fritz.box:38080/engraver-milling/actuator-api/clamp/open>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
+        ];
+      td:hasOutputSchema [ a js:ObjectSchema;
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "demo"
+            ], [ a js:StringSchema;
+              js:propertyName "status"
+            ];
+          js:required "status", "demo"
         ]
     ], [ a td:ActionAffordance;
       td:name "closeClamp";
@@ -159,6 +203,52 @@
           hctl:hasTarget <http://micro1.fritz.box:38080/engraver-milling/actuator-api/clamp/close>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
+        ];
+      td:hasOutputSchema [ a js:ObjectSchema;
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "demo"
+            ], [ a js:StringSchema;
+              js:propertyName "status"
+            ];
+          js:required "status", "demo"
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "startSpindle";
+      td:hasUriTemplateSchema [ a js:StringSchema;
+          td:name "machineId"
+        ];
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-milling/actuator-api/spindle/start>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasOutputSchema [ a js:ObjectSchema;
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "demo"
+            ], [ a js:StringSchema;
+              js:propertyName "status"
+            ];
+          js:required "status", "demo"
+        ]
+    ], [ a td:ActionAffordance;
+      td:name "stopSpindle";
+      td:hasUriTemplateSchema [ a js:StringSchema;
+          td:name "machineId"
+        ];
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-milling/actuator-api/spindle/stop>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasOutputSchema [ a js:ObjectSchema;
+          js:properties [ a js:BooleanSchema;
+              js:propertyName "demo"
+            ], [ a js:StringSchema;
+              js:propertyName "status"
+            ];
+          js:required "status", "demo"
         ]
     ];
   dct:description "Actuators for the engraver" .

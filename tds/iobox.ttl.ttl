@@ -1,0 +1,38 @@
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix wotsec: <https://www.w3.org/2019/wot/security#> .
+@prefix js: <https://www.w3.org/2019/wot/json-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edge.fritz.box:8080/workspaces/uc3/artifacts/iobox> a td:Thing, <http://w3id.org/eve#Artifact>;
+  td:title "Interoperability Box";
+  td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
+    ];
+  td:hasPropertyAffordance [ a td:PropertyAffordance, js:ObjectSchema;
+      td:name "getBLEDevices";
+      td:hasForm [
+          hctl:hasTarget <http://micro1.fritz.box:38080//devices/ble>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty, td:writeProperty
+        ];
+      td:isObservable false
+    ], [ a td:PropertyAffordance, js:ObjectSchema;
+      td:name "getTemperature";
+      td:hasUriTemplateSchema [ a js:StringSchema;
+          td:name "deviceId"
+        ];
+      td:hasForm [
+          hctl:hasTarget <http://micro1.fritz.box:38080//devices/ble/%7BdeviceId%7D/temperature>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty, td:writeProperty
+        ];
+      td:isObservable false;
+      js:properties [ a js:NumberSchema;
+          js:propertyName "temperature"
+        ], [ a js:IntegerSchema;
+          js:propertyName "timestamp"
+        ];
+      js:required "temperature", "timestamp"
+    ];
+  dct:description "Actuators for the engraver" .

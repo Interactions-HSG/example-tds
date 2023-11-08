@@ -5,7 +5,6 @@ import ch.unisg.ics.interactions.wot.td.affordances.ActionAffordance;
 import ch.unisg.ics.interactions.wot.td.affordances.Form;
 import ch.unisg.ics.interactions.wot.td.affordances.PropertyAffordance;
 import ch.unisg.ics.interactions.wot.td.schemas.*;
-import org.checkerframework.checker.units.qual.A;
 import org.eclipse.rdf4j.model.vocabulary.DCTERMS;
 
 import java.util.Arrays;
@@ -30,6 +29,7 @@ public class MillingMachine extends Thing{
                 .addProperty("x", new NumberSchema.Builder().build())
                 .addProperty("y", new NumberSchema.Builder().build())
                 .addProperty("laserOn", new BooleanSchema.Builder().build())
+                .addProperty("noDrilling", new BooleanSchema.Builder().build())
                 .build();
         ActionAffordance createEngraveText = new ActionAffordance.Builder("createEngraveText", createEngraveTextJobForm)
                 .addInputSchema(engraveTextSchema)
@@ -113,12 +113,32 @@ public class MillingMachine extends Thing{
 
         actions.add(setConfiguration);
 
+        DataSchema actionResponseSchema = new ObjectSchema.Builder()
+                .addProperty("status", new StringSchema.Builder().build())
+                .addProperty("demo", new BooleanSchema.Builder().build())
+                .addRequiredProperties("status", "demo")
+                .build();
+
+        Form getClampForm = new Form.Builder(baseURI + "/actuator-api/clamp")
+                .setMethodName("GET")
+                .build();
+
+
+
+        PropertyAffordance getClamp = new PropertyAffordance.Builder("getClamp", getClampForm)
+                .addUriVariable("machineId", new StringSchema.Builder().build())
+                .addDataSchema(actionResponseSchema)
+                .build();
+
+        properties.add(getClamp);
+
         Form openClampForm = new Form.Builder(baseURI + "/actuator-api/clamp/open")
                 .setMethodName("POST")
                 .build();
 
         ActionAffordance openClamp = new ActionAffordance.Builder("openClamp", openClampForm)
                 .addUriVariable("machineId", new StringSchema.Builder().build())
+                .addOutputSchema(actionResponseSchema)
                 .build();
 
         actions.add(openClamp);
@@ -129,9 +149,45 @@ public class MillingMachine extends Thing{
 
         ActionAffordance closeClamp = new ActionAffordance.Builder("closeClamp", closeClampForm)
                 .addUriVariable("machineId", new StringSchema.Builder().build())
+                .addOutputSchema(actionResponseSchema)
                 .build();
 
         actions.add(closeClamp);
+
+        Form getSpindleForm = new Form.Builder(baseURI + "/actuator-api/spindle")
+                .setMethodName("GET")
+                .build();
+
+
+
+        PropertyAffordance getSpindle = new PropertyAffordance.Builder("getSpindle", getSpindleForm)
+                .addUriVariable("machineId", new StringSchema.Builder().build())
+                .addDataSchema(actionResponseSchema)
+                .build();
+
+        properties.add(getSpindle);
+
+        Form startSpindleForm = new Form.Builder(baseURI + "/actuator-api/spindle/start")
+                .setMethodName("POST")
+                .build();
+
+        ActionAffordance startSpindle = new ActionAffordance.Builder("startSpindle", startSpindleForm)
+                .addUriVariable("machineId", new StringSchema.Builder().build())
+                .addOutputSchema(actionResponseSchema)
+                .build();
+
+        actions.add(startSpindle);
+
+        Form stopSpindleForm = new Form.Builder(baseURI + "/actuator-api/spindle/stop")
+                .setMethodName("POST")
+                .build();
+
+        ActionAffordance stopSpindle = new ActionAffordance.Builder("stopSpindle", stopSpindleForm)
+                .addUriVariable("machineId", new StringSchema.Builder().build())
+                .addOutputSchema(actionResponseSchema)
+                .build();
+
+        actions.add(stopSpindle);
     }
 
     @Override
