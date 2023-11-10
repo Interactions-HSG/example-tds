@@ -10,6 +10,44 @@
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
   td:hasPropertyAffordance [ a td:PropertyAffordance, js:ObjectSchema;
+      td:name "getSpec";
+      td:hasForm [
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-milling/spec>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty, td:writeProperty
+        ];
+      td:isObservable false;
+      js:properties [ a js:NumberSchema;
+          js:propertyName "workingAreaHeightMillimeter"
+        ], [ a js:StringSchema;
+          js:propertyName "model"
+        ], [ a js:StringSchema;
+          js:propertyName "type";
+          js:enum "LaserCutter", "MillingMachine"
+        ], [ a js:StringSchema;
+          js:propertyName "laserClass"
+        ], [ a js:NumberSchema;
+          js:propertyName "workingAreaLengthMillimeter"
+        ], [ a js:NumberSchema;
+          js:propertyName "powerWatt"
+        ], [ a js:NumberSchema;
+          js:propertyName "workingAreaWidthMillimeter"
+        ]
+    ], [ a td:PropertyAffordance, js:ObjectSchema;
+      td:name "getConfiguration";
+      td:hasForm [
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-milling/configuration>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:readProperty, td:writeProperty
+        ];
+      td:isObservable false;
+      js:properties [ a js:StringSchema;
+          js:propertyName "host"
+        ], [ a js:StringSchema;
+          js:propertyName "authenticationMode"
+        ];
+      js:required "host", "authenticationMode"
+    ], [ a td:PropertyAffordance, js:ObjectSchema;
       td:name "getJob";
       td:hasForm [
           hctl:hasTarget <http://micro1.fritz.box:38080/engraver-milling/api/job>;
@@ -28,7 +66,7 @@
     ], [ a td:PropertyAffordance, js:ObjectSchema;
       td:name "getSpec";
       td:hasForm [
-          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-milling/api/spec>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-milling/spec>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -37,30 +75,18 @@
           js:propertyName "workingAreaHeightMillimeter"
         ], [ a js:StringSchema;
           js:propertyName "model"
-        ], [
-          js:propertyName "type"
+        ], [ a js:StringSchema;
+          js:propertyName "type";
+          js:enum "LaserCutter", "MillingMachine"
         ], [ a js:StringSchema;
           js:propertyName "laserClass"
         ], [ a js:NumberSchema;
           js:propertyName "workingAreaLengthMillimeter"
         ], [ a js:NumberSchema;
+          js:propertyName "powerWatt"
+        ], [ a js:NumberSchema;
           js:propertyName "workingAreaWidthMillimeter"
         ]
-    ], [ a td:PropertyAffordance, js:ObjectSchema;
-      td:name "getConfiguration";
-      td:hasForm [
-          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-milling/api/configuration>;
-          hctl:forContentType "application/json";
-          hctl:hasOperationType td:invokeAction, td:readProperty, td:writeProperty
-        ];
-      td:isObservable false;
-      js:properties [ a js:StringSchema;
-          js:propertyName "host"
-        ], [ a js:StringSchema;
-          js:propertyName "authenticationMode";
-          js:enum "LaserCutter", "MillingMachine"
-        ];
-      js:required "host", "authenticationMode"
     ], [ a td:PropertyAffordance, js:ObjectSchema;
       td:name "getClamp";
       td:hasUriTemplateSchema [ a js:StringSchema;
@@ -97,6 +123,30 @@
       js:required "status", "demo"
     ];
   td:hasActionAffordance [ a td:ActionAffordance;
+      td:name "setConfiguration";
+      td:hasForm [
+          <http://www.w3.org/2011/http#methodName> "POST";
+          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-milling/configuration>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ];
+      td:hasInputSchema [ a js:ObjectSchema;
+          js:properties [ a js:StringSchema;
+              js:propertyName "host"
+            ], [ a js:StringSchema;
+              js:propertyName "authenticationMode"
+            ];
+          js:required "host", "authenticationMode"
+        ];
+      td:hasOutputSchema [ a js:ObjectSchema;
+          js:properties [ a js:StringSchema;
+              js:propertyName "host"
+            ], [ a js:StringSchema;
+              js:propertyName "authenticationMode"
+            ];
+          js:required "host", "authenticationMode"
+        ]
+    ], [ a td:ActionAffordance;
       td:name "createEngraveText";
       td:hasForm [
           <http://www.w3.org/2011/http#methodName> "POST";
@@ -148,31 +198,6 @@
               js:propertyName "state";
               js:enum "paused", "waiting", "available", "working", "finished", "error", "unconnected"
             ]
-        ]
-    ], [ a td:ActionAffordance;
-      td:name "getConfiguration";
-      td:hasForm [
-          hctl:hasTarget <http://micro1.fritz.box:38080/engraver-milling/api/configuration>;
-          hctl:forContentType "application/json";
-          hctl:hasOperationType td:invokeAction, td:readProperty, td:writeProperty
-        ];
-      td:hasInputSchema [ a js:ObjectSchema;
-          js:properties [ a js:StringSchema;
-              js:propertyName "host"
-            ], [ a js:StringSchema;
-              js:propertyName "authenticationMode";
-              js:enum "LaserCutter", "MillingMachine"
-            ];
-          js:required "host", "authenticationMode"
-        ];
-      td:hasOutputSchema [ a js:ObjectSchema;
-          js:properties [ a js:StringSchema;
-              js:propertyName "host"
-            ], [ a js:StringSchema;
-              js:propertyName "authenticationMode";
-              js:enum "LaserCutter", "MillingMachine"
-            ];
-          js:required "host", "authenticationMode"
         ]
     ], [ a td:ActionAffordance;
       td:name "openClamp";

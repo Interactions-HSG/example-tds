@@ -12,7 +12,7 @@
   td:hasPropertyAffordance [ a td:PropertyAffordance, js:ObjectSchema;
       td:name "getBLEDevices";
       td:hasForm [
-          hctl:hasTarget <http://micro1.fritz.box:38080//devices/ble>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/devices/ble>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];
@@ -23,7 +23,7 @@
           td:name "deviceId"
         ];
       td:hasForm [
-          hctl:hasTarget <http://micro1.fritz.box:38080//devices/ble/%7BdeviceId%7D/temperature>;
+          hctl:hasTarget <http://micro1.fritz.box:38080/devices/ble/%7BdeviceId%7D/temperature>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty, td:writeProperty
         ];

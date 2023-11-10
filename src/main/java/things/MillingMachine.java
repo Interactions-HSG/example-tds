@@ -17,6 +17,69 @@ import static org.eclipse.rdf4j.model.util.Values.literal;
 public class MillingMachine extends Thing{
     public MillingMachine(String baseURI, String relativeURI, String title) {
         super(baseURI, relativeURI, title);
+
+        Set<String> machineTypes = new HashSet<>(Arrays.asList("LaserCutter", "MillingMachine"));
+
+        StringSchema machineTypeSchema = new StringSchema.Builder()
+                .addEnum(machineTypes)
+                .build();
+
+        ObjectSchema specSchema = new ObjectSchema.Builder()
+                .addProperty("model", new StringSchema.Builder().build())
+                .addProperty("type", machineTypeSchema)
+                .addProperty("workingAreaWidthMillimeter", new NumberSchema.Builder().build())
+                .addProperty("workingAreaLengthMillimeter", new NumberSchema.Builder().build())
+                .addProperty("workingAreaHeightMillimeter", new NumberSchema.Builder().build())
+                .addProperty("powerWatt", new NumberSchema.Builder().build())
+                .addProperty("laserClass", new StringSchema.Builder().build())
+                .build();
+
+        Form getSpecForm = new Form.Builder(baseURI + "/spec")
+                .setMethodName("GET")
+                .build();
+
+        PropertyAffordance getSpec = new PropertyAffordance.Builder("getSpec", getSpecForm)
+                .addDataSchema(specSchema)
+                .build();
+
+        properties.add(getSpec);
+
+        Set<String> authenticationModes = new HashSet<>();
+        machineTypes.add("unauthenticated");
+        machineTypes.add("BasicAuth");
+
+        StringSchema authenticationModesSchema = new StringSchema.Builder()
+                .addEnum(authenticationModes)
+                .build();
+
+        DataSchema configurationSchema = new ObjectSchema.Builder()
+                .addProperty("host", new StringSchema.Builder().build())
+                .addProperty("authenticationMode", authenticationModesSchema)
+                .addRequiredProperties("host","authenticationMode" )
+                .build();
+
+        Form getConfigurationForm = new Form.Builder(baseURI + "/configuration")
+                .setMethodName("GET")
+                .build();
+
+        PropertyAffordance getConfiguration = new PropertyAffordance.Builder("getConfiguration", getConfigurationForm)
+                .addDataSchema(configurationSchema)
+                .build();
+
+        properties.add(getConfiguration);
+
+        Form setConfigurationForm = new Form.Builder(baseURI + "/configuration")
+                .setMethodName("POST")
+                .build();
+
+        ActionAffordance setConfiguration = new ActionAffordance.Builder("setConfiguration", setConfigurationForm)
+                .addInputSchema(configurationSchema)
+                .addOutputSchema(configurationSchema)
+                .build();
+
+        actions.add(setConfiguration);
+
+
         Form createEngraveTextJobForm = new Form.Builder(baseURI + "/api/job/text").build();
         DataSchema engraveTextSchema = new ObjectSchema.Builder()
                 .addProperty("font", new StringSchema.Builder().build())
@@ -40,7 +103,7 @@ public class MillingMachine extends Thing{
 
 
 
-        Set<String> states = new HashSet<>(Arrays.asList(new String[] {"unconnected", "available", "working", "finished", "paused", "waiting", "error" }));
+        Set<String> states = new HashSet<>(Arrays.asList("unconnected", "available", "working", "finished", "paused", "waiting", "error"));
 
         DataSchema stateSchema = new StringSchema.Builder().addEnum(states).build();
 
@@ -64,54 +127,13 @@ public class MillingMachine extends Thing{
 
         actions.add(deleteJob);
 
-        Form getSpecForm = new Form.Builder(baseURI + "/api/spec").setMethodName("GET").build();
 
-        Set<String> machineTypes = new HashSet<>(Arrays.asList(new String[]{"LaserCutter", "MillingMachine"}));
-
-        DataSchema machineTypeSchema = new DataSchema.Builder().addEnum(machineTypes).build();
-
-        DataSchema specSchema = new ObjectSchema.Builder()
-                .addProperty("model", new StringSchema.Builder().build())
-                .addProperty("type", machineTypeSchema)
-                .addProperty("workingAreaWidthMillimeter", new NumberSchema.Builder().build())
-                .addProperty("workingAreaLengthMillimeter", new NumberSchema.Builder().build())
-                .addProperty("workingAreaHeightMillimeter", new NumberSchema.Builder().build())
-                .addProperty("laserClass", new StringSchema.Builder().build())
-                .build();
-
-        PropertyAffordance getSpec = new PropertyAffordance.Builder("getSpec", getSpecForm)
-                .addDataSchema(specSchema)
-                .build();
 
         properties.add(getSpec);
 
-        Form getConfigurationForm = new Form.Builder(baseURI + "/api/configuration").setMethodName("GET").build();
-
-        Set<String> authenticationModes = new HashSet<>(Arrays.asList(new String[]{"unauthenticated", "BasicAuth"}));
-
-        DataSchema authenticationModeSchema = new StringSchema.Builder().addEnum(machineTypes).build();
-
-        DataSchema configurationSchema = new ObjectSchema.Builder()
-                .addProperty("host", new StringSchema.Builder().build())
-                .addProperty("authenticationMode", authenticationModeSchema)
-                .addRequiredProperties("host","authenticationMode" )
-                .build();
 
 
-        PropertyAffordance getConfiguration = new PropertyAffordance.Builder("getConfiguration", getConfigurationForm)
-                .addDataSchema(configurationSchema)
-                .build();
 
-        properties.add(getConfiguration);
-
-        Form setConfigurationForm = new Form.Builder(baseURI + "/api/configuration").setMethodName("POST").build();
-
-        ActionAffordance setConfiguration = new ActionAffordance.Builder("getConfiguration", getConfigurationForm)
-                .addInputSchema(configurationSchema)
-                .addOutputSchema(configurationSchema)
-                .build();
-
-        actions.add(setConfiguration);
 
         DataSchema actionResponseSchema = new ObjectSchema.Builder()
                 .addProperty("status", new StringSchema.Builder().build())

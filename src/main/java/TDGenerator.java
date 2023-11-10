@@ -147,7 +147,7 @@ public class TDGenerator {
 
         GoalInterfaceUC3 goalInterfaceUC3 = new GoalInterfaceUC3("http://localhost:5000", "http://localhost:8080/workspaces/uc3/artifacts/goal-interface", "Goal Interface UC3");
 
-        IOBox ioBox = new IOBox("http://micro1.fritz.box:38080/", "http://edge.fritz.box:8080/workspaces/uc3/artifacts/iobox", "Interoperability Box");
+        IOBox ioBox = new IOBox("http://micro1.fritz.box:38080", "http://edge.fritz.box:8080/workspaces/uc3/artifacts/iobox", "Interoperability Box");
 
         writeToFile(uRxRobotController.serializeTD(), "urx-robot-controller");
         writeToFile(engraver.serializeTD(), "engraver");
@@ -197,9 +197,9 @@ public class TDGenerator {
 
         writeToFile(localDLTClient.serializeTD(), "local_dlt_client");
         writeToFile(uc3DLTClient.serializeTD(), "uc3_dlt_client");
-        writeToFile(testServer.serializeTD(), "test_server.ttl");
-        writeToFile(goalInterfaceUC3.serializeTD(), "goal_interface_uc3.ttl");
-        writeToFile(ioBox.serializeTD(), "iobox.ttl");
+        writeToFile(testServer.serializeTD(), "test_server");
+        writeToFile(goalInterfaceUC3.serializeTD(), "goal_interface_uc3");
+        writeToFile(ioBox.serializeTD(), "iobox");
 
         try {
             //Read TD from file
