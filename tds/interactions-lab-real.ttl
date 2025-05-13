@@ -8,7 +8,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:interactions_lab> a td:Thing, eve:Artifact, <https://example.org/was#Lab>;
-  dct:title "The lab of the Interactions team";
+  td:title "The lab of the Interactions team";
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
   td:hasBase <https://api.interactions.ics.unisg.ch/was/rl/>;

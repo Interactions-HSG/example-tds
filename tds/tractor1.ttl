@@ -8,7 +8,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:tractor1> a td:Thing, was:Tractor;
-  dct:title "A tractor that can be used for monitoring the moisture level of soil in a farm.";
+  td:title "A tractor that can be used for monitoring the moisture level of soil in a farm.";
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
   td:hasBase <http://localhost:1080/api/tractors/1/>;

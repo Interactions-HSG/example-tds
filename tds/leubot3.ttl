@@ -10,7 +10,7 @@
 
 <http://yggdrasil.interactions.ics.unisg.ch/environments/61/workspaces/102/artifacts/leubot1>
   a td:Thing, <http://w3id.org/eve#Artifact>, onto:PhantomX;
-  dct:title "leubot1";
+  td:title "leubot1";
   td:hasSecurityConfiguration [ a wotsec:APIKeySecurityScheme;
       wotsec:in "HEADER";
       wotsec:name "X-API-Key"

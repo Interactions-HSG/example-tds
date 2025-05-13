@@ -11,7 +11,7 @@
 
 <http://yggdrasil.interactions.ics.unisg.ch/environments/61/workspaces/102/artifacts/leubot2>
   a td:Thing, eve:Artifact, onto:PhantomX;
-  dct:title "leubot2";
+  td:title "leubot2";
   td:hasSecurityConfiguration [ a wotsec:APIKeySecurityScheme;
       wotsec:in "HEADER";
       wotsec:name "X-API-Key"
