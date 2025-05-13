@@ -8,7 +8,7 @@
 @prefix htv: <http://www.w3.org/2011/http#> .
 
 <urn:lights> a td:Thing, was:Lights;
-  td:title "A set of lights in a room that can be turned on or off";
+  dct:title "A set of lights in a room that can be turned on or off";
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
   td:hasBase <http://localhost:1080/api/lights/1/>;

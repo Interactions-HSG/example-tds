@@ -10,7 +10,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:pretendabot> a td:Thing, eve:Artifact;
-  td:title "pretendBot";
+  dct:title "pretendBot";
   td:hasSecurityConfiguration [ a wotsec:APIKeySecurityScheme;
       wotsec:in "HEADER";
       wotsec:name "Authentication"

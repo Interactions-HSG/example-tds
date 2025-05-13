@@ -8,7 +8,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:calendar-service> a td:Thing, was:CalendarService;
-  td:title "A calendar service that can be used for managing a user's events";
+  dct:title "A calendar service that can be used for managing a user's events";
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
   td:hasBase <http://localhost:1080/api/calendar/1/>;

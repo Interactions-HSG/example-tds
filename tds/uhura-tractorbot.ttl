@@ -8,7 +8,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:tractorbot_uhura> a td:Thing, hsg:Robot;
-  td:title "Smart tractor";
+  dct:title "Smart tractor";
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
   td:hasBase <http://10.10.10.106/>;
@@ -70,7 +70,7 @@
         ]
     ], [ a td:ActionAffordance, hsg:FertilizeAction;
       td:name "fertilize";
-      td:title "Fertilization";
+      dct:title "Fertilization";
       td:hasForm [
           htv:methodName "POST";
           hctl:hasTarget <http://10.10.10.106/things/tractorbot/actions/fertilize>;
@@ -81,7 +81,7 @@
         ]
     ], [ a td:ActionAffordance, hsg:IrrigationAction;
       td:name "irrigate";
-      td:title "Irrigation";
+      dct:title "Irrigation";
       td:hasForm [
           htv:methodName "POST";
           hctl:hasTarget <http://10.10.10.106/things/tractorbot/actions/irrigate>;

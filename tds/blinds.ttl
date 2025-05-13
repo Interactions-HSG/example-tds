@@ -8,7 +8,7 @@
 @prefix htv: <http://www.w3.org/2011/http#> .
 
 <urn:blinds> a td:Thing, was:Blinds;
-  td:title "A set of blinds in a room that can be raised or lowered";
+  dct:title "A set of blinds in a room that can be raised or lowered";
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
   td:hasBase <http://localhost:1080/api/blinds/1/>;

@@ -8,14 +8,14 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:interactions_lab> a td:Thing, eve:Artifact, <https://example.org/was#Lab>;
-  td:title "The lab of the Interactions team";
+  dct:title "The lab of the Interactions team";
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
   td:hasBase <https://api.interactions.ics.unisg.ch/was/rl/>;
   td:hasPropertyAffordance [ a td:PropertyAffordance, <https://example.org/was#Status>,
         js:ObjectSchema;
       td:name "Status";
-      td:title "Read the lab status";
+      dct:title "Read the lab status";
       td:hasForm [
           htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/was/rl/status>;
@@ -29,10 +29,10 @@
           js:propertyName "Z1Light"
         ], [ a js:BooleanSchema, <http://example.org/was#Z2Blinds>;
           js:propertyName "Z2Blinds"
-        ], [ a js:NumberSchema, <http://example.org/was#Energy>;
-          js:propertyName "Energy"
-        ], [ a js:NumberSchema, <http://example.org/was#Hour>;
-          js:propertyName "Hour"
+        ], [ a js:NumberSchema, <http://example.org/was#TotalEnergyCost>;
+          js:propertyName "TotalEnergyCost"
+        ], [ a js:NumberSchema, <http://example.org/was#EnergyCost>;
+          js:propertyName "EnergyCost"
         ], [ a js:NumberSchema, <http://example.org/was#Sunshine>;
           js:propertyName "Sunshine"
         ], [ a js:BooleanSchema, <http://example.org/was#Z1Blinds>;
@@ -45,7 +45,7 @@
     ];
   td:hasActionAffordance [ a td:ActionAffordance, <http://example.org/was#SetZ1Light>;
       td:name "Control Lights Z1";
-      td:title "Turn on and off the lights in Z1";
+      dct:title "Turn on and off the lights in Z1";
       td:hasForm [
           htv:methodName "POST";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/was/rl/action>;
@@ -59,7 +59,7 @@
         ]
     ], [ a td:ActionAffordance, <http://example.org/was#SetZ2Light>;
       td:name "Control Lights Z2";
-      td:title "Turn on and off the lights in Z2";
+      dct:title "Turn on and off the lights in Z2";
       td:hasForm [
           htv:methodName "POST";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/was/rl/action>;
@@ -73,7 +73,7 @@
         ]
     ], [ a td:ActionAffordance, <http://example.org/was#SetZ1Blinds>;
       td:name "Control Blinds Z1";
-      td:title "Raise and lower the blinds in Z1";
+      dct:title "Raise and lower the blinds in Z1";
       td:hasForm [
           htv:methodName "POST";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/was/rl/action>;
@@ -87,7 +87,7 @@
         ]
     ], [ a td:ActionAffordance, <http://example.org/was#SetZ2Blinds>;
       td:name "Control Blinds Z2";
-      td:title "Raise and lower the blinds in Z2";
+      dct:title "Raise and lower the blinds in Z2";
       td:hasForm [
           htv:methodName "POST";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/was/rl/action>;

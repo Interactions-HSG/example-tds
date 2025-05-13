@@ -10,13 +10,13 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:rbg30_weather_station> a td:Thing, eve:Artifact, brick:WeatherStation;
-  td:title "KNX Weather Station at Rosenberg 30";
+  dct:title "KNX Weather Station at Rosenberg 30";
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
   td:hasBase <https://api.interactions.ics.unisg.ch/InfluxDB?measurement=weather_station>;
   td:hasPropertyAffordance [ a td:PropertyAffordance, brick:Temperature, js:ObjectSchema;
       td:name "Temperature";
-      td:title "Outside Air Temperature";
+      dct:title "Outside Air Temperature";
       td:hasForm [
           htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/InfluxDB?measurement=weather_station&field=temperature>;
@@ -33,7 +33,7 @@
         ]
     ], [ a td:PropertyAffordance, brick:Outside_Illuminance_Sensor, js:ObjectSchema;
       td:name "LightLevel";
-      td:title "Light level in Lux";
+      dct:title "Light level in Lux";
       td:hasForm [
           htv:methodName "GET";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/InfluxDB?measurement=weather_station&field=light_level>;

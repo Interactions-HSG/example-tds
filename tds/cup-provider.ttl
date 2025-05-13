@@ -8,13 +8,13 @@
 @prefix htv: <http://www.w3.org/2011/http#> .
 
 <urn:cup_provider> a td:Thing;
-  td:title "cupProvider";
+  dct:title "cupProvider";
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
   td:hasBase <http://localhost:1080/>;
   td:hasActionAffordance [ a td:ActionAffordance, ex:Order;
       td:name "order";
-      td:title "order";
+      dct:title "order";
       td:hasForm [
           htv:methodName "POST";
           hctl:hasTarget <http://localhost:1080/order>;

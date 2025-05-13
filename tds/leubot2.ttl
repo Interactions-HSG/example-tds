@@ -11,7 +11,7 @@
 
 <http://yggdrasil.interactions.ics.unisg.ch/environments/61/workspaces/102/artifacts/leubot2>
   a td:Thing, eve:Artifact, onto:PhantomX;
-  td:title "leubot2";
+  dct:title "leubot2";
   td:hasSecurityConfiguration [ a wotsec:APIKeySecurityScheme;
       wotsec:in "HEADER";
       wotsec:name "X-API-Key"
@@ -19,7 +19,7 @@
   td:hasBase <https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/>;
   td:hasPropertyAffordance [ a td:PropertyAffordance, onto:Base, js:ObjectSchema;
       td:name "base";
-      td:title "Read Base State";
+      dct:title "Read Base State";
       td:hasForm [
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/base>;
           hctl:forContentType "application/json";
@@ -34,7 +34,7 @@
       js:required "name", "value"
     ], [ a td:PropertyAffordance, onto:Shoulder, js:ObjectSchema;
       td:name "shoulder";
-      td:title "Read Shoulder Angle";
+      dct:title "Read Shoulder Angle";
       td:hasForm [
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/shoulder>;
           hctl:forContentType "application/json";
@@ -49,7 +49,7 @@
       js:required "name", "value"
     ], [ a td:PropertyAffordance, onto:Elbow, js:ObjectSchema;
       td:name "elbow";
-      td:title "Read Elbow Angle";
+      dct:title "Read Elbow Angle";
       td:hasForm [
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/elbow>;
           hctl:forContentType "application/json";
@@ -64,7 +64,7 @@
       js:required "name", "value"
     ], [ a td:PropertyAffordance, onto:WristAngle, js:ObjectSchema;
       td:name "wristAngle";
-      td:title "Read Wrist Angle";
+      dct:title "Read Wrist Angle";
       td:hasForm [
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/wrist/angle>;
           hctl:forContentType "application/json";
@@ -79,7 +79,7 @@
       js:required "name", "value"
     ], [ a td:PropertyAffordance, onto:WristRotation, js:ObjectSchema;
       td:name "wristRotation";
-      td:title "Read Wrist Rotation";
+      dct:title "Read Wrist Rotation";
       td:hasForm [
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/wrist/rotation>;
           hctl:forContentType "application/json";
@@ -94,7 +94,7 @@
       js:required "name", "value"
     ], [ a td:PropertyAffordance, onto:Gripper, js:ObjectSchema;
       td:name "gripper";
-      td:title "Read Gripper";
+      dct:title "Read Gripper";
       td:hasForm [
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/gripper>;
           hctl:forContentType "application/json";
@@ -109,7 +109,7 @@
       js:required "name", "value"
     ], [ a td:PropertyAffordance, onto:Posture, js:ObjectSchema;
       td:name "posture";
-      td:title "Read Posture Information";
+      dct:title "Read Posture Information";
       td:hasForm [
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/posture>;
           hctl:forContentType "application/json";
@@ -132,7 +132,7 @@
       js:required "Base", "Shoulder", "Elbow", "WristAngle", "WristRotation", "Gripper"
     ], [ a td:PropertyAffordance, foaf:Agent, js:ObjectSchema;
       td:name "user";
-      td:title "Read User Information";
+      dct:title "Read User Information";
       td:hasForm [
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/user>;
           hctl:forContentType "application/json";
@@ -148,7 +148,7 @@
     ];
   td:hasActionAffordance [ a td:ActionAffordance, onto:Reset;
       td:name "reset";
-      td:title "Reset";
+      dct:title "Reset";
       td:hasForm [
           htv:methodName "PUT";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/reset>;
@@ -157,7 +157,7 @@
         ]
     ], [ a td:ActionAffordance, onto:SetBase;
       td:name "setBase";
-      td:title "Set Base";
+      dct:title "Set Base";
       td:hasForm [
           htv:methodName "PUT";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/base>;
@@ -174,7 +174,7 @@
         ]
     ], [ a td:ActionAffordance, onto:SetShoulder;
       td:name "setShoulder";
-      td:title "Set Shoulder";
+      dct:title "Set Shoulder";
       td:hasForm [
           htv:methodName "PUT";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/shoulder>;
@@ -191,7 +191,7 @@
         ]
     ], [ a td:ActionAffordance, onto:SetElbow;
       td:name "setElbow";
-      td:title "Set Elbow";
+      dct:title "Set Elbow";
       td:hasForm [
           htv:methodName "PUT";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/elbow>;
@@ -208,7 +208,7 @@
         ]
     ], [ a td:ActionAffordance, onto:SetWristAngle;
       td:name "setWristAngle";
-      td:title "Set Wrist Angle";
+      dct:title "Set Wrist Angle";
       td:hasForm [
           htv:methodName "PUT";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/wrist/angle>;
@@ -225,7 +225,7 @@
         ]
     ], [ a td:ActionAffordance, onto:SetWristRotation;
       td:name "setWristRotation";
-      td:title "Set Wrist Rotation";
+      dct:title "Set Wrist Rotation";
       td:hasForm [
           htv:methodName "PUT";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/wrist/rotation>;
@@ -242,7 +242,7 @@
         ]
     ], [ a td:ActionAffordance, onto:SetGripper;
       td:name "setGripper";
-      td:title "Set Gripper";
+      dct:title "Set Gripper";
       td:hasForm [
           htv:methodName "PUT";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/gripper>;
@@ -259,7 +259,7 @@
         ]
     ], [ a td:ActionAffordance, onto:LogIn;
       td:name "logIn";
-      td:title "Log In";
+      dct:title "Log In";
       td:hasForm [
           htv:methodName "POST";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/user>;
@@ -279,7 +279,7 @@
       td:hasUriTemplateSchema [ a js:StringSchema, onto:UserToken;
           td:name "token"
         ];
-      td:title "Log Out";
+      dct:title "Log Out";
       td:hasForm [
           htv:methodName "DELETE";
           hctl:hasTarget <https://api.interactions.ics.unisg.ch/leubot2/v1.3.4/user/%7Btoken%7D>;

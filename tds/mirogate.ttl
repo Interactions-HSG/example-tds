@@ -9,12 +9,12 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:mirogate> a td:Thing;
-  td:title "Mirogate";
+  dct:title "Mirogate";
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
   td:hasPropertyAffordance [ a td:PropertyAffordance, miro:Pose, js:ObjectSchema;
       td:name "pose";
-      td:title "Pose";
+      dct:title "Pose";
       td:hasForm [
           cov:methodName "GET";
           hctl:hasTarget <coap://130.82.171.10:5683/pose>;
@@ -30,7 +30,7 @@
         ]
     ], [ a td:PropertyAffordance, miro:Humidity, js:ObjectSchema;
       td:name "humidity";
-      td:title "Humidity";
+      dct:title "Humidity";
       td:hasForm [
           cov:methodName "GET";
           hctl:hasTarget <coap://130.82.171.10:5683/humidity>;
@@ -51,7 +51,7 @@
         ]
     ], [ a td:PropertyAffordance, miro:Temperature, js:ObjectSchema;
       td:name "temperature";
-      td:title "Temperature";
+      dct:title "Temperature";
       td:hasForm [
           cov:methodName "GET";
           hctl:hasTarget <coap://130.82.171.10:5683/temperature>;

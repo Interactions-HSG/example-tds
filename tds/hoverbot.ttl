@@ -8,7 +8,7 @@
 @prefix hsg: <http://semantics.interactions.ics.unisg.ch/hackathon21#> .
 
 <urn:hoverbot_garuda> a td:Thing, hsg:Camera;
-  td:title "hoverbot";
+  dct:title "hoverbot";
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
   td:hasBase <http://10.10.10.105/> .

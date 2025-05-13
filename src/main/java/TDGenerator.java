@@ -46,7 +46,7 @@ public class TDGenerator {
         IrrigatorTractor tractor2 = new IrrigatorTractor("http://localhost:1080/api/tractors/2/",
                 "urn:tractor2", "A tractor that can be used for irrigating sections in a farm.");
 
-        InteractionsLabSimulator interactionsLabReal = new InteractionsLabSimulator("https://api.interactions.ics.unisg.ch/was/rl/",
+        InteractionsLabReal interactionsLabReal = new InteractionsLabReal("https://api.interactions.ics.unisg.ch/was/rl/",
                 "urn:interactions_lab", "The lab of the Interactions team");
 
         InteractionsLabSimulator interactionsLab = new InteractionsLabSimulator("http://localhost:1880/was/rl/",

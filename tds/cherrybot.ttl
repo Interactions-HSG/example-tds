@@ -10,7 +10,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:cherrybot> a td:Thing, eve:Artifact;
-  td:title "cherryBot";
+  dct:title "cherryBot";
   td:hasSecurityConfiguration [ a wotsec:APIKeySecurityScheme;
       wotsec:in "HEADER";
       wotsec:name "Authentication"

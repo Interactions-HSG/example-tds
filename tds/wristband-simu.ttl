@@ -8,7 +8,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:wristband-simu> a td:Thing, was:Wristband;
-  td:title "A wristband that can be used for monitoring a user's state";
+  dct:title "A wristband that can be used for monitoring a user's state";
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
   td:hasBase <http://localhost:1080/api/wristband/1/>;
