@@ -10,7 +10,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <urn:rbg30_weather_station> a td:Thing, eve:Artifact, brick:WeatherStation;
-  dct:title "KNX Weather Station at Rosenberg 30";
+  td:title "KNX Weather Station at Rosenberg 30";
   td:hasSecurityConfiguration [ a wotsec:NoSecurityScheme
     ];
   td:hasBase <https://api.interactions.ics.unisg.ch/InfluxDB?measurement=weather_station>;
