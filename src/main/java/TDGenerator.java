@@ -65,6 +65,8 @@ public class TDGenerator {
 
         XArm pretendaBot = new XArm("https://api.interactions.ics.unisg.ch/pretendabot/", "urn:pretendabot", "pretendBot");
 
+        XArmSimple cherryBotSimple = new XArmSimple("https://api.interactions.ics.unisg.ch/cherrybot/", "urn:cherrybot", "cherryBot");
+
         writeToFile(imgAnnotator.serializeTD(), "img-annotator");
         writeToFile(weatherStation.serializeTD(), "weather-station");
         writeToFile(engraver.serializeTD(), "engraver");
@@ -77,6 +79,7 @@ public class TDGenerator {
         writeToFile(leubot2.serializeTD(), "leubot2");
         writeToFile(cherryBot.serializeTD(), "cherrybot");
         writeToFile(pretendaBot.serializeTD(), "pretendabot");
+        writeToFile(cherryBotSimple.serializeTD(), "cherrybot-simple-v0");
 
         try {
             //Read TD from file

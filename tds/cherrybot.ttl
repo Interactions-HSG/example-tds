@@ -2,17 +2,17 @@
 @prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
 @prefix cherrybot: <https://interactions.ics.unisg.ch/cherrybot#> .
 @prefix dct: <http://purl.org/dc/terms/> .
-@prefix eve: <http://w3id.org/eve#> .
 @prefix wotsec: <https://www.w3.org/2019/wot/security#> .
+@prefix hmas: <https://purl.org/hmas/> .
 @prefix js: <https://www.w3.org/2019/wot/json-schema#> .
 @prefix htv: <http://www.w3.org/2011/http#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<urn:cherrybot> a td:Thing, eve:Artifact;
+<urn:cherrybot> a td:Thing, hmas:Artifact;
   td:title "cherryBot";
   td:hasSecurityConfiguration [ a wotsec:APIKeySecurityScheme;
-      wotsec:in "HEADER";
+      wotsec:in "header";
       wotsec:name "Authentication"
     ];
   td:hasBase <https://api.interactions.ics.unisg.ch/cherrybot/>;

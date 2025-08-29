@@ -14,16 +14,16 @@ import ch.unisg.ics.interactions.wot.td.vocabularies.HTV;
 import ch.unisg.ics.interactions.wot.td.vocabularies.TD;
 import vocabularies.CHERRY;
 import vocabularies.FOAF;
-import vocabularies.MINES;
 
-public class XArm extends Thing {
+public class XArmSimple extends Thing {
 
-    public XArm(String baseURI, String relativeURI, String title) {
+    public XArmSimple(String baseURI, String relativeURI, String title) {
         super(baseURI, relativeURI, title);
         this.namespaces.put("htv", HTV.PREFIX);
         this.namespaces.put("cherrybot", CHERRY.PREFIX);
         this.namespaces.put("foaf", FOAF.PREFIX);
         this.namespaces.put("hmas", "https://purl.org/hmas/");
+        this.namespaces.put("rdfs", "http://www.w3.org/2000/01/rdf-schema#");
 
         //Action forms
         Form postOperatorForm = new Form.Builder(baseURI + "operator")
@@ -137,60 +137,69 @@ public class XArm extends Thing {
 
 
         //Properties
-        properties.add(new PropertyAffordance.Builder("operator",
+        properties.add(new PropertyAffordance.Builder("currentUser",
                 new Form.Builder(baseURI + "operator")
                         .addOperationType(TD.readProperty)
                         .build())
                 .addSemanticType(CHERRY.operator)
+                .addComment("Shows who is currently logged in and allowed to use the robot (name, email, and access token).")
                 .addDataSchema(operatorWithTokenSchema)
                 .build());
 
-        properties.add(new PropertyAffordance.Builder("tcp",
+        properties.add(new PropertyAffordance.Builder("currentPosition",
                 new Form.Builder(baseURI + "tcp")
                         .addOperationType(TD.readProperty)
                         .build())
                 .addSemanticType(CHERRY.tcp)
+                .addComment("Shows the robot’s current position and orientation in space.")
                 .addDataSchema(targetSchema)
                 .build());
 
-        properties.add(new PropertyAffordance.Builder("tcpTarget",
+        properties.add(new PropertyAffordance.Builder("goalPosition",
                 new Form.Builder(baseURI + "tcp/target")
                         .addOperationType(TD.readProperty)
                         .build())
                 .addSemanticType(CHERRY.tcpTarget)
+                .addComment("Shows the position and orientation the robot is moving to. If this is the same as the current position, the robot is not moving.")
                 .addDataSchema(targetSchema)
                 .build());
 
-        properties.add(new PropertyAffordance.Builder("gripper",
+        properties.add(new PropertyAffordance.Builder("handState",
                 new Form.Builder(baseURI + "gripper")
                         .addOperationType(TD.readProperty)
                         .build())
                 .addSemanticType(CHERRY.gripper)
+                .addComment("Shows how open the robot’s hand is.")
                 .addDataSchema(gripperSchema)
                 .build());
 
         //Actions
-        actions.add(new ActionAffordance.Builder("initialize", initializeForm)
-                .addSemanticType(CHERRY.initialize)
-                .build());
-
-        actions.add(new ActionAffordance.Builder("registerOperator", postOperatorForm)
+        actions.add(new ActionAffordance.Builder("logIn", postOperatorForm)
                 .addSemanticType(CHERRY.registerOperator)
+                .addComment("Log in so you can use the robot (enter your name and email). After a successful login, the response will include a token in the Location header. This token is required to perform the robot’s movement and hand actions.")
                 .addInputSchema(operatorSchema)
                 .build());
 
-        actions.add(new ActionAffordance.Builder("setTarget", putTargetForm)
+        actions.add(new ActionAffordance.Builder("reset", initializeForm)
+                .addSemanticType(CHERRY.initialize)
+                .addComment("Moves the robot back to its starting position (reset).")
+                .build());
+
+        actions.add(new ActionAffordance.Builder("setGoalPosition", putTargetForm)
                 .addSemanticType(CHERRY.setTarget)
+                .addComment("Move the robot to a new position (X, Y, Z) and orientation (roll, pitch, yaw).")
                 .addInputSchema(tcpMovementSchema)
                 .build());
 
-        actions.add(new ActionAffordance.Builder("setGripper", putGripperForm)
+        actions.add(new ActionAffordance.Builder("setHandState", putGripperForm)
                 .addSemanticType(CHERRY.setGripper)
+                .addComment("Change how open the robot's hand is.")
                 .addInputSchema(gripperSchema)
                 .build());
 
-        actions.add(new ActionAffordance.Builder("removeOperator", deleteOperatorForm)
+        actions.add(new ActionAffordance.Builder("logOut", deleteOperatorForm)
                 .addSemanticType(CHERRY.removeOperator)
+                .addComment("Log out so someone else can use the robot.")
                 .addUriVariable("token", new StringSchema.Builder()
                         .addSemanticType(CHERRY.operatorToken)
                         .build())

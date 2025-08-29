@@ -5,22 +5,24 @@
 @prefix wotsec: <https://www.w3.org/2019/wot/security#> .
 @prefix hmas: <https://purl.org/hmas/> .
 @prefix js: <https://www.w3.org/2019/wot/json-schema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix htv: <http://www.w3.org/2011/http#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<urn:pretendabot> a td:Thing, hmas:Artifact;
-  td:title "pretendBot";
+<urn:cherrybot> a td:Thing, hmas:Artifact;
+  td:title "cherryBot";
   td:hasSecurityConfiguration [ a wotsec:APIKeySecurityScheme;
       wotsec:in "header";
       wotsec:name "Authentication"
     ];
-  td:hasBase <https://api.interactions.ics.unisg.ch/pretendabot/>;
+  td:hasBase <https://api.interactions.ics.unisg.ch/cherrybot/>;
   td:hasPropertyAffordance [ a td:PropertyAffordance, cherrybot:Operator, js:ObjectSchema,
         cherrybot:OperatorWithTokenSchema;
-      td:name "operator";
+      td:name "currentUser";
+      rdfs:comment "Shows who is currently logged in and allowed to use the robot (name, email, and access token).";
       td:hasForm [
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/pretendabot/operator>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/cherrybot/operator>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
         ];
@@ -34,9 +36,10 @@
         ];
       js:required "name", "email", "token"
     ], [ a td:PropertyAffordance, cherrybot:Tcp, js:ObjectSchema, cherrybot:TcpTargetSchema;
-      td:name "tcp";
+      td:name "currentPosition";
+      rdfs:comment "Shows the robot’s current position and orientation in space.";
       td:hasForm [
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/pretendabot/tcp>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/cherrybot/tcp>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
         ];
@@ -76,9 +79,10 @@
         ];
       js:required "coordinate", "rotation"
     ], [ a td:PropertyAffordance, cherrybot:TcpTarget, js:ObjectSchema, cherrybot:TcpTargetSchema;
-      td:name "tcpTarget";
+      td:name "goalPosition";
+      rdfs:comment "Shows the position and orientation the robot is moving to. If this is the same as the current position, the robot is not moving.";
       td:hasForm [
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/pretendabot/tcp/target>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/cherrybot/tcp/target>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
         ];
@@ -118,9 +122,10 @@
         ];
       js:required "coordinate", "rotation"
     ], [ a td:PropertyAffordance, cherrybot:Gripper, js:IntegerSchema, cherrybot:GripperValue;
-      td:name "gripper";
+      td:name "handState";
+      rdfs:comment "Shows how open the robot’s hand is.";
       td:hasForm [
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/pretendabot/gripper>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/cherrybot/gripper>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:readProperty
         ];
@@ -128,19 +133,12 @@
       js:minimum "0"^^xsd:int;
       js:maximum "800"^^xsd:int
     ];
-  td:hasActionAffordance [ a td:ActionAffordance, cherrybot:Initialize;
-      td:name "initialize";
-      td:hasForm [
-          htv:methodName "PUT";
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/pretendabot/initialize>;
-          hctl:forContentType "application/json";
-          hctl:hasOperationType td:invokeAction
-        ]
-    ], [ a td:ActionAffordance, cherrybot:RegisterOperator;
-      td:name "registerOperator";
+  td:hasActionAffordance [ a td:ActionAffordance, cherrybot:RegisterOperator;
+      td:name "logIn";
+      rdfs:comment "Log in so you can use the robot (enter your name and email). After a successful login, the response will include a token in the Location header. This token is required to perform the robot’s movement and hand actions.";
       td:hasForm [
           htv:methodName "POST";
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/pretendabot/operator>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/cherrybot/operator>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -152,11 +150,21 @@
             ];
           js:required "name", "email"
         ]
-    ], [ a td:ActionAffordance, cherrybot:SetTarget;
-      td:name "setTarget";
+    ], [ a td:ActionAffordance, cherrybot:Initialize;
+      td:name "reset";
+      rdfs:comment "Moves the robot back to its starting position (reset).";
       td:hasForm [
           htv:methodName "PUT";
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/pretendabot/tcp/target>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/cherrybot/initialize>;
+          hctl:forContentType "application/json";
+          hctl:hasOperationType td:invokeAction
+        ]
+    ], [ a td:ActionAffordance, cherrybot:SetTarget;
+      td:name "setGoalPosition";
+      rdfs:comment "Move the robot to a new position (X, Y, Z) and orientation (roll, pitch, yaw).";
+      td:hasForm [
+          htv:methodName "PUT";
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/cherrybot/tcp/target>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -205,10 +213,11 @@
           js:required "target", "speed"
         ]
     ], [ a td:ActionAffordance, cherrybot:SetGripper;
-      td:name "setGripper";
+      td:name "setHandState";
+      rdfs:comment "Change how open the robot's hand is.";
       td:hasForm [
           htv:methodName "PUT";
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/pretendabot/gripper>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/cherrybot/gripper>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ];
@@ -217,13 +226,14 @@
           js:maximum "800"^^xsd:int
         ]
     ], [ a td:ActionAffordance, cherrybot:RemoveOperator;
-      td:name "removeOperator";
+      td:name "logOut";
       td:hasUriTemplateSchema [ a js:StringSchema, cherrybot:OperatorToken;
           td:name "token"
         ];
+      rdfs:comment "Log out so someone else can use the robot.";
       td:hasForm [
           htv:methodName "DELETE";
-          hctl:hasTarget <https://api.interactions.ics.unisg.ch/pretendabot/operator/%7Btoken%7D>;
+          hctl:hasTarget <https://api.interactions.ics.unisg.ch/cherrybot/operator/%7Btoken%7D>;
           hctl:forContentType "application/json";
           hctl:hasOperationType td:invokeAction
         ]

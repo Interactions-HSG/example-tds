@@ -13,7 +13,7 @@
   a td:Thing, eve:Artifact, onto:PhantomX;
   td:title "leubot1";
   td:hasSecurityConfiguration [ a wotsec:APIKeySecurityScheme;
-      wotsec:in "HEADER";
+      wotsec:in "header";
       wotsec:name "X-API-Key"
     ];
   td:hasBase <https://api.interactions.ics.unisg.ch/leubot1/v1.3.4/>;

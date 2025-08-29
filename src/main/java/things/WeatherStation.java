@@ -6,7 +6,7 @@ import ch.unisg.ics.interactions.wot.td.affordances.PropertyAffordance;
 import ch.unisg.ics.interactions.wot.td.schemas.NumberSchema;
 import ch.unisg.ics.interactions.wot.td.schemas.ObjectSchema;
 import ch.unisg.ics.interactions.wot.td.schemas.StringSchema;
-import ch.unisg.ics.interactions.wot.td.security.NoSecurityScheme;
+import ch.unisg.ics.interactions.wot.td.security.SecurityScheme;
 import ch.unisg.ics.interactions.wot.td.vocabularies.TD;
 
 public class WeatherStation extends Thing {
@@ -68,7 +68,7 @@ public class WeatherStation extends Thing {
             .addBaseURI(baseURI)
             .addSemanticType("https://brickschema.org/schema/Brick#WeatherStation")
             .addSemanticType("http://w3id.org/eve#Artifact")
-            .addSecurityScheme(new NoSecurityScheme())
+            .addSecurityScheme("nosec", SecurityScheme.getNoSecurityScheme())
             .addProperties(properties)
             .build();
   }

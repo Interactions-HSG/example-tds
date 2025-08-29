@@ -8,6 +8,7 @@ import ch.unisg.ics.interactions.wot.td.schemas.IntegerSchema;
 import ch.unisg.ics.interactions.wot.td.schemas.ObjectSchema;
 import ch.unisg.ics.interactions.wot.td.schemas.StringSchema;
 import ch.unisg.ics.interactions.wot.td.security.APIKeySecurityScheme;
+import ch.unisg.ics.interactions.wot.td.security.TokenBasedSecurityScheme;
 import ch.unisg.ics.interactions.wot.td.vocabularies.HTV;
 import ch.unisg.ics.interactions.wot.td.vocabularies.TD;
 import vocabularies.FOAF;
@@ -282,7 +283,10 @@ public class PhantomXReactor extends Thing {
                 .addBaseURI(baseURI)
                 .addSemanticType(MINES.phantomX)
                 .addSemanticType("http://w3id.org/eve#Artifact")
-                .addSecurityScheme(new APIKeySecurityScheme(APIKeySecurityScheme.TokenLocation.HEADER, "X-API-Key"))
+                .addSecurityScheme("apikey", new APIKeySecurityScheme.Builder()
+                        .addTokenName("X-API-Key")
+                        .addTokenLocation(TokenBasedSecurityScheme.TokenLocation.HEADER)
+                        .build())
                 .addProperties(properties)
                 .addActions(actions)
                 .build();
