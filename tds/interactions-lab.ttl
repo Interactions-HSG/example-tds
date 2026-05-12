@@ -31,8 +31,6 @@
           js:propertyName "Z2Blinds"
         ], [ a js:NumberSchema, <http://example.org/was#TotalEnergyCost>;
           js:propertyName "TotalEnergyCost"
-        ], [ a js:NumberSchema, <http://example.org/was#Hour>;
-          js:propertyName "Hour"
         ], [ a js:NumberSchema, <http://example.org/was#EnergyCost>;
           js:propertyName "EnergyCost"
         ], [ a js:NumberSchema, <http://example.org/was#Sunshine>;
